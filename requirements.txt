@@ -10,3 +10,5 @@ sacrebleu
 rank-bm25
 pandas
 tqdm
+fastapi
+uvicorn
