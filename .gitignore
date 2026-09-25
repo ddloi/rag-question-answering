@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Training checkpoints (temporary optimizer states ~8GB)
+checkpoint-*/
+**/checkpoint-*/
+*.pt
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

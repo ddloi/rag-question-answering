@@ -1,0 +1,12 @@
+torch>=2.1.0
+transformers>=4.40.0
+sentence-transformers>=2.6.0
+faiss-cpu>=1.8.0
+datasets>=2.19.0
+evaluate>=0.4.1
+accelerate>=0.29.0
+rouge-score
+sacrebleu
+rank-bm25
+pandas
+tqdm

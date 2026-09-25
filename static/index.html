@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Studio | Deterministic Search & Telemetry Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Top Navbar -->
+        <header class="navbar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>PIPELINE STUDIO</h1>
+                    <span class="badge-tag">Deterministic Engine &bull; Zero-AI</span>
+                </div>
+            </div>
+
+            <!-- Pipeline Status Nodes Header -->
+            <div class="header-telemetry">
+                <div class="stat-pill">
+                    <span class="label">System State</span>
+                    <span class="value success"><span class="pulse-dot"></span> Active (Deterministic)</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="label">Total Index</span>
+                    <span class="value" id="hdr-corpus">3,940 Chunks</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="label">Avg Latency</span>
+                    <span class="value highlight" id="hdr-latency">~3.2 ms</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Pipeline Visualizer Banner -->
+            <section class="pipeline-stepper-container">
+                <div class="stepper-header">
+                    <span class="section-title">ENGINE PIPELINE EXECUTION FLOW</span>
+                    <span class="mode-indicator" id="pipeline-status-text">Ready for execution</span>
+                </div>
+                <div class="stepper-track">
+                    <div class="step-node" id="node-stage-1">
+                        <div class="node-icon">01</div>
+                        <div class="node-info">
+                            <div class="node-name">Query Normalizer</div>
+                            <div class="node-desc">Tokenize & Stopwords Filter</div>
+                        </div>
+                        <div class="node-latency" id="lat-stage-1">-- ms</div>
+                    </div>
+                    <div class="step-connector"></div>
+
+                    <div class="step-node" id="node-stage-2">
+                        <div class="node-icon">02</div>
+                        <div class="node-info">
+                            <div class="node-name">Inverted Index BM25</div>
+                            <div class="node-desc">TF-IDF Mathematical Scoring</div>
+                        </div>
+                        <div class="node-latency" id="lat-stage-2">-- ms</div>
+                    </div>
+                    <div class="step-connector"></div>
+
+                    <div class="step-node" id="node-stage-3">
+                        <div class="node-icon">03</div>
+                        <div class="node-info">
+                            <div class="node-name">Span Extractor</div>
+                            <div class="node-desc">Exact Grounding Sentence</div>
+                        </div>
+                        <div class="node-latency" id="lat-stage-3">-- ms</div>
+                    </div>
+                    <div class="step-connector"></div>
+
+                    <div class="step-node" id="node-stage-4">
+                        <div class="node-icon">04</div>
+                        <div class="node-info">
+                            <div class="node-name">Telemetry & Audit</div>
+                            <div class="node-desc">Execution Profiling</div>
+                        </div>
+                        <div class="node-latency" id="lat-stage-4">-- ms</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workspace Grid -->
+            <div class="workspace-grid">
+                <!-- Left Panel: Query & Parameters -->
+                <section class="panel control-panel">
+                    <div class="panel-header">
+                        <h2>QUERY CONSOLE</h2>
+                        <span class="badge">Deterministic Input</span>
+                    </div>
+
+                    <form id="pipeline-form" class="query-form">
+                        <div class="input-group">
+                            <label for="query-input">Query String</label>
+                            <textarea id="query-input" rows="3" placeholder="Nhập câu truy vấn tra cứu (ví dụ: Who was the director of the movie Jaws?)..." required></textarea>
+                        </div>
+
+                        <div class="params-grid">
+                            <div class="param-box">
+                                <label for="param-topk">Top-K Chunks: <span id="val-topk">5</span></label>
+                                <input type="range" id="param-topk" min="1" max="10" value="5">
+                            </div>
+                            <div class="param-box">
+                                <label for="param-k1">BM25 k1 (TF Saturation): <span id="val-k1">1.5</span></label>
+                                <input type="range" id="param-k1" min="0.5" max="3.0" step="0.1" value="1.5">
+                            </div>
+                            <div class="param-box">
+                                <label for="param-b">BM25 b (Length Norm): <span id="val-b">0.75</span></label>
+                                <input type="range" id="param-b" min="0.0" max="1.0" step="0.05" value="0.75">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" id="btn-run" class="btn-primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                <span>Thực thi Pipeline</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Presets / Quick Test Samples -->
+                    <div class="sample-presets">
+                        <div class="presets-title">TRUY VẤN MẪU TỪ CORPUS TEST</div>
+                        <div id="samples-list" class="samples-grid">
+                            <div class="loading-text">Đang tải truy vấn mẫu...</div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 1 Token Analysis Box -->
+                    <div class="sub-panel" id="stage1-detail-box" style="display: none;">
+                        <div class="sub-panel-title">GIAI ĐOẠN 1: PHÂN TÍCH TỪ KHÓA & TRỌNG SỐ IDF</div>
+                        <div class="term-tags-container" id="term-tags"></div>
+                    </div>
+                </section>
+
+                <!-- Right Panel: Results, Verification & Grounding -->
+                <section class="panel results-panel">
+                    <div class="panel-header">
+                        <h2>KẾT QUẢ XỬ LÝ & ĐỐI SOÁT MINH BẠCH</h2>
+                        <div class="header-tags">
+                            <span class="badge confidence" id="badge-confidence">Confidence: --%</span>
+                            <span class="badge speed" id="badge-total-latency">Latency: -- ms</span>
+                        </div>
+                    </div>
+
+                    <!-- Empty Placeholder State -->
+                    <div id="empty-state" class="empty-state">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <p>Nhập truy vấn hoặc chọn mẫu bên trái để thực thi pipeline xác định 4 giai đoạn.</p>
+                        <span class="subtext">100% không dùng mô hình sinh từ AI • Kết quả trích xuất từ văn bản gốc</span>
+                    </div>
+
+                    <!-- Result Content (Hidden by default) -->
+                    <div id="results-content" style="display: none;">
+                        <!-- Primary Extracted Grounding Span -->
+                        <div class="grounding-card">
+                            <div class="card-header">
+                                <div class="card-tag">
+                                    <span class="dot-live"></span>
+                                    <span>ĐOẠN TRÍCH XUẤT XÁC ĐỊNH (EXACT ANSWER SPAN)</span>
+                                </div>
+                                <div class="chunk-ref" id="span-source-ref">Chunk # -- &bull; Doc ID: --</div>
+                            </div>
+                            <div class="extracted-text-box" id="extracted-span-text">
+                                ...
+                            </div>
+                            <div class="span-metrics">
+                                <span>Sentence #<b id="span-sentence-idx">1</b></span>
+                                <span>Grounding Terms: <span id="span-matched-terms">--</span></span>
+                                <span>No Hallucination: <b>100% Verbatim</b></span>
+                            </div>
+                        </div>
+
+                        <!-- Mathematical Score Breakdown Table -->
+                        <div class="score-breakdown-card">
+                            <div class="sub-panel-title">PHÂN RÃ ĐIỂM SỐ BM25 THEO TỪ KHÓA (TOÁN HỌC MINH BẠCH)</div>
+                            <div class="table-responsive">
+                                <table class="breakdown-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Từ khóa (Term)</th>
+                                            <th>Số lần xuất hiện (TF)</th>
+                                            <th>Nghịch đảo tần suất (IDF)</th>
+                                            <th>Đóng góp điểm BM25</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="breakdown-tbody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Top Retrieved Chunks Inspector -->
+                        <div class="chunks-inspector">
+                            <div class="sub-panel-title">TÀI LIỆU NGUỒN ĐƯỢC XẾP HẠNG TRONG CORPUS</div>
+                            <div id="chunks-list" class="chunks-container"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
