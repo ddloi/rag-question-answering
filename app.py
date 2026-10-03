@@ -6,12 +6,21 @@ from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from pipeline_engine import DeterministicPipelineEngine
 
 app = FastAPI(
     title="Enterprise Pipeline Engine & Telemetry Studio",
     description="High-performance deterministic information retrieval without AI hallucination."
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins (Hugging Face Space)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 STATIC_DIR = Path(__file__).parent / "static"

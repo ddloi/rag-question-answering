@@ -13,8 +13,16 @@ from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForQuestionAnswering
 
 # --- CẤU HÌNH REPO CỦA BẠN TRÊN HUGGING FACE ---
-# Thay thế 'username/rag-t5-nlp-project' bằng repo_id thật của bạn
-MODEL_REPO_ID = "YOUR_USERNAME/rag-t5-nlp-project"
+# ⚠️  QUAN TRỌNG: Thay "YOUR_USERNAME" bằng username HF thật của bạn
+#     trước khi deploy, HOẶC set biến môi trường HF_MODEL_REPO_ID.
+import os as _os
+MODEL_REPO_ID = _os.environ.get("HF_MODEL_REPO_ID", "YOUR_USERNAME/rag-t5-nlp-project")
+if "YOUR_USERNAME" in MODEL_REPO_ID:
+    raise ValueError(
+        "Bạn cần thay 'YOUR_USERNAME' trong MODEL_REPO_ID bằng username "
+        "Hugging Face thật, hoặc set biến môi trường HF_MODEL_REPO_ID. "
+        "Ví dụ: export HF_MODEL_REPO_ID=dangd/rag-t5-nlp-project"
+    )
 EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 TOP_K = 5
 

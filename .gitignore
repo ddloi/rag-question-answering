@@ -14,8 +14,34 @@ checkpoint-*/
 **/checkpoint-*/
 *.pt
 
+# Fine-tuned model weights (891MB — download or re-train instead)
+generator_finetuned/model.safetensors
+generator_finetuned/training_args.bin
+generator_finetuned/checkpoint-*/
+
+# Large data files (re-generate from pipeline steps 0-4)
+raw_documents.json
+data/faiss.index
+data/corpus_chunks.jsonl
+data/chunk_metadata.jsonl
+data/training_pairs.jsonl
+
+# External binaries (should never be in git)
+cloudflared.exe
+*.exe
+
+# Generated reports and temp files
+build_clean_reports.py
+build_guide_and_glossary.py
+generate_report.py
+generate_reports.py
+test_clean.docx
+
 # IDE / System
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Pipeline state (local only)
+.pipeline/

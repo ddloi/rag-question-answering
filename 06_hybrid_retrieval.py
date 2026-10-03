@@ -14,10 +14,17 @@ chuẩn hoá điểm số giữa 2 hệ thống (BM25 score và cosine score có
 k thường chọn = 60 (giá trị chuẩn trong literature, không nhạy tham số).
 """
 
+import sys
 import json
 import numpy as np
+import torch
 import faiss
 from pathlib import Path
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
@@ -25,6 +32,7 @@ DATA_DIR = Path("data")
 EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 RRF_K = 60
 CANDIDATE_POOL = 30  # lấy top-30 từ mỗi hệ trước khi fuse, rồi cắt còn top_k cuối
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 def simple_tokenize(text: str):
@@ -46,7 +54,7 @@ class HybridRetriever:
         # --- Dense (đã có sẵn từ 02_build_index.py) ---
         print("Đang load FAISS index + embedding model...")
         self.index = faiss.read_index(str(DATA_DIR / "faiss.index"))
-        self.embed_model = SentenceTransformer(EMBED_MODEL_NAME, device="cuda")
+        self.embed_model = SentenceTransformer(EMBED_MODEL_NAME, device=DEVICE)
 
     def _bm25_ranked_ids(self, query: str, pool_size: int):
         scores = self.bm25.get_scores(simple_tokenize(query))
@@ -84,8 +92,9 @@ def compare_retrievers_demo():
     hybrid = HybridRetriever()
 
     test_questions = [
-        "Ví dụ câu hỏi 1",
-        "Ví dụ câu hỏi 2",
+        "Who directed the movie Jaws?",
+        "What is the capital city of Australia?",
+        "Which planet is closest to the Sun?",
     ]
 
     for q in test_questions:

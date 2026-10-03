@@ -12,3 +12,6 @@ pandas
 tqdm
 fastapi
 uvicorn
+pydantic
+gradio
+huggingface_hub

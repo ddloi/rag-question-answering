@@ -13,12 +13,18 @@ Lưu ý: mỗi lần đổi chunk_size, phải rebuild lại chunk + index từ 
 (vì ranh giới đoạn văn thay đổi hoàn toàn).
 """
 
+import sys
 import json
 import re
 import numpy as np
 import faiss
 import pandas as pd
 from pathlib import Path
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 

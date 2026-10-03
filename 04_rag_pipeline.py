@@ -1,4 +1,3 @@
-import torch
 """
 Bước 5-6: Pipeline RAG đầy đủ - Retrieval + Generation
 ---------------------------------------------------------
@@ -8,9 +7,16 @@ Cài đặt 3 hệ thống theo đúng yêu cầu đề bài để so sánh:
   3. rag_full           : retrieval + generation (hệ chính)
 """
 
+import sys
+import torch
 import json
 import faiss
 import numpy as np
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForQuestionAnswering
@@ -23,8 +29,9 @@ TOP_K = 5
 
 class RAGSystem:
     def __init__(self):
-        print("Đang load embedding model, FAISS index, generator...")
-        self.embed_model = SentenceTransformer(EMBED_MODEL_NAME, device="cuda")
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        print(f"Đang load embedding model, FAISS index, generator... (device={self.device})")
+        self.embed_model = SentenceTransformer(EMBED_MODEL_NAME, device=self.device)
         self.index = faiss.read_index(str(DATA_DIR / "faiss.index"))
 
         self.metadata = []
@@ -33,13 +40,13 @@ class RAGSystem:
                 self.metadata.append(json.loads(line))
 
         self.tokenizer = AutoTokenizer.from_pretrained(GENERATOR_PATH)
-        self.generator = AutoModelForSeq2SeqLM.from_pretrained(GENERATOR_PATH).to("cuda")
+        self.generator = AutoModelForSeq2SeqLM.from_pretrained(GENERATOR_PATH).to(self.device)
 
         # Dùng cho hệ generator_only (không context) — dùng model gốc chưa fine-tune
         self.qa_tokenizer = AutoTokenizer.from_pretrained("distilbert-base-cased-distilled-squad")
         self.qa_model = AutoModelForQuestionAnswering.from_pretrained(
             "distilbert-base-cased-distilled-squad"
-        ).to("cuda")
+        ).to(self.device)
 
     # ---------------- RETRIEVAL ----------------
     def retrieve(self, question: str, top_k: int = TOP_K):
@@ -65,7 +72,7 @@ class RAGSystem:
         )
         inputs = self.tokenizer(
             input_text, return_tensors="pt", truncation=True, max_length=512
-        ).to("cuda")
+        ).to(self.device)
         output_ids = self.generator.generate(
             **inputs,
             max_new_tokens=32,          # giới hạn token sinh ra, tránh dài lê thê
@@ -83,7 +90,7 @@ class RAGSystem:
         input_text = f"answer the question without context. question: {question} answer:"
         inputs = self.tokenizer(
             input_text, return_tensors="pt", truncation=True, max_length=256
-        ).to("cuda")
+        ).to(self.device)
         output_ids = self.generator.generate(
             **inputs,
             max_new_tokens=32,
@@ -111,7 +118,7 @@ class RAGSystem:
                 truncation=True,
                 max_length=512,
                 padding=True,
-            ).to("cuda")
+            ).to(self.device)
             with torch.no_grad():
                 outputs = self.qa_model(**inputs)
 
@@ -119,15 +126,19 @@ class RAGSystem:
             end_logits = outputs.end_logits[0]
 
             # Tìm cặp (start, end) có tổng logit cao nhất, với điều kiện end >= start
+            # Vectorized: tạo ma trận score[s,e] = start_logits[s] + end_logits[e]
+            # rồi mask chỉ giữ vùng e >= s và e - s < 20 (span tối đa 20 token)
             n_tokens = start_logits.shape[0]
-            best_span_score = -1e9
-            best_start, best_end = 0, 0
-            for s in range(n_tokens):
-                for e in range(s, min(s + 20, n_tokens)):  # span tối đa 20 token
-                    score = start_logits[s].item() + end_logits[e].item()
-                    if score > best_span_score:
-                        best_span_score = score
-                        best_start, best_end = s, e
+            score_matrix = start_logits.unsqueeze(1) + end_logits.unsqueeze(0)  # [n, n]
+            # Mask: giữ upper triangle (e >= s) với bandwidth 20
+            mask = torch.triu(torch.ones(n_tokens, n_tokens, device=start_logits.device, dtype=torch.bool), diagonal=0)
+            band_mask = torch.triu(torch.ones(n_tokens, n_tokens, device=start_logits.device, dtype=torch.bool), diagonal=20)
+            valid_mask = mask & ~band_mask
+            score_matrix[~valid_mask] = -1e9
+            flat_idx = score_matrix.argmax()
+            best_start = (flat_idx // n_tokens).item()
+            best_end = (flat_idx % n_tokens).item()
+            best_span_score = score_matrix[best_start, best_end].item()
 
             # FIX 2b: chỉ nhận span nếu score đủ cao (threshold)
             if best_span_score > 2.0 and best_span_score > best_score:

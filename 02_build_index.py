@@ -10,6 +10,7 @@ Chạy 1 lần duy nhất (offline) — không cần chạy lại mỗi lần h�
 
 import json
 import numpy as np
+import torch
 import faiss
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
@@ -34,7 +35,8 @@ def main():
     print(f"Đang mã hoá {len(texts)} chunks...")
 
     # GPU 6GB dư sức chạy model nhỏ này — device tự nhận "cuda" nếu có
-    model = SentenceTransformer(EMBED_MODEL_NAME, device="cuda")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = SentenceTransformer(EMBED_MODEL_NAME, device=device)
 
     embeddings = model.encode(
         texts,
