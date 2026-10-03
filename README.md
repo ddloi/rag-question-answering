@@ -64,27 +64,27 @@
 
 ## 📊 Kết quả Thực nghiệm & Evaluation
 
-### 1. So sánh 3 Hệ thống (End-to-End QA)
+### 1. So sánh 3 Hệ thống (End-to-End QA, trên toàn bộ 120 câu test)
 
 | Hệ thống | Exact Match (EM) | F1 Score | Faithfulness (Grounding) |
 |---|:---:|:---:|:---:|
-| **Generator-only** (không context) | 0.000 | 0.020 | N/A |
-| **Retrieval-only** (DistilBERT extractive) | 0.150 | 0.251 | 0.640 |
-| **RAG đầy đủ** (FAISS + T5 fine-tuned) | **0.300** | **0.345** | **0.825** |
+| **Generator-only** (không context) | 0.008 | 0.019 | N/A |
+| **Retrieval-only** (DistilBERT extractive) | 0.250 | 0.326 | 0.704 |
+| **RAG đầy đủ** (FAISS + T5 fine-tuned) | **0.325** | **0.376** | **0.858** |
 
 > **Nhận xét cốt lõi:**
-> - RAG đầy đủ đạt F1=0.345 và EM=0.300, vượt trội hoàn toàn so với Generator-only (F1=0.020) và Extractive QA (F1=0.251).
-> - Chỉ số **Faithfulness đạt 0.825 (82.5%)**, chứng minh mô hình sinh câu trả lời bám sát ngữ cảnh truy hồi, kiểm soát chặt chẽ hiện tượng ảo giác (hallucination).
+> - RAG đầy đủ đạt **F1=0.376** và **EM=0.325**, vượt trội hoàn toàn so với Generator-only (F1=0.019) và Extractive QA (F1=0.326).
+> - Chỉ số **Faithfulness đạt 0.858 (85.8%)**, chứng minh mô hình sinh câu trả lời bám sát ngữ cảnh truy hồi, kiểm soát chặt chẽ hiện tượng ảo giác (hallucination).
 
 ### 2. Phân rã lỗi & Độ chính xác trích dẫn (RAG đầy đủ)
 
 | Chỉ số đánh giá | Kết quả | Ý nghĩa khoa học |
 |---|:---:|---|
-| **Citation Accuracy (Doc-level)** | **0.850 (85.0%)** | Tỷ lệ passages truy hồi trích dẫn đúng tài liệu nguồn chuẩn |
-| **Citation Precision (Evidence)** | **0.450 (45.0%)** | Tỷ lệ passage chứa chính xác chuỗi đáp án |
-| **Retrieval Failure** | **15.0%** (3/20) | Lỗi do không tìm thấy tài liệu liên quan trong top-k |
-| **Generation Failure** | **55.0%** (11/20) | Đã truy hồi đúng tài liệu nhưng generator diễn giải lệch nhãn |
-| **Hoàn toàn chính xác (Correct)** | **30.0%** (6/20) | Trả lời chính xác hoàn toàn (Exact Match) |
+| **Citation Accuracy (Doc-level)** | **0.908 (90.8%)** | Tỷ lệ passages truy hồi trích dẫn đúng tài liệu nguồn chuẩn |
+| **Citation Precision (Evidence)** | **0.617 (61.7%)** | Tỷ lệ passage chứa chính xác chuỗi đáp án |
+| **Retrieval Failure** | **9.2%** (11/120) | Lỗi do không tìm thấy tài liệu liên quan trong top-k |
+| **Generation Failure** | **58.3%** (70/120) | Đã truy hồi đúng tài liệu nhưng generator diễn giải lệch nhãn |
+| **Hoàn toàn chính xác (Correct)** | **32.5%** (39/120) | Trả lời chính xác hoàn toàn (Exact Match) |
 
 ### 3. Recall@k của Retrieval (trên test set 120 câu)
 
