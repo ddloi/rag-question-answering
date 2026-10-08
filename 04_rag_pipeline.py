@@ -164,7 +164,7 @@ class RAGSystem:
 
 def demo():
     rag = RAGSystem()
-    question = "Ví dụ câu hỏi cần trả lời ở đây"
+    question = "Who directed the movie Jaws?"
 
     print("\n--- Hệ 1: Generator only (không context) ---")
     print(rag.answer_generator_only(question))
