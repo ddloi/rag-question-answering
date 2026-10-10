@@ -1,0 +1,48 @@
+{
+  "classical_baselines": {
+    "BM25": {
+      "Recall@3": 0.8583,
+      "Recall@5": 0.8917,
+      "Recall@10": 0.925,
+      "MRR": 0.8112
+    },
+    "TF-IDF": {
+      "Recall@3": 0.8,
+      "Recall@5": 0.8583,
+      "Recall@10": 0.8917,
+      "MRR": 0.7753
+    },
+    "Word2Vec": {
+      "Recall@3": 0.0667,
+      "Recall@5": 0.0917,
+      "Recall@10": 0.125,
+      "MRR": 0.0533
+    },
+    "FastText": {
+      "Recall@3": 0.0583,
+      "Recall@5": 0.0583,
+      "Recall@10": 0.0917,
+      "MRR": 0.0482
+    }
+  },
+  "reference_benchmarks": {
+    "Dense (FAISS - all-MiniLM-L6-v2)": {
+      "Recall@3": 0.8167,
+      "Recall@5": 0.88,
+      "Recall@10": 0.9417,
+      "MRR": 0.695,
+      "type": "Pre-trained Dense (SOTA Reference)"
+    },
+    "Hybrid Search (BM25 + FAISS via RRF)": {
+      "Recall@3": 0.8583,
+      "Recall@5": 0.91,
+      "Recall@10": 0.9583,
+      "MRR": 0.732,
+      "type": "Ensemble Hybrid (SOTA Reference)"
+    }
+  },
+  "dataset_info": {
+    "num_chunks": 3940,
+    "num_test_queries": 120
+  }
+}

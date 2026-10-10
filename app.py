@@ -70,7 +70,7 @@ def get_samples():
         samples.append({
             "question": r.get("question", ""),
             "ground_truth": r.get("answer", ""),
-            "doc_id": r.get("doc_id", "")
+            "doc_id": r.get("gold_doc_id", "")
         })
     return {"samples": samples}
 

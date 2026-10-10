@@ -42,6 +42,8 @@ def exact_match_score(prediction: str, ground_truth: str) -> int:
 def f1_score(prediction: str, ground_truth: str) -> float:
     pred_tokens = normalize_answer(prediction).split()
     gt_tokens = normalize_answer(ground_truth).split()
+    if len(pred_tokens) == 0 or len(gt_tokens) == 0:
+        return float(pred_tokens == gt_tokens)
     common = Counter(pred_tokens) & Counter(gt_tokens)
     num_same = sum(common.values())
     if num_same == 0:

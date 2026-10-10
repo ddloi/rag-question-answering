@@ -58,8 +58,9 @@ class HybridRetriever:
 
     def _bm25_ranked_ids(self, query: str, pool_size: int):
         scores = self.bm25.get_scores(simple_tokenize(query))
-        top_ids = np.argsort(scores)[::-1][:pool_size]
-        return list(top_ids)
+        top_ids = np.argsort(scores)[::-1]
+        valid_ids = [int(idx) for idx in top_ids if scores[idx] > 0][:pool_size]
+        return valid_ids
 
     def _dense_ranked_ids(self, query: str, pool_size: int):
         q_emb = self.embed_model.encode(

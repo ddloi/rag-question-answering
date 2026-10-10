@@ -17,6 +17,7 @@ import sys
 import json
 import re
 import numpy as np
+import torch
 import faiss
 import pandas as pd
 from pathlib import Path
@@ -115,13 +116,16 @@ def main():
         documents = json.load(f)
 
     qa_records = []
-    with open(DATA_DIR / "qa_pairs.jsonl", "r", encoding="utf-8") as f:
+    # Dùng test_qa.jsonl để đánh giá ablation trên tập test chuẩn, tránh rò rỉ dữ liệu train
+    test_file = DATA_DIR / "test_qa.jsonl" if (DATA_DIR / "test_qa.jsonl").exists() else DATA_DIR / "qa_pairs.jsonl"
+    with open(test_file, "r", encoding="utf-8") as f:
         for line in f:
             qa_records.append(json.loads(line))
-    # Dùng subset nhỏ cho ablation để chạy nhanh (vd 100 câu)
+    # Dùng subset 100 câu cho ablation để chạy nhanh
     qa_records = qa_records[:100]
 
-    embed_model = SentenceTransformer(EMBED_MODEL_NAME, device="cuda")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    embed_model = SentenceTransformer(EMBED_MODEL_NAME, device=device)
 
     results_table = []
 
