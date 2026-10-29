@@ -13,16 +13,16 @@
       "MRR": 0.7753
     },
     "Word2Vec": {
-      "Recall@3": 0.0667,
-      "Recall@5": 0.0917,
-      "Recall@10": 0.125,
-      "MRR": 0.0533
+      "Recall@3": 0.0583,
+      "Recall@5": 0.1,
+      "Recall@10": 0.1167,
+      "MRR": 0.0499
     },
     "FastText": {
-      "Recall@3": 0.0583,
+      "Recall@3": 0.05,
       "Recall@5": 0.0583,
-      "Recall@10": 0.0917,
-      "MRR": 0.0482
+      "Recall@10": 0.1,
+      "MRR": 0.0519
     }
   },
   "reference_benchmarks": {

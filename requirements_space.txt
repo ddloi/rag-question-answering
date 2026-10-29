@@ -1,5 +1,2 @@
-transformers>=4.40.0
-sentence-transformers>=2.6.0
-faiss-cpu>=1.8.0
-torch
-gradio
+# Hugging Face Space dependencies; also uploaded as a standalone file.
+-r deployment/huggingface/requirements.txt

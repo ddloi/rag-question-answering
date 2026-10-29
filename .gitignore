@@ -38,6 +38,8 @@ generate_reports.py
 test_clean.docx
 
 # IDE / System
+.impeccable/
+.ipynb_checkpoints/
 .vscode/
 .idea/
 .DS_Store
@@ -45,3 +47,12 @@ Thumbs.db
 
 # Pipeline state (local only)
 .pipeline/
+
+# Local test/build artifacts
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+build/
+dist/
+*.egg-info/

@@ -1,12 +1,14 @@
-"""Quick smoke test for the DeterministicPipelineEngine."""
+"""Compatibility test entry point; canonical tests live in tests/test_engine.py.
 
-from pipeline_engine import DeterministicPipelineEngine
+Preferred command: python -m unittest discover -s tests -v
+"""
 
-e = DeterministicPipelineEngine()
-res = e.execute_pipeline("director of Jaws")
-print("Telemetry:", res["telemetry"])
-print("Top snippet:", res["result"]["top_snippet"])
-print("Grounding Doc ID:", res["result"]["grounded_doc_id"])
-print("Score breakdown for rank 1:")
-for item in res["result"]["top_chunks"][0]["score_breakdown"]:
-    print(" ", item)
+import unittest
+
+
+def load_tests(loader, tests, pattern):
+    return loader.loadTestsFromName("tests.test_engine")
+
+
+if __name__ == "__main__":
+    unittest.main()

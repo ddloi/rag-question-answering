@@ -1,0 +1,2 @@
+# Compatibility requirements file; canonical lightweight web dependencies.
+-r requirements/demo.txt

@@ -11,6 +11,19 @@
 
 ---
 
+## Chạy demo nhanh
+
+Từ thư mục gốc `RAG`, khi đã có dữ liệu trong `data/`:
+
+```powershell
+python -m pip install -r requirements/demo.txt
+python app.py
+```
+
+Mở `http://localhost:8001`. Web demo hiện minh họa **BM25 + trích câu**; pipeline **T5 + FAISS** nằm riêng trong `experiments/`. Xem [hướng dẫn demo](docs/DEMO_READINESS.md), [cấu trúc và lệnh chạy](docs/ARCHITECTURE.md) hoặc [các môi trường Python](requirements/README.md).
+
+---
+
 ## 🎯 Câu hỏi Nghiên cứu (Research Questions)
 
 Đồ án được thiết kế xoay quanh 3 câu hỏi nghiên cứu cốt lõi:
@@ -156,7 +169,7 @@ Thực nghiệm đo lường trên toàn bộ 120 câu hỏi test (`data/test_qa
 python -m venv venv
 venv\Scripts\activate          # Windows
 # source venv/bin/activate     # Linux/Mac
-pip install -r requirements.txt
+python -m pip install -r requirements/ml.txt
 ```
 
 Kiểm tra CUDA:
@@ -167,35 +180,35 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_
 ### 1. Tải dataset
 
 ```bash
-python 00_download_dataset.py
+python -m experiments.download_dataset
 ```
-Mặc định tải 800 câu từ TriviaQA (`rc.wikipedia`, split validation). Đổi `DATASET_CHOICE = "natural_questions"` nếu muốn dùng NQ. → Tạo `raw_documents.json`.
+Mặc định tải 800 câu từ TriviaQA (`rc.wikipedia`, split validation). Đổi `DATASET_CHOICE = "natural_questions"` nếu muốn dùng NQ. → Tạo `data/raw_documents.json`.
 
 ### 2. Chunking
 
 ```bash
-python 01_prepare_and_chunk.py
+python -m experiments.prepare_chunks
 ```
 → Tạo `data/corpus_chunks.jsonl` và `data/qa_pairs.jsonl`.
 
 ### 3. Tách train/test
 
 ```bash
-python 01b_split_train_test.py
+python -m experiments.split_train_test
 ```
 → Tạo `data/test_qa.jsonl` (evaluate) và `data/training_pairs.jsonl` (fine-tune). Seed=42, test 15%.
 
 ### 4. Xây FAISS index
 
 ```bash
-python 02_build_index.py
+python -m experiments.build_index
 ```
 → Tạo `data/faiss.index` + `data/chunk_metadata.jsonl`. Chạy 1 lần.
 
 ### 5. Fine-tune generator
 
 ```bash
-python 03_finetune_generator.py
+python -m experiments.finetune_generator
 ```
 → Model lưu tại `generator_finetuned/`. T5-base, batch_size=4 + fp16 + gradient_accumulation=4.
 
@@ -203,10 +216,10 @@ python 03_finetune_generator.py
 
 ```bash
 # Đánh giá toàn bộ 120 câu test
-python 05_evaluate.py
+python -m experiments.evaluate
 
 # Hoặc đánh giá nhanh trên tập mẫu (ví dụ 10 câu)
-python 05_evaluate.py --samples 10
+python -m experiments.evaluate --samples 10
 ```
 → Xuất đầy đủ các chỉ số theo chuẩn đề cương Đề tài 20:
 - **Recall@k**: Đo lường độc lập cho bộ truy hồi (retriever)
@@ -218,87 +231,90 @@ python 05_evaluate.py --samples 10
 ### 7. Cải tiến — Hybrid retrieval
 
 ```bash
-python 06_hybrid_retrieval.py
+python -m experiments.hybrid_retrieval
 ```
 BM25 + Dense kết hợp bằng Reciprocal Rank Fusion (RRF, k=60).
 
 ### 8. Ablation study
 
 ```bash
-python 07_ablation_chunk_topk.py
+python -m experiments.ablation
 ```
-3 chunk_size × 3 top_k, so sánh Dense vs Hybrid. Kết quả → `ablation_results.csv`.
+3 chunk_size × 3 top_k, so sánh Dense vs Hybrid. Kết quả → `results/ablation_results.csv`.
 
 ### 9. Thực nghiệm Retrieval Baselines (Tuần xây dựng baseline)
 
 ```bash
-python 08_baseline_retrieval.py
+python -m experiments.baseline_retrieval
 ```
-So sánh 4 phương pháp retrieval truyền thống (BM25, TF-IDF, Word2Vec CBOW, FastText subwords) trên tập test 120 câu hỏi, đo lường Recall@3, Recall@5, Recall@10, MRR → Lưu kết quả tại `baseline_results.json`.
+So sánh 4 phương pháp retrieval truyền thống (BM25, TF-IDF, Word2Vec CBOW, FastText subwords) trên tập test 120 câu hỏi, đo lường Recall@3, Recall@5, Recall@10, MRR → Lưu kết quả tại `results/baseline_results.json`.
 
 ---
 
 ## 🌐 Web Demo (Local)
 
-Dự án bao gồm một web demo **Pipeline Studio** với giao diện BM25 search minh bạch, trực quan và giải thích được (Explainable Search):
-
-![Pipeline Studio UI](docs/pipeline_studio_demo.png)
+Dự án bao gồm web demo **RAG Lab** với giao diện tiếng Việt, truy hồi BM25 và trích câu nguyên văn. **Đây là demo retrieval baseline, chưa chạy T5 hoặc FAISS** như pipeline RAG trong phần thực nghiệm ở trên.
 
 ```bash
+python -m pip install -r requirements/demo.txt
 python app.py
 ```
 Mở trình duyệt tại `http://localhost:8001`. Giao diện hiển thị:
 - Pipeline 4 giai đoạn: Query Normalizer → BM25 Ranking → Span Extractor → Telemetry
 - Phân rã điểm BM25 theo từ khóa (TF, IDF, contribution)
 - Top-K chunks được xếp hạng với highlight từ khóa
-- Điều chỉnh tham số BM25 (k1, b) real-time
+- Điều chỉnh tham số BM25 (k1, b), áp dụng khi bấm “Tìm bằng chứng”
+- Đối chiếu đáp án tham chiếu sau khi chạy câu hỏi mẫu
+- Trạng thái tải, lỗi/thử lại và không có kết quả; hỗ trợ bàn phím và màn hình nhỏ
+
+Độ phủ từ khóa không phải độ chính xác QA; câu trích có thể không trả lời đúng câu hỏi. Xem [hướng dẫn và giới hạn trước demo](docs/DEMO_READINESS.md).
+
+Kiểm tra nhanh: cài `requirements/test.txt`, sau đó chạy `python -m unittest discover -s tests -v`. Lệnh kiểm thử engine cũ `python -m unittest test_engine -v` vẫn hoạt động.
 
 ### Deploy lên Hugging Face Space
 
 1. Upload model lên HF Hub:
    ```bash
-   python upload_to_hf.py
+   python -m scripts.upload_to_hf
    ```
-2. Cấu hình `app_space.py`:
+2. Cấu hình Hugging Face Space:
    - Set `HF_MODEL_REPO_ID` environment variable hoặc sửa trực tiếp trong file
-3. Tạo HF Space (Gradio) và upload `app_space.py` → `app.py`
+3. Tạo HF Space (Gradio), upload `deployment/huggingface/app.py` thành `app.py` và `deployment/huggingface/requirements.txt` thành `requirements.txt`. Đây là hai tệp độc lập để triển khai; không dùng launcher tương thích ở root.
 
 ---
 
 ## 📁 Cấu trúc dự án
 
-```
+```text
 RAG/
-├── 00_download_dataset.py      # Bước 0: Tải TriviaQA/NQ subset
-├── 01_prepare_and_chunk.py     # Bước 1: Chunking (200 words, overlap 40)
-├── 01b_split_train_test.py     # Bước 1.5: Tách train/test (seed=42)
-├── 02_build_index.py           # Bước 2: Embedding + FAISS index
-├── 03_finetune_generator.py    # Bước 3: Fine-tune T5-base
-├── 04_rag_pipeline.py          # Bước 4: RAG pipeline (3 hệ thống)
-├── 05_evaluate.py              # Bước 5: Evaluation (EM/F1/Recall)
-├── 06_hybrid_retrieval.py      # Cải tiến 1: BM25 + Dense Hybrid
-├── 07_ablation_chunk_topk.py   # Cải tiến 2: Ablation study
-├── 08_baseline_retrieval.py    # Tuần Baseline: BM25, TF-IDF, Word2Vec, FastText
-├── baseline_results.json       # Kết quả đo lường retrieval baseline
-├── ablation_results.csv        # Kết quả ablation study
-├── app.py                      # Web demo (FastAPI + static frontend)
-├── pipeline_engine.py          # BM25 deterministic engine
-├── app_space.py                # HF Space deployment (Gradio)
-├── upload_to_hf.py             # Upload model lên HF Hub
-├── requirements.txt            # Dependencies
-├── requirements_lock.txt       # Pinned versions (reproducibility)
-├── static/                     # Frontend assets (HTML/CSS/JS)
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-└── data/                       # Generated data (not in git)
-    ├── corpus_chunks.jsonl
-    ├── qa_pairs.jsonl
-    ├── test_qa.jsonl
-    ├── training_pairs.jsonl
-    ├── faiss.index
-    └── chunk_metadata.jsonl
+├── ragqa/                      # Mã ứng dụng web, không chứa thí nghiệm ML
+│   ├── web.py                  # FastAPI và các endpoint
+│   ├── engine.py               # BM25 + chọn câu nguyên văn
+│   ├── paths.py                # Đường dẫn dùng chung, độc lập thư mục chạy
+│   └── static/                 # HTML, CSS, JavaScript
+├── experiments/                # Download → chunk → split → index → train → evaluate
+│   ├── rag_pipeline.py         # T5 + FAISS và các hệ thống so sánh
+│   ├── hybrid_retrieval.py
+│   ├── ablation.py
+│   └── baseline_retrieval.py
+├── scripts/                    # Công cụ upload model
+├── deployment/huggingface/      # Gradio app và requirements độc lập
+├── tests/                      # Kiểm thử engine, API và đường dẫn
+├── configs/                    # Cấu hình baseline có trong Git
+├── requirements/               # demo, test, ML, notebook và snapshot môi trường
+├── notebooks/                  # preprocessing.ipynb
+├── data/                       # Raw documents, QA pairs, chunks, FAISS index
+├── generator_finetuned/        # Tokenizer, cấu hình và trọng số local
+├── results/                    # baseline_results.json, ablation_results.csv
+├── docs/                       # Kiến trúc và hướng dẫn demo
+├── app.py                      # Điểm chạy web tương thích
+├── 00_*.py … 08_*.py           # Điểm gọi cũ, chuyển tiếp vào experiments/
+└── requirements*.txt           # Điểm cài cũ, chuyển tiếp vào requirements/
 ```
+
+Mã triển khai chính nằm trong các package; các tệp Python ở root chỉ giữ tương thích với lệnh cũ. Chỉnh sửa web trong `ragqa/`, thí nghiệm trong `experiments/`. Xem [bản đồ kiến trúc và bảng lệnh](docs/ARCHITECTURE.md).
+
+`python -m experiments --list` liệt kê các bước mà không tải thư viện ML. Ví dụ `python -m experiments evaluate --samples 5` gọi phần đánh giá. Các bước tạo dữ liệu/huấn luyện có thể ghi đè artifact, không cần chạy lại để mở web demo khi đã có corpus.
 
 ---
 

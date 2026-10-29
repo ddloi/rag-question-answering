@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7fa">
+    <meta name="description" content="Khám phá truy hồi BM25 trên TriviaQA, kiểm tra đoạn trích và tài liệu nguồn.">
+    <title>RAG Lab · Khám phá truy hồi</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230369a1'/%3E%3Cpath d='M9 10h14M9 16h10M9 22h6' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/app.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Đến nội dung chính</a>
+    <header class="navbar">
+        <a class="brand" href="/" aria-label="RAG Lab — trang chủ">
+            <span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h7a3 3 0 0 1 3 3v12a4 4 0 0 0-4-2H4z"/><path d="M14 8a3 3 0 0 1 3-3h3v13h-2a4 4 0 0 0-4 2"/><path d="M7 9h3m-3 4h3"/></svg></span>
+            <span>RAG <b>Lab</b></span>
+            <span class="brand-divider" aria-hidden="true"></span>
+            <span class="brand-caption">Không gian thực nghiệm</span>
+        </a>
+        <div class="system-status"><span class="status-dot" aria-hidden="true"></span><span id="system-state" role="status">Đang kết nối…</span></div>
+    </header>
+    <main id="main" class="workspace">
+        <div class="page-heading">
+            <div><h1>Khám phá truy hồi tài liệu</h1><p>Đặt câu hỏi, tìm bằng chứng và xem cách hệ thống xếp hạng nguồn.</p></div>
+            <span class="mode-badge">BM25 + trích câu</span>
+        </div>
+        <section class="pipeline" aria-label="Quy trình xử lý">
+            <div class="pipeline-caption"><h2>Một câu hỏi, bốn bước xử lý</h2><span id="pipeline-status-text" role="status">Sẵn sàng khi bạn đặt câu hỏi</span></div>
+            <ol class="stepper-track">
+                <li class="step-node" id="node-stage-1"><span class="step-number">1</span><div><h3>Phân tích câu hỏi</h3><p>Tách và chọn từ khóa</p></div><span class="node-latency" id="lat-stage-1">—</span></li>
+                <li class="step-node" id="node-stage-2"><span class="step-number">2</span><div><h3>Truy hồi BM25</h3><p>Xếp hạng đoạn tài liệu</p></div><span class="node-latency" id="lat-stage-2">—</span></li>
+                <li class="step-node" id="node-stage-3"><span class="step-number">3</span><div><h3>Trích dẫn nguồn</h3><p>Chọn câu khớp từ khóa</p></div><span class="node-latency" id="lat-stage-3">—</span></li>
+                <li class="step-node" id="node-stage-4"><span class="step-number">4</span><div><h3>Đo & đối chiếu</h3><p>Ghi nhận thời gian chạy</p></div><span class="node-latency" id="lat-stage-4">—</span></li>
+            </ol>
+        </section>
+        <div class="workspace-grid">
+            <aside class="control-panel" aria-label="Đặt câu hỏi và cấu hình">
+                <form id="pipeline-form">
+                    <div class="section-heading"><h2>Câu hỏi của bạn</h2><span class="small-tag">TriviaQA · EN</span></div>
+                    <label class="sr-only" for="query-input">Nhập câu hỏi tiếng Anh</label>
+                    <textarea id="query-input" rows="3" maxlength="2000" placeholder="Ví dụ: Who directed the movie Jaws?" aria-describedby="query-help" required></textarea>
+                    <p id="query-help" class="field-help">Dữ liệu nguồn bằng tiếng Anh. Dùng câu hỏi tiếng Anh để có kết quả phù hợp hơn.</p>
+                    <div class="topk-control"><label for="param-topk">Số đoạn truy hồi <span class="muted">(Top-K)</span></label><output id="val-topk" for="param-topk">5</output></div>
+                    <input type="range" id="param-topk" min="1" max="10" value="5">
+                    <div class="range-ends" aria-hidden="true"><span>1 đoạn</span><span>10 đoạn</span></div>
+                    <details class="advanced-settings">
+                        <summary>Tham số BM25 <span class="summary-hint">Nâng cao</span></summary>
+                        <div class="advanced-body">
+                            <div class="topk-control"><label for="param-k1">Độ bão hòa từ khóa <span class="muted">k₁</span></label><output id="val-k1" for="param-k1">1.5</output></div>
+                            <input type="range" id="param-k1" min="0.5" max="3" step="0.1" value="1.5">
+                            <p class="field-help">Điều chỉnh tác động khi một từ xuất hiện nhiều lần.</p>
+                            <div class="topk-control"><label for="param-b">Chuẩn hóa độ dài <span class="muted">b</span></label><output id="val-b" for="param-b">0.75</output></div>
+                            <input type="range" id="param-b" min="0" max="1" step="0.05" value="0.75">
+                            <p class="field-help">Điều chỉnh mức ảnh hưởng của độ dài đoạn tài liệu.</p>
+                            <button type="button" id="reset-params" class="text-button">Khôi phục mặc định</button>
+                        </div>
+                    </details>
+                    <button type="submit" id="btn-run" class="btn-primary"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span id="run-label">Tìm bằng chứng</span><span aria-hidden="true">→</span></button>
+                    <p class="keyboard-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> để chạy · Enter để xuống dòng</p>
+                </form>
+                <section class="sample-presets" aria-labelledby="sample-heading">
+                    <div class="section-heading"><h2 id="sample-heading">Thử một câu hỏi mẫu</h2></div>
+                    <p class="field-help">Chọn để điền, sau đó bấm “Tìm bằng chứng”.</p>
+                    <div id="samples-list" class="samples-list" aria-live="polite"><p class="muted">Đang tải câu hỏi mẫu…</p></div>
+                    <button type="button" id="sample-retry" class="text-button" hidden>Tải lại câu hỏi mẫu</button>
+                    <button type="button" id="samples-toggle" class="text-button" aria-expanded="false" hidden>Xem tất cả câu hỏi</button>
+                </section>
+                <div class="corpus-info"><span class="corpus-icon" aria-hidden="true">▤</span><div><b>Kho tài liệu TriviaQA</b><p><span id="hdr-corpus">—</span> đoạn · <span id="hdr-vocab">—</span> từ vựng</p></div></div>
+            </aside>
+            <section id="results-panel" class="results-panel" aria-labelledby="results-heading" aria-busy="false">
+                <div class="results-header"><h2 id="results-heading" tabindex="-1">Bằng chứng truy hồi</h2><span id="result-status" class="small-tag">Chưa có truy vấn</span></div>
+                <div id="stale-notice" class="inline-notice" role="status" hidden>Câu hỏi hoặc tham số đã thay đổi. Chạy lại để cập nhật kết quả.</div>
+                <div id="empty-state" class="empty-state">
+                    <div class="document-illustration" aria-hidden="true"><svg viewBox="0 0 112 112" fill="none"><rect x="22" y="14" width="62" height="80" rx="7" fill="white" stroke="currentColor" stroke-width="1.5"/><path d="M35 33h34M35 44h25M35 55h34M35 66h19" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="78" cy="77" r="17" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><path d="m72 77 4 4 8-9" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <h3>Bắt đầu từ một câu hỏi</h3><p>Chọn một câu hỏi mẫu hoặc nhập câu hỏi của bạn.<br>Đoạn trích và các tài liệu nguồn sẽ xuất hiện ở đây.</p>
+                    <div class="empty-guide"><span>Từ khóa được đánh dấu</span><span>Nguồn có thể đối chiếu</span></div>
+                </div>
+                <div id="loading-state" class="loading-state" role="status" hidden><p>Đang tìm và xếp hạng tài liệu…</p><div class="skeleton skeleton-short"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton skeleton-medium"></div><div class="skeleton-block"></div></div>
+                <div id="no-results" class="empty-state" hidden><span class="empty-symbol" aria-hidden="true">⌕</span><h3>Chưa tìm thấy đoạn phù hợp</h3><p>Thử tên riêng, từ khóa cụ thể hoặc một câu hỏi mẫu bằng tiếng Anh. Kho tài liệu này chỉ chứa một phần của TriviaQA.</p></div>
+                <div id="error-state" class="error-state" role="alert" hidden><h3>Chưa thể hoàn tất truy vấn</h3><p id="error-message"></p><button type="button" id="retry-button" class="btn-secondary">Thử lại</button></div>
+                <div id="results-content" hidden>
+                    <p id="result-query" class="result-query"></p>
+                    <div class="result-metrics"><span id="badge-coverage" class="metric">Độ phủ từ khóa: —</span><span id="badge-total-latency" class="metric">Xử lý: —</span></div>
+                    <div class="excerpt-heading"><h3>Đoạn trích nổi bật</h3><button type="button" id="copy-result" class="text-button">Sao chép đoạn trích</button></div>
+                    <blockquote id="extracted-span-text" class="extracted-text"></blockquote>
+                    <div class="source-line"><span class="source-marker" aria-hidden="true">↳</span><span id="span-source-ref"></span><span>· Câu <span id="span-sentence-idx"></span></span></div>
+                    <p class="result-caveat">Trích nguyên văn từ nguồn; có thể chưa trả lời đúng câu hỏi. Độ phủ từ khóa thể hiện mức khớp từ, không phải độ chính xác.</p>
+                    <p id="copy-status" class="copy-feedback" role="status"></p>
+                    <details id="reference-details" class="reference-details" hidden><summary>Đối chiếu đáp án trong bộ test</summary><div><p>Đáp án tham chiếu: <strong id="reference-answer"></strong></p><p class="muted">Tài liệu chuẩn: <span id="reference-doc"></span>. Đây là nhãn của bộ dữ liệu, không phải đáp án do hệ thống sinh.</p></div></details>
+                    <div class="sources-heading"><h3>Tài liệu nguồn</h3><span id="chunks-count" class="small-tag"></span></div>
+                    <p class="field-help">Xếp hạng theo điểm BM25. Mở từng đoạn để kiểm tra ngữ cảnh đầy đủ.</p>
+                    <div id="chunks-list" class="chunks-list"></div>
+                    <details id="technical-details" class="technical-details">
+                        <summary>Phân tích từ khóa & điểm số <span class="summary-hint">Chi tiết kỹ thuật</span></summary>
+                        <div class="technical-body"><h4>Từ khóa trong câu hỏi</h4><div id="term-tags" class="term-tags"></div><p class="field-help">IDF càng cao, từ càng hiếm trong kho tài liệu.</p><h4>Phân rã điểm của đoạn xếp hạng #1</h4><div class="table-responsive"><table><caption class="sr-only">Đóng góp BM25 theo từng từ khóa</caption><thead><tr><th scope="col">Từ khóa</th><th scope="col">Số lần (TF)</th><th scope="col">IDF</th><th scope="col">Điểm BM25</th></tr></thead><tbody id="breakdown-tbody"></tbody></table></div><p class="field-help">Từ khớp trong câu trích: <span id="span-matched-terms"></span></p></div>
+                    </details>
+                </div>
+                <footer class="results-footer"><span class="footer-dot" aria-hidden="true"></span>Chế độ truy hồi & trích câu · Chưa sử dụng T5 hoặc FAISS</footer>
+            </section>
+        </div>
+        <footer class="page-footer"><span>RAG Lab · Demo đồ án hỏi–đáp</span><span>Kiểm tra bằng chứng trước khi kết luận.</span></footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Lightweight local BM25 web demo; no model downloads or GPU required.
+# Tested with Python 3.13.1. Full ML experiments use requirements.txt.
+fastapi==0.141.1
+pydantic==2.13.4
+uvicorn==0.52.4

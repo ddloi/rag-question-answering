@@ -1,0 +1,34 @@
+{
+  "random_seed": 42,
+  "bm25": {
+    "k1": 1.5,
+    "b": 0.75
+  },
+  "tfidf": {
+    "ngram_range": [1, 2],
+    "sublinear_tf": true,
+    "max_features": 25000,
+    "stop_words": "english"
+  },
+  "word2vec": {
+    "vector_size": 100,
+    "window": 5,
+    "min_count": 2,
+    "epochs": 10,
+    "sg": 0,
+    "seed": 42
+  },
+  "fasttext": {
+    "vector_size": 100,
+    "window": 5,
+    "min_count": 2,
+    "epochs": 10,
+    "sg": 0,
+    "seed": 42
+  },
+  "evaluation": {
+    "k_values": [3, 5, 10],
+    "test_qa_path": "data/test_qa.jsonl",
+    "corpus_path": "data/chunk_metadata.jsonl"
+  }
+}
