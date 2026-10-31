@@ -124,6 +124,15 @@ class ApiTests(unittest.TestCase):
         data = response.json()
         self.assertIn("rag", data)
 
+    def test_rag_low_relevance_gating_prevents_hallucination(self):
+        response = self.client.post("/api/pipeline/execute", json={"query": "???", "run_rag": True})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        if data.get("rag") and data["rag"].get("available"):
+            self.assertFalse(data["rag"]["is_grounded"])
+            self.assertLess(data["rag"]["top_score"], 0.25)
+            self.assertIn("Không tìm thấy", data["rag"]["answer"])
+
 
 if __name__ == "__main__":
     unittest.main()

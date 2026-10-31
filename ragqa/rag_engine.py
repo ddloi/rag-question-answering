@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 EXTRACTIVE_MODEL_NAME = "distilbert-base-cased-distilled-squad"
+SIMILARITY_THRESHOLD = 0.25
 
 
 class RAGNeuralEngine:
@@ -21,6 +22,7 @@ class RAGNeuralEngine:
       - Grounded answer generation via fine-tuned T5-base
       - Parametric-only answer generation (generator-only, showing hallucinations)
       - Extractive QA answer extraction via DistilBERT
+      - Relevance gating (threshold filtering to prevent false-confidence hallucination)
     """
 
     def __init__(self, data_dir: Path = DATA_DIR, model_dir: Path = MODEL_DIR):
@@ -254,17 +256,24 @@ class RAGNeuralEngine:
         retrieved = self.retrieve(query, top_k=top_k)
         retrieval_ms = (time.perf_counter() - t_ret_0) * 1000
 
+        top_score = retrieved[0]["score"] if retrieved else 0.0
+        is_grounded = top_score >= SIMILARITY_THRESHOLD
+
         # Step 2: T5 Generation with context (top-2 passages)
         t_gen_0 = time.perf_counter()
-        context = " ".join([r["text"] for r in retrieved[:2]]) if retrieved else ""
-        rag_answer = self.generate_answer(query, context) if context else "Không tìm thấy ngữ cảnh phù hợp."
+        if is_grounded:
+            context = " ".join([r["text"] for r in retrieved[:2]]) if retrieved else ""
+            rag_answer = self.generate_answer(query, context) if context else "Không tìm thấy ngữ cảnh phù hợp."
+        else:
+            context = ""
+            rag_answer = f"Không tìm thấy tài liệu liên quan trong kho tri thức (Độ tương đồng Cosine: {top_score:.3f} < {SIMILARITY_THRESHOLD})."
         generation_ms = (time.perf_counter() - t_gen_0) * 1000
 
         # Step 3: Generator-only (No context) for hallucination comparison
-        gen_only_answer = self.answer_generator_only(query)
+        gen_only_answer = self.answer_generator_only(query) if is_grounded else ""
 
         # Step 4: Extractive baseline
-        extractive_ans = self.answer_extractive_only(query, retrieved)
+        extractive_ans = self.answer_extractive_only(query, retrieved) if is_grounded else ""
 
         total_ms = (time.perf_counter() - t_start) * 1000
 
@@ -272,6 +281,8 @@ class RAGNeuralEngine:
             "available": True,
             "device": self.device,
             "device_name": self.device_name,
+            "is_grounded": is_grounded,
+            "top_score": top_score,
             "answer": rag_answer,
             "generator_only_answer": gen_only_answer,
             "extractive_answer": extractive_ans,
