@@ -220,25 +220,26 @@
                             <div class="model-card-header">
                                 <div class="card-title-group">
                                     <span class="card-icon neural-icon">🤖</span>
-                                    <div>
-                                        <h3>Hệ thống RAG Đầy Đủ</h3>
-                                        <p class="card-subtitle">FAISS Dense + T5-base Generator</p>
+                                    <div class="card-title-text">
+                                        <h3>Hệ RAG Đầy Đủ</h3>
+                                        <span class="card-subtitle">FAISS Dense + T5-base</span>
                                     </div>
                                 </div>
-                                <span class="model-badge neural-badge">Mô hình Chính</span>
+                                <span class="model-badge neural-badge">RAG Full</span>
                             </div>
                             <div class="model-card-body">
-                                <div class="answer-label">Câu trả lời do T5 sinh ra (từ ngữ cảnh):</div>
+                                <div class="answer-label">Câu trả lời do T5 sinh ra:</div>
                                 <div class="generated-answer-box" id="rag-answer-box">—</div>
                                 
                                 <div class="contrast-row">
-                                    <span class="contrast-label">Ảo giác nếu không có context (Generator-only):</span>
+                                    <span class="contrast-label">T5 khi không có context (ảo giác):</span>
                                     <strong class="contrast-val val-hallucination" id="rag-gen-only-box">—</strong>
                                 </div>
                                 <div class="contrast-row" id="extractive-row">
-                                    <span class="contrast-label">Trích xuất DistilBERT (Extractive):</span>
+                                    <span class="contrast-label">Trích xuất DistilBERT:</span>
                                     <strong class="contrast-val" id="rag-extractive-box">—</strong>
                                 </div>
+                                <p class="result-caveat" id="rag-explanation">Sinh đáp án dựa trên ngữ cảnh từ FAISS.</p>
                                 <div class="card-stats">
                                     <span id="rag-latency-stat">⏱ T5: —</span>
                                     <span id="rag-retrieval-stat">🌐 FAISS: —</span>
@@ -251,21 +252,21 @@
                             <div class="model-card-header">
                                 <div class="card-title-group">
                                     <span class="card-icon lexical-icon">📄</span>
-                                    <div>
+                                    <div class="card-title-text">
                                         <h3>Hệ Baseline BM25</h3>
-                                        <p class="card-subtitle">Truy hồi từ khóa + Trích câu</p>
+                                        <span class="card-subtitle">Truy hồi từ khóa</span>
                                     </div>
                                 </div>
-                                <span class="model-badge lexical-badge">Baseline Cũ</span>
+                                <span class="model-badge lexical-badge">BM25</span>
                             </div>
                             <div class="model-card-body">
-                                <div class="answer-label">Câu trích nguyên văn từ đoạn nguồn:</div>
+                                <div class="answer-label">Câu trích nguyên văn:</div>
                                 <blockquote class="verbatim-answer-box" id="bm25-answer-box">—</blockquote>
                                 <div class="contrast-row">
                                     <span class="contrast-label">Nguồn trích:</span>
                                     <span class="contrast-val" id="bm25-source-ref">—</span>
                                 </div>
-                                <p class="result-caveat">Trích nguyên văn theo tần suất từ khóa; chưa phải câu trả lời tóm lược.</p>
+                                <p class="result-caveat">Trích nguyên văn theo từ khóa, chưa phải đáp án tóm lược.</p>
                                 <div class="card-stats">
                                     <span id="bm25-latency-stat">⏱ BM25: —</span>
                                     <span id="bm25-coverage-stat">📊 Phủ từ: —</span>
@@ -278,21 +279,21 @@
                             <div class="model-card-header">
                                 <div class="card-title-group">
                                     <span class="card-icon gt-icon">🎯</span>
-                                    <div>
+                                    <div class="card-title-text">
                                         <h3>Đáp án Tham Chiếu</h3>
-                                        <p class="card-subtitle">Nhãn chuẩn tập Test TriviaQA</p>
+                                        <span class="card-subtitle">Nhãn chuẩn TriviaQA</span>
                                     </div>
                                 </div>
                                 <span class="model-badge gt-badge" id="gt-match-badge">Ground Truth</span>
                             </div>
                             <div class="model-card-body">
-                                <div class="answer-label">Đáp án đúng trong bộ dữ liệu:</div>
+                                <div class="answer-label">Đáp án đúng trong dataset:</div>
                                 <div class="gt-answer-box" id="gt-answer-box">Chưa chọn câu hỏi mẫu</div>
                                 <div class="contrast-row">
                                     <span class="contrast-label">Tài liệu chuẩn:</span>
                                     <span class="contrast-val" id="gt-doc-box">—</span>
                                 </div>
-                                <p class="result-caveat" id="gt-explanation">Dùng để đối chiếu độ chính xác (Exact Match / F1) của T5 và BM25.</p>
+                                <p class="result-caveat" id="gt-explanation">Dùng đối chiếu độ chính xác của T5 và BM25.</p>
                                 <div class="card-stats">
                                     <span id="gt-status-stat">Đối chiếu tự động</span>
                                 </div>

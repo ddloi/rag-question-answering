@@ -72,7 +72,8 @@ class RAGNeuralEngine:
                 if torch.cuda.is_available():
                     self.device = "cuda"
                     gpu_name = torch.cuda.get_device_name(0)
-                    self.device_name = f"CUDA ({gpu_name})"
+                    short_gpu = gpu_name.replace("NVIDIA GeForce ", "").replace(" Laptop GPU", "").strip()
+                    self.device_name = f"CUDA ({short_gpu})"
                 else:
                     self.device = "cpu"
                     self.device_name = "CPU"

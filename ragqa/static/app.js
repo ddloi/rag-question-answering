@@ -275,17 +275,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const ragAnsNorm = (rag?.answer || "").trim().toLowerCase();
             const gtNorm = gtAnswer.trim().toLowerCase();
             if (ragAnsNorm && gtNorm && (ragAnsNorm === gtNorm || gtNorm.includes(ragAnsNorm) || ragAnsNorm.includes(gtNorm))) {
-                matchBadge.textContent = "Khớp với T5 (Match) ✓";
-                matchBadge.className = "model-badge gt-badge";
+                matchBadge.textContent = "✓ Khớp (Match)";
+                matchBadge.className = "model-badge match-success";
             } else {
-                matchBadge.textContent = "Đối chiếu Ground Truth";
-                matchBadge.className = "model-badge";
+                matchBadge.textContent = "Khác đáp án";
+                matchBadge.className = "model-badge match-diff";
             }
         } else {
             $("gt-answer-box").textContent = "Câu hỏi tự nhập (Chưa có nhãn test)";
             $("gt-doc-box").textContent = "—";
             matchBadge.textContent = "Tự nhập";
-            matchBadge.className = "model-badge";
+            matchBadge.className = "model-badge lexical-badge";
         }
 
         // 4. DANH SÁCH CHUNKS: FAISS & BM25

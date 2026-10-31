@@ -181,19 +181,22 @@ kbd { font: inherit; background: var(--surface-alt); border: 1px solid var(--bor
 .card-bm25 { border-color: #cbd5e1; }
 .card-gt { border-color: #86efac; background: #fafdfb; }
 
-.model-card-header { padding: 12px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 8px; background: var(--surface-alt); border-radius: 9px 9px 0 0; }
+.model-card-header { padding: 12px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; background: var(--surface-alt); border-radius: 9px 9px 0 0; }
 .card-rag .model-card-header { background: #f0f9ff; border-bottom-color: #bae6fd; }
 .card-gt .model-card-header { background: #f0fdf4; border-bottom-color: #bbf7d0; }
 
-.card-title-group { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.card-icon { font-size: 18px; }
-.card-title-group h3 { font-size: 13.5px; font-weight: 650; white-space: nowrap; }
-.card-subtitle { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.card-title-group { display: flex; align-items: flex-start; gap: 8px; min-width: 0; flex: 1; }
+.card-icon { font-size: 18px; line-height: 1.2; flex-shrink: 0; margin-top: 1px; }
+.card-title-text { display: flex; flex-direction: column; min-width: 0; }
+.card-title-text h3 { font-size: 13.5px; font-weight: 650; line-height: 1.3; margin: 0; }
+.card-subtitle { font-size: 11px; color: var(--muted); line-height: 1.35; margin-top: 2px; }
 
-.model-badge { font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 4px; border: 1px solid; white-space: nowrap; }
+.model-badge { font-size: 10.5px; font-weight: 600; padding: 2px 7px; border-radius: 4px; border: 1px solid; white-space: nowrap; flex-shrink: 0; }
 .neural-badge { background: #0284c7; color: white; border-color: #0284c7; }
 .lexical-badge { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
 .gt-badge { background: #16a34a; color: white; border-color: #16a34a; }
+.match-success { background: #16a34a; color: white; border-color: #16a34a; }
+.match-diff { background: #fef3c7; color: #92400e; border-color: #fde68a; }
 
 .model-card-body { padding: 14px; display: flex; flex-direction: column; flex: 1; }
 .answer-label { font-size: 11.5px; color: var(--muted); font-weight: 500; margin-bottom: 6px; }
@@ -203,10 +206,11 @@ kbd { font: inherit; background: var(--surface-alt); border: 1px solid var(--bor
 .verbatim-answer-box { font-size: 13.5px; font-weight: 500; color: var(--ink); padding: 12px 14px; background: #f8fafc; border: 1px solid var(--border); border-radius: 7px; min-height: 52px; margin: 0; line-height: 1.6; max-height: 140px; overflow-y: auto; }
 .gt-answer-box { font-size: 18px; font-weight: 700; color: #15803d; padding: 12px 14px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 7px; min-height: 52px; display: flex; align-items: center; line-height: 1.4; word-break: break-word; }
 
-.contrast-row { margin-top: 10px; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+.contrast-row { margin-top: 8px; font-size: 11.5px; color: var(--muted); line-height: 1.45; min-height: 38px; }
 .contrast-label { display: block; color: var(--muted); }
 .contrast-val { display: block; font-size: 12.5px; color: var(--ink); margin-top: 2px; }
 .val-hallucination { color: #dc2626; font-weight: 600; }
+.result-caveat { color: var(--muted); font-size: 11.5px; margin-top: 10px; line-height: 1.5; min-height: 34px; }
 
 .card-stats { margin-top: auto; padding-top: 12px; display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; border-top: 1px solid var(--border); }
 
