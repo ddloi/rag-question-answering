@@ -5,11 +5,12 @@
 [![HuggingFace Transformers](https://img.shields.io/badge/%F0%9F%A4%97-Transformers-yellow.svg)](https://huggingface.co/)
 [![FAISS](https://img.shields.io/badge/Vector%20Search-FAISS-green.svg)](https://github.com/facebookresearch/faiss)
 [![Developer](https://img.shields.io/badge/Developer-ddloi-58A6FF.svg?logo=github)](https://github.com/ddloi)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> Tái lập bài báo **Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (NeurIPS 2020)** trên tập TriviaQA subset, sử dụng T5-base + FAISS + BM25 Hybrid Retrieval, phát triển bởi **Đặng Đại Lợi ([@ddloi](https://github.com/ddloi))**.
+> Triển khai RAG thực nghiệm dựa trên ý tưởng của **Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (NeurIPS 2020)** trên tập TriviaQA subset, sử dụng T5-base + FAISS + BM25 Hybrid Retrieval, phát triển bởi **Đặng Đại Lợi ([@ddloi](https://github.com/ddloi))**.
 
 ---
+
+Repository này dùng Git LFS cho trọng số T5. Đọc [hướng dẫn cập nhật GitHub](docs/GITHUB_UPDATE.md) trước khi đẩy; corpus verified_v2 được tạo hoặc cung cấp riêng.
 
 ## Chạy demo nhanh
 
@@ -20,9 +21,27 @@ python -m pip install -r requirements/demo.txt
 python app.py
 ```
 
-Mở `http://localhost:8001`. Web demo hiện minh họa **BM25 + trích câu**; pipeline **T5 + FAISS** nằm riêng trong `experiments/`. Xem [hướng dẫn demo](docs/DEMO_READINESS.md), [cấu trúc và lệnh chạy](docs/ARCHITECTURE.md) hoặc [các môi trường Python](requirements/README.md).
+Mở `http://localhost:8001`. Web so sánh **BM25 + trích câu** với **Dense/Hybrid + T5 fine-tuned** khi mô hình local đã sẵn sàng. Bấm **Nạp mô hình RAG**, chờ trạng thái sẵn sàng rồi chạy câu hỏi. Chỉ dùng BM25 thì tắt checkbox RAG. Nhánh neural cần thêm `requirements/ml.txt`, checkpoint và cache MiniLM; web không tự tải model. Xem [hướng dẫn demo](docs/DEMO_READINESS.md), [cấu trúc và lệnh chạy](docs/ARCHITECTURE.md) hoặc [các môi trường Python](requirements/README.md).
 
 ---
+
+## Bản cập nhật 31/10/2026
+
+**Lưu ý nghiên cứu:** [rà soát khoa học mới nhất](docs/SCIENTIFIC_READINESS.md) phát hiện context training cần nghiệm thu, normalizer EM/F1 khác TriviaQA gốc và các baseline cần kiểm soát template. Điểm dưới đây là kết quả custom/canonical lịch sử, chưa chốt cho bài báo; Colab và đánh giá người độc lập chưa được thực thi.
+
+Web có **Hybrid (Dense + BM25 + ưu tiên từ hiếm)** và **Dense** để đối chiếu. Corpus demo_v3 thêm nguồn Wikipedia cho Fivestones và Antigonus, tổng **12.602 chunks**. Vì nguồn được chọn sau khi quan sát lỗi test, đây là dữ liệu demo, không dùng báo điểm benchmark. Khi thiếu artifact, web dùng verified_v2 hoặc corpus gốc. Xem [bản cải tiến và cách tái lập](docs/IMPROVEMENTS_V3.md).
+
+Đã chấm lại 120 dự đoán của run verified_v2 bằng **canonical answer**, loại alias chưa duyệt khỏi phép chấm mặc định:
+
+| Hệ | EM | F1 |
+| --- | ---: | ---: |
+| T5 không context | 0,83% | 1,93% |
+| Dense + DistilBERT extractive | 26,67% | 36,67% |
+| Dense + T5 RAG | **34,17%** | **39,76%** |
+
+Đây là chấm lại dự đoán đã lưu, không phải lần chạy mô hình mới. Canonical-only có thể bỏ sót biến thể đúng; phiếu duyệt 1.626 alias nằm trong [artifact canonical](results/canonical_rescore_v2/). Điểm alias cũ 42,50% EM không dùng làm kết quả cuối. Doc Recall@5 lịch sử của Dense/Hybrid RRF vẫn là 92,50%; Hybrid mới trên web chưa được đánh giá toàn tập.
+
+**43/43 tests đạt**. Phiếu faithfulness/citation 20 câu vẫn ghi rõ agent_self_review. [Báo cáo run gốc](docs/EVALUATION_RESULTS_V2.md) giữ để đối chiếu; các bảng 3.940 chunks bên dưới là kết quả lịch sử, không so sánh trực tiếp với v2/v3.
 
 ## 🎯 Câu hỏi Nghiên cứu (Research Questions)
 
@@ -35,7 +54,7 @@ Mở `http://localhost:8001`. Web demo hiện minh họa **BM25 + trích câu**;
 
 ## 📖 Tổng quan Công trình Liên quan (Related Work)
 
-1. **Lewis et al. (NeurIPS 2020) — *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks***: Công trình nền tảng đề xuất kiến trúc RAG end-to-end kết hợp mô hình sinh seq2seq (BART/T5) với bộ truy hồi dense non-parametric (DPR + FAISS), chứng minh sự vượt trội trên các tác vụ Open-domain QA.
+1. **Lewis et al. (NeurIPS 2020) — *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks***: Công trình nền tảng đề xuất kiến trúc RAG end-to-end kết hợp mô hình sinh seq2seq với bộ truy hồi dense non-parametric (DPR + FAISS), chứng minh sự vượt trội trên các tác vụ Open-domain QA.
 2. **Karpukhin et al. (EMNLP 2020) — *Dense Passage Retrieval for Open-Domain Question Answering (DPR)***: Đặt nền móng cho dense retrieval hiện đại, sử dụng bi-encoder với hàm loss contrastive để mã hóa câu hỏi và passage vào không gian vector chung, vượt qua BM25 trong việc nắm bắt tương đồng ngữ nghĩa.
 3. **Guu et al. (ICML 2020) — *REALM: Retrieval-Augmented Language Model Pre-training***: Đề xuất phương pháp pre-train mô hình ngôn ngữ có sự hỗ trợ của retrieval module từ đầu (unsupervised masked language modeling kết hợp neural retriever), minh chứng giá trị của external knowledge.
 4. **Izacard & Grave (EACL 2021) — *Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering (Fusion-in-Decoder - FiD)***: Mở rộng khả năng xử lý nhiều passage (lên đến 100 passages) bằng cách mã hóa độc lập từng đoạn ở Encoder và dung hợp (fuse) toàn bộ thông tin tại Decoder, đạt SOTA trên Natural Questions và TriviaQA.
@@ -91,11 +110,13 @@ Mở `http://localhost:8001`. Web demo hiện minh họa **BM25 + trích câu**;
 |-----------|-------|-------|
 | **Generator-only** | Sinh câu trả lời không có context (parametric knowledge) | T5-base fine-tuned |
 | **Retrieval-only** | Trích xuất span từ passage (extractive baseline) | DistilBERT-SQuAD |
-| **RAG đầy đủ** | Retrieval + Generation — hệ chính theo Lewis et al. | FAISS + T5-base |
+| **RAG đầy đủ** | Retrieval + Generation — pipeline ứng dụng ý tưởng RAG | FAISS + T5-base |
 
 ---
 
-## 📊 Kết quả Thực nghiệm & Evaluation
+## 📊 Kết quả lịch sử — corpus 3.940 chunks
+
+Các bảng sau là số liệu đã ghi trong báo cáo trước đây trên corpus cũ. Kết quả đo lại trên verified_v2 nằm ở phần đầu README và báo cáo EVALUATION_RESULTS_V2; không dùng các bảng cũ để mô tả bản v2. Web dùng num_beams=4 và ngưỡng Cosine 0,25; script thí nghiệm dùng cấu hình riêng, nên kết quả từng truy vấn trên web không tái lập trực tiếp các bảng này. Faithfulness ở đây là tỷ lệ token đáp án xuất hiện trong context, không phải kiểm định suy luận hay bảo đảm không có ảo giác.
 
 ### 1. So sánh 3 Hệ thống (End-to-End QA, trên toàn bộ 120 câu test)
 
@@ -107,7 +128,7 @@ Mở `http://localhost:8001`. Web demo hiện minh họa **BM25 + trích câu**;
 
 > **Nhận xét cốt lõi:**
 > - RAG đầy đủ đạt **F1=0.376** và **EM=0.325**, vượt trội hoàn toàn so với Generator-only (F1=0.019) và Extractive QA (F1=0.326).
-> - Chỉ số **Faithfulness đạt 0.858 (85.8%)**, chứng minh mô hình sinh câu trả lời bám sát ngữ cảnh truy hồi, kiểm soát chặt chẽ hiện tượng ảo giác (hallucination).
+> - Chỉ số **Faithfulness đạt 0.858 (85.8%)**, cho biết mức trùng token với ngữ cảnh theo heuristic đã dùng; cần đánh giá bổ sung để kết luận về tính đúng đắn và ảo giác.
 
 ### 2. Phân rã lỗi & Độ chính xác trích dẫn (RAG đầy đủ)
 
@@ -127,14 +148,14 @@ Thực nghiệm đo lường trên toàn bộ 120 câu hỏi test (`data/test_qa
 |---|---|:---:|:---:|:---:|:---:|
 | **Classical Sparse** | **BM25 (Okapi)** | 0.8583 | 0.8917 | 0.9250 | **0.8112** |
 | | **TF-IDF Vectorizer** | 0.8000 | 0.8583 | 0.8917 | 0.7753 |
-| **Classical Embedding** | **Word2Vec (CBOW Avg Pooling)** | 0.0500 | 0.0833 | 0.1167 | 0.0533 |
-| | **FastText (Subwords Avg Pooling)** | 0.0500 | 0.0583 | 0.1000 | 0.0515 |
+| **Classical Embedding** | **Word2Vec (CBOW Avg Pooling)** | 0.0583 | 0.1000 | 0.1167 | 0.0499 |
+| | **FastText (Subwords Avg Pooling)** | 0.0500 | 0.0583 | 0.1000 | 0.0519 |
 | **Pre-trained Dense** | **Dense FAISS (all-MiniLM-L6-v2)** | 0.8167 | 0.8800 | 0.9417 | 0.6950 |
 | **Ensemble Hybrid** | **Hybrid Search (BM25 + FAISS via RRF)** | **0.8583** | **0.9100** | **0.9583** | 0.7320 |
 
 > **Phân tích khoa học (Key Takeaways):**
 > 1. **BM25 và TF-IDF vượt trội về MRR (0.8112 & 0.7753)** vì câu hỏi trong TriviaQA chứa nhiều thực thể tên riêng (entity names). Phương pháp exact match đưa chunk chứa đúng từ khóa lên vị trí đầu tiên (rank 1) cực kỳ hiệu quả.
-> 2. **Word2Vec và FastText (huấn luyện từ đầu trên corpus nhỏ ~4k chunks)** đạt Recall thấp (Recall@5 < 9%) vì biểu diễn static average-pooling làm mờ vector ngữ nghĩa và thiếu ngữ cảnh sâu.
+> 2. **Word2Vec và FastText (huấn luyện từ đầu trên corpus nhỏ ~4k chunks)** đạt Recall thấp (Recall@5 khoảng 6–10%) vì biểu diễn static average-pooling làm mờ vector ngữ nghĩa và thiếu ngữ cảnh sâu.
 > 3. **Dense FAISS đạt Recall@10 cao hơn BM25 (0.9417 vs 0.9250)** nhờ khả năng khái quát ngữ nghĩa đa dạng (semantic generalization).
 > 4. **Hybrid Search (BM25 + FAISS)** kế thừa cả 2 ưu điểm: đạt **Recall@5=0.9100** và **Recall@10=0.9583**, cao nhất trong toàn bộ các cấu hình thực nghiệm.
 
@@ -255,19 +276,21 @@ So sánh 4 phương pháp retrieval truyền thống (BM25, TF-IDF, Word2Vec CBO
 
 Dự án bao gồm web demo **RAG Lab** với giao diện tiếng Việt, hỗ trợ **so sánh trực tiếp giữa Hệ thống RAG (FAISS Dense + fine-tuned T5-base) và Baseline BM25 (truy hồi từ khóa + trích câu)** trên tập TriviaQA.
 
-`ash
+```powershell
 python app.py
-`
+```
 Mở trình duyệt tại **http://localhost:8001** (hoặc http://127.0.0.1:8001). Giao diện hiển thị:
 - **Bảng 3 khối so sánh kết quả trực diện**:
-  1. **Hệ RAG đầy đủ (T5 + FAISS)**: Câu trả lời do T5 sinh ra dựa vào ngữ cảnh, kèm đối chiếu ảo giác của T5 khi không có context (Generator-only).
+  1. **Hệ RAG đầy đủ (T5 + FAISS)**: Câu trả lời do T5 sinh ra dựa vào ngữ cảnh, kèm câu trả lời của cùng checkpoint T5 khi không có context (Generator-only); câu này có thể đúng hoặc sai.
   2. **Hệ Baseline BM25**: Câu trích nguyên văn từ đoạn văn theo tần suất từ khóa.
   3. **Đáp án tham chiếu (Ground Truth)**: Đối chiếu với đáp án chuẩn trong dataset TriviaQA.
-- **So sánh tài liệu nguồn song song**: Tab xem Top-K đoạn truy hồi bởi FAISS (vector ngữ nghĩa Cosine) vs BM25 (TF-IDF).
+- **So sánh tài liệu nguồn song song**: Tab xem Top-K nguồn cho RAG (Dense hoặc Hybrid) và BM25; Cosine không phải xác suất đúng.
 - **Phân rã kỹ thuật**: Bảng điểm BM25 chi tiết (TF, IDF, contribution) và độ trễ từng giai đoạn.
 - **Tự động tận dụng GPU (CUDA)**: Tự động chạy trên GPU (RTX 3050) nếu có hoặc chuyển sang CPU một cách an toàn.
 
 Kiểm tra nhanh: cài `requirements/test.txt`, sau đó chạy `python -m unittest discover -s tests -v`. Lệnh kiểm thử engine cũ `python -m unittest test_engine -v` vẫn hoạt động.
+
+Kiểm tra trước demo: `python -m scripts.check_demo`. Kiểm tra model local thực tế: `python -m scripts.check_demo --neural`. Xem [hướng dẫn demo](docs/DEMO_READINESS.md) để chuẩn bị cache khi cài trên máy mới.
 
 ### Deploy lên Hugging Face Space
 
@@ -285,9 +308,10 @@ Kiểm tra nhanh: cài `requirements/test.txt`, sau đó chạy `python -m unitt
 
 ```text
 RAG/
-├── ragqa/                      # Mã ứng dụng web, không chứa thí nghiệm ML
+├── ragqa/                      # Web BM25 và suy luận neural tùy chọn
 │   ├── web.py                  # FastAPI và các endpoint
 │   ├── engine.py               # BM25 + chọn câu nguyên văn
+│   ├── rag_engine.py           # FAISS + T5 và vòng đời mô hình local
 │   ├── paths.py                # Đường dẫn dùng chung, độc lập thư mục chạy
 │   └── static/                 # HTML, CSS, JavaScript
 ├── experiments/                # Download → chunk → split → index → train → evaluate
@@ -321,12 +345,12 @@ Mã triển khai chính nằm trong các package; các tệp Python ở root ch�
 | Component | Specification |
 |-----------|--------------|
 | **Embedding Model** | `all-MiniLM-L6-v2` (22M params, 384-dim) |
-| **Generator** | `T5-base` (220M params), fine-tuned 3 epochs |
+| **Generator** | `T5-base` (220M params); script cấu hình fine-tune 3 epochs |
 | **Extractive QA** | `distilbert-base-cased-distilled-squad` |
 | **Index** | FAISS `IndexFlatIP` (exact cosine search) |
 | **Hybrid** | BM25Okapi + Dense, Reciprocal Rank Fusion (k=60) |
 | **Training** | fp16, gradient checkpointing, effective batch=16 |
-| **Seed** | 42 (torch, numpy, random) — fully reproducible |
+| **Seed** | 42 (torch, numpy, random); môi trường và artifact lưu trong manifest |
 | **Dataset** | TriviaQA `rc.wikipedia` validation, 800 QA pairs |
 
 ---

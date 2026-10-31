@@ -1,6 +1,6 @@
 # Cấu trúc và cách chạy project
 
-Project được chia theo trách nhiệm để dễ trình bày đồ án và dễ sửa mã. Web demo BM25 và các thí nghiệm T5/FAISS là hai đường chạy riêng.
+Project được chia theo trách nhiệm để dễ trình bày đồ án và dễ sửa mã. Web có BM25 và nhánh Dense/Hybrid + T5 tùy chọn; experiments giữ các bước huấn luyện, đánh giá và Hybrid. Thư mục cha chứa bản chính RAG và bản nộp baseline độc lập.
 
 ## Bản đồ trách nhiệm
 
@@ -8,11 +8,12 @@ Project được chia theo trách nhiệm để dễ trình bày đồ án và d
 | --- | --- | --- |
 | `ragqa/web.py` | FastAPI, validation và endpoint | Thay API web |
 | `ragqa/engine.py` | BM25, chọn câu và telemetry | Thay hành vi retrieval demo |
+| `ragqa/rag_engine.py` | Vòng đời model local, FAISS + T5 và DistilBERT tùy chọn | Thay suy luận neural trên web |
 | `ragqa/static/` | HTML, CSS, JavaScript | Thay UX/UI |
 | `ragqa/paths.py` | Các đường dẫn chung | Thay nơi lưu dữ liệu hoặc kết quả |
 | `experiments/` | Chuẩn bị dữ liệu, train, RAG, đánh giá | Thay thí nghiệm nghiên cứu |
 | `configs/` | Cấu hình baseline được quản lý bằng Git | Thay hyperparameters mặc định |
-| `scripts/` | Công cụ upload artifact | Bảo trì công cụ triển khai |
+| `scripts/` | Phục hồi dữ liệu, dựng corpus demo, chấm lại và upload artifact | Bảo trì công cụ triển khai |
 | `deployment/huggingface/` | Gradio app và requirements độc lập | Deploy Hugging Face Space |
 | `tests/` | Kiểm thử engine/API và đường dẫn | Kiểm tra hồi quy |
 | `requirements/` | Môi trường demo, test, ML, notebook | Cài đúng nhóm phụ thuộc |
@@ -26,6 +27,9 @@ Project được chia theo trách nhiệm để dễ trình bày đồ án và d
 flowchart LR
     Browser[Trình duyệt] --> Web[ragqa.web]
     Web --> Engine[ragqa.engine: BM25 + trích câu]
+    Web --> Neural[ragqa.rag_engine: FAISS + T5 tùy chọn]
+    Neural --> Data
+    Neural --> Model
     Web --> Static[ragqa/static]
     Engine --> Data[data/]
     Research[experiments/] --> Data
@@ -48,12 +52,19 @@ python app.py
 # Kiểm thử
 python -m pip install -r requirements/test.txt
 python -m unittest discover -s tests -v
+python -m scripts.check_demo
+# Kiểm tra suy luận thật bằng model/cache local:
+python -m scripts.check_demo --neural
 
 # Liệt kê thí nghiệm; không tải thư viện ML hoặc chạy bước nào
 python -m experiments --list
 ```
 
 Web mở tại `http://localhost:8001`. `python app.py`, `uvicorn app:app` và lệnh kiểm thử engine cũ vẫn được giữ. Package `ragqa` không tự nạp model hoặc khởi động server khi chỉ `import ragqa`.
+
+## Vòng đời mô hình trên web
+
+Import ragqa.web chỉ nạp corpus BM25. Nút nạp RAG hoặc truy vấn đầu tiên bật RAG khởi động worker nền. POST /api/rag/load trả 202; GET /api/pipeline/info cho biết ready, loading, idle, error hoặc unavailable. Khi nạp xong, chạy lại câu hỏi để có kết quả RAG. Mô hình chỉ đọc checkpoint và cache local; lỗi neural được báo riêng, giữ kết quả BM25. Mỗi tiến trình phục vụ một lượt suy luận neural; lượt đến cùng lúc nhận thông báo bận.
 
 ## Các bước thí nghiệm
 
@@ -87,7 +98,7 @@ Cũng có thể dùng `python -m experiments evaluate --samples 5`. Các module 
 
 Dữ liệu raw và hai tệp kết quả được chuyển nguyên nội dung, bao gồm chỉnh sửa local đã có ở baseline. Notebook giữ các cell và kết quả đã lưu, chỉ cập nhật cell đường dẫn để mở từ root hoặc `notebooks/`. Corpus, chỉ mục, train/test và trọng số không được tạo lại.
 
-Mọi đường dẫn artifact trong Python dùng `ragqa.paths`, độc lập thư mục làm việc. Baseline đọc `.pipeline/hyperparams.json` nếu có; nếu không, dùng `configs/baseline_retrieval.json`. Đường dẫn tương đối trong cấu hình được tính từ root repository.
+Các đường dẫn artifact trong package chính RAG dùng `ragqa.paths`, độc lập thư mục làm việc. Baseline đọc `.pipeline/hyperparams.json` nếu có; nếu không, dùng `configs/baseline_retrieval.json`. Đường dẫn tương đối trong cấu hình được tính từ root repository.
 
 Các tệp `00_*.py` đến `08_*.py`, `pipeline_engine.py`, `test_engine.py`, `upload_to_hf.py` và `app_space.py` ở root là các điểm gọi tương thích. Chỉnh sửa triển khai ở package tương ứng để tránh có hai bản logic khác nhau.
 
@@ -98,3 +109,9 @@ Upload `deployment/huggingface/app.py` thành `app.py` và tệp `requirements.t
 ## Phạm vi xác nhận
 
 Lần sắp xếp này kiểm tra cấu trúc, import, đường dẫn, engine/API demo và tính toàn vẹn các artifact đã chuyển. Không huấn luyện lại, không upload Hub, không deploy Space và không xác nhận lại chất lượng QA của T5/FAISS. Giới hạn chức năng demo nằm trong [DEMO_READINESS.md](DEMO_READINESS.md).
+
+## Bản thực nghiệm verified_v2
+
+`experiments/verify_dataset.py` tạo corpus có nguồn/alias được khôi phục ở revision cố định. `experiments/metrics.py` là bộ tính điểm nhẹ; `experiments/evaluate.py` lưu manifest, predictions và metrics vào từng run riêng. `experiments/rag_pipeline.py` dùng lại inference/context mask của web, lưu context thực sự sau truncation. Web chọn bản đầy đủ theo thứ tự data/demo_v3 → data/verified_v2 → data gốc. Demo v3 và Hybrid ưu tiên từ hiếm không tham gia số liệu đánh giá v2; xem IMPROVEMENTS_V3.md. Các script train/chuẩn bị dữ liệu cũ vẫn thao tác data gốc; không tự đổi bộ huấn luyện của checkpoint.
+
+Xem EVALUATION_PROTOCOL.md và EVALUATION_RESULTS_V2.md để tra cấu hình, phạm vi và bằng chứng.

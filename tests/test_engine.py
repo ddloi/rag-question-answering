@@ -5,6 +5,7 @@ import math
 import os
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -119,19 +120,27 @@ class ApiTests(unittest.TestCase):
                 self.assertEqual(response.status_code, 422)
 
     def test_rag_execution_returns_structured_comparison(self):
-        response = self.client.post("/api/pipeline/execute", json={"query": "Who directed the movie Jaws?", "run_rag": True})
+        with patch("ragqa.web.rag_neural_engine.is_available", return_value=False):
+            response = self.client.post("/api/pipeline/execute", json={"query": "Who directed the movie Jaws?", "run_rag": True})
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertIn("rag", data)
+        self.assertFalse(data["rag"]["available"])
 
-    def test_rag_low_relevance_gating_prevents_hallucination(self):
-        response = self.client.post("/api/pipeline/execute", json={"query": "???", "run_rag": True})
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        if data.get("rag") and data["rag"].get("available"):
-            self.assertFalse(data["rag"]["is_grounded"])
-            self.assertLess(data["rag"]["top_score"], 0.25)
-            self.assertIn("Không tìm thấy", data["rag"]["answer"])
+    def test_rag_low_relevance_skips_generation(self):
+        from ragqa.rag_engine import RAGNeuralEngine
+        neural = RAGNeuralEngine()
+        neural.is_loaded = True
+        with patch.object(neural, "retrieve", return_value=[{"score": 0.1, "text": "Unrelated"}]), \
+             patch.object(neural, "generate_answer") as generate, \
+             patch.object(neural, "answer_generator_only") as no_context, \
+             patch.object(neural, "answer_extractive_only") as extract:
+            data = neural.execute_rag("unrelated question")
+        self.assertFalse(data["relevance_passed"])
+        self.assertIn("Không tìm thấy", data["answer"])
+        generate.assert_not_called()
+        no_context.assert_not_called()
+        extract.assert_not_called()
 
 
 if __name__ == "__main__":

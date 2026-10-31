@@ -1,0 +1,64 @@
+{
+  "n": 120,
+  "qa": {
+    "generator_only": {
+      "em": 0.06666666666666667,
+      "f1": 0.11
+    },
+    "retrieval_only": {
+      "em": 0.35,
+      "f1": 0.4451262626262626
+    },
+    "rag_full": {
+      "em": 0.425,
+      "f1": 0.47400974025974024
+    }
+  },
+  "retrieval": {
+    "dense": {
+      "doc_recall@3": 0.9083333333333333,
+      "answer_alias_recall@3": 0.8083333333333333,
+      "doc_recall@5": 0.925,
+      "answer_alias_recall@5": 0.8333333333333334,
+      "doc_recall@10": 0.975,
+      "answer_alias_recall@10": 0.8916666666666667,
+      "doc_mrr@30": 0.8736592765125374
+    },
+    "bm25": {
+      "doc_recall@3": 0.7333333333333333,
+      "answer_alias_recall@3": 0.6083333333333333,
+      "doc_recall@5": 0.775,
+      "answer_alias_recall@5": 0.625,
+      "doc_recall@10": 0.8666666666666667,
+      "answer_alias_recall@10": 0.7333333333333333,
+      "doc_mrr@30": 0.6705120573870574
+    },
+    "hybrid_rrf": {
+      "doc_recall@3": 0.875,
+      "answer_alias_recall@3": 0.725,
+      "doc_recall@5": 0.925,
+      "answer_alias_recall@5": 0.8083333333333333,
+      "doc_recall@10": 0.975,
+      "answer_alias_recall@10": 0.8666666666666667,
+      "doc_mrr@30": 0.8327012108262107
+    }
+  },
+  "evidence_proxies": {
+    "retrieval_only": {
+      "token_support_fraction": 0.8309722222222222,
+      "used_context_has_gold_alias": 0.8083333333333333,
+      "source_doc_hit_in_used_passages": 0.9083333333333333
+    },
+    "rag_full": {
+      "token_support_fraction": 0.875,
+      "used_context_has_gold_alias": 0.7083333333333334,
+      "source_doc_hit_in_used_passages": 0.8833333333333333
+    }
+  },
+  "error_breakdown": {
+    "retrieval_evidence_missing": 18,
+    "generation_wrong_with_lexical_evidence": 37,
+    "correct": 51,
+    "context_selection_or_truncation": 14
+  }
+}

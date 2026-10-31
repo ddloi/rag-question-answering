@@ -1,0 +1,45 @@
+{
+  "status": "complete",
+  "created_at": "2026-10-31T10:03:26.976537+00:00",
+  "seed": 42,
+  "data_dir": "data/verified_v2",
+  "samples": 120,
+  "top_k": 5,
+  "generation": {
+    "max_new_tokens": 32,
+    "num_beams": 4,
+    "early_stopping": true,
+    "no_repeat_ngram_size": 3,
+    "length_penalty": 0.8
+  },
+  "context_top_n": 2,
+  "max_input_tokens": 512,
+  "neural_relevance_gate": false,
+  "generator_only": "same fine-tuned checkpoint, context removed; not separately trained closed-book",
+  "citation_note": "Used passages are evidence candidates, not generated inline citations. Proxies are NOT semantic faithfulness.",
+  "manual_review": "sample seed 42, 20 rows selected before review; judgments are separate",
+  "python": "3.13.1",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "5.17.0",
+    "sentence-transformers": "6.1.0",
+    "faiss-cpu": "1.15.1",
+    "rank-bm25": "0.2.2"
+  },
+  "git_head": "27a1d0abbea3bb53d2ca87c7280d24c5382cd05d",
+  "git_dirty": true,
+  "sha256": {
+    "data/verified_v2/test_qa.jsonl": "6df0c3626242fc533eda0d3737d6d19026232ee09ed3a708584a591d066a017f",
+    "data/verified_v2/chunk_metadata.jsonl": "4633ce9b542bffc4566957e2fb2177c2dae11c9f1cdac3b91a8ead626f1ebc23",
+    "data/verified_v2/faiss.index": "e871fa214862ad62e3cc59448063a17a227af459685ac73c8e55d1f869ab6799",
+    "generator_finetuned/model.safetensors": "3ec02edd66e3180b79eec0f535f8b678b3356f44c315f77235b8702f092bd161",
+    "data/training_pairs.jsonl": "9d4fd790429d238d27d280d78ac1ccfd3d6214685599fd457399c5c3a76cd4ec",
+    "experiments/rag_pipeline.py": "1d7bcac43e1f29bed6a73e06da7291241521a5f7e407fbea8152d9d9fedd8b13",
+    "experiments/evaluate.py": "b009fb73f3eb97958f0b7f5cb893909cd17d6c4ea17fabb1a89a1713d94a24ec",
+    "experiments/metrics.py": "7117c934d62074c0caa090b9ac24fcf28a12a4ebb1963dcf2b18fa35a4857476",
+    "ragqa/rag_engine.py": "25cb8595107f4a184735be9939361b590babdfed660b9afceaeadb3e674819bf"
+  },
+  "device": "CUDA (RTX 3050 6GB)",
+  "finished_at": "2026-10-31T10:05:14.447312+00:00",
+  "path_note": "Machine-specific dataset path removed for portability; checksums unchanged."
+}

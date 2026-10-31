@@ -1,0 +1,32 @@
+{
+  "dataset_version": "demo_v3",
+  "created_at": "2026-10-31T10:33:39.362114+00:00",
+  "purpose": "Demo only: extra pages selected after seeing test questions; not a held-out evaluation corpus.",
+  "base_dataset": "verified_v2",
+  "base_manifest_sha256": "677dd563144f283c78cfc8253713e9881eb838c7da855ce6c90f7bcaf85c8078",
+  "base_chunks": 12556,
+  "additional_chunks": 46,
+  "sources": [
+    {
+      "title": "Knucklebones",
+      "page_id": 3125551,
+      "revision": 1377923263,
+      "source_url": "https://en.wikipedia.org/?curid=3125551",
+      "retrieved_utc": "2026-10-31T10:32:52.265610+00:00",
+      "sha256": "624c61ece71448dcdab2dda3ef057a5d137c2c2362b969a4568660bf5b469974"
+    },
+    {
+      "title": "The Winter's Tale",
+      "page_id": 85378,
+      "revision": 1379720458,
+      "source_url": "https://en.wikipedia.org/?curid=85378",
+      "retrieved_utc": "2026-10-31T10:32:52.807162+00:00",
+      "sha256": "9803e602fdde442006fe4141116590abadc56a0cfd683a45ab2d11745c6b80da"
+    }
+  ],
+  "output_sha256": {
+    "chunk_metadata.jsonl": "8406814948535ca29b7e96ac83818f04fc62ffb75fee0d87949437a2be554fbb",
+    "faiss.index": "3422a881e6d00b56c42ce9f04ed2c5c27c7b7d3e900815f28947a95c8d0579d7",
+    "test_qa.jsonl": "6df0c3626242fc533eda0d3737d6d19026232ee09ed3a708584a591d066a017f"
+  }
+}

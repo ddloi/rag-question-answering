@@ -22,7 +22,7 @@
         <div class="system-status-group">
             <div class="system-status" id="bm25-status-pill">
                 <span class="status-dot online" aria-hidden="true"></span>
-                <span>BM25: <strong id="bm25-state">3.940 chunks</strong></span>
+                <span>BM25: <strong id="bm25-state">Đang kết nối…</strong></span>
             </div>
             <div class="system-status" id="rag-status-pill">
                 <span class="status-dot" id="rag-dot" aria-hidden="true"></span>
@@ -44,7 +44,7 @@
         </div>
         <section class="pipeline" aria-label="Quy trình xử lý">
             <div class="pipeline-caption">
-                <h2>Quy trình xử lý song song hai hệ thống</h2>
+                <h2>Các bước và thời gian của nhánh BM25</h2>
                 <span id="pipeline-status-text" role="status">Sẵn sàng khi bạn đặt câu hỏi</span>
             </div>
             <ol class="stepper-track">
@@ -52,31 +52,31 @@
                     <span class="step-number">1</span>
                     <div>
                         <h3>Phân tích câu hỏi</h3>
-                        <p>Tách từ khóa & Vectorize</p>
+                        <p>Chuẩn hóa và tách từ khóa</p>
                     </div>
                     <span class="node-latency" id="lat-stage-1">—</span>
                 </li>
                 <li class="step-node" id="node-stage-2">
                     <span class="step-number">2</span>
                     <div>
-                        <h3>Truy hồi song song</h3>
-                        <p>BM25 vs FAISS Dense</p>
+                        <h3>Xếp hạng BM25</h3>
+                        <p>Tính điểm từ khóa</p>
                     </div>
                     <span class="node-latency" id="lat-stage-2">—</span>
                 </li>
                 <li class="step-node" id="node-stage-3">
                     <span class="step-number">3</span>
                     <div>
-                        <h3>Sinh & Trích câu</h3>
-                        <p>T5-base vs Trích câu</p>
+                        <h3>Chọn câu trích</h3>
+                        <p>Chọn câu nguyên văn</p>
                     </div>
                     <span class="node-latency" id="lat-stage-3">—</span>
                 </li>
                 <li class="step-node" id="node-stage-4">
                     <span class="step-number">4</span>
                     <div>
-                        <h3>Đối chiếu Ground Truth</h3>
-                        <p>So sánh đáp án chuẩn & độ trễ</p>
+                        <h3>Ghi nhận kết quả</h3>
+                        <p>Nguồn và thời gian xử lý</p>
                     </div>
                     <span class="node-latency" id="lat-stage-4">—</span>
                 </li>
@@ -98,8 +98,16 @@
                             <input type="checkbox" id="param-run-rag" checked>
                             <span class="checkbox-text">Kích hoạt RAG (FAISS + T5-base)</span>
                         </label>
-                        <span class="option-hint" id="rag-engine-hint">Đang nạp GPU/CPU…</span>
+                        <span class="option-hint" id="rag-engine-hint" role="status">Đang kiểm tra trạng thái…</span>
+                        <button type="button" id="load-rag-button" class="text-button" hidden>Nạp mô hình RAG</button>
                     </div>
+
+                    <label for="param-retrieval">Truy hồi cho RAG</label>
+                    <select id="param-retrieval" aria-describedby="retrieval-help">
+                        <option value="hybrid">Hybrid · ngữ nghĩa + từ khóa</option>
+                        <option value="dense">Dense · chỉ ngữ nghĩa</option>
+                    </select>
+                    <p class="field-help" id="retrieval-help">Hybrid kết hợp xếp hạng và ưu tiên từ khóa hiếm. Chọn Dense để đối chiếu.</p>
 
                     <div class="topk-control">
                         <label for="param-topk">Số đoạn truy hồi <span class="muted">(Top-K)</span></label>
@@ -137,7 +145,15 @@
                     <div class="section-heading">
                         <h2 id="sample-heading">Câu hỏi mẫu tiêu biểu</h2>
                     </div>
-                    <p class="field-help">Bấm chọn câu hỏi để điền nhanh và so sánh:</p>
+                    <p class="field-help">Nhóm theo kết quả quan sát trong lần chạy trước; kết quả hiện tại có thể khác. Chọn câu hỏi rồi bấm chạy để đối chiếu.</p>
+                    <label for="sample-filter" class="field-help">Lọc trường hợp</label>
+                    <select id="sample-filter" aria-label="Lọc câu hỏi theo trường hợp">
+                        <option value="all">Tất cả trường hợp</option>
+                        <option value="correct">Lần trước trả lời đúng</option>
+                        <option value="generation">Có bằng chứng, sinh sai</option>
+                        <option value="missing">Lần trước thiếu từ khóa</option>
+                        <option value="context">Context chưa đủ hoặc sinh sai</option>
+                    </select>
                     <div id="samples-list" class="samples-list" aria-live="polite">
                         <p class="muted">Đang tải câu hỏi mẫu…</p>
                     </div>
@@ -171,10 +187,10 @@
                         </svg>
                     </div>
                     <h3>Bắt đầu so sánh từ một câu hỏi</h3>
-                    <p>Chọn câu hỏi mẫu bên trái hoặc nhập câu hỏi của bạn.<br>Hệ thống sẽ chạy song song BM25 và RAG (FAISS + T5) để bạn so sánh trực tiếp kết quả.</p>
+                    <p>Chọn câu hỏi mẫu bên trái hoặc nhập câu hỏi của bạn.<br>BM25 chạy ngay. Khi mô hình RAG đã sẵn sàng, bật RAG để so sánh câu trả lời T5 với nguồn truy hồi.</p>
                     <div class="empty-guide">
                         <span>So sánh T5 Generator vs BM25</span>
-                        <span>Đối chiếu Ground Truth</span>
+                        <span>Ghi nhận kết quả</span>
                         <span>So sánh tài liệu Dense vs Sparse</span>
                     </div>
                 </div>
@@ -222,7 +238,7 @@
                                     <span class="card-icon neural-icon">🤖</span>
                                     <div class="card-title-text">
                                         <h3>Hệ RAG Đầy Đủ</h3>
-                                        <span class="card-subtitle">FAISS Dense + T5-base</span>
+                                        <span class="card-subtitle" id="rag-method-label">Hybrid + T5-base</span>
                                     </div>
                                 </div>
                                 <span class="model-badge neural-badge">RAG Full</span>
@@ -232,8 +248,8 @@
                                 <div class="generated-answer-box" id="rag-answer-box">—</div>
                                 
                                 <div class="contrast-row">
-                                    <span class="contrast-label">T5 khi không có context (ảo giác):</span>
-                                    <strong class="contrast-val val-hallucination" id="rag-gen-only-box">—</strong>
+                                    <span class="contrast-label">T5 không có ngữ cảnh:</span>
+                                    <strong class="contrast-val" id="rag-gen-only-box">—</strong>
                                 </div>
                                 <div class="contrast-row" id="extractive-row">
                                     <span class="contrast-label">Trích xuất DistilBERT:</span>
@@ -293,7 +309,7 @@
                                     <span class="contrast-label">Tài liệu chuẩn:</span>
                                     <span class="contrast-val" id="gt-doc-box">—</span>
                                 </div>
-                                <p class="result-caveat" id="gt-explanation">Dùng đối chiếu độ chính xác của T5 và BM25.</p>
+                                <p class="result-caveat" id="gt-explanation">So khớp chuỗi không phân biệt hoa/thường; không phải điểm EM/F1 trên tập test.</p>
                                 <div class="card-stats">
                                     <span id="gt-status-stat">Đối chiếu tự động</span>
                                 </div>
@@ -307,22 +323,22 @@
                             <h3>Tài liệu nguồn đã truy hồi</h3>
                             <div class="source-tabs" role="tablist">
                                 <button type="button" class="tab-btn active" id="tab-btn-faiss" role="tab" aria-selected="true" aria-controls="tab-pane-faiss">
-                                    🌐 FAISS Dense Search (<span id="faiss-chunks-count">5</span>)
+                                    <span id="neural-source-label">Nguồn cho RAG</span> (<span id="faiss-chunks-count">0</span>)
                                 </button>
-                                <button type="button" class="tab-btn" id="tab-btn-bm25" role="tab" aria-selected="false" aria-controls="tab-pane-bm25">
-                                    🔍 BM25 Sparse Search (<span id="bm25-chunks-count">5</span>)
+                                <button type="button" class="tab-btn" id="tab-btn-bm25" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-pane-bm25">
+                                    🔍 BM25 Sparse Search (<span id="bm25-chunks-count">0</span>)
                                 </button>
                             </div>
                         </div>
 
                         <!-- Pane 1: FAISS Dense Chunks (used by T5) -->
-                        <div class="tab-pane active" id="tab-pane-faiss" role="tabpanel">
-                            <p class="field-help">Top đoạn có độ tương đồng ngữ nghĩa vector (Cosine Similarity) cao nhất, được nạp làm ngữ cảnh cho mô hình T5.</p>
+                        <div class="tab-pane active" id="tab-pane-faiss" role="tabpanel" aria-labelledby="tab-btn-faiss" tabindex="0">
+                            <p class="field-help" id="neural-source-help">T5 dùng tối đa hai đoạn đầu, giới hạn tổng đầu vào 512 token. Cosine là độ tương đồng, không phải xác suất đúng.</p>
                             <div id="faiss-chunks-list" class="chunks-list"></div>
                         </div>
 
                         <!-- Pane 2: BM25 Sparse Chunks -->
-                        <div class="tab-pane" id="tab-pane-bm25" role="tabpanel" hidden>
+                        <div class="tab-pane" id="tab-pane-bm25" role="tabpanel" aria-labelledby="tab-btn-bm25" tabindex="0" hidden>
                             <p class="field-help">Top đoạn xếp hạng theo điểm từ khóa BM25 (dựa trên tần suất TF-IDF).</p>
                             <div id="bm25-chunks-list" class="chunks-list"></div>
                         </div>
@@ -356,7 +372,7 @@
                 </div>
                 <footer class="results-footer">
                     <span class="footer-dot" aria-hidden="true"></span>
-                    <span>Hệ thống RAG Đề tài 20: FAISS IndexFlatIP + T5-base fine-tuned + BM25Okapi Baseline</span>
+                    <span>Hệ thống RAG Đề tài 20: FAISS + T5 fine-tuned (tùy chọn) · BM25 IDF dương + trích câu</span>
                 </footer>
             </section>
         </div>

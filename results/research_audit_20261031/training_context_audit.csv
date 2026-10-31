@@ -1,0 +1,681 @@
+﻿row,question,answer,doc_id,canonical_in_context,any_official_alias_in_context,canonical_after_384_token_limit
+0,In which London street does fictional character Sweeney Todd have his barber shop?,Fleet Street,doc_772,False,False,False
+1,Which musician founded the Red Hot Peppers?,Jelly Roll Morton,doc_33,True,True,True
+2,On which island are the Cuillin Hills?,The Isle of Skye,doc_437,True,True,True
+3,Art Garfunkel trained for which profession although he didn't qualify?,Architect,doc_23,False,False,False
+4,Who was the second wife of Henry VIII?,Anne Boleyn,doc_522,False,False,False
+5,In Hanna and Barbera's TV cartoons base on The Addams Family who was the voice of Gomez?,John Astin,doc_110,False,False,False
+6,If I Were A Rich Man Was a big hit from which stage show?,Fiddler on the Roof,doc_17,True,True,True
+7,Which radioactive substance sometimes occurs naturally in spring water?,Radon,doc_198,True,True,True
+8,"In Greek mythology, who was the first wife of Aegeus?",Meta,doc_687,False,False,False
+9,The roller coaster ride called Rita is located at which English theme park?,Alton Towers,doc_607,False,False,False
+10,What is 1009 when expressed as Roman Numerals?,MIX,doc_481,False,False,False
+11,"A mahout is a person who works, tends and rides which animal?",Elephant,doc_590,True,True,True
+12,Aconcagua is the highest mountain in which mountain range?,Andes,doc_577,True,True,True
+13,What is the principal language of Bulgaria?,Bulgarian,doc_162,True,True,True
+14,Which country does the airline TAAG come from?,Angola,doc_42,True,True,True
+15,What type of animal is Baloo in the novel ‘The Jungle Book’ by Rudyard Kipling?,Bear,doc_726,True,True,True
+16,"Which Channel 4 TV show's presenters included Mark Lamarr, Amanda De Cadenet and Terry Christian?",The Word,doc_263,False,False,False
+17,Who did Dr. Crippen murder?,His wife,doc_148,True,True,True
+18,What type of creature is a bufflehead?,Duck,doc_582,True,True,True
+19,"On the human body, a keloid is a type of what?",Scar,doc_724,True,True,True
+20,Which vegetable was the first to be canned?,Peas,doc_550,False,False,False
+21,Selenology is the scientific study of which celestial body?,The moon,doc_701,True,True,True
+22,Who was known as the Great Lover of the Silent Screen?,Rudolf Valentino,doc_431,False,False,False
+23,Who painted Girl with a Pearl Earring?,Johannes Vermeer,doc_480,True,True,True
+24,Which planet has moons named after Shakespearean characters?,Uranus,doc_311,True,True,True
+25,"In what year was the first episode of Doctor Who broadcast? 1959, 1963 or 1967?",1963,doc_414,True,True,True
+26,What was the name of Michael Jackson's second wife?,Debbie Rowe,doc_137,False,False,False
+27,"In golf, what name is given to a score of three under par on a given hole?",Albatross,doc_504,False,False,False
+28,"Which 1986 Peter Weir movie and based on a Paul Theroux novel starred Harrison Ford, Helen Mirren and River Phoenix?",The Mosquito Coast,doc_369,False,False,False
+29,"In the British military, a bombadier is equivalent to which other rank?",Corporal,doc_725,True,True,True
+30,Name the magician who first introduced us to Basil Brush.,David Nixon,doc_417,True,True,True
+31,"In ‘Follow That Camel’, the fourteenth Carry On film, Sid James was replaced by which US actor?",Phil Silvers,doc_589,True,True,True
+32,Captain Corelli's mandolin is a book a film set in which country,Greece,doc_520,False,False,False
+33,What type of creature is a Painted Dragon?,Lizard.,doc_514,True,True,True
+34,"Who directed the films Thelma and Louise, Hannibal and Black Hawk Down?",Ridley Scott,doc_241,True,True,True
+35,What was the name of Michael Jackson's autobiography written in 1988?,Moonwalk,doc_5,True,True,True
+36,"In the 1904 Olympics, how many of the 23 track and field titles were won by Americans?",21,doc_149,False,False,False
+37,The Marquesas Islands lie in which ocean?,Pacific,doc_561,True,True,True
+38,"In a standard deck of cards, how many Kings have a moustache?",Three,doc_272,True,True,True
+39,"Which river originates in the Taurus Mountains, and flows through Syria and Iraq?",Euphrates,doc_386,True,True,True
+40,What is the American version of Strictly Come Dancing called?,Dancing With The Stars,doc_535,True,True,True
+41,The ‘La Scala Opera House’ is in which European city?,Milan,doc_720,True,True,True
+42,"Who wrote My Life and Loves in 1926, originally banned in the US?",Frank Harris,doc_119,True,True,True
+43,"In Only Fools And Horses, Rodney Trotter shares his middle name with which London football club?",Charlton,doc_409,True,True,True
+44,Which Joan's career revived in Whatever Happened to Baby Jane?,Crawford,doc_84,True,True,True
+45,The United Nations University is based in which Asian city?,Tokyo,doc_596,True,True,True
+46,A creance is the name of the long fine cord used in which sport?,Falconry,doc_667,True,True,True
+47,Which 90s sci fi series with James Belushi was based on Bruce Wagner's comic strip of the same name?,Wild Palms,doc_16,True,True,True
+48,What is the capital of the U.S. state of Connecticut?,Hartford.,doc_502,True,True,True
+49,Brandon Lee died during the making of which movie?,The Crow,doc_39,True,True,True
+50,"Which cult film, starring Harrison Ford, was based on the story Do Androids Dream of Electric Sheep?",Blade Runner,doc_237,True,True,True
+51,Wayne Rooney signed for Manchester United from which other Premiership Club?,Everton,doc_306,True,True,True
+52,Who played the role of Kate Flax in the 1990 film Mermaids?,Christina Ricci,doc_381,True,True,True
+53,Which famous book features the character of Bob Cratchit?,A Christmas Carol,doc_293,True,True,True
+54,What was the name of the sixth studio album released by Prince and the Revolution in June of 1984?,Purple RAIN,doc_527,True,True,True
+55,Which US city was named after a British Prime Minister?,Pittsburgh,doc_138,False,False,False
+56,In September 2006 the government of Prime Minister Thaksin Shinawatra was overthrown in which Asian country?,Thailand,doc_695,False,False,False
+57,Which much-loved actor won the Best Actor Oscar for The Philadelphia Story?,James Stewart,doc_85,True,True,True
+58,The 1987 film ‘Cry Freedom’ is a biographical drama about which South African civil rights leader?,Steve Biko,doc_578,True,True,True
+59,"Smoky, Leaf-nosed and Vesper are all species of which creature?",Bat,doc_678,True,True,True
+60,Which actor succeeded Marlon Brando as head of the Corleone family in the Godfather films?,Al Pacino,doc_712,False,False,False
+61,What is the name of a triangle which has sides unequal in length?,Scalene,doc_749,True,True,True
+62,Who plays Daphne in the 2002 film ‘Scooby-Doo’?,Sarah Michelle Gellar,doc_664,False,False,False
+63,"Which rodent rears its young, called kittens, in a nest called a drey?",Squirrel,doc_188,False,True,False
+64,Sadler’s Wells Ballet and the Vic-Wells Ballet were the previous names of which British ballet company?,The Royal Ballet,doc_606,True,True,True
+65,Which statesman was known as the Iron Chancellor?,Otto Van Bismark,doc_483,False,True,False
+66,Which Palestinian co-founded al Fatah in 1957?,Yasser Arafat,doc_124,False,False,False
+67,"In 1953, Edmund Hillary was half of the famous pair to first do what?",Climb Everest,doc_452,False,False,False
+68,"In the game ‘Metal Gear Solid’,who is the twin brother of Solid Snake?",Liquid Snake,doc_702,True,True,True
+69,The town of Honiton in Devon is famous for producing what?,Lace,doc_661,True,True,True
+70,Rarely is the question asked: Is our children learning?,George W Bush,doc_476,True,True,True
+71,What was the name of the cat in Rising Damp?,Vienna,doc_393,False,False,False
+72,Which Eastenders actor has played the policeman Nick Rowan on TV?,Nick Berry,doc_256,True,True,True
+73,What story introduced the Cybermen?,The Tenth Planet,doc_403,True,True,True
+74,"Which mammal constructs a lodge in which to store food, rear young, and pass the winter?",Beaver,doc_190,False,True,False
+75,Who had a 70s No 1 hit with Let's Do It Again?,The Staple Singers,doc_40,True,True,True
+76,On Red Nose Day 2001 who won Celebrity Big Brother?,Jack Dee,doc_333,False,False,False
+77,What are the international registration letters of a vehicle from Iceland?,IS,doc_140,True,True,True
+78,"The American legal drama Shark ran from Sept 06 to May 08. Who starred in the title role, playing Sebastian Stark?",James Woods,doc_375,True,True,True
+79,South Pacific was set during which war?,WWII,doc_129,False,True,False
+80,Where in a vertebrate would you find the protein myoglobin?,Muscle tissue,doc_184,True,True,True
+81,How many scottish football league teams names end in United?,3,doc_249,False,False,False
+82,"Which American female rap artist, film & television actress release a song called Paper in 1998",Queen Latifah,doc_423,False,False,False
+83,How many chambers has the heart?,Four,doc_193,True,True,True
+84,"The 1951 ‘Treaty of Peace With Japan’ which served to officially end World War II, is commonly known as what?",San Francisco Peace Treaty,doc_756,True,True,True
+85,Which caped crusader operated in Gotham City?,Batman,doc_152,True,True,True
+86,"In January 1957, Russell Endean became the first batsman to be dismissed from a test cricket match for doing what?",Handling the ball,doc_609,False,False,False
+87,What is the name of the plastic bit on the end of shoelaces?,An aglet,doc_315,True,True,True
+88,What was the name of the kangaroo often mistaken by Sylvester the cat to be a giant mouse?,Hippety Hopper,doc_364,True,True,True
+89,"In which year was the storming of the Bastille, which started the French Revolution?",1789,doc_651,True,True,True
+90,"From which country do French fries originate? France, Belgium or Switzerland?",Switzerland,doc_227,False,False,False
+91,"Marie Antoinette, Queen of France and Navarre, was born in which country?",Austria,doc_778,True,True,True
+92,Which European country hosted the 1956 Winter Olympic Games?,Italy,doc_617,True,True,True
+93,Where in England was actor Nigel Hawthorne born?,Coventry,doc_31,False,False,False
+94,What type of animal is the star of the 2005 film Racing Stripes?,Zebra,doc_290,True,True,True
+95,In which year did the first episode of Minder take place?,1979,doc_392,True,True,True
+96,Falange was the name given to several political movements and parties dating from the 1930’s in which European country?,Spain,doc_762,True,True,True
+97,In which year was the Juilliard School founded in New York?,1905,doc_118,True,True,True
+98,Who first drew Mickey Mouse when ?Disney first supplied the voice?,Ub Iwerks,doc_132,True,True,True
+99,What colour is ‘Mr Man’ Mr Strong’s hat?,Green,doc_639,False,False,False
+100,On which part of the body would a mukluk be worn?,Foot,doc_675,True,True,True
+101,Which artist David was born in Bradford UK?,Hockney,doc_45,True,True,True
+102,Who was the youngest brother in the Beach Boys?,Carl Wilson,doc_56,True,True,True
+103,What is the name of Humphrey Bogart’s character in the film ‘Casablanca’?,Rick Blaine,doc_635,False,False,False
+104,"Which common mineral is used to make casts, moulds, blackboard chalk and plaster of Paris?",Gypsum,doc_199,False,False,False
+105,"Used in cooking, agar-agar is a gelatin made from what?",Seaweed,doc_776,True,True,True
+106,"Who wrote the Bourne trilogy of books, made into movies starring Matt Damon?",Robert Ludlum,doc_312,True,True,True
+107,What was the name of the World War I fighter ace nicknamed the Red Baron?,Manfred von Richtofen.,doc_501,False,True,False
+108,What is secreted by the pancreas to regulate blood sugar levels?,Insulin,doc_192,True,True,True
+109,Who was known as the ‘Waltz King’ of Vienna?,Johann Strauss II,doc_793,False,False,False
+110,"What was the name of the comedy written by Ray Galton, Alan Simpson which aired 57 episodes?",Steptoe and Son,doc_395,True,True,True
+111,Who presented Family Fortunes in the two years between Bob Monkhouse and Les Dennis?,Max Bygraves,doc_310,True,True,True
+112,"Although he never won an Oscar for best director, one of Hitchcock's films did win an Oscar for best picture. What was the film?",Rebecca,doc_542,False,False,False
+113,Which British playwright was killed with a hammer by his lover Keith Haliwell in 1967?,Joe Orton,doc_648,True,True,True
+114,What word is given to a point in tennis which has to be replayed?,Let,doc_251,False,False,False
+115,Golfer Ernie Els was born in which country?,South Africa,doc_576,False,True,False
+116,What type of bird was the first released by Noah?,Raven,doc_485,False,False,False
+117,"Sufferers, Locksmen and Dreads are followers of which religion?",Rastafarian,doc_795,False,False,False
+118,"A Long Island Iced Tea is a cocktail based on vodka, gin, tequila, and which other spirit?",Rum,doc_443,True,True,True
+119,Which cartoon strip character first appeared in The Beano in 1951?,Dennis the Menace.,doc_467,False,False,False
+120,Who was the defending champion when Martina Navratilova first won Wimbledon singles?,Virginia Wade,doc_49,True,True,True
+121,In what month was the attack on Pearl Harbor?,December,doc_147,True,True,True
+122,Who had chart hits which included Annie`s Song and Rocky Mountain High?,John DENVER,doc_457,True,True,True
+123,What is the name of the helicopter used to transport the President of the United States,Marine One,doc_472,False,False,False
+124,For which team did Babe Ruth blast his last Major League home run?,Boston Braves,doc_106,True,True,True
+125,In which country is the region Dalmatia?,Croatia,doc_430,True,True,True
+126,"Meryl Streep's character, Miranda, in the 2006 film The Devil Wears Prada was based on the editor-in-chief of which fashion magazine?",Vogue,doc_377,True,True,True
+127,Apiculture is the raising and care of which creatures?,Bees,doc_548,True,True,True
+128,Which breed of dog is Marley in the 2008 film ‘Marley and Me’?,Labrador Retriever,doc_688,False,False,False
+129,"Nicknamed the cannibal, who is the only rider to have won all three jerseys in the same year in the Tour de France?",Eddy Merckx,doc_335,False,False,False
+130,"Which serial killer hanged himself in Wakefield Prison in January 2004, four years after being found guilty of 15 murders?",Dr Harold Shipman,doc_355,False,False,False
+131,What is the name of the clarified butter used in Indian cookery?,Ghee,doc_716,True,True,True
+132,What is the main ingredient of borscht soup?,Beetroot,doc_710,False,True,False
+133,"Which fictional character is the subject of George Frampton’s bronze statue in Kensington Gardens, London?",Peter Pan,doc_764,True,True,True
+134,Who plays the role of Bubble in Absolutely Fabulous?,Jane Horrocks,doc_449,True,True,True
+135,What is Harrison Ford's real name?,Harrison Ford,doc_101,True,True,True
+136,"How many of his 45 races did Mike Hawthorn, a former Formula One motor racing world champion, win?",Three,doc_115,True,True,True
+137,"Which Italian explorer had ships named Nina, Pinta and Santa Maria?",Christopher COLUMBUS,doc_456,False,True,False
+138,In which is Shakespeare's plays are the title character's last words the rest is silence?,Hamlet,doc_488,True,True,True
+139,How many times did Steffi Graf win the Ladies Singles at Wimbledon?,7,doc_400,False,False,False
+140,What was the former name of the British Green Party?,Ecology Party,doc_171,True,True,True
+141,What was the first name of the character played by John Travolta in Saturday Night Fever.,Tony,doc_439,True,True,True
+142,Which US No 1 single came from Diana Ross's platinum album Diana?,Upside Down,doc_43,True,True,True
+143,Which legendary dancer was Oscar-nominated for The Towering Inferno?,Fred Astaire,doc_86,True,True,True
+144,What song was a hit for Tom Jones and Cerys Matthews in 1999?,Baby it's cold outside,doc_533,False,False,False
+145,The Yalu river forms a sort of natural border between China and which of its neighbours?,North Korea,doc_307,True,True,True
+146,What building in Scotland is said to house the Holy Grail and features prominently at the end of The Da Vinci Code?,Rosslyn Chapel,doc_447,False,False,False
+147,What is the alcoholic ingredient of Irish coffee?,Whiskey,doc_268,True,True,True
+148,"In Vladimir Nabokov's book ""Lolita"", what is Lolita's real name?",Dolores HAZE,doc_524,False,True,False
+149,Tirana is the capital of which European country?,Albania,doc_727,True,True,True
+150,Which country is known to its people as Suomen Tasavalta?,Finland,doc_164,True,True,True
+151,Who holds a trumpet on the album cover of Sgt. Pepper's Lonely Hearts Club Band by The Beatles?,Ringo Starr,doc_294,False,False,False
+152,Gjetost is the national cheese of which country?,Norway,doc_365,True,True,True
+153,Nguyen Tan Dung became Prime Minister of which country in June 2006?,Vietnam,doc_682,True,True,True
+154,Which orchestral conductor was married to one of the subjects of the film Hillary and Jackie?,Daniel Barenboim,doc_155,True,True,True
+155,Which singer played the Goblin King Jareth in the film Labyrinth'?,David Bowie,doc_506,False,False,False
+156,What number in Bingo is sometimes referred to as Heinz varieties?,57,doc_207,False,False,False
+157,"What dish, especially popular in parts of Wales and the English Midlands,  is traditionally made from pig's heart, liver and fatty belly meat or bacon minced together, with herbs added for flavouring and sometimes bread crumbs",Faggots,doc_518,True,True,True
+158,In which South American country does Angostura Bitters originally come from?,Venezuela,doc_786,True,True,True
+159,Which method of painting consists of applying pigment to wet plaster?,Fresco.,doc_515,True,True,True
+160,"What type of acid is extracted from the juice of lemons, oranges, limes, and grapefruit?",Citric acid,doc_215,True,True,True
+161,What colour is the cross on the national flag of Denmark?,White,doc_632,True,True,True
+162,"In Roman mythology, what was the name of the brother slain by Romulus?",Remus,doc_619,True,True,True
+163,How was President Kennedy assassinated?,Shot,doc_151,False,False,False
+164,Who was sacked as the Beatles' drummer and replaced by Ringo Starr?,Pete Best,doc_487,True,True,True
+165,The Forest of Arden is in which English county?,Warwickshire,doc_706,True,True,True
+166,How many verses make up the national anthem God Save The Queen?,Three,doc_209,True,True,True
+167,Who is credited with the discovery of the tomb of King Tutankhamen in 1922?,Howard Carter,doc_516,True,True,True
+168,Who won the men's singles title at Wimbledon in 1987?,Pat Cash,doc_446,False,False,False
+169,Who won the 2010 Giro D'Italia?,Ivan Basso,doc_424,True,True,True
+170,"Who was born first, Kiefer Sutherland or Christian Slater?",Kiefer Sutherland,doc_63,True,True,True
+171,Peter O’Sullevan was a BBC commentator for which sport?,Horse racing,doc_569,False,False,False
+172,Who was the author of 'The Old Curiosity Shop'?,Charles Dickens,doc_321,True,True,True
+173,In Greek mythology who was the twin of Polydeuces?,Castor,doc_327,True,True,True
+174,"Scarlett O'Hara was not beautiful, but men seldom realised it when caught by her charm as the Tarleton twins were",Gone with the wind,doc_372,True,True,True
+175,Which town in East Sussex now stands on the site of the battle of Hastings?,Battle,doc_368,True,True,True
+176,What artist designed the logo for Chupa Chups lollipops?,Salvador Dali,doc_537,False,False,False
+177,"In humans, a hemispherectomy is the removal of half of the what?",Brain,doc_594,True,True,True
+178,What is the name given to the largest bee in a hive?,Queen,doc_266,False,False,False
+179,Which Flemish Baroque painter’s Antwerp home is now a museum?,Peter Paul Rubens,doc_625,False,False,False
+180,Which stand-up comedian presents 8 Out Of 10 Cats and Distraction?,Jimmy Carr,doc_308,True,True,True
+181,Bonar Law is the only Prime Minister not born in the UK. In which country was he born?,Canada,doc_396,True,True,True
+182,What percentage of the earth's surface is covered by Europe?,8%,doc_130,False,False,False
+183,The world was first aware of the Chernobyl disaster after detectors were triggered at a nuclear plant in which country?,Sweden,doc_97,False,False,False
+184,The Kray twins were convicted of the murder of George Cornell in the East End of London in 1966. What was the name of the pub in which he was shot?,The Blind Beggar,doc_295,False,False,False
+185,What is the second most common gas in the atmosphere?,Oxygen,doc_197,True,True,True
+186,What was the name of the Prime Minister of Egypt who was assassinated in 1910?,Boutros Ghali,doc_673,True,True,True
+187,Which King did Guy Fawkes attempt to kill with his gunpowder plot?,James I,doc_261,False,False,False
+188,Which US President was given the nickname the ‘Great Engineer’?,Herbert Hoover,doc_780,False,False,False
+189,Who did Simple Simon meet on his way to the fair?,The Pie man.,doc_466,True,True,True
+190,What raw material is used for making glass?,Sand,doc_176,False,False,False
+191,Who created the Miss World pageant?,Eric Morley.,doc_513,True,True,True
+192,"Composite, Shield and Cinder Cone are all types of what?",Volcano,doc_634,False,True,False
+193,What is the currency of India?,Rupee,doc_461,False,False,False
+194,Cristina Fernandez de Kirchner became President of which South American country in December 2007?,Argentina,doc_559,True,True,True
+195,Steve Martin and which other actor hosted the 2010 Academy Awards?,Alec Baldwin,doc_685,False,False,False
+196,Which actress married Dennis Quaid on Valentine's Day in 1991?,Meg Ryan,doc_297,True,True,True
+197,"The 1955 comedy movie We're No Angels centred on three escaped convicts. Peter Ustinov and Aldo Ray were two, but who played the third?",Humphrey Bogart,doc_350,True,True,True
+198,What was founded by Ferdinand II of Aragon and Isabella I of Castile to keep Catholic orthodoxy as the major religion of their kingdoms?,Spanish Inquisition,doc_503,True,True,True
+199,What was the name of the ferry that capsized after leaving Zeebrugge in 1987,The Herald of free Enterprise,doc_419,False,False,False
+200,Which highway was Revisited in a classic 60s album by Bob Dylan?,61,doc_14,False,False,False
+201,Opera singer Leyla Gencer was born in which European country?,Turkey,doc_785,False,False,False
+202,"In February 1938, Roberto M. Ortiz became President of which South American country?",Argentina,doc_693,True,True,True
+203,Which famous resident resides at Highgrove House?,The Prince of Wales,doc_460,True,True,True
+204,What animal did Reggie Perrin think of every time his Mother-in-law was mentioned?,A Hippopotamus.,doc_530,False,False,False
+205,Which fictional girls' boarding school was created by the cartoonist Ronald Searle,St. Trinians,doc_475,True,True,True
+206,Which film features the Dawes Tomes Mousley Grubbs Fidelity Fiduciary Bank?,Mary Poppins,doc_328,True,True,True
+207,"How long does it take, approximately, for light to travel from the Sun to the Earth?",About 8 minutes,doc_442,False,False,False
+208,What is the US state capital of Idaho?,Boise,doc_680,True,True,True
+209,"Which Shakespeare play tells the story of Prospero, the rightful Duke of Milan?",The TEMPEST,doc_525,False,False,False
+210,In what film did Oprah Winfrey make her big screen acting debut?,The Color Purple,doc_204,False,False,False
+211,In which country was the first permanent bungee jumping site situated?,New Zealand,doc_98,True,True,True
+212,Which golf shot is the opposite of a slice?,Hook,doc_407,False,False,False
+213,"In 1951, which European country saw the abdication of King Leopold lll in favour of his son Baudouin?",Belgium,doc_620,False,False,False
+214,On the Internet what is Spam?,Junk mail,doc_116,False,False,False
+215,"According to the Bible, who was the only apostle to witness the crucifixion of Jesus?",John,doc_630,True,True,True
+216,What name is given to the change of state from liquid to gas?,Evaporation,doc_179,False,False,False
+217,What is a positively charged ion called?,Cation,doc_584,True,True,True
+218,Who's home runs record did Mark McGwire break in the 1998 season?,Roger Maris,doc_102,False,False,False
+219,Yuan Yuan was caught carrying drugs for which Chinese team?,Swimming,doc_113,False,False,False
+220,Who provided the voice for Bob The Builder on his number one hit Can We Fix It?,Neil Morrissey,doc_240,True,True,True
+221,In medicine the MMR vaccination gives protection against which diseases?,"Measles, Mumps and Rubella",doc_621,True,True,True
+222,"When the egg is released from the ovary, what is left behind?",Corpus luteum,doc_195,True,True,True
+223,Which Asian country hosted its first Formula One Grand Prix motor race in October 2010?,South Korea,doc_555,False,False,False
+224,"In our solar system, which is the sixth planet from the sun?",Saturn,doc_728,True,True,True
+225,On which label did Chuck Berry record in the 1950s and 1960s?,Chess,doc_136,True,True,True
+226,Which US athlete won a gold medal for the high jump in the 1968 Summer Olympics?,Dick Fosbury,doc_771,False,False,False
+227,"The Asian Tsunami or Boxing day tsunami that hit Thailand, Indonesia and many other countries happened in what year?",2004,doc_468,True,True,True
+228,What colour is the cross on the national flag of Switzerland?,White,doc_210,True,True,True
+229,Which US gangster was released from Alcatraz prison in November 1939?,Al Capone,doc_657,True,True,True
+230,Marc Dutroux hit the headlines over a 'house of horrors' in which country?,Belgium,doc_91,True,True,True
+231,Who directed the classic 30s western Stagecoach?,John Ford,doc_12,True,True,True
+232,Who was the American President when the Berlin Wall was constructed?,John F Kennedy,doc_211,False,False,False
+233,Melanie Molitor is the mom of which tennis world NO 1?,Martina Hingis,doc_90,False,False,False
+234,Which Oscar-nominated film had You Sexy Thing as its theme song?,The Full Monty,doc_83,True,True,True
+235,The Suez Canal connects the Mediterranean Sea to which other Sea?,Red sea,doc_121,True,True,True
+236,What is the name of the company that owned the spaceship Red Dwarf?,The Jupiter Mining Corporation,doc_415,True,True,True
+237,"In UK currency, how many sides does a twenty pence piece have?",Seven,doc_556,False,False,False
+238,"As at March 2001, who holds the record for scoring the most league goals for the soccer team Arsenal?",Ian Wright,doc_208,False,False,False
+239,Which animal has the longest gestation period at around 22 months?,The elephant,doc_286,False,False,False
+240,What is the force that opposes the relative motion of two bodies that are in contact?,Friction,doc_181,True,True,True
+241,Who was the first person after Scott to reach the South Pole overland?,Edmond Hillary,doc_52,False,False,False
+242,Which famous woman in history had a cottage in Shottery in Warwickshire?,Anne Hathaway,doc_427,True,True,True
+243,"In the NATO phonetic alphabet, which word represents the letter I?",India,doc_744,True,True,True
+244,"In which country are the Angel Falls, the highest waterfall in the world?",Venezuela,doc_349,True,True,True
+245,General Charles de Gaulle was French President 1959 to 1969. Who succeeded him?,Georges Pompidou,doc_411,False,False,False
+246,"What type of seaweed grows up to 100 meters in length, and is farmed for its alginates?",Kelp,doc_183,True,True,True
+247,Taphephobia is the abnormal fear of being what?,Buried alive,doc_799,True,True,True
+248,"Which family of insects has species named 'drivers', 'weavers', 'and even individuals called 'soldiers'?",Ant,doc_186,False,True,False
+249,In what year was the first Tarzan novel published?,1914,doc_157,True,True,True
+250,What was the name of the Cunard ocean liner which was launched on 20th September 1906?,Mauretania,doc_586,True,True,True
+251,What type of creature is a tanager?,Bird,doc_588,True,True,True
+252,The Tumut Hydroelectric Power Station is in which Australian state?,New South Wales,doc_757,True,True,True
+253,Which sitcom star appeared on the big screening The Object of My Affection?,Jennifer Aniston,doc_75,True,True,True
+254,Which British swimmer won Olympic Gold Medals in 2008 in the 400 and 800 m freestyle?,Rebecca Adlington,doc_743,True,True,True
+255,What was the capital of the United States between 1785 and 1790??,New York,doc_474,False,False,False
+256,In which 1969 movie did Michael Caine appear with his brother Stanley.,The Italian Job,doc_440,True,True,True
+257,Men Against the Sea and Pitcairn's Island were two sequels to what famous novel?,Mutiny On The Bounty,doc_18,True,True,True
+258,Who bought Chelsea football club for £1 in 1982?,Ken Bates,doc_279,True,True,True
+259,"""Which character did Julia """"Roberts play in Steven Spielberg's Hook?""",Tinkerbell,doc_76,False,False,False
+260,"In 2009, who was convicted of the murder of Lana Clarkson?",Phil Spector,doc_353,True,True,True
+261,How was the European Recovery Program in the 1940s more commonly known?,Marshall Plan,doc_38,True,True,True
+262,Mount Chimborazo is in which South American country?,Ecuador,doc_698,True,True,True
+263,Who sang the theme song for the TV show 'Rawhide'?,Frankie Laine,doc_428,False,False,False
+264,What name is given to the home of a beaver?,Lodge,doc_287,False,True,False
+265,In which film series would you expect to film Katniss Everdeen and Peeta Malark?,The Hunger Games,doc_528,True,True,True
+266,Who killed Lee harvey Oswald?,Jack Ruby,doc_361,True,True,True
+267,Which film features the characters Sally Albright and Harry Burns?,When Harry Met Sally,doc_282,True,True,True
+268,What are the only two musical notes which have no flats?,C and F,doc_226,True,True,True
+269,From which 1968 film did English band Duran Duran take their name?,Barbarella,doc_719,True,True,True
+270,Which Swedish actress won the Best Supporting Actress Oscar for Murder on the Orient Express?,Ingrid Bergman,doc_82,False,False,False
+271,Who was the star of the film based on the record Harper Valley PTA by Jeannie C Riley?,Barbara Eden,doc_134,True,True,True
+272,What are the shape-shifting foxes of the Japanese folklore?,Kitsune,doc_326,True,True,True
+273,Who set fire to his guitar at the Monterey Pop festival in 19676?,Jimi Hendrix,doc_66,True,True,True
+274,"Where does the infamous ""Streif"" downhill ski race take place?",Kitzbühel,doc_532,True,True,True
+275,Who was the next British Prime Minister after Arthur Balfour?,Campbell-Bannerman,doc_1,False,False,False
+276,What was President Gerald Ford's middle name?,Rudolph,doc_22,True,True,True
+277,Rodolfo and Mimi are the main characters in which opera by Giacomo Puccini?,La Boheme,doc_669,False,True,False
+278,The Hotel Matignon is the official residence of the Prime Minister of which European country?,France,doc_600,True,True,True
+279,Which common colour can also be known as heliotrope?,Purple,doc_406,False,False,False
+280,"""In which movie did Garbo say, """"I want to be alone"""".""",Grand Hotel,doc_47,True,True,True
+281,Kagoshima international airport is in which country?,Japan,doc_26,True,True,True
+282,In which year did Margaret Thatcher become British Prime Minister?,1979,doc_608,True,True,True
+283,Louis Reard created which two-piece item of clothing in 1946?,Bikini,doc_707,True,True,True
+284,From which animal does Haggis come?,Sheep,doc_258,False,True,False
+285,"In humans, otalgia, is the medical term for what?",Earache,doc_557,True,True,True
+286,"In the 1999 film Stuart Little, who plays the part of Mrs Eleanor Little?",Geena Davis,doc_324,True,True,True
+287,Who played King Arthur in the 1967 musical film Camelot?,Richard Harris,doc_351,False,False,False
+288,Boll weevil cause damage to which crop?,Cotton,doc_683,True,True,True
+289,In which British city is the Jewry Wall Museum?,Leicester,doc_709,False,False,False
+290,"What is the name of the Japanese dish of bite-sized pieces of raw fish served with dipping sauces, vegetables and wasabi?",Sashimi,doc_751,True,True,True
+291,What was Warren Beatty's first movie?,Splendor in the Grass,doc_107,True,True,True
+292,"Name the game show, presented by Leslie Grantham and Melinda Messenger, where contestants were set physical and mental challenges?",Fort Boyard,doc_309,False,False,False
+293,"What kind of disaster claimed some 100,000 lives in Armenia in 1988?",Earthquake,doc_144,False,False,False
+294,Which singer had a big 60s No 1 with Roses Are Red?,Bobby Vinton,doc_139,True,True,True
+295,Which film director guested as the FBI Director in The Silence of the Lambs?,Roger Corman,doc_79,False,False,False
+296,"Which singer picked up three Ivor Novello awards in May, including songwriter of the year for her hit single, The Fear?",Lily Allen,doc_425,True,True,True
+297,Who played Dr. Doug Ross on the TV show E.R.?,George Clooney,doc_380,True,True,True
+298,What is the name of Terence and Shirley Conran's dress designer son?,Jasper,doc_54,True,True,True
+299,The Battle of Vimy Ridge took place in which country during World War l?,France,doc_638,True,True,True
+300,The roe of lumpfish is used as a substitute for which delicacy?,Caviar,doc_739,True,True,True
+301,"In music, who was Sweet and Innocent and Too Young?",Donny Osmond,doc_68,True,True,True
+302,Which journalist first told the world about the My Lai massacre?,Seymour Hersh,doc_53,False,False,False
+303,Which famous cowboy was created by George W. Trendle?,The Lone Ranger,doc_339,True,True,True
+304,What colour are the flowers of a hawkbit plant?,Yellow,doc_708,True,True,True
+305,Which act won the Eurovision Song Contest for the United Kingdom singing Love Shine A Light?,Katrina And The Waves,doc_283,False,False,False
+306,Who was the only Prime Minister of Britain to be assassinated?,Spencer Percival,doc_418,False,True,False
+307,"In 1961, who famously scored six goals in a match but still ended up on the losing team in a FA Cup tie?",Denis Law,doc_341,True,True,True
+308,1986 film starring Goldie Hawn as a High School football coach.,Wildcats,doc_454,False,False,False
+309,Wolf Mankowitz wrote the 1953 novel ‘A Kid For Two….’what’?,Farthings,doc_748,True,True,True
+310,What is the name of the London Underground station in EastEnders?,Walford East,doc_334,True,True,True
+311,Which cheese shares its name with a Guiness Premiership rugby team that play at Welford Road?,Leicester.,doc_413,False,False,False
+312,"The Bible tells of 3 wise men visiting Jesus after his birth, but in which of the Gospels does this appear?",Matthew,doc_313,True,True,True
+313,Who was the first US president Barbara Walters interviewed?,Nixon,doc_154,False,False,False
+314,Which notorious murderer lived at 10 Rillington Place?,John Christie,doc_360,True,True,True
+315,What is the largest city in Turkey?,Istanbul,doc_278,False,False,False
+316,Which American singer was born Eleanora Fagan?,Billie Holiday,doc_426,True,True,True
+317,In which year did it become compulsory to wear seat belts in front seats of cars in the UK?,1983,doc_670,False,False,False
+318,A saluki is which type of animal?,Dog,doc_622,True,True,True
+319,Which state on the Gulf of Mexico is nearest the end of the alphabet?,Texas,doc_145,True,True,True
+320,What has a central vein called a midrib?,Leaf,doc_189,True,True,True
+321,"In which North African country was Mohammed Al-Fayed, owner of Harrods department store in London, born?",Egypt,doc_125,True,True,True
+322,Which Holiday movie favourite featured a character called Kevin McCallister?,Home Alone,doc_493,True,True,True
+323,What is the name of the strong material found in plant cell walls?,Cellulose,doc_178,True,True,True
+324,‘The Weeping Woman’ is the work of which artist?,Pablo Picasso,doc_592,True,True,True
+325,The Wang River is in which Asian country?,Thailand,doc_641,True,True,True
+326,"In which country was Marie Curie born? Poland, Austria or Switzerland?",Poland,doc_259,True,True,True
+327,What US sitcom was the first exported to Britain?,Amos 'N' Andy,doc_109,False,False,False
+328,In which capital city would you find Charles Bridge and Wenceslas Square?,Prague,doc_275,True,True,True
+329,The meibomian gland is found in which part of the human body?,Eyelid,doc_741,False,True,False
+330,What is the lightest metal under standard conditions?,Lithium,doc_536,True,True,True
+331,What name is given to a baby marsupial?,Joey,doc_288,False,False,False
+332,Wayne Rooney scored his first senior goal against which club?,Arsenal,doc_318,True,True,True
+333,"Which cartoon series featured the characters Lion-o, Cheetera, Tygra and Snarf/",Thundercats.,doc_458,True,True,True
+334,Which actress was voted Miss Greenwich Village in 1942?,Lauren Bacall,doc_4,True,True,True
+335,In which state was Gene Vincent born?,Virginia,doc_37,True,True,True
+336,What are the flat treeless plains of Argentina called?,The Pampas,doc_384,False,False,False
+337,What was Jacques Cousteau's mobile oceonagraphic laboratory.,Calypso,doc_471,True,True,True
+338,Which British actress played Valerie in the 1997 film ‘Nil By Mouth’?,Kathy Burke,doc_579,True,True,True
+339,Who did Jack Ruby shoot in November 1963?,Lee Harvey Oswald,doc_153,True,True,True
+340,Who plays Cruella de Vil in the 1996 live action version of 101 Dalmations?,Glenn Close,doc_330,False,False,False
+341,Macbeth belonged to which royal house or dynasty?,House of Dunkeld,doc_343,True,True,True
+342,How many months is the gestation period for an elephant?,22,doc_789,False,False,False
+343,What is the Milky Way?,The local galaxy,doc_202,False,True,False
+344,The pilgrim route to Santiago de Compostela in Northern Spain is known as the ‘Way’ of which saint?,Saint James,doc_568,True,True,True
+345,Which rock star did Cindy Crawford name her first son after?,Presley,doc_122,False,False,False
+346,"Which TV comedy had characters McLaren, Blanco & Warren",Porridge,doc_509,True,True,True
+347,A youngberry is a cross between a dewberry and what else?,A blackberry,doc_366,True,True,True
+348,Which economist wrote The Wealth Of Nations?,Adam Smith,doc_342,True,True,True
+349,The first issue of which British children’s comic was published in April 1950?,Eagle,doc_755,True,True,True
+350,Which actress wrote the novel The Last of the Really Great Whangdoodles?,Julie Andrews,doc_133,True,True,True
+351,Which two colours make up the national flag of Greenland?,White and red,doc_662,False,False,False
+352,Who won the Ladies singles title at Wimbledon in 2004?,Maria Sharapova,doc_267,True,True,True
+353,Who dated actress Elizabeth Hurley between 2000 and 2001 and denied he was the father of her son born in 2002 before a DNA test proved otherwise?,Stephen Bing,doc_289,False,False,False
+354,"During Margaret Thatcher's years as Prime Minister, there were three Chancellors of the Exchequer. Geoffrey Howe and Nigel Lawson were two, but who was the other one?",John Major,doc_298,False,False,False
+355,Whose arch nemisis is the Red Skull?,Captain America's,doc_336,True,True,True
+356,"In the 2005 Julian Barnes novel ‘Arthur and George’, who is Arthur?",Arthur Conan Doyle,doc_717,True,True,True
+357,What is the minimum age of someone running for the office of President of the United States?,35 years of age,doc_496,True,True,True
+358,Anna Nicole Smith was controversially married to which oil billionaire?,J Howard Marshall,doc_317,True,True,True
+359,"In Lewis Carroll's poem The Hunting of the Snark, what did the elusive, troublesome snark turn into to fool hunters?",A boojum,doc_20,True,True,True
+360,The Koppen System is a classification system for what?,Climate,doc_593,True,True,True
+361,Composer Giacomo Puccini died leaving which opera unfinished?,Turandot,doc_729,False,False,False
+362,Aung San Suu Kyi is a controversial leader in which country?,Myanmar,doc_126,True,True,True
+363,Author Dick Francis is famous for writing novels based around which sport?,Horseracing,doc_291,True,True,True
+364,"Who was the 16th president of the U.S.A.,assasinated in 1865",Abraham LINCOLN,doc_455,False,False,False
+365,Who had hits with Go Now and Nights in White Satin?,Moody Blues,doc_482,True,True,True
+366,Bandar Seri Begawan International airport is in which country?,Brunei,doc_61,True,True,True
+367,"What colour is the number 10 on the door of 10 Downing Street? White, Yellow or Brown?",White,doc_206,False,False,False
+368,What was Blondie's last UK No 1 of the 80s?,Rapture,doc_120,False,False,False
+369,"In Greek mythology, what was the name of the nymph who fell in love with Narcissus, but who was said to have pined away when her love was not returned, leaving only her voice?",Echo,doc_560,False,False,False
+370,What is the full name of the train robber played by Phil Collins in a 1988 movie?,Buster Edwards,doc_345,False,False,False
+371,Where did the Shinning Path terrorists operate?,Peru,doc_34,True,True,True
+372,What was the nickname given to premiership footballer Neil Ruddock?,Razor,doc_304,True,True,True
+373,How old was Jimi Hendrix when he died?,27,doc_35,True,True,True
+374,How many lines are there in a sonnet?,14,doc_534,False,True,False
+375,"Which London river, now flowing underground, rises in Hampstead, flows through St. Pancras, down Farringdon Street and enters the Thames by Blackfriars Bridge?",River Fleet,doc_435,False,False,False
+376,Who had a Too Legit To Quit Tour?,MC Hammer,doc_41,True,True,True
+377,"What is the most common blood type in humans? A, B or O?",O,doc_260,True,True,True
+378,Mel Gibson (1990) and Kenneth Branagh (1996) have both played which character in movies?,Hamlet,doc_491,True,True,True
+379,"Name the fantasy movie directed by Terry Gilliam, where 6 dwarves have stolen a map.",Time Bandits,doc_508,False,False,False
+380,‘Divine Wind’ is the English translation of which Japanese word?,Kamikaze,doc_624,True,True,True
+381,"In the UK tv series ‘Mr Bean’, what model car does Mr Bean drive?",Mini 1000,doc_668,False,False,False
+382,-Day in 1944 was the greatest sea-bourn invasion in history. What was the code name for the operation?,Operation Overlord,doc_436,True,True,True
+383,What is the title of the 1944 film starring Barbara Stanwyck as the wife who seduces an insurance salesman into killing her husband?,Double Indemnity,doc_746,True,True,True
+384,Who was the first poet to be buried at Poet’s Corner in London’s Westminster Abbey?,Geoffrey Chaucer,doc_652,True,True,True
+385,"Who wrote the novels About A Boy, How To Be Good and High Fidelity?",Nick Hornby,doc_244,True,True,True
+386,Buddy Holly and the Big Bopper were two of the three musicians who died in a plane crash in February 1959. Who was the other one?,Richie Valens,doc_299,False,False,False
+387,What colour are the two stars on the national flag of Syria?,Green,doc_797,False,False,False
+388,Where in Canada is the Lion's Gate bridge?,Vancouver,doc_29,False,False,False
+389,"What is the name of the group of 1,196 islands in the North Indian Ocean, none bigger than five square miles?",Maldives,doc_160,False,False,False
+390,"In Greek mythology, Tiresias disclosed the crimes of who?",Oedipus,doc_595,True,True,True
+391,The town of Tobermory is on which Scottish island?,Mull,doc_553,True,True,True
+392,The fictional character ‘Disco Stu’ appears in which US cartoon tv Series?,The Simpsons,doc_777,True,True,True
+393,"The invention of what in 1867, made Alfred Nobel famous?",Dynamite,doc_222,True,True,True
+394,"Which scientist was Time magazine's ""Person of the 20th Century""?",Albert Einstein,doc_303,True,True,True
+395,Buenos Aires is the capital of which South American country?,Argentina,doc_547,True,True,True
+396,What is the Pacific terminus of the Trans Siberian Railway?,Vladivostok,doc_158,True,True,True
+397,From which 1960s sci-fi movie did 1980s pop sensation Duran Duran take their name from a character from the movie?,Barbarella,doc_498,True,True,True
+398,The 1932 film ‘The Mask of Fu Manchu’ revolves around Fu Manchu’s quest for the sword and mask of which historical figure?,Genghis Khan,doc_770,True,True,True
+399,Which Scottish newspaper features the Broons and Oor Wullie?,The Sunday Post,doc_292,True,True,True
+400,The Miller Brewing Company got its start in what U.S. city?,"Milwaukee, Wisconsin",doc_465,True,True,True
+401,Sindh is a province of which Asian country?,Pakistan,doc_766,True,True,True
+402,How many times was Boris Becker runner-up in the Men's Singles at Wimbledon?,4,doc_399,False,False,False
+403,Who had a 70s No 1 hit with Kiss You All Over?,Exile,doc_2,True,True,True
+404,Which creatures are used as croquet balls in the novel ‘Alice’s Adventures in Wonderland’?,Hedgehogs,doc_704,False,False,False
+405,Who proclaimed the People's Republic of China in 1949?,Mao Zedong,doc_168,False,False,False
+406,Which Mediterranean island gained independence in 1959 under the presidency of Archbishop Makarios?,Cyprus,doc_614,True,True,True
+407,Which poet wrote ‘The Lake Isle of Innisfree’?,William Butler Yeats,doc_694,False,False,False
+408,In which year was the Encyclopedia Britannica first published?,1768,doc_218,True,True,True
+409,"The original United Artists film studio was founded in 1919 by D.W. Griffith, Mary Pickford, Douglas Fairbanks and who else?",Charlie Chaplin,doc_492,True,True,True
+410,Which group released an album in 1986 entitled ‘The Queen is Dead’?,The Smiths,doc_571,True,True,True
+411,Which King of England sold Dunkirk to Louis XIV of France?,Charles II,doc_564,False,False,False
+412,In which country is the castle that gives the Habsburg dynasty its name?,Switzerland,doc_170,True,True,True
+413,"Which serial killer is the subject of the films A Study In Terror, Murder By Decree and From Hell?",Jack The Ripper,doc_242,False,False,False
+414,"In the human body, what is stored in adipose tissue?",Fat,doc_781,True,True,True
+415,Which was the only eastern bloc country to participate in the 1984 LA Olympics?,Rumania,doc_15,False,True,False
+416,What was the Paramount Film Company originally called?,Famous Players Film Company,doc_51,True,True,True
+417,"In the novel ‘Wuthering Heights’ by Emily Bronte, Catherine’s father found Heathcliffe on the streets of which English city?",Liverpool,doc_554,True,True,True
+418,Another name for the Holy Wars between the  Christian states of Europe against the Saracens,Crusades,doc_453,True,True,True
+419,Which US president did Anthony Hopkins play in a film whose title was simply his name?,Nixon,doc_77,False,False,False
+420,"In years and days, how old was Luigina Giavotti when she won a silver medal in gymnastics in 1928, and is still the youngest medal winner today?",11 years and 302 days,doc_255,True,True,True
+421,The Belgian beer ‘Kriek’ is flavoured with which fruit?,Cherry,doc_705,True,True,True
+422,Which British Prime Minister said of Downing Street ‘One of the most precious jewels in the national heritage’?,Margaret Thatcher,doc_572,False,False,False
+423,What name is given to the study of animal behavior?,Ethology,doc_187,True,True,True
+424,Hidrosis is the medical term for which bodily function?,Sweating,doc_660,True,True,True
+425,Which President of the Philippines was deposed in 1986?,Marcos,doc_143,False,False,False
+426,Madame de Pompadour and Madame du Barry were mistresses of which French King?,Louis XV,doc_767,True,True,True
+427,Which British artist’s works include ‘The First Real Target’?,Peter Blake,doc_563,False,False,False
+428,Who composed the ballet ‘Swan Lake’?,Pyotr Tchaikovsky,doc_735,False,True,False
+429,"In 1976, which gymnast scored 7 maximum scores of 10 as she won three gold medals, one silver and one bronze?",Nadia Comaneci,doc_254,False,True,False
+430,Who was the only female victim to be killed off in the opening credit sequence in Police Squad?,Florence Henderson,doc_111,True,True,True
+431,What was the surname of the butler played by Gordon Jackson in Upstairs Downstairs?,Hudson,doc_347,False,False,False
+432,"What is the name of the enzyme usually added to milk to coagulate it, to make ""curds and whey""?",Rennet.,doc_412,True,True,True
+433,What was the profession of Paul Strand (1890 - 1976)?,Photographer,doc_62,True,True,True
+434,In the late 60s Owen Finlay MacLaren pioneered what useful item for parents of small chldren?,Baby Buggy,doc_100,True,True,True
+435,Which drink did The Spice Girls promote?,Pepsi,doc_55,False,False,False
+436,By what name did Samuel Langhorne Clemens publish his novels under?,Mark Twain,doc_478,True,True,True
+437,The Flying Pickets were a British vocal group who had Christmas no1 hit in 1983. What was the title of the song.,Only You,doc_420,True,True,True
+438,Which British politician became Member of Parliament for Epping in October 1924?,Winston Churchill,doc_601,False,False,False
+439,Who killed Robert F Kennedy?,Sirhan Sirhan,doc_362,True,True,True
+440,"In 1969, a man was stabbed to death by a member of the Hell's Angels at a Rolling Stones concert. Where was the concert held?",Altamont,doc_441,False,False,False
+441,Who is recognised as Britain’s first Prime Minister?,Robert Walpole,doc_752,False,False,False
+442,Who had a 60s No 1 hit with This Diamond Ring?,Gary Lewis and the Playboys,doc_96,False,True,False
+443,What is the name of the large buttock and thigh muscle?,Gluteus maximus,doc_194,True,True,True
+444,"Which character has been played by Jack Lord, Cec Linder, Rik Van Nutter, Norman Burton, David Hedison, John Terry, David Hedison and Jeffrey Wright?",A) Felix Leiter,doc_416,True,True,True
+445,In which part of the human body is the limbic system?,Brain,doc_585,True,True,True
+446,"What seven letter word, beginning with the letters 'Ra' is a palindrome?",Racecar,doc_248,True,True,True
+447,What was left in Pandora's Box after all the evil escaped?,Hope,doc_484,True,True,True
+448,Throughout the 80s and 90s Phil Collins recorded on which record label?,Atlantic,doc_135,False,False,False
+449,The Strawberry Museum in the town of Wepion is in which country?,Belgium,doc_599,True,True,True
+450,"On the London Underground, which is the only line to connect at some point with every other line on the system?",The Jubilee Line,doc_219,False,False,False
+451,"Isoprene, Butyl and Nitrile are all types of which substance?",Rubber,doc_611,True,True,True
+452,What was the name of Roland Rat's gerbil friend?,Kevin,doc_285,True,True,True
+453,"In cricket, what is the score of 111 known as?",Nelson,doc_243,True,True,True
+454,Which RAF fighter-bomber was built by the Panavia partnership?,The TORNADO,doc_526,False,False,False
+455,What is the name of the steam locomotive which set the world speed record in July 1938 by reaching 126 mph on the East Coast Mainline  in England?,Mallard,doc_581,False,False,False
+456,How many times was Wyatt Earp shot?,None,doc_338,False,False,False
+457,Who wrote the 1930’s novel ‘Tender is the Night’?,F. Scott Fitzgerald,doc_696,True,True,True
+458,Who is featured on Puff Daddy's Can't Hold Me Down?,Mase,doc_69,True,True,True
+459,Maria Fitzherbert was ‘married’ to which British monarch?,George IV,doc_697,True,True,True
+460,On what date in 1969 did Neil Armstrong first set foot on the Moon?,July 20th,doc_60,False,False,False
+461,Benina international airport is in which country?,Libya,doc_72,True,True,True
+462,The flag of Libya is a plain rectangle of which color?,Green,doc_7,True,True,True
+463,Odontology is the scientific study of what?,Teeth,doc_768,True,True,True
+464,"In which arcade game, would you find ghosts called Inky, Pinky, Blinky and Clyde?",Pac-Man,doc_235,False,False,False
+465,Author J.R.R. Tolkien was born in which country?,South Africa,doc_567,True,True,True
+466,What Michelle Pfeiffer movie got a boost from the Coolio song Gangsta's Paradise?,Dangerous Minds,doc_21,True,True,True
+467,Tony Hadley was the lead singer with which 1980s new romantic band?,Spandau Ballet,doc_346,True,True,True
+468,Which city hosted the 1992 Summer Olympic Games?,Barcelona,doc_684,True,True,True
+469,In which city would you find O'Hare International Airport?,Chicago,doc_230,True,True,True
+470,Who is the last English-born player to win the men's singles title at Wimbledon?,Fred Perry,doc_253,True,True,True
+471,Sun Yat Sen overthrew the emperor in which country establishing a republic after 2000 years of imperial rule?,China,doc_123,True,True,True
+472,How many avenues radiate from the Arc de Triomphe?,12,doc_462,False,False,False
+473,Louis Smith won an individual silver medal in gymnastics at the 2012 London Olympics. For what discipline?,Pommel Horse,doc_529,True,True,True
+474,In which sitcom did Penelope Wilton play the wife of Richard Briers?,Ever Decreasing Circles,doc_448,False,False,False
+475,Which creature features on the label of a Bacardi rum bottle?,Bat,doc_629,True,True,True
+476,The Oroville Dam is in which US state?,California,doc_672,True,True,True
+477,How meny times have Liverpool won the Europion Cup?,5,doc_319,False,False,False
+478,What is the second lightest chemical element?,Helium,doc_205,True,True,True
+479,Which US singing duo started out under the names Caesar and Cleo?,Sonny and Cher,doc_627,True,True,True
+480,La Paz is the administrative capital of which South American country?,Bolivia,doc_691,True,True,True
+481,"Who won the Best Actress Oscar for the 1988 film, The Accused?",Jodie Foster,doc_433,True,True,True
+482,What was the name of the Liverpool nightclub where the Beatles regularly played?,The Cavern,doc_540,False,False,False
+483,Astrakhan is the curly hair of which young animal?,Lamb,doc_681,True,True,True
+484,"Which wife of Henry VIII had already married twice before she became queen, and married for a fourth time after Henry's death?",Catherine Parr,doc_169,False,False,False
+485,Keflavik is the main international airport of which country?,Iceland,doc_562,True,True,True
+486,What is the state capital of Florida?,Tallahassee,doc_486,True,True,True
+487,Which home of champagne in France was also where the German High Command surrendered in WWII?,Reims,doc_131,False,False,False
+488,"In La Cage Aux Folles, what was La Cage Aux Folles?",Nightclub,doc_128,True,True,True
+489,‘Think Different’ is an advertising slogan for which company?,Apple (computers),doc_545,False,True,False
+490,What had Edmond Hillary worked at before taking up mountain climbing?,Bee Keeping,doc_70,False,False,False
+491,England won the 1966 World Cup beating Germany 4-2. Hurst scored 3 of England's goals who scored the other?,Martin Peters,doc_497,False,False,False
+492,What was the name of the brothel in The Best Little Whorehouse in Texas?,Chicken Ranch,doc_87,True,True,True
+493,The Manuel M.Torres Dam is the largest hydro plant in which country?,Mexico,doc_742,True,True,True
+494,Scatology is the scientific study of what?,Excrement,doc_690,True,True,True
+495,What is the most common pub name in the UK?,The Red Lion,doc_246,False,False,False
+496,Which 70s show was based on the British show Till Death Us Do Part?,All In The Family,doc_59,True,True,True
+497,The melody for which famous song was written by sisters and school teachers Patty and Mildred Hill in Kentucky in 1893?,Happy Birthday,doc_245,True,True,True
+498,"Athos and Porthos are two of the 3 musketeers, name the other one.",Aramis,doc_314,True,True,True
+499,Name the tv series about FBI agent Don Eppes and his mathematical genius brother Charlie,Numb3rs,doc_371,True,True,True
+500,Amr Shabana from Egypt is famous for playing which sport?,Squash,doc_645,True,True,True
+501,What was Truman Capote's last name before he was adopted by his stepfather?,Persons,doc_19,True,True,True
+502,The Red Setter is more properly known by which name?,The Irish Setter.,doc_500,True,True,True
+503,Who stars in the 2008 movie Seven Pounds?,Will Smith,doc_331,True,True,True
+504,Who does Emilio Estevez play in the 1988 film ‘Young Guns’?,Billy the Kid,doc_613,False,False,False
+505,Which Lloyd Webber musical premiered in the US on 10th December 1993?,Sunset Boulevard,doc_0,False,False,False
+506,In which New York borough would you find Hell’s Kitchen?,Manhattan,doc_543,True,True,True
+507,"Which fruit did Nell Gwynn, mistress of King Charles II, sell in Drury Lane?",Oranges,doc_552,False,False,False
+508,Which crusade was led by Philip II Augustus of France and Richard I of England?,Third crusade,doc_165,True,True,True
+509,What nationality was three time Olympic gold medallist in figure skating Sonja Henie?,Norwegian,doc_382,False,False,False
+510,"Brown, American Rainbow and Cutthroat are all types of which fish?",Trout,doc_713,True,True,True
+511,What is the official language of Nicaragua?,Spanish,doc_774,True,True,True
+512,Thanatology is the scientific study of what?,Death,doc_711,True,True,True
+513,What is the US state capital of Louisiana?,Baton Rouge,doc_636,True,True,True
+514,The Ducati is manufactured in which city and what country?,"Bologna, Italy",doc_305,True,True,True
+515,"Which future Hollywood star got her break as Wonder Girl, Wonder Woman's sister Drusilla?",Debra Winger,doc_108,True,True,True
+516,What was the name of Shari Lewis' sassy sock puppet?,Lamb Chop.,doc_519,True,True,True
+517,"Of which reptile are there only two species, one living in the Mississippi and the other in China?",Alligator,doc_182,False,True,False
+518,Which patriotic Irving Berlin song includes the line  From the mountains to the prairie to the oceans white with foam ?,God Bless AMERICA.,doc_512,False,False,False
+519,Sandygate Road football and cricket stadium is in which English city?,Sheffield,doc_676,True,True,True
+520,What claimed the life of singer Kathleen Ferrier?,Cancer,doc_3,True,True,True
+521,"Sinology is the study of the language, history and culture of which country?",China,doc_723,True,True,True
+522,Who was king of France at the time of the French Revolution?,Louis XVI,doc_161,False,False,False
+523,Which company were responsible for the production of the Spitfire?,Supermarine,doc_445,True,True,True
+524,"In medicine, algology is the study of what?",Pain,doc_740,False,False,False
+525,"In humans, Duane Syndrome affects which part of the body?",Eye,doc_798,False,True,False
+526,"In the poem ‘Monday’s Child’, what is Wednesday’s child full of?",Woe,doc_760,False,False,False
+527,What colour is the liqueur ‘Parfait d’Amour’?,Purple,doc_715,True,True,True
+528,"Which US author wrote ‘The Naked and the Dead’, based on his military service in World War II?",Norman Mailer,doc_745,True,True,True
+529,In which country did the Internet start?,USA,doc_117,False,False,False
+530,Who had an 80s No 1 hit with Hold On To The Nights?,Richard Marx,doc_11,True,True,True
+531,Which French author wrote the fairy tales ‘Little Red Riding Hood’ ‘Sleeping Beauty’ and ‘Puss in Boots’?,Charles Perrault,doc_566,False,False,False
+532,Which brand of beer does Homer Simpson drink regularly?,Duff,doc_257,False,False,False
+533,How many US states are prefixed by the word New?,4,doc_541,False,False,False
+534,Who wrote the novel Rasselas in a single week in 1759 to pay for his mother's funeral?,Samuel Johnson,doc_479,True,True,True
+535,Who does the commentary in the UK tv programme ‘Come Dine With Me’?,Dave Lamb,doc_659,True,True,True
+536,Which former West Indian fast bowler was known as 'Whispering Death'?,Michael Holding,doc_390,True,True,True
+537,"Which comedy written by Johnny Speight which first aired in 1965, featured a fervent West Ham supporter?",Till Death Us Do Part,doc_394,True,True,True
+538,Who was the Georgia Peach?,Ty Cobb,doc_65,False,False,False
+539,What type of animal is a dik-dik?,Antelope,doc_610,True,True,True
+540,"In London in 1788, the ‘Daily Universal Register’ was relaunched as which newspaper?",The Times,doc_761,False,False,False
+541,"In the novel ‘Jane Eyre’ by Charlotte Bronte, what is the name of Mr Rochester’s first wife?",Bertha Mason,doc_763,False,False,False
+542,Which tennis player was known as the Rockhampton Rocket?,Rod Laver,doc_642,False,False,False
+543,Which writer and politician became Lord Tweedsmuir?,John Buchan,doc_156,True,True,True
+544,Who beat Tim Henman in his first Wimbledon singles semifinal?,Pete Sampras,doc_112,False,False,False
+545,What is Osbert Lancaster best known for producing?,Cartoons,doc_48,True,True,True
+546,"Which sports event was first held at Worcester, Massachusetts in 1927?",Ryder Cup,doc_93,False,False,False
+547,"In dentistry, what is the name given to hardened dental plaque?",TARTAR.,doc_505,False,False,False
+548,What is the second biggest city in the UK?,Birmingham,doc_521,True,True,True
+549,Where was the American venue of the Live Aid concert?,Philadelphia,doc_141,True,True,True
+550,"Henry Blake, Charles Winchester and Father Mulcahy are all characters in which US tv series?",M*A*S*H,doc_700,True,True,True
+551,"In cooking, 190 degrees Celsius is the equivalent to which Gas Mark?",5,doc_737,False,False,False
+552,Which actress left Eastenders for Hollywood only to flop as The Bionic Woman?,Michelle Ryan,doc_408,False,False,False
+553,What is the name of the iron hook which is attached to the pole used by fisherman to land a heavy fish?,Gaff,doc_597,True,True,True
+554,"Which dancer has only one notable film cameo, appearing with Sean Connery in the 1979 movie The First Great Train Robbery, breaking into a guarded station office.",Wayne Sleep,doc_438,True,True,True
+555,Which English singer/songwriter/musician wrote the Tremeloes hit ‘Here Comes My Baby’ at the age of eighteen?,Cat Stevens,doc_598,False,False,False
+556,In which year did St George die?,303,doc_269,True,True,True
+557,"In computers, the X-Y Position Indicator for a Display System is now known as what?",Cursor,doc_551,False,False,False
+558,Who wrote the plays ‘The Cocktail Party’ and ‘The Family Reunion’?,T.S.Eliot,doc_775,False,True,False
+559,How many episodes of Prisoner: Cell Block H were made?,692,doc_252,True,True,True
+560,Creme Anglaise is the French version of which English dessert item?,Custard,doc_792,True,True,True
+561,"Which film sees Clint Eastwood, Tommy Lee Jones, James Garner and Donald Sutherland as retired astronauts?",Space Cowboys,doc_271,False,False,False
+562,Truax Field international airport is in which US state?,Wisconsin,doc_146,True,True,True
+563,"Following that year's April Budget, Alderman Sir Cuthbert Ackroyd, who later became Lord Mayor of London, bought the first what on 1 November 1956?",Premium Bond,doc_469,True,True,True
+564,The fictional characters William Dobbin and Rawdon Crawley appear in which novel?,Vanity Fair,doc_658,True,True,True
+565,"How many Rings of Power were there, in total?",20,doc_405,True,True,True
+566,Which jazz saxophonist was nicknamed Bird,Charlie Parker,doc_511,False,False,False
+567,Which country was invaded by Iraq in 1990?,Kuwait,doc_671,True,True,True
+568,What is the acronym for the agency which provides co-operation between police forces worldwide?,Interpol,doc_217,False,False,False
+569,The age of the railway began in which year with the introduction of the Liverpool-Manchester line?,1830,doc_322,True,True,True
+570,"Apart from English, what is the official language of Canada?",French,doc_580,True,True,True
+571,How many pieces are there in a standard set of dominoes?,28,doc_216,True,True,True
+572,Della Street was whose secretary?,Perry Mason,doc_67,True,True,True
+573,The Canary Islands are named after what animal?,Dog,doc_274,False,True,False
+574,"How were Dr Stantz, Dr Spengler and Dr Venkman better known in the 1980's?",Ghostbusters,doc_410,True,True,True
+575,Who played Frankenstein in the 1994 film of the same name?,Kenneth Branagh,doc_323,False,False,False
+576,Which country will host the 2014 FIFA World Cup?,Brazil,doc_783,True,True,True
+577,What is the second most common word in written English?,Of,doc_234,True,True,True
+578,Who first hosted Family Feud?,Richard Dawson,doc_57,True,True,True
+579,Marilyn Monroe starred in the Seven Year Itch. Who directed it?,Billy Wilder,doc_332,False,False,False
+580,What is the only letter of the alphabet which does not appear in any of the names of the 50 American states?,Q,doc_224,False,False,False
+581,Who was the first Hanover King of England?,George I,doc_570,True,True,True
+582,The 1958 film ‘Gigi’ was based on the novel by which French author?,Colette,doc_655,True,True,True
+583,What was the surname of the woman who was the inspiration behind the Rolling Stones song Angie?,Bowie,doc_276,False,False,False
+584,"In the run up to the 1997 election, Tony Blair outlined his parties' three priorities for office, can you name them?","Education, Education, Education",doc_388,False,True,False
+585,Which queen consort of England is associated with Hever Castle in Kent?,Anne Boleyn,doc_473,True,True,True
+586,"In which battle did Harold II, the last Saxon king, lose his life?",Battle of Hastings,doc_167,True,True,True
+587,‘The King of Barataria’ is the subtitle of which Gilbert and Sullivan operetta?,The Gondoliers,doc_794,True,True,True
+588,The rowan tree is also known as the Mountain ‘what’?,Ash,doc_546,True,True,True
+589,What was the nickname of the French singer Edith Piaf?,The Little Sparrow,doc_175,False,False,False
+590,The Transandine Railway runs between which two South American countries?,Chile and Argentina,doc_722,True,True,True
+591,"What disease was Robert the Bruce, King of Scotland, said to have died of in 1329?",Leprosy,doc_623,False,False,False
+592,Beloved in 1999 was whose first movie since The Color Purple in 1985?,Oprah Winfrey,doc_73,True,True,True
+593,Which national team beat Hungary 4-2 to win the 1938 FIFA World Cup?,Italy,doc_663,True,True,True
+594,Who wrote the poem ‘The Lady of the Lake’?,Sir Walter Scott,doc_699,True,True,True
+595,"According to the film Gremlins, if you are looking after a Gremlin you should not feed him after midnight, not get him wet and not expose him to what?",Bright Light,doc_273,False,False,False
+596,"Which British monarch founded the Yeomen of the Guard, originally as a royal bodyguard?",Henry VII,doc_686,False,False,False
+597,What is the most popular natural attraction in Alaska?,Mount McKinley,doc_214,False,False,False
+598,Who killed Jean Paul Marat?,Charlotte Corday,doc_363,True,True,True
+599,Which part of the human body produces insulin?,The pancreas,doc_379,True,True,True
+600,In which Netherlands city does the United Nations International Court of Justice sit?,The Hague,doc_166,True,True,True
+601,Who is the patron saint of lost causes?,St Jude,doc_373,False,True,False
+602,The Free Officers Movement was composed of young junior army officers committed to unseating the monarchy of which African country?,Egypt,doc_650,True,True,True
+603,"The Dakar Rally (previously known as the Paris Dakar rally) is an annual event, but of which country is Dakar the capital city?",Senegal,doc_464,True,True,True
+604,The 1965 film ‘The Heroes of Telemark’ is set in which European country?,Norway,doc_796,True,True,True
+605,"In the human body, which bone connects the humerus with the calvicle?",Scapula (shoulder blade),doc_753,True,True,True
+606,Who won baseball's first World Series of the 80s?,Philadelphia Phillies,doc_103,False,False,False
+607,The song ‘Seventy Six Trombones’ is from which musical show?,The Music Man,doc_779,True,True,True
+608,Nigel Hawthorne was Oscar nominated for The Madness of which King?,George,doc_81,True,True,True
+609,Who composed the musical theme for the Pink Panther?,Henry Mancini,doc_296,True,True,True
+610,"In which 1993 film does a boy called Jonah write to a woman called Annie, asking her to meet his father at the Empire State building on St. Valentine's Day?",Sleepless In Seattle,doc_233,False,False,False
+611,How many hundredweight are in a UK ton?,20,doc_677,True,True,True
+612,Richard Daley was mayor of which city for 21 years?,Chicago,doc_46,True,True,True
+613,In which American state is the Isabella Stewart Gardner Museum?,Massachusetts,doc_71,True,True,True
+614,Who is the lead singer of the English band ‘The Specials’?,Terry Hall,doc_721,True,True,True
+615,Which hormone helps control ovulation?,Luteinizing hormone,doc_196,False,False,False
+616,How many medals did the United States win at the 2010 Winter Olympics?,37,doc_591,True,True,True
+617,What is the name of CS Lewis' 7 book fantasy?,The Chronicles of Narnia,doc_370,True,True,True
+618,Who wrote the 1963 novel ‘The Spy Who Came in From the Cold’?,John Le Carre,doc_633,False,True,False
+619,The ports of Puck and Jastarnia are in which European country?,Poland,doc_643,True,True,True
+620,"Fruit, cricket and horseshoe are varieties of what type of animal?",Bat,doc_300,False,False,False
+621,What was the middle name of US actor James Dean?,Byron,doc_565,True,True,True
+622,In which sci fi classic did the space ship Nostromo first appear?,Alien,doc_80,False,True,False
+623,"Following success at the 1979 election whose party conference speeech included the lines 'you turn if you want to, the lady's not for turning'?",Margaret Thatcher,doc_387,True,True,True
+624,Which of the founders of United Artists had the last name nearest the beginning of the alphabet?,Chaplin,doc_127,True,True,True
+625,What is the capital of Indonesia?,Jakarta,doc_549,True,True,True
+626,"Produced between 1970 and 1974, what is a Bond Bug?",Car,doc_470,True,True,True
+627,River Phoenix died during the making of which movie?,Dark Blood,doc_44,True,True,True
+628,Who is the Vice-President for George W Bush?,Dick Cheyney,doc_270,False,False,False
+629,‘Lofsongur’ is the national anthem of which country?,Iceland,doc_618,True,True,True
+630,Ecuador has a border with Peru and which other country ?,Colombia,doc_352,True,True,True
+631,Who is Arthur Wellesley better known as?,Duke of Wellington,doc_367,True,True,True
+632,Who succeeded Brezhnev as Soviet premier?,Andropov,doc_99,True,True,True
+633,Which snooker player was simply known as 'The Grinder'?,Cliff Thorburn,doc_389,True,True,True
+634,How old was Woody Herman when he founded his own orchestra?,13,doc_94,False,False,False
+635,"Raclette, Tilsit and Sbrinz are all types of which foodstuff?",Cheese,doc_790,True,True,True
+636,"In Harry Potter And The Goblet Of Fire, which dragon did Harry have to defeat?",Hungarian Horntail,doc_344,False,False,False
+637,Who wrote The Importance Of Being Earnest?,Oscar Wilde,doc_220,True,True,True
+638,What is the name of the mountain pass which lies between Pakistan and Afghanistan?,Khyber pass,doc_159,True,True,True
+639,Who wrote the novel ‘The Prime of Miss Jean Brodie’?,Muriel Spark,doc_765,True,True,True
+640,Who was the seventh president of the United States?,Andrew Jackson,doc_348,True,True,True
+641,What is the International Vehicle Registration for Cambodia?,K,doc_784,False,False,False
+642,Who designed St Paul’s Cathedral in London?,Christopher Wren,doc_714,True,True,True
+643,"What is the name of the cathedral in Red Square, Moscow?",St. Basil's,doc_163,True,True,True
+644,Which volcano in Tanzania is the highest mountain in Africa?,Kilimanjaro,doc_6,True,True,True
+645,"Which team beat American Samoa 31-0 in a qualifying match for the 2002 World Cup, but still failed to qualify?",Australia,doc_284,True,True,True
+646,Which famous jewellers makes the Super Bowl Trophy?,Tiffany & Co.,doc_603,True,True,True
+647,"Who was the leader of the gang whose members included Benny the Ball ,Brain and Choo Choo?",Top Cat.,doc_459,True,True,True
+648,What was the Spice Girls' debut single called?,Wannabee,doc_225,False,True,False
+649,Which sea lies between Italy and the former Yugoslavia?,Adriatic,doc_429,False,False,False
+650,The Hel Peninsula is part of which European country?,Poland,doc_787,True,True,True
+651,The UEFA (Union of European Football Associations) was founded in which European country in 1954?,Switzerland,doc_718,True,True,True
+652,The Euro is divided into how many cents?,100,doc_665,True,True,True
+653,Mr and Mrs Potato Head appear in which film franchise?,Toy Story,doc_733,True,True,True
+654,Which force is nothing more than the bending of space and time?,Gravitational force,doc_203,False,False,False
+655,Which bodily fluid is collected in a lachrymatory?,Tears,doc_574,True,True,True
+656,In which sport could the Pacers take on the Pistons?,A: Basketball,doc_27,True,True,True
+657,Wanlockhead is the highest village in which European country?,Scotland,doc_616,True,True,True
+658,The King of Wishful Thinking was a hit song used during the opening credits of the movie Pretty Woman. Who sang it?,Go West,doc_517,True,True,True
+659,"Which ITV magazine style show ran from 1968 to 1980 and featured presenters including Jenny Hanley, Mick Robertson and Tommy Boyd?",Magpie,doc_238,True,True,True
+660,What is the most populated city in America?,New York,doc_223,False,False,False
+661,For which movie did Katharine Hepburn win her second Oscar?,Guess Who's Coming To Dinner,doc_95,True,True,True
+662,What was Walter Matthau's first movie?,The Kentuckian,doc_30,True,True,True
+663,"In Greek mythology, who were Arges, Brontes and Steropes?",Cyclopes,doc_32,False,False,False
+664,How is Frances Gumm the actress better known?,Judy Garland,doc_432,True,True,True
+665,"Bedloe’s Island in New York Harbour, is the former name of which island?",Liberty Island,doc_604,True,True,True
+666,What relation is Joey Richardson to Vanessa Redgrave?,Daughter,doc_89,True,True,True
+667,"British MP, Diane Abbott, learned to play which musical instrument in the tv series ‘Play It Again’?",Piano,doc_558,False,False,False
+668,Who always holds the title of the Supreme Governor of the Church of England?,The British monarch,doc_758,True,True,True
+669,"In the game of Bingo, ‘Get up and run’ represents which number?",31,doc_692,True,True,True
+670,What was Pete Sampras seeded when he won his first US Open?,12,doc_104,True,True,True
+671,The Cuatro Torres Business Area is in which European city?,Madrid,doc_754,True,True,True
+672,"In WWII, who was the head of the Nazi party's security service?",Reinhard Heidrich,doc_142,False,False,False
+673,For what novel did J. K. Rowling win the 1999 Whitbread Children's book of the year award?,Harry Potter and the Prisoner of Azkaban,doc_228,False,False,False
+674,Who had a top ten hit in the UK with Cupid in 1961?,Sam Cooke,doc_250,True,True,True
+675,What nationality was the painter Vincent Van Gogh?,Dutch,doc_281,False,False,False
+676,How many players are on the field in a baseball team?,Nine,doc_759,True,True,True
+677,In the 80s who wrote the novel Empire of The Sun?,J. G. Ballard,doc_25,False,False,False
+678,Which grand slam did Pete Sampras not win in the 20th century?,French,doc_114,True,True,True
+679,Hans Holbein the Younger was court painter to which English monarch?,Henry VIII,doc_654,True,True,True

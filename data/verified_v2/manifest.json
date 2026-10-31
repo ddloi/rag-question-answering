@@ -1,0 +1,48 @@
+{
+  "dataset_version": "verified_v2",
+  "created_at": "2026-10-31T09:59:37.283399+00:00",
+  "source_dataset": "mandarjoshi/trivia_qa",
+  "source_config": "rc.wikipedia",
+  "source_split": "validation",
+  "source_revision": "0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+  "policy": "Create a frozen evidence-repaired corpus alongside the original, never drop QA rows.\n\nOfficial TriviaQA aliases and complete evidence pages are recovered at a pinned\nrevision. If no alias occurs in the original excerpt, use the complete original\npage, or the first supplied evidence page containing an official alias. This is\nan explicitly answer-informed construction of a controlled corpus, not a\nfull-Wikipedia retrieval benchmark. No hyperparameters are tuned on test scores.\n",
+  "chunk_size": 200,
+  "overlap": 40,
+  "counts": {
+    "documents": 800,
+    "chunks": 12556,
+    "test": 120,
+    "test_with_gold_alias_in_source": 120
+  },
+  "repair_policies": {
+    "full_original_page": 204,
+    "original_excerpt": 573,
+    "alternate_official_evidence_page": 10,
+    "unresolved_in_official_pages": 12,
+    "original_excerpt_unit_boundary_verified": 1
+  },
+  "question_overlap_train_test": 0,
+  "checkpoint_note": "Existing checkpoint trained on ORIGINAL training_pairs; no retraining or test-label training.",
+  "input_sha256": {
+    "raw_documents.json": "c0e062de383168828fca555ad34e243798607d46fdb64bff8114e4378c960e48",
+    "provenance\\triviaqa_official.jsonl": "327dd1420ed306d59f738613a5eb8dab8234f4c492bde9ff9993ccfa023a426d",
+    "test_qa.jsonl": "af35eca1a10911f08743c3b8ace950dc4b33c08a0605ac5f8c6fb261c2bd6e69",
+    "training_pairs.jsonl": "9d4fd790429d238d27d280d78ac1ccfd3d6214685599fd457399c5c3a76cd4ec"
+  },
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dimension": 384,
+  "output_sha256": {
+    "chunk_metadata.jsonl": "4633ce9b542bffc4566957e2fb2177c2dae11c9f1cdac3b91a8ead626f1ebc23",
+    "corpus_chunks.jsonl": "4633ce9b542bffc4566957e2fb2177c2dae11c9f1cdac3b91a8ead626f1ebc23",
+    "faiss.index": "e871fa214862ad62e3cc59448063a17a227af459685ac73c8e55d1f869ab6799",
+    "raw_documents.json": "a5692e32f1f0048e007c6ce2b1b6926f98eb15cd22b8526f67a5188af6688c98",
+    "source_audit.jsonl": "0119949ff442e93a3f8830c5aa109aa9eabc84fd089ef214f7e40189de26bd94",
+    "test_qa.jsonl": "6df0c3626242fc533eda0d3737d6d19026232ee09ed3a708584a591d066a017f"
+  },
+  "verification_note": "Evidence regex uses word boundaries, including numeric answers adjacent to degree/unit symbols. Reclassification changes audit flags only; index/corpus unchanged.",
+  "builder_sha256": {
+    "experiments\\verify_dataset.py": "30f8cd9ed7db8f435b534b0654d7cad3e621cf8432c715e4fa4926bf9cce2010",
+    "experiments\\metrics.py": "7117c934d62074c0caa090b9ac24fcf28a12a4ebb1963dcf2b18fa35a4857476",
+    "experiments\\prepare_chunks.py": "a548ceb4f864e562c95396e9da53588c13dcd4869be3c2a63e2bad522596e7b6"
+  }
+}

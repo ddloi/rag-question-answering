@@ -1,215 +1,164 @@
-"""
-BƯỚC 7: Evaluation
----------------------
-- Recall@k của retrieval (đo riêng, không phụ thuộc generation)
-- EM (Exact Match) và F1 cho câu trả lời cuối cùng
-- Phân rã lỗi: lỗi do retrieval sai hay generation sai
-"""
-
-import sys
+"""Reproducible three-arm QA evaluation with per-question evidence and measured retrieval."""
+import argparse
+import csv
+import importlib.metadata
 import json
-import re
-import string
+import platform
+import random
+import subprocess
+import time
 from collections import Counter
-from ragqa.paths import DATA_DIR
-from .rag_pipeline import RAGSystem
+from datetime import datetime, timezone
+from pathlib import Path
 
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-if hasattr(sys.stderr, "reconfigure"):
-    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-
-
-
-# ---------------- Các hàm chuẩn hoá & tính điểm (theo chuẩn SQuAD) ----------------
-def normalize_answer(s: str) -> str:
-    s = s.lower()
-    s = "".join(ch for ch in s if ch not in string.punctuation)
-    s = re.sub(r"\b(a|an|the)\b", " ", s)
-    s = " ".join(s.split())
-    return s
+from ragqa.paths import DATA_DIR, MODEL_DIR, PROJECT_ROOT, RESULTS_DIR, resolve_project_path
+from .metrics import (answers_for, classify_error, contains_answer, exact_match_score,
+                      f1_score, normalize_answer, score_answer, select_answer_policy, token_support_fraction)
+from .verify_dataset import digest, read_jsonl
 
 
-def exact_match_score(prediction: str, ground_truth: str) -> int:
-    return int(normalize_answer(prediction) == normalize_answer(ground_truth))
+def faithfulness_score(prediction, context):
+    """Compatibility name: lexical token overlap only, not semantic faithfulness."""
+    return token_support_fraction(prediction, context)
 
 
-def f1_score(prediction: str, ground_truth: str) -> float:
-    pred_tokens = normalize_answer(prediction).split()
-    gt_tokens = normalize_answer(ground_truth).split()
-    if len(pred_tokens) == 0 or len(gt_tokens) == 0:
-        return float(pred_tokens == gt_tokens)
-    common = Counter(pred_tokens) & Counter(gt_tokens)
-    num_same = sum(common.values())
-    if num_same == 0:
-        return 0.0
-    precision = num_same / len(pred_tokens)
-    recall = num_same / len(gt_tokens)
-    return 2 * precision * recall / (precision + recall)
+def citation_correctness_score(gold_answer, gold_doc_id, retrieved_passages):
+    """Compatibility: source/evidence proxies, not entailment or citation precision."""
+    return {"doc_match": int(any(p['doc_id'] == gold_doc_id for p in retrieved_passages)),
+            "evidence_match": int(any(contains_answer(p['text'], [gold_answer]) for p in retrieved_passages))}
 
 
-# ---------------- Đánh giá Faithfulness & Citation Correctness ----------------
-def faithfulness_score(prediction: str, context: str) -> float:
-    """
-    Đo độ trung thực (Faithfulness / Context Grounding):
-    Tỷ lệ token trong câu trả lời xuất hiện trong đoạn context bằng chứng.
-    Tránh hiện tượng ảo giác (hallucination) của generator.
-    """
-    pred_tokens = normalize_answer(prediction).split()
-    if not pred_tokens:
-        return 0.0
-    ctx_norm = normalize_answer(context)
-    ctx_token_set = set(ctx_norm.split())
-    supported_tokens = sum(1 for tok in pred_tokens if tok in ctx_token_set)
-    return supported_tokens / len(pred_tokens)
+def retrieve_all(rag, bm25, question, pool=30):
+    import numpy as np
+    dense = rag.retrieve(question, pool)
+    scores = bm25.get_scores(question.lower().split())
+    sparse_ids = [int(i) for i in np.argsort(-scores, kind='stable') if scores[i] > 0][:pool]
+    sparse = [{**rag.metadata[i], 'score': float(scores[i])} for i in sparse_ids]
+    index_by_chunk = {p['chunk_id']: i for i,p in enumerate(rag.metadata)}
+    dense_ids = [index_by_chunk[p['chunk_id']] for p in dense]
+    fusion = {}
+    for ranked in [sparse_ids, dense_ids]:
+        for rank, i in enumerate(ranked, 1): fusion[i] = fusion.get(i, 0.) + 1 / (60 + rank)
+    hybrid = [{**rag.metadata[i], 'score': float(score)} for i,score in sorted(fusion.items(), key=lambda pair:(-pair[1], pair[0]))[:pool]]
+    return {'dense':dense, 'bm25':sparse, 'hybrid_rrf':hybrid}
 
 
-def citation_correctness_score(gold_answer: str, gold_doc_id: str, retrieved_passages: list) -> dict:
-    """
-    Đo độ chính xác của trích dẫn (Citation Correctness):
-    - doc_match: Liệu tài liệu nguồn chuẩn (gold_doc_id) có nằm trong danh sách trích dẫn không.
-    - evidence_match: Liệu có passage nào chứa trực tiếp chuỗi đáp án chuẩn (gold_answer) không.
-    """
-    doc_match = int(any(p.get("doc_id") == gold_doc_id for p in retrieved_passages))
-    norm_gold = normalize_answer(gold_answer)
-    evidence_match = 0
-    if norm_gold:
-        for p in retrieved_passages:
-            if norm_gold in normalize_answer(p.get("text", "")):
-                evidence_match = 1
-                break
-    return {"doc_match": doc_match, "evidence_match": evidence_match}
+def retrieval_summary(rows, k_values=(3,5,10)):
+    output={}
+    for method in ['dense','bm25','hybrid_rrf']:
+        scores={}
+        for k in k_values:
+            scores[f'doc_recall@{k}']=sum(any(p['doc_id']==r['gold_doc_id'] for p in r['retrieval'][method][:k]) for r in rows)/len(rows)
+            scores[f'answer_alias_recall@{k}']=sum(any(contains_answer(p['text'],r['answer_aliases']) for p in r['retrieval'][method][:k]) for r in rows)/len(rows)
+        scores['doc_mrr@30']=sum(next((1/(i+1) for i,p in enumerate(r['retrieval'][method]) if p['doc_id']==r['gold_doc_id']),0.) for r in rows)/len(rows)
+        output[method]=scores
+    return output
 
 
-# ---------------- Đánh giá Recall@k của retrieval ----------------
-def evaluate_retrieval(rag: RAGSystem, qa_records: list, k: int = 5) -> float:
-    hits = 0
-    for rec in qa_records:
-        retrieved = rag.retrieve(rec["question"], top_k=k)
-        retrieved_doc_ids = {r["doc_id"] for r in retrieved}
-        if rec["gold_doc_id"] in retrieved_doc_ids:
-            hits += 1
-    return hits / len(qa_records)
+def evaluate_end_to_end(rag, qa_records, writer=None, top_k=5):
+    from rank_bm25 import BM25Okapi
+    bm25=BM25Okapi([p['text'].lower().split() for p in rag.metadata],k1=1.5,b=.75)
+    rows=[]
+    corpus_normalized=[' '+normalize_answer(p['text'])+' ' for p in rag.metadata]
+    for i,record in enumerate(qa_records):
+        aliases=answers_for(record)
+        corpus_support=any(' '+normalize_answer(a)+' ' in text for a in aliases if normalize_answer(a) for text in corpus_normalized)
+        started=time.perf_counter()
+        retrieval=retrieve_all(rag,bm25,record['question'])
+        dense=retrieval['dense'][:top_k]
+        rag_result=rag.generate_with_evidence(record['question'],dense)
+        extractive=rag.answer_retrieval_only(record['question'],dense)
+        generator_only=rag.answer_generator_only(record['question'])
+        systems={}
+        for name,result in [('rag_full',rag_result),('retrieval_only',extractive),('generator_only',{'answer':generator_only,'context_used':'','used_passages':[]})]:
+            systems[name]={**result, **score_answer(result['answer'],record)}
+            if name!='generator_only':
+                systems[name]['token_support_fraction']=token_support_fraction(result['answer'],result['context_used'])
+                systems[name]['used_context_has_gold_alias']=contains_answer(result['context_used'],aliases)
+                systems[name]['source_doc_hit_in_used_passages']=any(p['doc_id']==record['gold_doc_id'] for p in result['used_passages'])
+        row={'id':i,'question':record['question'],'answer':record['answer'],'answer_aliases':aliases,
+             'gold_doc_id':record['gold_doc_id'],'corpus_has_answer_alias':corpus_support,
+             'retrieval':retrieval,'systems':systems,
+             'error_category':classify_error(rag_result['answer'],record,dense,rag_result['context_used'],corpus_support),
+             'latency_ms':round((time.perf_counter()-started)*1000,2)}
+        rows.append(row)
+        if writer:
+            writer.write(json.dumps(row,ensure_ascii=False)+'\n'); writer.flush()
+        print(f"[{i+1}/{len(qa_records)}] RAG EM={systems['rag_full']['em']} category={row['error_category']}",flush=True)
+    metrics={name:{metric:sum(r['systems'][name][metric] for r in rows)/len(rows) for metric in ['em','f1']} for name in ['generator_only','retrieval_only','rag_full']}
+    proxies={name:{metric:sum(r['systems'][name][metric] for r in rows)/len(rows) for metric in ['token_support_fraction','used_context_has_gold_alias','source_doc_hit_in_used_passages']} for name in ['retrieval_only','rag_full']}
+    return rows,{'n':len(rows),'qa':metrics,'retrieval':retrieval_summary(rows),'evidence_proxies':proxies,'error_breakdown':dict(Counter(r['error_category'] for r in rows))}
 
 
-# ---------------- Đánh giá EM/F1 cho từng hệ thống + phân rã lỗi ----------------
-def evaluate_end_to_end(rag: RAGSystem, qa_records: list):
-    results = {"rag_full": [], "retrieval_only": [], "generator_only": []}
-    error_breakdown = {"retrieval_fail": 0, "generation_fail": 0, "correct": 0}
-    faithfulness_scores = {"rag_full": [], "retrieval_only": []}
-    citation_doc_scores = []
-    citation_evidence_scores = []
-
-    for rec in qa_records:
-        question, gold_answer, gold_doc = rec["question"], rec["answer"], rec["gold_doc_id"]
-
-        # Hệ RAG đầy đủ
-        rag_result = rag.answer_rag_full(question)
-        rag_pred = rag_result["answer"]
-        em = exact_match_score(rag_pred, gold_answer)
-        f1 = f1_score(rag_pred, gold_answer)
-        results["rag_full"].append({"em": em, "f1": f1})
-
-        # Context được dùng để sinh (top-2 passages)
-        used_context = " ".join([r["text"] for r in rag_result["retrieved"][:2]])
-        faithfulness_scores["rag_full"].append(faithfulness_score(rag_pred, used_context))
-
-        # Citation correctness: kiểm tra trích dẫn cả cấp doc và cấp evidence
-        cit_eval = citation_correctness_score(gold_answer, gold_doc, rag_result["retrieved"])
-        citation_doc_scores.append(cit_eval["doc_match"])
-        citation_evidence_scores.append(cit_eval["evidence_match"])
-
-        # Phân rã lỗi: retrieval có tìm đúng doc không?
-        retrieved_doc_ids = {r["doc_id"] for r in rag_result["retrieved"]}
-        retrieval_ok = gold_doc in retrieved_doc_ids
-
-        if em == 1:
-            error_breakdown["correct"] += 1
-        elif not retrieval_ok:
-            error_breakdown["retrieval_fail"] += 1
-        else:
-            # retrieval đúng nhưng câu trả lời vẫn sai -> lỗi ở generation
-            error_breakdown["generation_fail"] += 1
-
-        # Hệ retrieval-only
-        ro_result = rag.answer_retrieval_only(question)
-        ro_pred = ro_result["answer"]
-        results["retrieval_only"].append({
-            "em": exact_match_score(ro_pred, gold_answer),
-            "f1": f1_score(ro_pred, gold_answer),
-        })
-        ro_context = " ".join([r["text"] for r in ro_result["retrieved"][:3]])
-        faithfulness_scores["retrieval_only"].append(faithfulness_score(ro_pred, ro_context))
-
-        # Hệ generator-only
-        go_answer = rag.answer_generator_only(question)
-        results["generator_only"].append({
-            "em": exact_match_score(go_answer, gold_answer),
-            "f1": f1_score(go_answer, gold_answer),
-        })
-
-    metrics_extra = {
-        "faithfulness": {
-            k: sum(v) / len(v) if v else 0.0 for k, v in faithfulness_scores.items()
-        },
-        "citation_doc_accuracy": (
-            sum(citation_doc_scores) / len(citation_doc_scores)
-            if citation_doc_scores else 0.0
-        ),
-        "citation_evidence_accuracy": (
-            sum(citation_evidence_scores) / len(citation_evidence_scores)
-            if citation_evidence_scores else 0.0
-        ),
-    }
-
-    return results, error_breakdown, metrics_extra
-
-
-def summarize(results: dict, error_breakdown: dict, metrics_extra: dict, n: int):
-    print("\n=== KẾT QUẢ EM / F1 THEO TỪNG HỆ THỐNG ===")
-    for system_name, records in results.items():
-        avg_em = sum(r["em"] for r in records) / n
-        avg_f1 = sum(r["f1"] for r in records) / n
-        print(f"{system_name:20s}  EM={avg_em:.3f}  F1={avg_f1:.3f}")
-
-    print("\n=== ĐỘ TRUNG THỰC & TRÍCH DẪN (FAITHFULNESS & CITATION) ===")
-    for sys_name, score in metrics_extra["faithfulness"].items():
-        print(f"Faithfulness ({sys_name:15s}): {score:.3f}")
-    print(f"Citation Accuracy (Document-level):  {metrics_extra['citation_doc_accuracy']:.3f}")
-    print(f"Citation Precision (Evidence-level): {metrics_extra['citation_evidence_accuracy']:.3f}")
-
-    print("\n=== PHÂN RÃ LỖI (RAG đầy đủ) ===")
-    total = sum(error_breakdown.values())
-    for k, v in error_breakdown.items():
-        print(f"{k:20s}: {v}/{total} ({v/total*100:.1f}%)")
+def export_review(rows,path,seed=42,size=20):
+    """Freeze sample selection independently of scores; leave judgments blank."""
+    selected=sorted(random.Random(seed).sample(range(len(rows)),min(size,len(rows))))
+    fields=['id','question','prediction','gold_answer','used_context','used_doc_ids','faithfulness_label','citation_label','rationale','reviewer_kind']
+    with path.open('w',encoding='utf-8-sig',newline='') as f:
+        writer=csv.DictWriter(f,fieldnames=fields); writer.writeheader()
+        for i in selected:
+            r=rows[i]; arm=r['systems']['rag_full']
+            writer.writerow({'id':r['id'],'question':r['question'],'prediction':arm['answer'],'gold_answer':r['answer'],
+                             'used_context':arm['context_used'],'used_doc_ids':';'.join(p['doc_id'] for p in arm['used_passages'])})
 
 
 def main():
-    import argparse
-    parser = argparse.ArgumentParser(description="Evaluate RAG Pipeline (Đề tài 20)")
-    parser.add_argument("--samples", type=int, default=None, help="Số lượng mẫu test để đánh giá nhanh (mặc định: toàn bộ)")
-    parser.add_argument("--k", type=int, default=5, help="Top-k cho Recall@k (mặc định: 5)")
-    args = parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--data-dir',type=Path,default=DATA_DIR/'verified_v2')
+    parser.add_argument('--samples',type=int)
+    parser.add_argument('--k',type=int,default=5)
+    parser.add_argument('--seed',type=int,default=42)
+    parser.add_argument('--answer-policy', choices=('canonical', 'official-aliases'), default='canonical',
+                        help='canonical is conservative; official aliases require human review')
+    parser.add_argument('--run-dir',type=Path)
+    args=parser.parse_args()
+    if args.samples is not None and args.samples<1: parser.error('--samples must be positive')
+    if args.k<1 or args.k>30: parser.error('--k must be from 1 to 30')
+    data_dir=resolve_project_path(args.data_dir)
+    records=read_jsonl(data_dir/'test_qa.jsonl')
+    records = [select_answer_policy(record, args.answer_policy) for record in records]
+    if args.samples: records=records[:args.samples]
+    if not records: parser.error('Empty test split')
+    run_dir=resolve_project_path(args.run_dir) if args.run_dir else RESULTS_DIR/('evaluation_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
+    run_dir.mkdir(parents=True,exist_ok=False)
+    import torch
+    from transformers import set_seed
+    set_seed(args.seed)
+    from .rag_pipeline import RAGSystem, GENERATION_OPTIONS
+    try:
+        dataset_location = data_dir.relative_to(PROJECT_ROOT).as_posix()
+    except ValueError:
+        dataset_location = '<external dataset>'
+    def artifact_label(path):
+        try:
+            return path.relative_to(PROJECT_ROOT).as_posix()
+        except ValueError:
+            return '<external dataset>/' + path.name
+    metadata={'status':'running','created_at':datetime.now(timezone.utc).isoformat(),'seed':args.seed,'data_dir':dataset_location,
+              'samples':len(records),'top_k':args.k,'answer_policy':args.answer_policy,'generation':GENERATION_OPTIONS,'context_top_n':2,'max_input_tokens':512,
+              'neural_relevance_gate':False,'generator_only':'same fine-tuned checkpoint, context removed; not separately trained closed-book',
+              'citation_note':'Used passages are evidence candidates, not generated inline citations. Proxies are NOT semantic faithfulness.',
+              'manual_review':'sample seed 42, 20 rows selected before review; judgments are separate',
+              'python':platform.python_version(),'packages':{n:importlib.metadata.version(n) for n in ['torch','transformers','sentence-transformers','faiss-cpu','rank-bm25']},
+              'git_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=PROJECT_ROOT,text=True).strip(),
+              'git_dirty':bool(subprocess.check_output(['git','status','--porcelain'],cwd=PROJECT_ROOT,text=True).strip()),
+              'sha256':{artifact_label(p):digest(p) for p in [data_dir/'test_qa.jsonl',data_dir/'chunk_metadata.jsonl',data_dir/'faiss.index',MODEL_DIR/'model.safetensors',DATA_DIR/'training_pairs.jsonl',PROJECT_ROOT/'experiments/rag_pipeline.py',PROJECT_ROOT/'experiments/evaluate.py',PROJECT_ROOT/'experiments/metrics.py',PROJECT_ROOT/'ragqa/rag_engine.py']}}
+    def save_manifest(): (run_dir/'manifest.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2),encoding='utf-8')
+    save_manifest()
+    try:
+        rag=RAGSystem(data_dir=data_dir,top_k=args.k)
+        metadata['device']=rag.device_name
+        with (run_dir/'predictions.jsonl').open('w',encoding='utf-8') as writer:
+            rows,summary=evaluate_end_to_end(rag,records,writer,args.k)
+        (run_dir/'metrics.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+        export_review(rows,run_dir/'review_sample.csv')
+        metadata['status']='complete'; metadata['finished_at']=datetime.now(timezone.utc).isoformat()
+        print(json.dumps(summary,ensure_ascii=False,indent=2),flush=True)
+        print('Saved:',run_dir,flush=True)
+    except Exception as exc:
+        metadata['status']='failed'; metadata['error']=str(exc)
+        raise
+    finally: save_manifest()
 
-    rag = RAGSystem()
 
-    qa_records = []
-    with open(DATA_DIR / "test_qa.jsonl", "r", encoding="utf-8") as f:
-        for line in f:
-            qa_records.append(json.loads(line))
-
-    if args.samples and args.samples < len(qa_records):
-        print(f"Đang chạy đánh giá trên tập mẫu {args.samples}/{len(qa_records)} câu...")
-        qa_records = qa_records[:args.samples]
-    else:
-        print(f"Đang chạy đánh giá trên toàn bộ {len(qa_records)} câu test...")
-
-    recall_at_k = evaluate_retrieval(rag, qa_records, k=args.k)
-    print(f"Recall@{args.k} (retrieval): {recall_at_k:.3f}")
-
-    results, error_breakdown, metrics_extra = evaluate_end_to_end(rag, qa_records)
-    summarize(results, error_breakdown, metrics_extra, len(qa_records))
-
-
-if __name__ == "__main__":
-    main()
+if __name__=='__main__': main()

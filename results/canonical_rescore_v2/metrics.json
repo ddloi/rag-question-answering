@@ -1,0 +1,55 @@
+{
+  "n": 120,
+  "answer_policy": "canonical_only",
+  "note": "Conservative exact canonical reference; may mark valid variants or spelling corrections incorrect.",
+  "qa": {
+    "generator_only": {
+      "em": 0.008333333333333333,
+      "f1": 0.019305555555555555
+    },
+    "retrieval_only": {
+      "em": 0.26666666666666666,
+      "f1": 0.3667135642135642
+    },
+    "rag_full": {
+      "em": 0.3416666666666667,
+      "f1": 0.39761363636363634
+    }
+  },
+  "retrieval": {
+    "dense": {
+      "doc_recall@3": 0.9083333333333333,
+      "doc_recall@5": 0.925,
+      "doc_recall@10": 0.975,
+      "doc_mrr@30": 0.8736592765125374,
+      "canonical_answer_recall@3": 0.7166666666666667,
+      "canonical_answer_recall@5": 0.75,
+      "canonical_answer_recall@10": 0.8083333333333333
+    },
+    "bm25": {
+      "doc_recall@3": 0.7333333333333333,
+      "doc_recall@5": 0.775,
+      "doc_recall@10": 0.8666666666666667,
+      "doc_mrr@30": 0.6705120573870574,
+      "canonical_answer_recall@3": 0.5083333333333333,
+      "canonical_answer_recall@5": 0.5333333333333333,
+      "canonical_answer_recall@10": 0.6583333333333333
+    },
+    "hybrid_rrf": {
+      "doc_recall@3": 0.875,
+      "doc_recall@5": 0.925,
+      "doc_recall@10": 0.975,
+      "doc_mrr@30": 0.8327012108262107,
+      "canonical_answer_recall@3": 0.6416666666666667,
+      "canonical_answer_recall@5": 0.725,
+      "canonical_answer_recall@10": 0.7916666666666666
+    }
+  },
+  "error_breakdown": {
+    "retrieval_evidence_missing": 21,
+    "generation_wrong_with_lexical_evidence": 35,
+    "corpus_evidence_missing": 8,
+    "correct": 41,
+    "context_selection_or_truncation": 15
+  }
+}

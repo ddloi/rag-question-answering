@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-10-31T10:35:05.921815+00:00",
+  "source_run": "evaluation_v2_full",
+  "prediction_sha256": "d9fc229048239b1c3658302ebea450e7cf252b79ab9fb6852fea9e9513365f40",
+  "test_sha256": "6df0c3626242fc533eda0d3737d6d19026232ee09ed3a708584a591d066a017f",
+  "corpus_sha256": "4633ce9b542bffc4566957e2fb2177c2dae11c9f1cdac3b91a8ead626f1ebc23",
+  "answers": "canonical_only",
+  "model_inference": "not rerun; scores derived from saved predictions",
+  "n": 120,
+  "candidate_aliases_to_review": 1626,
+  "scoring_code_sha256": {
+    "scripts/rescore_canonical.py": "ff11c9084b7b22f6554751de393b4df15fddd8afd92cfafdca059f47cf184334",
+    "experiments/metrics.py": "34a12403cdbe4d2c225efac38c6c1a0f9fdf4e32755900e6f48daf70eab85c16"
+  }
+}

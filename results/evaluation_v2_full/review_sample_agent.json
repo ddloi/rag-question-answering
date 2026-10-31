@@ -1,0 +1,18 @@
+{
+  "reviewer_kind": "agent_self_review",
+  "independent_human_review": false,
+  "selection_seed": 42,
+  "n": 20,
+  "faithfulness": {
+    "unsupported": 7,
+    "supported": 11,
+    "unclear": 2
+  },
+  "citation_support": {
+    "does_not_support": 7,
+    "supports_answer": 11,
+    "unclear": 2
+  },
+  "definition": "Whether provided passages support this answer to this question; not generated inline-citation precision.",
+  "predictions_sha256": "d9fc229048239b1c3658302ebea450e7cf252b79ab9fb6852fea9e9513365f40"
+}

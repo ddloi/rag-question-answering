@@ -1,95 +1,76 @@
+> **Bản hiện tại 31/10/2026:** 43/43 tests đạt. Web chọn demo_v3 (12.602 chunks), rồi verified_v2 (12.556), rồi corpus gốc (3.940) theo artifact đầy đủ. Có lựa chọn Hybrid/Dense. Corpus demo có nguồn được chọn sau khi xem lỗi test; số liệu nghiên cứu dùng verified_v2. Xem [bản cập nhật](IMPROVEMENTS_V3.md).
+
 # Kiểm tra trước buổi demo
-
-## Phạm vi đã kiểm tra
-
-Giao diện web tại `http://localhost:8001` chạy **BM25 retrieval + chọn một câu nguyên văn từ đoạn nguồn**. Đường chạy này nằm trong `ragqa/web.py` và `ragqa/engine.py` (qua launcher `app.py` ở root); **không gọi T5, FAISS hoặc Hybrid Retrieval** của các script thí nghiệm.
-
-Có thể dùng giao diện này để trình bày việc chuẩn hóa câu hỏi, xếp hạng nguồn BM25, xem đoạn trích và kiểm tra đóng góp điểm của từng từ khóa. Chưa nên giới thiệu đây là demo đầy đủ của hệ RAG sinh câu trả lời trong README.
 
 ## Cách chạy
 
-Mở PowerShell trong thư mục project, dùng môi trường Python đã có FastAPI, Uvicorn và Pydantic 2:
-
 ```powershell
-Set-Location 'D:\Projects\Git_Projects\Rag-question-answering\RAG'
+# Mở PowerShell trong thư mục RAG sau khi clone repository
 python -m pip install -r requirements/demo.txt
 python app.py
 ```
 
-Sau đó mở `http://localhost:8001`. Giữ cửa sổ chạy server trong lúc demo; dừng bằng `Ctrl+C`. Giao diện cần server hoạt động để truy vấn dữ liệu. Các đường dẫn dữ liệu và static được tính theo vị trí mã nguồn, không phụ thuộc thư mục làm việc khi import ứng dụng.
+Mở http://127.0.0.1:8001. Giữ tiến trình server trong lúc demo. Khi code Python thay đổi, cần khởi động lại server; khi đổi JS/CSS hãy tải lại trang. BM25 đọc corpus local và có thể chạy ngay. Các đường dẫn dữ liệu/static của bản chính độc lập thư mục làm việc.
 
-Corpus local được đọc từ `data/chunk_metadata.jsonl`; tại thời điểm kiểm tra có **3.940 chunks**. Danh sách câu hỏi mẫu đọc từ tám dòng đầu `data/test_qa.jsonl`. Số lượng trên giao diện cần lấy từ API hiện tại, không coi con số trong tài liệu là dữ liệu cố định.
+## Chế độ BM25 và RAG
 
-## Kiểm thử backend
+- **BM25:** tắt checkbox RAG nếu muốn chỉ xem xếp hạng từ khóa và câu trích nguyên văn.
+- **RAG:** cài môi trường `requirements/ml.txt`; cần `data/faiss.index`, `data/chunk_metadata.jsonl`, checkpoint T5 trong `generator_finetuned/` và MiniLM trong cache Hugging Face. Bấm **Nạp mô hình RAG**, chờ trạng thái sẵn sàng rồi chạy câu hỏi. DistilBERT là đối chứng tùy chọn; thiếu cache của nó không chặn T5.
+- Nạp mô hình chạy nền. Truy vấn gửi trong lúc nạp vẫn trả BM25; chạy lại sau khi RAG sẵn sàng. Khi nạp lỗi, giao diện có nút thử nạp lại; truy vấn thường không tự lặp lại lần nạp đã lỗi.
+- Web chỉ đọc mô hình local/cache. Khi chuẩn bị máy mới, tải model trước buổi demo bằng lệnh dưới; không cần chạy nếu cache đã có.
+
+```powershell
+python -m pip install -r requirements/ml.txt
+python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
+# Đối chứng DistilBERT tùy chọn
+python -c "from transformers import AutoTokenizer, AutoModelForQuestionAnswering; name='distilbert-base-cased-distilled-squad'; AutoTokenizer.from_pretrained(name); AutoModelForQuestionAnswering.from_pretrained(name)"
+```
+
+Checkpoint T5 đã fine-tune cần được sao chép hoặc khôi phục riêng. Web không thay bằng T5 gốc khi thiếu checkpoint. Các artifact lớn bị Git bỏ qua, vì vậy clone mã nguồn chưa đủ để chạy neural.
+
+## Lệnh kiểm tra
 
 ```powershell
 python -m pip install -r requirements/test.txt
 python -m unittest discover -s tests -v
+python -m scripts.check_demo
+python -m scripts.check_demo --neural
 ```
 
-Bộ kiểm thử theo cấu trúc mới chạy **12/12 tests đạt** (9 engine/API và 3 đường dẫn). Lệnh engine tương thích cũ cũng chạy **9/9 tests đạt**, bao gồm:
+`check_demo` chỉ đọc dữ liệu, kiểm tra API/static, ID đoạn nguồn, nguồn tham chiếu, câu hỏi train/test trùng nhau và một truy vấn BM25. `--neural` nạp model local và chạy thêm một câu hỏi thật, không tải model hay ghi đè kết quả.
 
-- `k1` thay đổi điểm thật và `b` thay đổi ranking thật trên corpus kiểm thử.
-- Điểm xếp hạng dùng cùng công thức với bảng phân rã theo từ khóa.
-- Query không có từ phù hợp hoặc chỉ có dấu câu trả về trạng thái không có nguồn.
-- Câu được chọn là đoạn nguyên văn và kết quả xếp hạng ổn định giữa các lần chạy.
-- Query và tham số vượt giới hạn bị từ chối.
-- Import ứng dụng từ thư mục làm việc khác vẫn đọc đúng corpus và câu hỏi mẫu.
-- API thông tin, mẫu, truy vấn và các tệp giao diện trả về thành công.
+Kiểm tra ngày **31/10/2026**: **26/26 tests đạt** cho BM25, validation, đường dẫn, API và vòng đời RAG. Kiểm thử hồi quy neural dùng mô phỏng để chạy được trên môi trường nhẹ. Kiểm tra suy luận thật riêng trên máy này: CUDA RTX 3050 6GB, nạp khoảng 46,8 giây; câu hỏi Proteus/Nereid trả “Neptune”, tổng suy luận khoảng 1,46 giây trong lần chạy đầu. Lần nạp từ web có thể lâu hơn lần chạy trực tiếp; nên nạp trước buổi trình bày và chờ trạng thái sẵn sàng. Tốc độ thay đổi theo máy và trạng thái cache.
 
-Các kiểm thử này xác nhận hành vi phần mềm, **không đo độ chính xác QA** và không thay thế đánh giá mô hình trên tập test.
+## Luồng trình bày gợi ý
 
-## Những điểm đã sửa có ảnh hưởng trực tiếp đến demo
+1. Mở trang và nạp RAG trước khi bắt đầu thuyết trình.
+2. Nhập **Proteus and Nereid are moons of which planet?** rồi chạy. T5 đã trả Neptune trong kiểm tra thực tế. Mở nguồn FAISS và BM25 để chỉ ra bằng chứng.
+3. Tắt RAG, chạy **The river Danube flows into which sea?** để giải thích BM25, câu trích và bảng đóng góp điểm từ khóa.
+4. Đổi Dense/Hybrid, Top-K hoặc k1/b: giao diện báo kết quả cũ. Chạy lại để cập nhật; k1/b tác động điểm thật của BM25.
+5. Chạy một mẫu yếu như tên cá mập cơ khí trong Jaws để nêu giới hạn: truy hồi đúng tài liệu chưa bảo đảm chọn/sinh đúng đáp án.
 
-- Trước đây `k1/b` chỉ tác động vào bảng giải thích, không tác động vào điểm ranking thật. Hai tham số nay được áp dụng ngay trong tính BM25.
-- Điểm BM25 và đóng góp của từng từ khóa nay dùng cùng công thức IDF dương. Biến thể này khác cách xử lý IDF/epsilon trong `rank_bm25` ở một số script nghiên cứu; không dùng các điểm hiện trên giao diện để diễn giải lại số liệu baseline đã lưu.
-- API giới hạn query từ 1–2.000 ký tự, `top_k` từ 1–10, `k1` từ 0,5–3 và `b` từ 0–1.
-- Nhãn hệ thống mô tả đúng chế độ retrieval. Không có cam kết rằng trích nguyên văn đồng nghĩa với đáp án đúng.
-- Chạy `python app.py` tránh khởi tạo corpus hai lần.
+8 câu hỏi mẫu được chọn từ test_qa.jsonl, chia nhóm theo lần chạy lịch sử để giải thích đúng, lỗi sinh, thiếu từ khóa và context. Bấm mẫu chỉ điền câu hỏi; không tự chạy. Câu hỏi trùng chính xác một câu trong toàn bộ 120 câu test vẫn có nhãn tham chiếu, kể cả khi không nằm trong 8 mẫu hiển thị. Nhãn được gắn sau suy luận, không đưa vào prompt T5.
 
-## Hạn chế cần trình bày trung thực
+## Cách đọc kết quả
 
-Corpus và câu hỏi mẫu là tiếng Anh. Cơ chế phân tích từ hiện tại phù hợp với dữ liệu này; chưa được đánh giá cho câu hỏi tiếng Việt.
+- BM25 dùng IDF dương và chọn một câu nguyên văn; khác biến thể rank_bm25 dùng trong thí nghiệm baseline. Độ phủ từ khóa không phải xác suất đúng.
+- Chọn Dense để chỉ dùng MiniLM/FAISS theo cosine; chọn Hybrid để kết hợp pool Dense/BM25 bằng RRF và ưu tiên từ khóa hiếm. Điểm passage hiển thị vẫn là Cosine thật, không phải điểm RRF. T5 dùng tối đa hai đoạn đầu, đầu vào cắt ở 512 token; không phải mọi đoạn Top-K đều được sinh từ. Web dùng beam=4 và ngưỡng cosine 0,25; script nghiên cứu có cấu hình riêng.
+- Ngưỡng cosine chỉ loại một số truy vấn ít liên quan, không bảo đảm chống ảo giác. T5 không có context có thể đúng hoặc sai. Trong smoke test, câu này trả Jupiter còn T5 có context trả Neptune; DistilBERT trả sai “Saturn's moon Mimas”.
+- Nhãn đối chiếu chỉ kiểm tra chuỗi đáp án sau trim/lowercase; không tính EM/F1 trên tập dữ liệu và không công nhận mọi chuỗi con là đúng.
+- Các bước và độ trễ ở thanh quy trình là nhánh BM25. Tổng máy chủ tính cả neural; toàn yêu cầu trên trình duyệt tính thêm truyền nhận và đọc phản hồi. Thời gian sinh T5 không bao gồm các đối chứng.
+- API giữ kết quả BM25 nếu neural lỗi hoặc đang bận. Mỗi tiến trình chỉ chạy một lượt suy luận neural cùng lúc.
 
-Chọn câu dựa vào mức khớp từ khóa có thể đưa ra câu không trả lời đúng câu hỏi, ngay cả khi tài liệu nguồn đúng. Ví dụ câu hỏi về tên cá mập cơ khí trong *Jaws* có thể lấy đúng tài liệu nhưng chọn câu giới thiệu bộ phim thay vì câu chứa “Bruce”. Các câu hỏi đầu về trò chơi Fivestones hoặc nhân vật Antigonus cũng có thể truy hồi sai tài liệu.
+Corpus gốc có **3.940 chunks**, **120 câu test**; bản demo_v3 hiện tại có **12.602 chunks**. Tiền kiểm không thấy câu hỏi train/test trùng nhau. Đây không phải kiểm định rò rỉ dữ liệu đầy đủ. Số liệu nghiên cứu cũ trong README cần được tái lập bằng môi trường/tham số tương ứng trước khi khẳng định chất lượng toàn tập.
 
-Danh sách tám mẫu đầu được giữ nguyên để người xem có thể thấy cả trường hợp yếu. Không nên kỳ vọng mọi câu hỏi mẫu đều cho câu trích chứa đáp án.
+## Xử lý nhanh khi demo
 
-“Độ phủ từ khóa” là tỷ lệ từ khóa câu hỏi xuất hiện trong câu trích; đây **không phải** độ chính xác, xác suất đáp án đúng hay chỉ số faithfulness được đánh giá độc lập. Điểm `confidence` cũ trong API cũng chỉ là một heuristic từ vựng.
-
-Thời gian xử lý đo tại server và thời gian toàn bộ yêu cầu trên trình duyệt có thể khác nhau. Không cam kết một ngưỡng độ trễ cố định cho mọi máy hoặc mọi truy vấn.
-
-## Câu hỏi minh họa có thể dùng
-
-Những câu dưới đây nằm trong tập test hiện tại và đã cho câu trích chứa đáp án tham chiếu khi chạy cấu hình mặc định. Đây là các ví dụ thuận tiện để giải thích giao diện, **không phải tập đánh giá ngẫu nhiên, không phải minh chứng cho accuracy và không bảo đảm mọi câu hỏi khác đạt chất lượng tương tự**.
-
-| Câu hỏi nhập vào | Đáp án tham chiếu để đối chiếu |
+| Hiện tượng | Thao tác |
 | --- | --- |
-| The Nullarbor Plain is in which country? | Australia |
-| Proteus and Nereid are moons of which planet? | Neptune |
-| Who was famous for popularising the 'little black dress' in the 1920s? | Coco Chanel |
-| The river Danube flows into which sea? | Black Sea |
-| In Greek mythology, Amphitrite, queen of the sea, was the wife of which god? | Poseidon |
-| ‘Back to Bedlam’ was the debut album for which British singer? | James Blunt |
-| What was the first Beatles film? | A Hard Day's Night |
-| Of which African country is Niamey the capital? | Niger |
+| Mất kết nối | Kiểm tra server còn chạy, sau đó bấm Thử lại |
+| RAG đang nạp | Chờ Sẵn sàng rồi chạy lại câu hỏi |
+| Nạp model thất bại | Xem log server, môi trường ML, cache MiniLM và checkpoint; bấm thử nạp lại |
+| Thiếu DistilBERT | Vẫn dùng T5 + BM25; nạp đối chứng trước buổi sau |
+| RAG đang bận | Chờ truy vấn trước xong hoặc tắt RAG để dùng BM25 |
+| Không có nguồn BM25 | Thử câu hỏi tiếng Anh, tên riêng hoặc mẫu trong corpus |
 
-Trong buổi demo, có thể chạy một ví dụ tốt, mở đoạn nguồn và bảng điểm, thay `k1/b` để giải thích tác động, rồi chạy một mẫu yếu để nêu giới hạn. Nếu cần chứng minh chất lượng hệ RAG sinh câu trả lời, cần chạy và kiểm tra riêng đường T5/FAISS/Hybrid; phần đó chưa được xác nhận bằng các kiểm thử backend nói trên.
-
-## Kiểm tra UX/UI đã thực hiện
-
-- Giao diện tiếng Việt, nền sáng; câu hỏi mẫu chỉ điền biểu mẫu, không chạy truy vấn ngoài ý muốn.
-- Chạy mẫu Jaws và mở đáp án tham chiếu: thấy rõ khác biệt giữa câu trích và đáp án “Bruce”.
-- Chạy ví dụ Proteus/Nereid và Danube; mở nguồn, phân rã điểm, sao chép đoạn trích.
-- Chạy chuỗi không có trong corpus: hiện hướng dẫn không có kết quả, không hiển thị nguồn giả.
-- Tắt máy chủ thử nghiệm, xác nhận lỗi kết nối nội tuyến; khởi động lại và dùng “Thử lại” thành công.
-- Thay Top-K: hiện cảnh báo kết quả cũ; Ctrl+Enter thực thi và Enter giữ chức năng xuống dòng.
-- Kiểm tra bố cục 320px, 390px, 768px và desktop 1280px: không thấy tràn ngang. Mobile chuyển focus đến kết quả sau khi chạy.
-- Kiểm tra tương phản chữ hiển thị ở trạng thái desktop có kết quả: không có mục dưới tỷ lệ 4,5:1 trong phép kiểm tra màu chữ/nền. Đây chưa phải kiểm định khả năng tiếp cận đầy đủ.
-- Kiểm tra cú pháp JavaScript/Python và `git diff --check`.
-
-Đã thêm `requirements/demo.txt` cho web demo nhẹ (lệnh cài cũ qua `requirements_demo.txt` vẫn hoạt động), không cần GPU hoặc tải mô hình. Các thư viện ML đầy đủ vẫn nằm trong `requirements/ml.txt`. Để chạy kiểm thử API, cài thêm `httpx` nếu môi trường chưa có.
-
-## Vị trí mã nguồn sau khi sắp xếp
-
-Mã web ở `ragqa/`, thí nghiệm ở `experiments/`, kiểm thử ở `tests/`. Notebook ở `notebooks/`, kết quả đo ở `results/`. `ragqa/paths.py` là nơi xác định đường dẫn dữ liệu. Xem `docs/ARCHITECTURE.md` để tra lệnh mới và các điểm gọi tương thích.
+[Kiến trúc và vị trí mã nguồn](ARCHITECTURE.md) · [Môi trường Python](../requirements/README.md)

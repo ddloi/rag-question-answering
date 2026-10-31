@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "n": 120,
+  "qa_metrics_recomputed": true,
+  "retrieval_metrics_recomputed": true,
+  "actual_context_bounds": true,
+  "input_code_checkpoint_checksums_match": true,
+  "all_test_questions_preserved": true,
+  "prediction_sha256": "d9fc229048239b1c3658302ebea450e7cf252b79ab9fb6852fea9e9513365f40",
+  "dataset_manifest_sha256": "677dd563144f283c78cfc8253713e9881eb838c7da855ce6c90f7bcaf85c8078"
+}

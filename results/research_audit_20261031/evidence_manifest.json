@@ -1,0 +1,19 @@
+{
+  "old_training_first_chunk_fallback_rows": 223,
+  "training_contexts_not_matching_current_selection_rule": 0,
+  "canonical_answers_different_from_recovered_official_value": [],
+  "blank_review_rows": 20,
+  "completed_human_review_rows_in_blank_form": 0,
+  "input_sha256": {
+    "data/raw_documents.json": "c0e062de383168828fca555ad34e243798607d46fdb64bff8114e4378c960e48",
+    "data/training_pairs.jsonl": "9d4fd790429d238d27d280d78ac1ccfd3d6214685599fd457399c5c3a76cd4ec",
+    "data/verified_v2/manifest.json": "677dd563144f283c78cfc8253713e9881eb838c7da855ce6c90f7bcaf85c8078",
+    "data/verified_v2/test_qa.jsonl": "6df0c3626242fc533eda0d3737d6d19026232ee09ed3a708584a591d066a017f",
+    "data/verified_v2/chunk_metadata.jsonl": "4633ce9b542bffc4566957e2fb2177c2dae11c9f1cdac3b91a8ead626f1ebc23",
+    "results/evaluation_v2_full/predictions.jsonl": "d9fc229048239b1c3658302ebea450e7cf252b79ab9fb6852fea9e9513365f40",
+    "results/evaluation_v2_full/manifest.json": "1de160a99680c054eb002d62705a36174d6ce09e2618a16280a66bf25421a6ed",
+    "scripts/audit_research.py": "d888b76ae52fbadf448704132d92475387775dbda11e954c4f3aa20b83ead5dc",
+    "experiments/finetune_generator.py": "f0750f72eaffdf6aa4050ab8a030f6f368ef57cf817b135f1f003b19cf7e49fe",
+    "experiments/split_train_test.py": "d54c68b65c6281c69ac787a004fbf6d40a7bd21731119886460d2bcf8d70be19"
+  }
+}

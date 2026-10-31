@@ -1,0 +1,14 @@
+{
+  "created_at": "2026-10-31T14:51:47.694944+00:00",
+  "purpose": "Selected demonstration cases, not held-out evaluation or an estimate of accuracy.",
+  "n": 8,
+  "dataset": "demo_v3",
+  "retrieval": "Hybrid RRF pool=30 k=60 plus rare query term heuristic",
+  "corpus_manifest_sha256": "f07a0261b6836bb8b69e6a95f8fa07fe1694dd292b850f4c9ff6d21db299a33e",
+  "response_sha256": "111e93634b3d08e6987db4de407b1349c007975ca5047421055ac580da920a90",
+  "code_sha256": {
+    "ragqa/web.py": "8d9d9144c0a335427aff8a5e77160950b972b4644b95c05e79ef32b1a3823650",
+    "ragqa/rag_engine.py": "200593f23e618c9fe03f1834bb09d594bf91b3a7a5ac003b20bf2bbada948b23",
+    "ragqa/engine.py": "5423f5b44358b137efc01e9c30662216f1c45bce450223a930e9299be4cf89b4"
+  }
+}

@@ -56,3 +56,16 @@ htmlcov/
 build/
 dist/
 *.egg-info/
+
+# Recovered source pages and rebuilt evidence corpus; manifests/results are retained.
+data/provenance/*.jsonl
+data/verified_v2/*.jsonl
+data/verified_v2/raw_documents.json
+data/verified_v2/faiss.index
+data/demo_v3/*.jsonl
+data/demo_v3/faiss.index
+
+# Short local smoke runs; the full evaluation evidence is kept separately.
+results/evaluation_v2_smoke/
+# Intermediate draft; canonical_rescore_v2 contains the finalized scoring provenance.
+results/canonical_rescore_v1/

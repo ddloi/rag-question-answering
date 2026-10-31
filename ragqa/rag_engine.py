@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from .paths import DATA_DIR, MODEL_DIR
+from .engine import clean_tokens
 
 logger = logging.getLogger(__name__)
 
@@ -34,11 +35,14 @@ class RAGNeuralEngine:
         self.is_loading = False
         self.load_error: Optional[str] = None
         self._lock = threading.Lock()
+        self._start_lock = threading.Lock()
+        self._inference_lock = threading.Lock()
 
         # Neural components
         self.embed_model = None
         self.index = None
         self.metadata: List[Dict[str, Any]] = []
+        self._chunk_positions = {}
         self.tokenizer = None
         self.generator = None
         self.qa_tokenizer = None
@@ -48,7 +52,12 @@ class RAGNeuralEngine:
         """Check if required files exist on disk."""
         faiss_file = self.data_dir / "faiss.index"
         meta_file = self.data_dir / "chunk_metadata.jsonl"
-        return faiss_file.exists() and meta_file.exists()
+        weights = any((self.model_dir / name).is_file() for name in
+                      ("model.safetensors", "pytorch_model.bin", "model.safetensors.index.json"))
+        return (faiss_file.is_file() and meta_file.is_file() and weights
+                and (self.model_dir / "config.json").is_file()
+                and (self.model_dir / "tokenizer_config.json").is_file()
+                and any((self.model_dir / name).is_file() for name in ("tokenizer.json", "spiece.model")))
 
     def load_sync(self):
         """Synchronously load embedding model, FAISS index, and T5 generator."""
@@ -60,6 +69,8 @@ class RAGNeuralEngine:
             self.is_loading = True
             t0 = time.perf_counter()
             try:
+                if not self.is_available():
+                    raise FileNotFoundError("Thiếu FAISS, metadata hoặc checkpoint T5 đã fine-tune.")
                 import torch
                 import faiss
                 from sentence_transformers import SentenceTransformer
@@ -81,7 +92,7 @@ class RAGNeuralEngine:
                 logger.info(f"[RAGNeuralEngine] Loading on {self.device_name}...")
 
                 # 1. Embedding Model
-                self.embed_model = SentenceTransformer(EMBED_MODEL_NAME, device=self.device)
+                self.embed_model = SentenceTransformer(EMBED_MODEL_NAME, device=self.device, local_files_only=True)
 
                 # 2. FAISS Index & Metadata
                 faiss_path = str(self.data_dir / "faiss.index")
@@ -93,16 +104,23 @@ class RAGNeuralEngine:
                         if line.strip():
                             self.metadata.append(json.loads(line))
 
-                # 3. T5 Generator (fine-tuned if available, else t5-base)
-                gen_path = str(self.model_dir) if self.model_dir.exists() else "t5-base"
-                self.tokenizer = AutoTokenizer.from_pretrained(gen_path)
-                self.generator = AutoModelForSeq2SeqLM.from_pretrained(gen_path).to(self.device)
+                if self.index.ntotal != len(self.metadata):
+                    raise ValueError("Số vector FAISS không khớp số dòng metadata. Cần xây lại index.")
+                if self.index.d != self.embed_model.get_sentence_embedding_dimension():
+                    raise ValueError("Chiều vector FAISS không khớp embedding model.")
+                self._chunk_positions = {row.get('chunk_id', pos): pos
+                                         for pos, row in enumerate(self.metadata)}
+
+                # Require the reported fine-tuned checkpoint; never substitute an untrained base model.
+                gen_path = str(self.model_dir)
+                self.tokenizer = AutoTokenizer.from_pretrained(gen_path, local_files_only=True)
+                self.generator = AutoModelForSeq2SeqLM.from_pretrained(gen_path, local_files_only=True).to(self.device)
                 self.generator.eval()
 
                 # 4. DistilBERT Extractive QA Model
                 try:
-                    self.qa_tokenizer = AutoTokenizer.from_pretrained(EXTRACTIVE_MODEL_NAME)
-                    self.qa_model = AutoModelForQuestionAnswering.from_pretrained(EXTRACTIVE_MODEL_NAME).to(self.device)
+                    self.qa_tokenizer = AutoTokenizer.from_pretrained(EXTRACTIVE_MODEL_NAME, local_files_only=True)
+                    self.qa_model = AutoModelForQuestionAnswering.from_pretrained(EXTRACTIVE_MODEL_NAME, local_files_only=True).to(self.device)
                     self.qa_model.eval()
                 except Exception as ext_err:
                     logger.warning(f"[RAGNeuralEngine] Could not load extractive model: {ext_err}")
@@ -115,18 +133,31 @@ class RAGNeuralEngine:
                 logger.info(f"[RAGNeuralEngine] Loaded successfully in {elapsed:.2f}s on {self.device_name}.")
             except Exception as exc:
                 self.is_loaded = False
-                self.load_error = str(exc)
+                self.load_error = ("Không nạp được RAG từ tệp local. Kiểm tra môi trường ML, cache MiniLM và checkpoint T5; "
+                                   f"xem log máy chủ ({type(exc).__name__}).")
+                self.embed_model = self.index = self.tokenizer = self.generator = None
+                self.qa_tokenizer = self.qa_model = None
+                self.metadata = []
                 logger.exception(f"[RAGNeuralEngine] Failed to load: {exc}")
             finally:
                 self.is_loading = False
 
     def load_in_background(self):
         """Kick off background loading thread."""
-        if not self.is_loaded and not self.is_loading and self.is_available():
-            thread = threading.Thread(target=self.load_sync, daemon=True, name="RAG-Model-Loader")
-            thread.start()
+        with self._start_lock:
+            if not self.is_loaded and not self.is_loading and self.is_available():
+                # Reserve before starting the thread so simultaneous requests cannot queue loaders.
+                self.is_loading = True
+                self.load_error = None
+                thread = threading.Thread(target=self.load_sync, daemon=True, name="RAG-Model-Loader")
+                try:
+                    thread.start()
+                except Exception:
+                    self.is_loading = False
+                    raise
 
-    def retrieve(self, question: str, top_k: int = 5) -> List[Dict[str, Any]]:
+    def retrieve(self, question: str, top_k: int = 5, sparse_candidates=None,
+                 anchor_term=None) -> List[Dict[str, Any]]:
         """Dense retrieval using all-MiniLM-L6-v2 and FAISS IndexFlatIP."""
         if not self.is_loaded:
             raise RuntimeError("RAG model is not loaded yet.")
@@ -134,7 +165,7 @@ class RAGNeuralEngine:
         q_emb = self.embed_model.encode(
             [question], normalize_embeddings=True, convert_to_numpy=True
         ).astype("float32")
-        scores, indices = self.index.search(q_emb, top_k)
+        scores, indices = self.index.search(q_emb, max(30, top_k) if sparse_candidates is not None else top_k)
         results = []
         for rank, (score, idx) in enumerate(zip(scores[0], indices[0]), start=1):
             if idx == -1 or idx >= len(self.metadata):
@@ -148,7 +179,32 @@ class RAGNeuralEngine:
                 "score": round(float(score), 4),
                 "text": chunk.get("text", "")
             })
-        return results
+        if sparse_candidates is None:
+            return results
+
+        # Web-only hybrid: fuse ranks, then preserve a distinctly rare query term.
+        # Scores remain actual cosine similarities, never BM25 or RRF scores.
+        candidates = {row['chunk_id']: dict(row, fusion_score=1 / (60 + row['rank']))
+                      for row in results}
+        for rank, sparse in enumerate(sparse_candidates, start=1):
+            chunk_id = sparse['chunk_id']
+            if chunk_id not in candidates:
+                pos = self._chunk_positions.get(chunk_id)
+                if pos is None:
+                    continue
+                cosine = float(self.index.reconstruct(pos) @ q_emb[0])
+                candidates[chunk_id] = {key: sparse[key] for key in
+                                        ('chunk_id', 'doc_id', 'title', 'text')}
+                candidates[chunk_id].update(score=round(cosine, 4), fusion_score=0.0)
+            candidates[chunk_id]['fusion_score'] += 1 / (60 + rank)
+        for row in candidates.values():
+            row['matched_anchor'] = bool(anchor_term and anchor_term in clean_tokens(row['text']))
+        ranked = sorted(candidates.values(), key=lambda row:
+                        (row['matched_anchor'], row['fusion_score'], row['score']), reverse=True)[:top_k]
+        for rank, row in enumerate(ranked, start=1):
+            row['rank'] = rank
+            row['fusion_score'] = round(row['fusion_score'], 6)
+        return ranked
 
     def generate_answer(self, question: str, context: str) -> str:
         """Generate grounded answer with fine-tuned T5-base."""
@@ -223,7 +279,12 @@ class RAGNeuralEngine:
             score_matrix = start_logits.unsqueeze(1) + end_logits.unsqueeze(0)
             mask = torch.triu(torch.ones(n_tokens, n_tokens, device=start_logits.device, dtype=torch.bool), diagonal=0)
             band_mask = torch.triu(torch.ones(n_tokens, n_tokens, device=start_logits.device, dtype=torch.bool), diagonal=20)
-            valid_mask = mask & ~band_mask
+            # Question, padding and special tokens are not valid answer evidence.
+            context_mask = torch.tensor([sid == 1 for sid in inputs.sequence_ids(0)],
+                                        device=start_logits.device, dtype=torch.bool)
+            valid_mask = mask & ~band_mask & context_mask[:, None] & context_mask[None, :]
+            if not valid_mask.any():
+                continue
             score_matrix[~valid_mask] = -1e9
             flat_idx = score_matrix.argmax()
             best_start = (flat_idx // n_tokens).item()
@@ -241,7 +302,8 @@ class RAGNeuralEngine:
 
         return best_answer
 
-    def execute_rag(self, query: str, top_k: int = 5) -> Dict[str, Any]:
+    def execute_rag(self, query: str, top_k: int = 5, sparse_candidates=None,
+                    anchor_term=None) -> Dict[str, Any]:
         """Execute dense retrieval and generation, returning full comparison data."""
         if not self.is_loaded:
             return {
@@ -250,11 +312,22 @@ class RAGNeuralEngine:
                 "error": self.load_error or "Mô hình RAG đang khởi động hoặc chưa sẵn sàng."
             }
 
+        if not self._inference_lock.acquire(blocking=False):
+            return {"available": False, "error": "RAG đang xử lý một câu hỏi khác. Vui lòng thử lại sau."}
+        try:
+            return self._execute_loaded(query, top_k, sparse_candidates, anchor_term)
+        finally:
+            self._inference_lock.release()
+
+    def _execute_loaded(self, query: str, top_k: int, sparse_candidates=None,
+                        anchor_term=None) -> Dict[str, Any]:
+
         t_start = time.perf_counter()
 
         # Step 1: FAISS Dense Retrieval
         t_ret_0 = time.perf_counter()
-        retrieved = self.retrieve(query, top_k=top_k)
+        retrieved = self.retrieve(query, top_k=top_k, sparse_candidates=sparse_candidates,
+                                  anchor_term=anchor_term)
         retrieval_ms = (time.perf_counter() - t_ret_0) * 1000
 
         top_score = retrieved[0]["score"] if retrieved else 0.0
@@ -283,12 +356,17 @@ class RAGNeuralEngine:
             "device": self.device,
             "device_name": self.device_name,
             "is_grounded": is_grounded,
+            "relevance_passed": is_grounded,
+            "relevance_threshold": SIMILARITY_THRESHOLD,
+            "extractive_available": self.qa_model is not None,
             "top_score": top_score,
             "answer": rag_answer,
             "generator_only_answer": gen_only_answer,
             "extractive_answer": extractive_ans,
             "context_used": context,
             "retrieved_chunks": retrieved,
+            "retrieval_method": "hybrid_rrf_anchor" if sparse_candidates is not None else "dense",
+            "anchor_term": anchor_term if sparse_candidates is not None else None,
             "latency": {
                 "retrieval_ms": round(retrieval_ms, 2),
                 "generation_ms": round(generation_ms, 2),

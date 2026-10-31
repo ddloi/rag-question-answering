@@ -10,7 +10,7 @@ Sinh viên trình bày đồ án hỏi–đáp và giảng viên xem demo trên 
 
 ## Product Purpose
 
-Cho phép thử câu hỏi trên corpus TriviaQA tiếng Anh, theo dõi các bước xử lý và kiểm tra đoạn nguồn. Trang FastAPI hiện là demo BM25 + trích câu; không đại diện cho pipeline T5 + FAISS trong các script nghiên cứu.
+Cho phép thử câu hỏi trên corpus TriviaQA tiếng Anh, theo dõi các bước xử lý và kiểm tra đoạn nguồn. Trang FastAPI so sánh BM25 + trích câu với FAISS + T5 fine-tuned khi mô hình local đã sẵn sàng. Web có Dense hoặc Hybrid RRF với ưu tiên từ hiếm; thí nghiệm khoa học trong experiments giữ cấu hình Dense riêng. Corpus demo v3 tách khỏi corpus đánh giá và được ghi nhãn rõ.
 
 ## Brand Personality
 

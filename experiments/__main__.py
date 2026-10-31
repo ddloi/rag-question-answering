@@ -15,6 +15,7 @@ STAGES = {
     "hybrid": "hybrid_retrieval",
     "ablation": "ablation",
     "baseline": "baseline_retrieval",
+    "verify": "verify_dataset",
 }
 
 

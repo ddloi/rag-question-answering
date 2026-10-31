@@ -1,0 +1,124 @@
+{
+  "created_at": "2026-10-31T15:03:22.161990+00:00",
+  "reviewer_kind": "implementer_self_review",
+  "purpose": "Research readiness audit; no new model training/inference and no data changes.",
+  "counts": {
+    "qa_documents": 800,
+    "training_input_rows": 680,
+    "heldout_question_rows": 120,
+    "verified_chunks": 12556,
+    "unique_verified_titles": 748
+  },
+  "split": {
+    "exact_normalized_question_overlap": 0,
+    "test_questions_sharing_source_title_with_training_input": 12,
+    "interpretation": "Page overlap does not prove answer leakage, but cannot support unseen-document generalization."
+  },
+  "training_context": {
+    "rows_without_canonical_string": 238,
+    "rows_without_any_official_alias_string": 206,
+    "note": "Lexical diagnostics; semantic support requires manual review. 680 includes the configured inner 10% validation split.",
+    "tokenizer": {
+      "status": "PASS",
+      "method": "Serialized tokenizer backend, training-format input, max_length=384",
+      "missing_canonical_after_truncation": 238,
+      "additional_lost_canonical": 0
+    }
+  },
+  "duplicates": {
+    "extra_normalized_identical_chunks": 1544,
+    "queries_with_identical_dense_top_two_texts": 11
+  },
+  "saved_run": {
+    "status": "complete",
+    "n": 120,
+    "test_prediction_order_matches": true,
+    "all_three_systems_present": true,
+    "max_saved_rag_input_tokens": 512,
+    "current_files_match_historical_manifest": {
+      "data/verified_v2/test_qa.jsonl": true,
+      "data/verified_v2/chunk_metadata.jsonl": true,
+      "data/verified_v2/faiss.index": true,
+      "generator_finetuned/model.safetensors": true,
+      "data/training_pairs.jsonl": true,
+      "experiments/rag_pipeline.py": true,
+      "experiments/evaluate.py": false,
+      "experiments/metrics.py": false,
+      "ragqa/rag_engine.py": false
+    }
+  },
+  "normalization_diagnostic": {
+    "reference": "https://github.com/mandarjoshi90/triviaqa/blob/master/evaluation/triviaqa_evaluation.py",
+    "note": "Alternate normalization only; canonical references are NOT full official TriviaQA alias evaluation.",
+    "qa": {
+      "generator_only": {
+        "current_custom_canonical": {
+          "em": 0.008333333333333333,
+          "f1": 0.019305555555555555
+        },
+        "triviaqa_style_canonical_only": {
+          "em": 0.008333333333333333,
+          "f1": 0.019305555555555555
+        }
+      },
+      "retrieval_only": {
+        "current_custom_canonical": {
+          "em": 0.26666666666666666,
+          "f1": 0.3667135642135642
+        },
+        "triviaqa_style_canonical_only": {
+          "em": 0.2916666666666667,
+          "f1": 0.3871897546897547
+        }
+      },
+      "rag_full": {
+        "current_custom_canonical": {
+          "em": 0.3416666666666667,
+          "f1": 0.39761363636363634
+        },
+        "triviaqa_style_canonical_only": {
+          "em": 0.3416666666666667,
+          "f1": 0.3998358585858586
+        }
+      }
+    },
+    "changed_system_question_pairs": 5
+  },
+  "review_sample": {
+    "reviewer_kind": "agent_self_review",
+    "independent_human_review": false,
+    "selection_seed": 42,
+    "n": 20,
+    "faithfulness": {
+      "unsupported": 7,
+      "supported": 11,
+      "unclear": 2
+    },
+    "citation_support": {
+      "does_not_support": 7,
+      "supports_answer": 11,
+      "unclear": 2
+    },
+    "definition": "Whether provided passages support this answer to this question; not generated inline-citation precision.",
+    "predictions_sha256": "d9fc229048239b1c3658302ebea450e7cf252b79ab9fb6852fea9e9513365f40"
+  },
+  "index": {
+    "status": "PASS",
+    "type": "IndexFlatIP",
+    "count": 12556,
+    "dimension": 384,
+    "finite": true,
+    "unit_norm_atol": 0.001,
+    "unit_norms_pass": true,
+    "norm_min": 0.9999998807907104,
+    "norm_max": 1.0000001192092896
+  },
+  "not_run": [
+    "Colab execution",
+    "Independent human annotation",
+    "Fresh untouched holdout evaluation",
+    "New checkpoint training",
+    "Full Hybrid+anchor answer evaluation on a fresh holdout"
+  ],
+  "audit_code_sha256": "d888b76ae52fbadf448704132d92475387775dbda11e954c4f3aa20b83ead5dc"
+}

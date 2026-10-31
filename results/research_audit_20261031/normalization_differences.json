@@ -1,0 +1,77 @@
+[
+  {
+    "id": 43,
+    "system": "retrieval_only",
+    "question": "Who wrote the play ‘The Iceman Cometh’?",
+    "prediction": "Eugene O ' Neill",
+    "canonical": "Eugene O’Neill",
+    "current": {
+      "em": 0,
+      "f1": 0.4
+    },
+    "triviaqa_style_canonical_only": {
+      "em": 1,
+      "f1": 1.0
+    }
+  },
+  {
+    "id": 77,
+    "system": "retrieval_only",
+    "question": "What was the first Beatles film?",
+    "prediction": "A Hard Day ' s Night",
+    "canonical": "A Hard Day's Night",
+    "current": {
+      "em": 0,
+      "f1": 0.5714285714285714
+    },
+    "triviaqa_style_canonical_only": {
+      "em": 1,
+      "f1": 1.0
+    }
+  },
+  {
+    "id": 100,
+    "system": "retrieval_only",
+    "question": "Cobweb is a fairy in which Shakespeare play?",
+    "prediction": "A Midsummer ' s Night Dream",
+    "canonical": "A Midsummer Night’s Dream",
+    "current": {
+      "em": 0,
+      "f1": 0.5714285714285714
+    },
+    "triviaqa_style_canonical_only": {
+      "em": 0,
+      "f1": 1.0
+    }
+  },
+  {
+    "id": 101,
+    "system": "retrieval_only",
+    "question": "Who lives in the Hundred Acre Wood?",
+    "prediction": "Winnie - the - Pooh",
+    "canonical": "Winnie-the-Pooh",
+    "current": {
+      "em": 0,
+      "f1": 0.0
+    },
+    "triviaqa_style_canonical_only": {
+      "em": 1,
+      "f1": 1.0
+    }
+  },
+  {
+    "id": 64,
+    "system": "rag_full",
+    "question": "\"What is the more common name of the \"\"simple plurality\"\" system of voting?\"",
+    "prediction": "First Pastt-the-Post",
+    "canonical": "First past the post",
+    "current": {
+      "em": 0,
+      "f1": 0.4
+    },
+    "triviaqa_style_canonical_only": {
+      "em": 0,
+      "f1": 0.6666666666666666
+    }
+  }
+]

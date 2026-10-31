@@ -35,7 +35,7 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 CONFIG_PATH = PIPELINE_DIR / "hyperparams.json"
-OUTPUT_PATH = RESULTS_DIR / "baseline_results.json"
+OUTPUT_PATH = RESULTS_DIR / "classical_baselines_measured.json"
 
 
 def set_seed(seed: int = 42) -> None:
@@ -178,7 +178,7 @@ class Word2VecRetriever:
             epochs=config.get("epochs", 10),
             sg=config.get("sg", 0),
             seed=config.get("seed", 42),
-            workers=2,
+            workers=1,
         )
 
         # Tính vector biểu diễn cho toàn bộ chunks (L2-normalized)
@@ -219,7 +219,7 @@ class FastTextRetriever:
             epochs=config.get("epochs", 10),
             sg=config.get("sg", 0),
             seed=config.get("seed", 42),
-            workers=2,
+            workers=1,
         )
 
         # Tính vector biểu diễn cho toàn bộ chunks (L2-normalized)
@@ -340,23 +340,9 @@ def main() -> None:
     results["FastText"] = evaluate_retriever(fasttext_retriever, corpus, test_qas, k_values)
     print(f"      Kết quả FastText: {results['FastText']}")
 
-    # Thêm số liệu đối chuẩn tham chiếu (Pre-trained Dense FAISS & Hybrid Search)
-    reference_benchmarks = {
-        "Dense (FAISS - all-MiniLM-L6-v2)": {
-            "Recall@3": 0.8167,
-            "Recall@5": 0.8800,
-            "Recall@10": 0.9417,
-            "MRR": 0.6950,
-            "type": "Pre-trained Dense (SOTA Reference)",
-        },
-        "Hybrid Search (BM25 + FAISS via RRF)": {
-            "Recall@3": 0.8583,
-            "Recall@5": 0.9100,
-            "Recall@10": 0.9583,
-            "MRR": 0.7320,
-            "type": "Ensemble Hybrid (SOTA Reference)",
-        },
-    }
+    # Dense/Hybrid are measured by experiments.evaluate on the same frozen corpus.
+    # Never emit old reference constants as if computed by this run.
+    reference_benchmarks = {}
 
     # Bảng tổng hợp
     print("\n" + "=" * 78)
@@ -379,7 +365,8 @@ def main() -> None:
     # Xuất file JSON
     full_output = {
         "classical_baselines": results,
-        "reference_benchmarks": reference_benchmarks,
+        "neural_retrieval": "See measured retrieval in evaluation_<run>/metrics.json",
+        "mrr_max_depth": 50,
         "dataset_info": {
             "num_chunks": len(corpus),
             "num_test_queries": len(test_qas),
