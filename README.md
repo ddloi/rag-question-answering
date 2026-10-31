@@ -253,21 +253,19 @@ So sánh 4 phương pháp retrieval truyền thống (BM25, TF-IDF, Word2Vec CBO
 
 ## 🌐 Web Demo (Local)
 
-Dự án bao gồm web demo **RAG Lab** với giao diện tiếng Việt, truy hồi BM25 và trích câu nguyên văn. **Đây là demo retrieval baseline, chưa chạy T5 hoặc FAISS** như pipeline RAG trong phần thực nghiệm ở trên.
+Dự án bao gồm web demo **RAG Lab** với giao diện tiếng Việt, hỗ trợ **so sánh trực tiếp giữa Hệ thống RAG (FAISS Dense + fine-tuned T5-base) và Baseline BM25 (truy hồi từ khóa + trích câu)** trên tập TriviaQA.
 
-```bash
-python -m pip install -r requirements/demo.txt
+`ash
 python app.py
-```
-Mở trình duyệt tại `http://localhost:8001`. Giao diện hiển thị:
-- Pipeline 4 giai đoạn: Query Normalizer → BM25 Ranking → Span Extractor → Telemetry
-- Phân rã điểm BM25 theo từ khóa (TF, IDF, contribution)
-- Top-K chunks được xếp hạng với highlight từ khóa
-- Điều chỉnh tham số BM25 (k1, b), áp dụng khi bấm “Tìm bằng chứng”
-- Đối chiếu đáp án tham chiếu sau khi chạy câu hỏi mẫu
-- Trạng thái tải, lỗi/thử lại và không có kết quả; hỗ trợ bàn phím và màn hình nhỏ
-
-Độ phủ từ khóa không phải độ chính xác QA; câu trích có thể không trả lời đúng câu hỏi. Xem [hướng dẫn và giới hạn trước demo](docs/DEMO_READINESS.md).
+`
+Mở trình duyệt tại **http://localhost:8001** (hoặc http://127.0.0.1:8001). Giao diện hiển thị:
+- **Bảng 3 khối so sánh kết quả trực diện**:
+  1. **Hệ RAG đầy đủ (T5 + FAISS)**: Câu trả lời do T5 sinh ra dựa vào ngữ cảnh, kèm đối chiếu ảo giác của T5 khi không có context (Generator-only).
+  2. **Hệ Baseline BM25**: Câu trích nguyên văn từ đoạn văn theo tần suất từ khóa.
+  3. **Đáp án tham chiếu (Ground Truth)**: Đối chiếu với đáp án chuẩn trong dataset TriviaQA.
+- **So sánh tài liệu nguồn song song**: Tab xem Top-K đoạn truy hồi bởi FAISS (vector ngữ nghĩa Cosine) vs BM25 (TF-IDF).
+- **Phân rã kỹ thuật**: Bảng điểm BM25 chi tiết (TF, IDF, contribution) và độ trễ từng giai đoạn.
+- **Tự động tận dụng GPU (CUDA)**: Tự động chạy trên GPU (RTX 3050) nếu có hoặc chuyển sang CPU một cách an toàn.
 
 Kiểm tra nhanh: cài `requirements/test.txt`, sau đó chạy `python -m unittest discover -s tests -v`. Lệnh kiểm thử engine cũ `python -m unittest test_engine -v` vẫn hoạt động.
 

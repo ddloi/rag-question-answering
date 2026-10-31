@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f5f7fa">
-    <meta name="description" content="Khám phá truy hồi BM25 trên TriviaQA, kiểm tra đoạn trích và tài liệu nguồn.">
-    <title>RAG Lab · Khám phá truy hồi</title>
+    <meta name="description" content="RAG Lab — Nghiên cứu & So sánh trực tiếp BM25 Retrieval với Hệ thống RAG (FAISS Dense + T5 Generator) trên TriviaQA.">
+    <title>RAG Lab · So sánh BM25 vs RAG (FAISS + T5)</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230369a1'/%3E%3Cpath d='M9 10h14M9 16h10M9 22h6' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="/static/style.css">
     <script src="/static/app.js" defer></script>
@@ -17,90 +17,352 @@
             <span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h7a3 3 0 0 1 3 3v12a4 4 0 0 0-4-2H4z"/><path d="M14 8a3 3 0 0 1 3-3h3v13h-2a4 4 0 0 0-4 2"/><path d="M7 9h3m-3 4h3"/></svg></span>
             <span>RAG <b>Lab</b></span>
             <span class="brand-divider" aria-hidden="true"></span>
-            <span class="brand-caption">Không gian thực nghiệm</span>
+            <span class="brand-caption">Nghiên cứu & Đối chiếu Hỏi–Đáp</span>
         </a>
-        <div class="system-status"><span class="status-dot" aria-hidden="true"></span><span id="system-state" role="status">Đang kết nối…</span></div>
+        <div class="system-status-group">
+            <div class="system-status" id="bm25-status-pill">
+                <span class="status-dot online" aria-hidden="true"></span>
+                <span>BM25: <strong id="bm25-state">3.940 chunks</strong></span>
+            </div>
+            <div class="system-status" id="rag-status-pill">
+                <span class="status-dot" id="rag-dot" aria-hidden="true"></span>
+                <span>T5 + FAISS: <strong id="rag-state">Đang kết nối…</strong></span>
+            </div>
+        </div>
     </header>
     <main id="main" class="workspace">
         <div class="page-heading">
-            <div><h1>Khám phá truy hồi tài liệu</h1><p>Đặt câu hỏi, tìm bằng chứng và xem cách hệ thống xếp hạng nguồn.</p></div>
-            <span class="mode-badge">BM25 + trích câu</span>
+            <div>
+                <h1>So sánh Thực nghiệm: BM25 vs RAG (FAISS + T5)</h1>
+                <p>Đối chiếu trực quan giữa Truy hồi từ khóa cổ điển (BM25) và Hệ thống RAG nơ-ron (Dense Retrieval + Sinh đáp án).</p>
+            </div>
+            <div class="badge-cluster">
+                <span class="mode-badge mode-sparse">BM25 Sparse</span>
+                <span class="mode-badge-vs">vs</span>
+                <span class="mode-badge mode-dense">FAISS + T5-base</span>
+            </div>
         </div>
         <section class="pipeline" aria-label="Quy trình xử lý">
-            <div class="pipeline-caption"><h2>Một câu hỏi, bốn bước xử lý</h2><span id="pipeline-status-text" role="status">Sẵn sàng khi bạn đặt câu hỏi</span></div>
+            <div class="pipeline-caption">
+                <h2>Quy trình xử lý song song hai hệ thống</h2>
+                <span id="pipeline-status-text" role="status">Sẵn sàng khi bạn đặt câu hỏi</span>
+            </div>
             <ol class="stepper-track">
-                <li class="step-node" id="node-stage-1"><span class="step-number">1</span><div><h3>Phân tích câu hỏi</h3><p>Tách và chọn từ khóa</p></div><span class="node-latency" id="lat-stage-1">—</span></li>
-                <li class="step-node" id="node-stage-2"><span class="step-number">2</span><div><h3>Truy hồi BM25</h3><p>Xếp hạng đoạn tài liệu</p></div><span class="node-latency" id="lat-stage-2">—</span></li>
-                <li class="step-node" id="node-stage-3"><span class="step-number">3</span><div><h3>Trích dẫn nguồn</h3><p>Chọn câu khớp từ khóa</p></div><span class="node-latency" id="lat-stage-3">—</span></li>
-                <li class="step-node" id="node-stage-4"><span class="step-number">4</span><div><h3>Đo & đối chiếu</h3><p>Ghi nhận thời gian chạy</p></div><span class="node-latency" id="lat-stage-4">—</span></li>
+                <li class="step-node" id="node-stage-1">
+                    <span class="step-number">1</span>
+                    <div>
+                        <h3>Phân tích câu hỏi</h3>
+                        <p>Tách từ khóa & Vectorize</p>
+                    </div>
+                    <span class="node-latency" id="lat-stage-1">—</span>
+                </li>
+                <li class="step-node" id="node-stage-2">
+                    <span class="step-number">2</span>
+                    <div>
+                        <h3>Truy hồi song song</h3>
+                        <p>BM25 vs FAISS Dense</p>
+                    </div>
+                    <span class="node-latency" id="lat-stage-2">—</span>
+                </li>
+                <li class="step-node" id="node-stage-3">
+                    <span class="step-number">3</span>
+                    <div>
+                        <h3>Sinh & Trích câu</h3>
+                        <p>T5-base vs Trích câu</p>
+                    </div>
+                    <span class="node-latency" id="lat-stage-3">—</span>
+                </li>
+                <li class="step-node" id="node-stage-4">
+                    <span class="step-number">4</span>
+                    <div>
+                        <h3>Đối chiếu Ground Truth</h3>
+                        <p>So sánh đáp án chuẩn & độ trễ</p>
+                    </div>
+                    <span class="node-latency" id="lat-stage-4">—</span>
+                </li>
             </ol>
         </section>
         <div class="workspace-grid">
             <aside class="control-panel" aria-label="Đặt câu hỏi và cấu hình">
                 <form id="pipeline-form">
-                    <div class="section-heading"><h2>Câu hỏi của bạn</h2><span class="small-tag">TriviaQA · EN</span></div>
+                    <div class="section-heading">
+                        <h2>Câu hỏi nghiên cứu</h2>
+                        <span class="small-tag">TriviaQA · EN</span>
+                    </div>
                     <label class="sr-only" for="query-input">Nhập câu hỏi tiếng Anh</label>
-                    <textarea id="query-input" rows="3" maxlength="2000" placeholder="Ví dụ: Who directed the movie Jaws?" aria-describedby="query-help" required></textarea>
-                    <p id="query-help" class="field-help">Dữ liệu nguồn bằng tiếng Anh. Dùng câu hỏi tiếng Anh để có kết quả phù hợp hơn.</p>
-                    <div class="topk-control"><label for="param-topk">Số đoạn truy hồi <span class="muted">(Top-K)</span></label><output id="val-topk" for="param-topk">5</output></div>
+                    <textarea id="query-input" rows="3" maxlength="2000" placeholder="Ví dụ: In what year did Edward Vlll abdicate?" aria-describedby="query-help" required></textarea>
+                    <p id="query-help" class="field-help">Dữ liệu nguồn bằng tiếng Anh. Dùng câu hỏi tiếng Anh để có kết quả chính xác nhất.</p>
+                    
+                    <div class="option-toggle-group">
+                        <label class="checkbox-label" for="param-run-rag">
+                            <input type="checkbox" id="param-run-rag" checked>
+                            <span class="checkbox-text">Kích hoạt RAG (FAISS + T5-base)</span>
+                        </label>
+                        <span class="option-hint" id="rag-engine-hint">Đang nạp GPU/CPU…</span>
+                    </div>
+
+                    <div class="topk-control">
+                        <label for="param-topk">Số đoạn truy hồi <span class="muted">(Top-K)</span></label>
+                        <output id="val-topk" for="param-topk">5</output>
+                    </div>
                     <input type="range" id="param-topk" min="1" max="10" value="5">
                     <div class="range-ends" aria-hidden="true"><span>1 đoạn</span><span>10 đoạn</span></div>
+                    
                     <details class="advanced-settings">
                         <summary>Tham số BM25 <span class="summary-hint">Nâng cao</span></summary>
                         <div class="advanced-body">
-                            <div class="topk-control"><label for="param-k1">Độ bão hòa từ khóa <span class="muted">k₁</span></label><output id="val-k1" for="param-k1">1.5</output></div>
+                            <div class="topk-control">
+                                <label for="param-k1">Độ bão hòa từ khóa <span class="muted">k₁</span></label>
+                                <output id="val-k1" for="param-k1">1.5</output>
+                            </div>
                             <input type="range" id="param-k1" min="0.5" max="3" step="0.1" value="1.5">
-                            <p class="field-help">Điều chỉnh tác động khi một từ xuất hiện nhiều lần.</p>
-                            <div class="topk-control"><label for="param-b">Chuẩn hóa độ dài <span class="muted">b</span></label><output id="val-b" for="param-b">0.75</output></div>
+                            <p class="field-help">Tác động khi một từ xuất hiện nhiều lần.</p>
+                            <div class="topk-control">
+                                <label for="param-b">Chuẩn hóa độ dài <span class="muted">b</span></label>
+                                <output id="val-b" for="param-b">0.75</output>
+                            </div>
                             <input type="range" id="param-b" min="0" max="1" step="0.05" value="0.75">
-                            <p class="field-help">Điều chỉnh mức ảnh hưởng của độ dài đoạn tài liệu.</p>
+                            <p class="field-help">Mức ảnh hưởng của độ dài đoạn tài liệu.</p>
                             <button type="button" id="reset-params" class="text-button">Khôi phục mặc định</button>
                         </div>
                     </details>
-                    <button type="submit" id="btn-run" class="btn-primary"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span id="run-label">Tìm bằng chứng</span><span aria-hidden="true">→</span></button>
+                    <button type="submit" id="btn-run" class="btn-primary">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+                        <span id="run-label">So sánh & Tìm bằng chứng</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
                     <p class="keyboard-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> để chạy · Enter để xuống dòng</p>
                 </form>
                 <section class="sample-presets" aria-labelledby="sample-heading">
-                    <div class="section-heading"><h2 id="sample-heading">Thử một câu hỏi mẫu</h2></div>
-                    <p class="field-help">Chọn để điền, sau đó bấm “Tìm bằng chứng”.</p>
-                    <div id="samples-list" class="samples-list" aria-live="polite"><p class="muted">Đang tải câu hỏi mẫu…</p></div>
+                    <div class="section-heading">
+                        <h2 id="sample-heading">Câu hỏi mẫu tiêu biểu</h2>
+                    </div>
+                    <p class="field-help">Bấm chọn câu hỏi để điền nhanh và so sánh:</p>
+                    <div id="samples-list" class="samples-list" aria-live="polite">
+                        <p class="muted">Đang tải câu hỏi mẫu…</p>
+                    </div>
                     <button type="button" id="sample-retry" class="text-button" hidden>Tải lại câu hỏi mẫu</button>
                     <button type="button" id="samples-toggle" class="text-button" aria-expanded="false" hidden>Xem tất cả câu hỏi</button>
                 </section>
-                <div class="corpus-info"><span class="corpus-icon" aria-hidden="true">▤</span><div><b>Kho tài liệu TriviaQA</b><p><span id="hdr-corpus">—</span> đoạn · <span id="hdr-vocab">—</span> từ vựng</p></div></div>
+                <div class="corpus-info">
+                    <span class="corpus-icon" aria-hidden="true">▤</span>
+                    <div>
+                        <b>Kho tri thức TriviaQA</b>
+                        <p><span id="hdr-corpus">—</span> đoạn chunks · <span id="hdr-vocab">—</span> từ vựng</p>
+                        <p class="device-tag" id="hdr-device">Thiết bị: Đang kiểm tra…</p>
+                    </div>
+                </div>
             </aside>
             <section id="results-panel" class="results-panel" aria-labelledby="results-heading" aria-busy="false">
-                <div class="results-header"><h2 id="results-heading" tabindex="-1">Bằng chứng truy hồi</h2><span id="result-status" class="small-tag">Chưa có truy vấn</span></div>
-                <div id="stale-notice" class="inline-notice" role="status" hidden>Câu hỏi hoặc tham số đã thay đổi. Chạy lại để cập nhật kết quả.</div>
-                <div id="empty-state" class="empty-state">
-                    <div class="document-illustration" aria-hidden="true"><svg viewBox="0 0 112 112" fill="none"><rect x="22" y="14" width="62" height="80" rx="7" fill="white" stroke="currentColor" stroke-width="1.5"/><path d="M35 33h34M35 44h25M35 55h34M35 66h19" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="78" cy="77" r="17" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/><path d="m72 77 4 4 8-9" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                    <h3>Bắt đầu từ một câu hỏi</h3><p>Chọn một câu hỏi mẫu hoặc nhập câu hỏi của bạn.<br>Đoạn trích và các tài liệu nguồn sẽ xuất hiện ở đây.</p>
-                    <div class="empty-guide"><span>Từ khóa được đánh dấu</span><span>Nguồn có thể đối chiếu</span></div>
+                <div class="results-header">
+                    <h2 id="results-heading" tabindex="-1">Kết quả So sánh Đối chiếu</h2>
+                    <span id="result-status" class="small-tag">Chưa có truy vấn</span>
                 </div>
-                <div id="loading-state" class="loading-state" role="status" hidden><p>Đang tìm và xếp hạng tài liệu…</p><div class="skeleton skeleton-short"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton skeleton-medium"></div><div class="skeleton-block"></div></div>
-                <div id="no-results" class="empty-state" hidden><span class="empty-symbol" aria-hidden="true">⌕</span><h3>Chưa tìm thấy đoạn phù hợp</h3><p>Thử tên riêng, từ khóa cụ thể hoặc một câu hỏi mẫu bằng tiếng Anh. Kho tài liệu này chỉ chứa một phần của TriviaQA.</p></div>
-                <div id="error-state" class="error-state" role="alert" hidden><h3>Chưa thể hoàn tất truy vấn</h3><p id="error-message"></p><button type="button" id="retry-button" class="btn-secondary">Thử lại</button></div>
+                <div id="stale-notice" class="inline-notice" role="status" hidden>Câu hỏi hoặc tham số đã thay đổi. Chạy lại để cập nhật kết quả.</div>
+                
+                <!-- Trạng thái trống -->
+                <div id="empty-state" class="empty-state">
+                    <div class="document-illustration" aria-hidden="true">
+                        <svg viewBox="0 0 112 112" fill="none">
+                            <rect x="22" y="14" width="62" height="80" rx="7" fill="white" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M35 33h34M35 44h25M35 55h34M35 66h19" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="78" cy="77" r="17" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+                            <path d="m72 77 4 4 8-9" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Bắt đầu so sánh từ một câu hỏi</h3>
+                    <p>Chọn câu hỏi mẫu bên trái hoặc nhập câu hỏi của bạn.<br>Hệ thống sẽ chạy song song BM25 và RAG (FAISS + T5) để bạn so sánh trực tiếp kết quả.</p>
+                    <div class="empty-guide">
+                        <span>So sánh T5 Generator vs BM25</span>
+                        <span>Đối chiếu Ground Truth</span>
+                        <span>So sánh tài liệu Dense vs Sparse</span>
+                    </div>
+                </div>
+
+                <!-- Trạng thái đang tải -->
+                <div id="loading-state" class="loading-state" role="status" hidden>
+                    <p id="loading-text">Đang truy hồi vector FAISS và sinh câu trả lời bằng T5-base…</p>
+                    <div class="skeleton skeleton-short"></div>
+                    <div class="skeleton"></div>
+                    <div class="skeleton"></div>
+                    <div class="skeleton skeleton-medium"></div>
+                    <div class="skeleton-block"></div>
+                </div>
+
+                <!-- Trạng thái không có kết quả -->
+                <div id="no-results" class="empty-state" hidden>
+                    <span class="empty-symbol" aria-hidden="true">⌕</span>
+                    <h3>Chưa tìm thấy đoạn phù hợp</h3>
+                    <p>Thử tên riêng, từ khóa cụ thể hoặc câu hỏi mẫu bằng tiếng Anh trong kho TriviaQA.</p>
+                </div>
+
+                <!-- Trạng thái lỗi -->
+                <div id="error-state" class="error-state" role="alert" hidden>
+                    <h3>Chưa thể hoàn tất truy vấn</h3>
+                    <p id="error-message"></p>
+                    <button type="button" id="retry-button" class="btn-secondary">Thử lại</button>
+                </div>
+
+                <!-- Nội dung kết quả so sánh -->
                 <div id="results-content" hidden>
                     <p id="result-query" class="result-query"></p>
-                    <div class="result-metrics"><span id="badge-coverage" class="metric">Độ phủ từ khóa: —</span><span id="badge-total-latency" class="metric">Xử lý: —</span></div>
-                    <div class="excerpt-heading"><h3>Đoạn trích nổi bật</h3><button type="button" id="copy-result" class="text-button">Sao chép đoạn trích</button></div>
-                    <blockquote id="extracted-span-text" class="extracted-text"></blockquote>
-                    <div class="source-line"><span class="source-marker" aria-hidden="true">↳</span><span id="span-source-ref"></span><span>· Câu <span id="span-sentence-idx"></span></span></div>
-                    <p class="result-caveat">Trích nguyên văn từ nguồn; có thể chưa trả lời đúng câu hỏi. Độ phủ từ khóa thể hiện mức khớp từ, không phải độ chính xác.</p>
-                    <p id="copy-status" class="copy-feedback" role="status"></p>
-                    <details id="reference-details" class="reference-details" hidden><summary>Đối chiếu đáp án trong bộ test</summary><div><p>Đáp án tham chiếu: <strong id="reference-answer"></strong></p><p class="muted">Tài liệu chuẩn: <span id="reference-doc"></span>. Đây là nhãn của bộ dữ liệu, không phải đáp án do hệ thống sinh.</p></div></details>
-                    <div class="sources-heading"><h3>Tài liệu nguồn</h3><span id="chunks-count" class="small-tag"></span></div>
-                    <p class="field-help">Xếp hạng theo điểm BM25. Mở từng đoạn để kiểm tra ngữ cảnh đầy đủ.</p>
-                    <div id="chunks-list" class="chunks-list"></div>
+                    <div class="result-metrics">
+                        <span id="badge-total-latency" class="metric">Tổng xử lý: —</span>
+                        <span id="badge-rag-latency" class="metric metric-neural">T5 Sinh câu: —</span>
+                        <span id="badge-coverage" class="metric">BM25 Khớp từ: —</span>
+                        <span id="badge-device" class="metric">Thiết bị: —</span>
+                    </div>
+
+                    <!-- BẢNG 3 KHỐI SO SÁNH TRỰC DIỆN -->
+                    <div class="comparison-grid">
+                        <!-- Khối 1: Hệ RAG nơ-ron (T5 + FAISS) -->
+                        <article class="model-card card-rag">
+                            <div class="model-card-header">
+                                <div class="card-title-group">
+                                    <span class="card-icon neural-icon">🤖</span>
+                                    <div>
+                                        <h3>Hệ thống RAG Đầy Đủ</h3>
+                                        <p class="card-subtitle">FAISS Dense + T5-base Generator</p>
+                                    </div>
+                                </div>
+                                <span class="model-badge neural-badge">Mô hình Chính</span>
+                            </div>
+                            <div class="model-card-body">
+                                <div class="answer-label">Câu trả lời do T5 sinh ra (từ ngữ cảnh):</div>
+                                <div class="generated-answer-box" id="rag-answer-box">—</div>
+                                
+                                <div class="contrast-row">
+                                    <span class="contrast-label">Ảo giác nếu không có context (Generator-only):</span>
+                                    <strong class="contrast-val val-hallucination" id="rag-gen-only-box">—</strong>
+                                </div>
+                                <div class="contrast-row" id="extractive-row">
+                                    <span class="contrast-label">Trích xuất DistilBERT (Extractive):</span>
+                                    <strong class="contrast-val" id="rag-extractive-box">—</strong>
+                                </div>
+                                <div class="card-stats">
+                                    <span id="rag-latency-stat">⏱ T5: —</span>
+                                    <span id="rag-retrieval-stat">🌐 FAISS: —</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Khối 2: Baseline BM25 -->
+                        <article class="model-card card-bm25">
+                            <div class="model-card-header">
+                                <div class="card-title-group">
+                                    <span class="card-icon lexical-icon">📄</span>
+                                    <div>
+                                        <h3>Hệ Baseline BM25</h3>
+                                        <p class="card-subtitle">Truy hồi từ khóa + Trích câu</p>
+                                    </div>
+                                </div>
+                                <span class="model-badge lexical-badge">Baseline Cũ</span>
+                            </div>
+                            <div class="model-card-body">
+                                <div class="answer-label">Câu trích nguyên văn từ đoạn nguồn:</div>
+                                <blockquote class="verbatim-answer-box" id="bm25-answer-box">—</blockquote>
+                                <div class="contrast-row">
+                                    <span class="contrast-label">Nguồn trích:</span>
+                                    <span class="contrast-val" id="bm25-source-ref">—</span>
+                                </div>
+                                <p class="result-caveat">Trích nguyên văn theo tần suất từ khóa; chưa phải câu trả lời tóm lược.</p>
+                                <div class="card-stats">
+                                    <span id="bm25-latency-stat">⏱ BM25: —</span>
+                                    <span id="bm25-coverage-stat">📊 Phủ từ: —</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Khối 3: Ground Truth -->
+                        <article class="model-card card-gt">
+                            <div class="model-card-header">
+                                <div class="card-title-group">
+                                    <span class="card-icon gt-icon">🎯</span>
+                                    <div>
+                                        <h3>Đáp án Tham Chiếu</h3>
+                                        <p class="card-subtitle">Nhãn chuẩn tập Test TriviaQA</p>
+                                    </div>
+                                </div>
+                                <span class="model-badge gt-badge" id="gt-match-badge">Ground Truth</span>
+                            </div>
+                            <div class="model-card-body">
+                                <div class="answer-label">Đáp án đúng trong bộ dữ liệu:</div>
+                                <div class="gt-answer-box" id="gt-answer-box">Chưa chọn câu hỏi mẫu</div>
+                                <div class="contrast-row">
+                                    <span class="contrast-label">Tài liệu chuẩn:</span>
+                                    <span class="contrast-val" id="gt-doc-box">—</span>
+                                </div>
+                                <p class="result-caveat" id="gt-explanation">Dùng để đối chiếu độ chính xác (Exact Match / F1) của T5 và BM25.</p>
+                                <div class="card-stats">
+                                    <span id="gt-status-stat">Đối chiếu tự động</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- SO SÁNH TÀI LIỆU NGUỒN: FAISS DENSE VS BM25 SPARSE -->
+                    <div class="sources-section">
+                        <div class="sources-heading">
+                            <h3>Tài liệu nguồn đã truy hồi</h3>
+                            <div class="source-tabs" role="tablist">
+                                <button type="button" class="tab-btn active" id="tab-btn-faiss" role="tab" aria-selected="true" aria-controls="tab-pane-faiss">
+                                    🌐 FAISS Dense Search (<span id="faiss-chunks-count">5</span>)
+                                </button>
+                                <button type="button" class="tab-btn" id="tab-btn-bm25" role="tab" aria-selected="false" aria-controls="tab-pane-bm25">
+                                    🔍 BM25 Sparse Search (<span id="bm25-chunks-count">5</span>)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Pane 1: FAISS Dense Chunks (used by T5) -->
+                        <div class="tab-pane active" id="tab-pane-faiss" role="tabpanel">
+                            <p class="field-help">Top đoạn có độ tương đồng ngữ nghĩa vector (Cosine Similarity) cao nhất, được nạp làm ngữ cảnh cho mô hình T5.</p>
+                            <div id="faiss-chunks-list" class="chunks-list"></div>
+                        </div>
+
+                        <!-- Pane 2: BM25 Sparse Chunks -->
+                        <div class="tab-pane" id="tab-pane-bm25" role="tabpanel" hidden>
+                            <p class="field-help">Top đoạn xếp hạng theo điểm từ khóa BM25 (dựa trên tần suất TF-IDF).</p>
+                            <div id="bm25-chunks-list" class="chunks-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- CHI TIẾT KỸ THUẬT -->
                     <details id="technical-details" class="technical-details">
-                        <summary>Phân tích từ khóa & điểm số <span class="summary-hint">Chi tiết kỹ thuật</span></summary>
-                        <div class="technical-body"><h4>Từ khóa trong câu hỏi</h4><div id="term-tags" class="term-tags"></div><p class="field-help">IDF càng cao, từ càng hiếm trong kho tài liệu.</p><h4>Phân rã điểm của đoạn xếp hạng #1</h4><div class="table-responsive"><table><caption class="sr-only">Đóng góp BM25 theo từng từ khóa</caption><thead><tr><th scope="col">Từ khóa</th><th scope="col">Số lần (TF)</th><th scope="col">IDF</th><th scope="col">Điểm BM25</th></tr></thead><tbody id="breakdown-tbody"></tbody></table></div><p class="field-help">Từ khớp trong câu trích: <span id="span-matched-terms"></span></p></div>
+                        <summary>Chi tiết kỹ thuật & Phân tích BM25 <span class="summary-hint">Mở rộng</span></summary>
+                        <div class="technical-body">
+                            <h4>Từ khóa trong câu hỏi</h4>
+                            <div id="term-tags" class="term-tags"></div>
+                            
+                            <h4>Phân rã điểm BM25 của đoạn xếp hạng #1</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <caption>Đóng góp BM25 theo từng từ khóa</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Từ khóa</th>
+                                            <th scope="col">Số lần (TF)</th>
+                                            <th scope="col">IDF</th>
+                                            <th scope="col">Điểm BM25</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="breakdown-tbody"></tbody>
+                                </table>
+                            </div>
+                            <p class="field-help">Từ khớp trong câu trích BM25: <span id="span-matched-terms"></span></p>
+                        </div>
                     </details>
                 </div>
-                <footer class="results-footer"><span class="footer-dot" aria-hidden="true"></span>Chế độ truy hồi & trích câu · Chưa sử dụng T5 hoặc FAISS</footer>
+                <footer class="results-footer">
+                    <span class="footer-dot" aria-hidden="true"></span>
+                    <span>Hệ thống RAG Đề tài 20: FAISS IndexFlatIP + T5-base fine-tuned + BM25Okapi Baseline</span>
+                </footer>
             </section>
         </div>
-        <footer class="page-footer"><span>RAG Lab · Demo đồ án hỏi–đáp</span><span>Kiểm tra bằng chứng trước khi kết luận.</span></footer>
+        <footer class="page-footer">
+            <span>RAG Lab · Đồ án Hỏi–Đáp (Đề tài 20)</span>
+            <span>Tác giả: Đặng Đại Lợi (@ddloi)</span>
+        </footer>
     </main>
 </body>
 </html>

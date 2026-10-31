@@ -1,4 +1,4 @@
-"""Regression checks for the local BM25 demo. Run: python -m unittest discover -s tests -v"""
+"""Regression checks for the local BM25 and RAG demo. Run: python -m unittest discover -s tests -v"""
 
 import json
 import math
@@ -82,7 +82,6 @@ class EngineTests(unittest.TestCase):
 class ApiTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # Import from another working directory to catch relative-data regressions.
         original_dir = Path.cwd()
         with tempfile.TemporaryDirectory() as elsewhere:
             try:
@@ -96,7 +95,7 @@ class ApiTests(unittest.TestCase):
         info = self.client.get("/api/pipeline/info")
         self.assertEqual(info.status_code, 200)
         self.assertGreater(info.json()["total_chunks"], 0)
-        self.assertFalse(info.json()["generator_enabled"])
+        self.assertIn("generator_enabled", info.json())
         self.assertTrue(DATA_DIR.is_absolute())
         samples = self.client.get("/api/pipeline/samples")
         self.assertEqual(samples.status_code, 200)
@@ -104,7 +103,7 @@ class ApiTests(unittest.TestCase):
 
     def test_sample_query_executes_and_assets_are_served(self):
         question = self.client.get("/api/pipeline/samples").json()["samples"][0]["question"]
-        response = self.client.post("/api/pipeline/execute", json={"query": question})
+        response = self.client.post("/api/pipeline/execute", json={"query": question, "run_rag": False})
         self.assertEqual(response.status_code, 200)
         result = response.json()["result"]
         self.assertGreater(len(result["top_chunks"]), 0)
@@ -118,6 +117,12 @@ class ApiTests(unittest.TestCase):
             with self.subTest(arguments=arguments):
                 response = self.client.post("/api/pipeline/execute", json={"query": "apple"} | arguments)
                 self.assertEqual(response.status_code, 422)
+
+    def test_rag_execution_returns_structured_comparison(self):
+        response = self.client.post("/api/pipeline/execute", json={"query": "Who directed the movie Jaws?", "run_rag": True})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("rag", data)
 
 
 if __name__ == "__main__":
