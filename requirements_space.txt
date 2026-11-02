@@ -1,2 +1,0 @@
-# Hugging Face Space dependencies; also uploaded as a standalone file.
--r deployment/huggingface/requirements.txt

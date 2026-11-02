@@ -1,0 +1,273 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "experiments.research_evaluate", "--data-dir", "data/research_v1", "--split", "dev", "--run-dir", "results/research_colab_dev"], "cwd": "/content/RAG", "started_utc": "20261101T115209644290Z"}
+Building shared retrieval rankings...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights:  77%|███████▋  | 79/103 [00:00<00:00, 777.53it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 780.43it/s]
+Generating closed-book baseline...
+
+Loading weights:   0%|          | 0/257 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 257/257 [00:00<00:00, 4756.14it/s]
+Running extractive baseline...
+
+Loading weights:   0%|          | 0/102 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 102/102 [00:00<00:00, 1431.75it/s]
+Generating Dense RAG, Hybrid RAG, and context ablation...
+
+Loading weights:   0%|          | 0/257 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 257/257 [00:00<00:00, 4685.25it/s]
+[1/200] dense EM=0 hybrid EM=0
+[2/200] dense EM=0 hybrid EM=0
+[3/200] dense EM=0 hybrid EM=0
+[4/200] dense EM=0 hybrid EM=1
+[5/200] dense EM=0 hybrid EM=0
+[6/200] dense EM=1 hybrid EM=1
+[7/200] dense EM=0 hybrid EM=1
+[8/200] dense EM=1 hybrid EM=1
+[9/200] dense EM=0 hybrid EM=1
+[10/200] dense EM=0 hybrid EM=0
+[11/200] dense EM=0 hybrid EM=1
+[12/200] dense EM=0 hybrid EM=1
+[13/200] dense EM=0 hybrid EM=0
+[14/200] dense EM=1 hybrid EM=1
+[15/200] dense EM=1 hybrid EM=1
+[16/200] dense EM=1 hybrid EM=0
+[17/200] dense EM=1 hybrid EM=1
+[18/200] dense EM=0 hybrid EM=0
+[19/200] dense EM=0 hybrid EM=0
+[20/200] dense EM=0 hybrid EM=0
+[21/200] dense EM=1 hybrid EM=1
+[22/200] dense EM=0 hybrid EM=0
+[23/200] dense EM=0 hybrid EM=0
+[24/200] dense EM=0 hybrid EM=0
+[25/200] dense EM=1 hybrid EM=1
+[26/200] dense EM=1 hybrid EM=1
+[27/200] dense EM=1 hybrid EM=0
+[28/200] dense EM=1 hybrid EM=1
+[29/200] dense EM=0 hybrid EM=0
+[30/200] dense EM=1 hybrid EM=1
+[31/200] dense EM=0 hybrid EM=0
+[32/200] dense EM=1 hybrid EM=1
+[33/200] dense EM=1 hybrid EM=1
+[34/200] dense EM=1 hybrid EM=1
+[35/200] dense EM=1 hybrid EM=1
+[36/200] dense EM=1 hybrid EM=1
+[37/200] dense EM=1 hybrid EM=1
+[38/200] dense EM=0 hybrid EM=1
+[39/200] dense EM=0 hybrid EM=0
+[40/200] dense EM=1 hybrid EM=1
+[41/200] dense EM=1 hybrid EM=1
+[42/200] dense EM=1 hybrid EM=0
+[43/200] dense EM=0 hybrid EM=0
+[44/200] dense EM=1 hybrid EM=1
+[45/200] dense EM=0 hybrid EM=0
+[46/200] dense EM=0 hybrid EM=0
+[47/200] dense EM=1 hybrid EM=1
+[48/200] dense EM=0 hybrid EM=1
+[49/200] dense EM=0 hybrid EM=0
+[50/200] dense EM=0 hybrid EM=0
+[51/200] dense EM=1 hybrid EM=1
+[52/200] dense EM=1 hybrid EM=1
+[53/200] dense EM=1 hybrid EM=1
+[54/200] dense EM=0 hybrid EM=0
+[55/200] dense EM=1 hybrid EM=1
+[56/200] dense EM=1 hybrid EM=1
+[57/200] dense EM=0 hybrid EM=0
+[58/200] dense EM=1 hybrid EM=1
+[59/200] dense EM=0 hybrid EM=0
+[60/200] dense EM=1 hybrid EM=1
+[61/200] dense EM=0 hybrid EM=1
+[62/200] dense EM=1 hybrid EM=1
+[63/200] dense EM=1 hybrid EM=1
+[64/200] dense EM=1 hybrid EM=1
+[65/200] dense EM=1 hybrid EM=1
+[66/200] dense EM=0 hybrid EM=0
+[67/200] dense EM=1 hybrid EM=1
+[68/200] dense EM=0 hybrid EM=1
+[69/200] dense EM=1 hybrid EM=1
+[70/200] dense EM=1 hybrid EM=1
+[71/200] dense EM=0 hybrid EM=0
+[72/200] dense EM=1 hybrid EM=1
+[73/200] dense EM=1 hybrid EM=1
+[74/200] dense EM=0 hybrid EM=0
+[75/200] dense EM=1 hybrid EM=1
+[76/200] dense EM=1 hybrid EM=1
+[77/200] dense EM=0 hybrid EM=0
+[78/200] dense EM=1 hybrid EM=1
+[79/200] dense EM=1 hybrid EM=1
+[80/200] dense EM=0 hybrid EM=0
+[81/200] dense EM=1 hybrid EM=1
+[82/200] dense EM=1 hybrid EM=1
+[83/200] dense EM=0 hybrid EM=0
+[84/200] dense EM=1 hybrid EM=1
+[85/200] dense EM=0 hybrid EM=0
+[86/200] dense EM=0 hybrid EM=0
+[87/200] dense EM=0 hybrid EM=0
+[88/200] dense EM=0 hybrid EM=0
+[89/200] dense EM=1 hybrid EM=1
+[90/200] dense EM=0 hybrid EM=0
+[91/200] dense EM=1 hybrid EM=1
+[92/200] dense EM=1 hybrid EM=1
+[93/200] dense EM=0 hybrid EM=0
+[94/200] dense EM=1 hybrid EM=1
+[95/200] dense EM=0 hybrid EM=0
+[96/200] dense EM=0 hybrid EM=0
+[97/200] dense EM=0 hybrid EM=0
+[98/200] dense EM=0 hybrid EM=0
+[99/200] dense EM=1 hybrid EM=1
+[100/200] dense EM=0 hybrid EM=0
+[101/200] dense EM=1 hybrid EM=1
+[102/200] dense EM=1 hybrid EM=1
+[103/200] dense EM=0 hybrid EM=0
+[104/200] dense EM=0 hybrid EM=0
+[105/200] dense EM=0 hybrid EM=0
+[106/200] dense EM=1 hybrid EM=0
+[107/200] dense EM=1 hybrid EM=1
+[108/200] dense EM=0 hybrid EM=0
+[109/200] dense EM=0 hybrid EM=1
+[110/200] dense EM=0 hybrid EM=0
+[111/200] dense EM=0 hybrid EM=0
+[112/200] dense EM=1 hybrid EM=1
+[113/200] dense EM=0 hybrid EM=0
+[114/200] dense EM=1 hybrid EM=0
+[115/200] dense EM=1 hybrid EM=1
+[116/200] dense EM=0 hybrid EM=0
+[117/200] dense EM=0 hybrid EM=1
+[118/200] dense EM=0 hybrid EM=0
+[119/200] dense EM=0 hybrid EM=0
+[120/200] dense EM=1 hybrid EM=1
+[121/200] dense EM=0 hybrid EM=0
+[122/200] dense EM=1 hybrid EM=1
+[123/200] dense EM=0 hybrid EM=1
+[124/200] dense EM=1 hybrid EM=1
+[125/200] dense EM=1 hybrid EM=1
+[126/200] dense EM=0 hybrid EM=0
+[127/200] dense EM=1 hybrid EM=1
+[128/200] dense EM=0 hybrid EM=0
+[129/200] dense EM=0 hybrid EM=0
+[130/200] dense EM=0 hybrid EM=0
+[131/200] dense EM=1 hybrid EM=1
+[132/200] dense EM=1 hybrid EM=1
+[133/200] dense EM=1 hybrid EM=1
+[134/200] dense EM=1 hybrid EM=1
+[135/200] dense EM=1 hybrid EM=0
+[136/200] dense EM=0 hybrid EM=0
+[137/200] dense EM=1 hybrid EM=1
+[138/200] dense EM=0 hybrid EM=0
+[139/200] dense EM=0 hybrid EM=0
+[140/200] dense EM=0 hybrid EM=0
+[141/200] dense EM=1 hybrid EM=1
+[142/200] dense EM=0 hybrid EM=0
+[143/200] dense EM=1 hybrid EM=1
+[144/200] dense EM=0 hybrid EM=0
+[145/200] dense EM=1 hybrid EM=1
+[146/200] dense EM=0 hybrid EM=0
+[147/200] dense EM=1 hybrid EM=1
+[148/200] dense EM=0 hybrid EM=0
+[149/200] dense EM=1 hybrid EM=1
+[150/200] dense EM=0 hybrid EM=0
+[151/200] dense EM=0 hybrid EM=0
+[152/200] dense EM=1 hybrid EM=1
+[153/200] dense EM=0 hybrid EM=1
+[154/200] dense EM=0 hybrid EM=0
+[155/200] dense EM=0 hybrid EM=0
+[156/200] dense EM=1 hybrid EM=1
+[157/200] dense EM=0 hybrid EM=0
+[158/200] dense EM=1 hybrid EM=1
+[159/200] dense EM=0 hybrid EM=0
+[160/200] dense EM=0 hybrid EM=0
+[161/200] dense EM=1 hybrid EM=1
+[162/200] dense EM=1 hybrid EM=1
+[163/200] dense EM=0 hybrid EM=0
+[164/200] dense EM=1 hybrid EM=0
+[165/200] dense EM=1 hybrid EM=0
+[166/200] dense EM=0 hybrid EM=0
+[167/200] dense EM=1 hybrid EM=1
+[168/200] dense EM=0 hybrid EM=0
+[169/200] dense EM=1 hybrid EM=0
+[170/200] dense EM=0 hybrid EM=0
+[171/200] dense EM=1 hybrid EM=1
+[172/200] dense EM=0 hybrid EM=0
+[173/200] dense EM=0 hybrid EM=1
+[174/200] dense EM=0 hybrid EM=0
+[175/200] dense EM=0 hybrid EM=0
+[176/200] dense EM=0 hybrid EM=0
+[177/200] dense EM=0 hybrid EM=0
+[178/200] dense EM=1 hybrid EM=1
+[179/200] dense EM=1 hybrid EM=1
+[180/200] dense EM=1 hybrid EM=1
+[181/200] dense EM=1 hybrid EM=1
+[182/200] dense EM=0 hybrid EM=0
+[183/200] dense EM=0 hybrid EM=1
+[184/200] dense EM=1 hybrid EM=1
+[185/200] dense EM=1 hybrid EM=0
+[186/200] dense EM=0 hybrid EM=0
+[187/200] dense EM=1 hybrid EM=1
+[188/200] dense EM=0 hybrid EM=0
+[189/200] dense EM=0 hybrid EM=1
+[190/200] dense EM=0 hybrid EM=0
+[191/200] dense EM=1 hybrid EM=1
+[192/200] dense EM=1 hybrid EM=1
+[193/200] dense EM=0 hybrid EM=0
+[194/200] dense EM=0 hybrid EM=0
+[195/200] dense EM=0 hybrid EM=0
+[196/200] dense EM=0 hybrid EM=0
+[197/200] dense EM=1 hybrid EM=1
+[198/200] dense EM=1 hybrid EM=1
+[199/200] dense EM=0 hybrid EM=0
+[200/200] dense EM=0 hybrid EM=0
+{
+  "generator_only": {
+    "official": {
+      "em": 0.055,
+      "f1": 0.1041904761904762
+    },
+    "canonical": {
+      "em": 0.045,
+      "f1": 0.06176190476190477
+    }
+  },
+  "retrieval_only": {
+    "official": {
+      "em": 0.455,
+      "f1": 0.5160281385281386
+    },
+    "canonical": {
+      "em": 0.38,
+      "f1": 0.46386147186147186
+    }
+  },
+  "rag_full": {
+    "official": {
+      "em": 0.515,
+      "f1": 0.577952380952381
+    },
+    "canonical": {
+      "em": 0.475,
+      "f1": 0.5442344322344322
+    }
+  },
+  "rag_hybrid": {
+    "official": {
+      "em": 0.545,
+      "f1": 0.5971666666666667
+    },
+    "canonical": {
+      "em": 0.505,
+      "f1": 0.5720555555555555
+    }
+  },
+  "rag_checkpoint_no_context": {
+    "official": {
+      "em": 0.07,
+      "f1": 0.16267857142857142
+    },
+    "canonical": {
+      "em": 0.045,
+      "f1": 0.0745
+    }
+  }
+}
+
+EXIT_CODE=0

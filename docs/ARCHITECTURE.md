@@ -1,117 +1,83 @@
-# Cấu trúc và cách chạy project
+# Bản đồ project và lệnh vận hành
 
-Project được chia theo trách nhiệm để dễ trình bày đồ án và dễ sửa mã. Web có BM25 và nhánh Dense/Hybrid + T5 tùy chọn; experiments giữ các bước huấn luyện, đánh giá và Hybrid. Thư mục cha chứa bản chính RAG và bản nộp baseline độc lập.
+Bản dùng để báo cáo là research_v1. Đọc [hướng dẫn học](HOC_VA_VAN_HANH.md) để hiểu thuật toán; tài liệu này giúp tìm đúng thư mục và lệnh.
 
-## Bản đồ trách nhiệm
+## Ba nhóm cần phân biệt
 
-| Vị trí | Vai trò | Khi cần sửa |
+| Nhóm | Thư mục | Mở khi nào? |
 | --- | --- | --- |
-| `ragqa/web.py` | FastAPI, validation và endpoint | Thay API web |
-| `ragqa/engine.py` | BM25, chọn câu và telemetry | Thay hành vi retrieval demo |
-| `ragqa/rag_engine.py` | Vòng đời model local, FAISS + T5 và DistilBERT tùy chọn | Thay suy luận neural trên web |
-| `ragqa/static/` | HTML, CSS, JavaScript | Thay UX/UI |
-| `ragqa/paths.py` | Các đường dẫn chung | Thay nơi lưu dữ liệu hoặc kết quả |
-| `experiments/` | Chuẩn bị dữ liệu, train, RAG, đánh giá | Thay thí nghiệm nghiên cứu |
-| `configs/` | Cấu hình baseline được quản lý bằng Git | Thay hyperparameters mặc định |
-| `scripts/` | Phục hồi dữ liệu, dựng corpus demo, chấm lại và upload artifact | Bảo trì công cụ triển khai |
-| `deployment/huggingface/` | Gradio app và requirements độc lập | Deploy Hugging Face Space |
-| `tests/` | Kiểm thử engine/API và đường dẫn | Kiểm tra hồi quy |
-| `requirements/` | Môi trường demo, test, ML, notebook | Cài đúng nhóm phụ thuộc |
-| `notebooks/` | Khám phá dữ liệu và preprocessing QA | Phân tích notebook |
-| `data/` | Raw documents, QA pairs, chunks, FAISS index | Artifact đầu vào và trung gian |
-| `generator_finetuned/` | Trọng số, tokenizer, cấu hình model | Artifact mô hình local |
-| `results/` | JSON/CSV kết quả đo đã lưu | Đọc hoặc lưu kết quả thí nghiệm |
-| `.pipeline/` | Cấu hình override và trạng thái local | Trạng thái máy hiện tại; không đưa vào Git |
+| Mã và cấu hình | ragqa/, experiments/, scripts/, configs/, requirements/, tests/ | Sửa code, chạy lệnh, kiểm thử |
+| Tài liệu và notebook | docs/, notebooks/ | Học đồ án, chuẩn bị báo cáo, chạy Colab |
+| Artifact | data/, checkpoints/, results/, outputs/, generator_finetuned/ | Chuẩn bị model/corpus, xem kết quả, bàn giao |
+
+Artifact có nhiều file vì cần lưu predictions, manifests, checksum và provenance. Không di chuyển chúng chỉ để gom thư mục: các đường dẫn đã được khóa hoặc lưu trong hồ sơ thí nghiệm.
+
+## Web và pipeline
 
 ```mermaid
 flowchart LR
-    Browser[Trình duyệt] --> Web[ragqa.web]
-    Web --> Engine[ragqa.engine: BM25 + trích câu]
-    Web --> Neural[ragqa.rag_engine: FAISS + T5 tùy chọn]
-    Neural --> Data
-    Neural --> Model
-    Web --> Static[ragqa/static]
-    Engine --> Data[data/]
-    Research[experiments/] --> Data
-    Research --> Model[generator_finetuned/]
-    Research --> Results[results/]
-    Research --> Config[configs/ hoặc override local]
+    U[Trình duyệt] --> A[app.py và ragqa.web]
+    A --> W[ragqa.research_web]
+    W --> P[experiments.research_pipeline]
+    P --> R[Dense hoặc Hybrid retrieval]
+    R --> D[data/research_v1: corpus và FAISS]
+    P --> C[T5 closed-book]
+    P --> E[DistilBERT extractive]
+    P --> G[T5 RAG]
+    C --> M[checkpoints/research_v1]
+    G --> M
 ```
 
-## Lệnh chạy chính
+| Tệp | Trách nhiệm |
+| --- | --- |
+| app.py | Điểm mở web; hỗ trợ python app.py và uvicorn app:app |
+| ragqa/web.py | FastAPI, static files, route nghiên cứu và demo lịch sử |
+| ragqa/research_web.py | Nạp ba hệ, nhận câu hỏi, gắn reference dev sau inference |
+| ragqa/static/research.* | Giao diện nghiên cứu |
+| experiments/research_data.py | Chọn split, chunking, embedding và index |
+| experiments/research_pipeline.py | Template, token budget, retrieval, generation, extraction |
+| experiments/research_train.py | Fine-tune hai T5 riêng |
+| experiments/research_evaluate.py | Ba hệ, Hybrid, ablation, predictions và metrics |
+| experiments/metrics.py | Normalization TriviaQA, EM/F1 |
+| configs/research_v1.json | Cấu hình chung đã chốt |
+| scripts/ | Preflight, báo cáo, đối chiếu replay, tổng hợp phiếu chấm, đóng gói |
 
-Chạy từ thư mục gốc `RAG`, trừ trường hợp dùng đường dẫn tuyệt đối đến launcher.
+Các module lịch sử vẫn ở experiments/ và ragqa/ vì còn import hoặc phục vụ /legacy. Xem [bản đồ experiments](../experiments/README.md). Không đổi các đường dẫn phương pháp đã khóa trong lượt sắp xếp này.
+
+## Những lệnh dùng hằng ngày
+
+Từ root RAG, sau khi chuẩn bị đúng artifact và môi trường:
 
 ```powershell
-# Web nhẹ; không cần GPU hoặc tải mô hình
-python -m pip install -r requirements/demo.txt
+python -m pip install -r requirements/demo.txt -r requirements/research.txt
 python app.py
-# Hoặc: python -m ragqa
-# Hoặc: python -m uvicorn ragqa.web:app --host 127.0.0.1 --port 8001
-
-# Kiểm thử
-python -m pip install -r requirements/test.txt
 python -m unittest discover -s tests -v
-python -m scripts.check_demo
-# Kiểm tra suy luận thật bằng model/cache local:
-python -m scripts.check_demo --neural
-
-# Liệt kê thí nghiệm; không tải thư viện ML hoặc chạy bước nào
 python -m experiments --list
 ```
 
-Web mở tại `http://localhost:8001`. `python app.py`, `uvicorn app:app` và lệnh kiểm thử engine cũ vẫn được giữ. Package `ragqa` không tự nạp model hoặc khởi động server khi chỉ `import ragqa`.
+Mở http://127.0.0.1:8001/research. POST /api/research/load nạp MiniLM, hai T5 và DistilBERT ở nền; GET /api/research/info cho biết ready/loading/error. POST /api/research/execute chạy ba hệ, mỗi tiến trình chỉ xử lý một yêu cầu suy luận tại một thời điểm.
 
-## Vòng đời mô hình trên web
+Dựng dữ liệu, train và evaluate theo [hướng dẫn vận hành](HOC_VA_VAN_HANH.md). Không cần chạy lại chúng để mở demo. Các run mới phải có đường dẫn mới; giữ nguyên kết quả đã chốt.
 
-Import ragqa.web chỉ nạp corpus BM25. Nút nạp RAG hoặc truy vấn đầu tiên bật RAG khởi động worker nền. POST /api/rag/load trả 202; GET /api/pipeline/info cho biết ready, loading, idle, error hoặc unavailable. Khi nạp xong, chạy lại câu hỏi để có kết quả RAG. Mô hình chỉ đọc checkpoint và cache local; lỗi neural được báo riêng, giữ kết quả BM25. Mỗi tiến trình phục vụ một lượt suy luận neural; lượt đến cùng lúc nhận thông báo bận.
+## Tài liệu nằm ở đâu?
 
-## Các bước thí nghiệm
+- [docs/README.md](README.md): danh mục và thứ tự đọc.
+- docs/history/: v2/v3, audit cũ, kế hoạch ban đầu và README dài trước khi thu gọn.
+- docs/development/: PRODUCT.md và DESIGN.md cho công việc giao diện.
+- [results/README.md](../results/README.md): kết quả hiện tại và bằng chứng lịch sử.
 
-Các bước dưới đây cần môi trường `requirements/ml.txt`. Chúng có thể tải dữ liệu/mô hình, chạy huấn luyện hoặc ghi đè artifact; không cần chạy lại để mở web khi corpus đã có.
+## Lệnh cũ sau sắp xếp
 
-| Bước | Lệnh chính | Lệnh cũ vẫn hỗ trợ |
-| --- | --- | --- |
-| Tải dữ liệu | `python -m experiments.download_dataset` | `python 00_download_dataset.py` |
-| Chia đoạn | `python -m experiments.prepare_chunks` | `python 01_prepare_and_chunk.py` |
-| Tách train/test | `python -m experiments.split_train_test` | `python 01b_split_train_test.py` |
-| Xây chỉ mục | `python -m experiments.build_index` | `python 02_build_index.py` |
-| Fine-tune | `python -m experiments.finetune_generator` | `python 03_finetune_generator.py` |
-| RAG T5 + FAISS | `python -m experiments.rag_pipeline` | `python 04_rag_pipeline.py` |
-| Đánh giá | `python -m experiments.evaluate --samples 5` | `python 05_evaluate.py --samples 5` |
-| Hybrid retrieval | `python -m experiments.hybrid_retrieval` | `python 06_hybrid_retrieval.py` |
-| Ablation | `python -m experiments.ablation` | `python 07_ablation_chunk_topk.py` |
-| Retrieval baselines | `python -m experiments.baseline_retrieval` | `python 08_baseline_retrieval.py` |
-| Upload Hub | `python -m scripts.upload_to_hf` | `python upload_to_hf.py` |
+18 launcher/requirements chuyển tiếp ở root đã được đưa ra bản lưu riêng. Logic triển khai vẫn ở package; thay cách gọi như sau:
 
-Cũng có thể dùng `python -m experiments evaluate --samples 5`. Các module cụ thể giữ hành vi nhập thư viện ML của bản gốc; `--help` của một số bước vẫn có thể chậm. `python -m experiments --list` và `python -m experiments --help` dùng để xem hướng dẫn nhanh, không nạp các thư viện này.
-
-## Artifact sau khi di chuyển
-
-| Vị trí trước | Vị trí hiện tại |
+| Trước đây | Dùng hiện tại |
 | --- | --- |
-| `raw_documents.json` | `data/raw_documents.json` |
-| `baseline_results.json` | `results/baseline_results.json` |
-| `ablation_results.csv` | `results/ablation_results.csv` |
-| `preprocessing.ipynb` | `notebooks/preprocessing.ipynb` |
-| `static/` | `ragqa/static/` |
+| python 00_download_dataset.py ... và các script 01–08 | python -m experiments.<module> ...; liệt kê bằng python -m experiments --list |
+| import pipeline_engine | from ragqa.engine import ... |
+| python test_engine.py | python -m unittest discover -s tests -v |
+| python upload_to_hf.py | python -m scripts.upload_to_hf |
+| requirements_demo/lock/space.txt ở root | requirements/demo.txt, requirements/lock.txt, deployment/huggingface/requirements.txt |
+| requirements.txt ở root | requirements/research.txt cho research_v1; requirements/ml.txt cho pipeline lịch sử |
+| app_space.py | deployment/huggingface/app.py và requirements.txt cùng thư mục |
 
-Dữ liệu raw và hai tệp kết quả được chuyển nguyên nội dung, bao gồm chỉnh sửa local đã có ở baseline. Notebook giữ các cell và kết quả đã lưu, chỉ cập nhật cell đường dẫn để mở từ root hoặc `notebooks/`. Corpus, chỉ mục, train/test và trọng số không được tạo lại.
-
-Các đường dẫn artifact trong package chính RAG dùng `ragqa.paths`, độc lập thư mục làm việc. Baseline đọc `.pipeline/hyperparams.json` nếu có; nếu không, dùng `configs/baseline_retrieval.json`. Đường dẫn tương đối trong cấu hình được tính từ root repository.
-
-Các tệp `00_*.py` đến `08_*.py`, `pipeline_engine.py`, `test_engine.py`, `upload_to_hf.py` và `app_space.py` ở root là các điểm gọi tương thích. Chỉnh sửa triển khai ở package tương ứng để tránh có hai bản logic khác nhau.
-
-## Triển khai Space
-
-Upload `deployment/huggingface/app.py` thành `app.py` và tệp `requirements.txt` bên cạnh lên một Gradio Space. Cấu hình biến `HF_MODEL_REPO_ID`. Không dùng launcher tương thích `app_space.py` ở root làm tệp độc lập trên Space vì launcher phụ thuộc package trong repository.
-
-## Phạm vi xác nhận
-
-Lần sắp xếp này kiểm tra cấu trúc, import, đường dẫn, engine/API demo và tính toàn vẹn các artifact đã chuyển. Không huấn luyện lại, không upload Hub, không deploy Space và không xác nhận lại chất lượng QA của T5/FAISS. Giới hạn chức năng demo nằm trong [DEMO_READINESS.md](DEMO_READINESS.md).
-
-## Bản thực nghiệm verified_v2
-
-`experiments/verify_dataset.py` tạo corpus có nguồn/alias được khôi phục ở revision cố định. `experiments/metrics.py` là bộ tính điểm nhẹ; `experiments/evaluate.py` lưu manifest, predictions và metrics vào từng run riêng. `experiments/rag_pipeline.py` dùng lại inference/context mask của web, lưu context thực sự sau truncation. Web chọn bản đầy đủ theo thứ tự data/demo_v3 → data/verified_v2 → data gốc. Demo v3 và Hybrid ưu tiên từ hiếm không tham gia số liệu đánh giá v2; xem IMPROVEMENTS_V3.md. Các script train/chuẩn bị dữ liệu cũ vẫn thao tác data gốc; không tự đổi bộ huấn luyện của checkpoint.
-
-Xem EVALUATION_PROTOCOL.md và EVALUATION_RESULTS_V2.md để tra cấu hình, phạm vi và bằng chứng.
+Deploy Space là công việc tùy chọn, không phải bằng chứng kết quả research_v1. Lệnh web chính và các lệnh module được giữ nguyên. Bản lưu trước sắp xếp có đường dẫn và SHA trong [biên bản dọn](CLEANUP.md).

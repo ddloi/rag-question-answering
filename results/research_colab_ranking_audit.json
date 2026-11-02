@@ -1,0 +1,524 @@
+{
+  "status": "COMPLETE",
+  "created_at": "2026-11-01T12:16:31.595310+00:00",
+  "scope": "Derived audit of the single dev ranking-order difference in frozen local/Colab inference artifacts; no new inference, training, tuning, or mismatch normalization.",
+  "question_id": "qb_4397",
+  "question": "In April 1963, Lester Bowles Pearson became Prime Minister of which country?",
+  "canonical_reference": "Canada",
+  "finding": "Dense ranks 23/24 swap; the same chunk IDs swap Hybrid ranks 28/29. BM25, all evaluated top-1/3/5/10 orders and memberships, actual contexts, answers, and reported retrieval metrics remain unchanged.",
+  "strict_full_ranking_replay": "ORDER_DIFFERENCE_PRESERVED",
+  "inputs": {
+    "original": {
+      "predictions": "results/research_v1_dev/predictions.jsonl.gz",
+      "predictions_sha256": "f951e50af3976f1f4b42466c8a440c66d9ed9e3a1d01dddc1e3eefcfc916d90f",
+      "prediction_sha_matches_manifest_and_comparison": true,
+      "manifest": "results/research_v1_dev/manifest.json",
+      "manifest_sha256": "bd510ea22dd54b57ad4df4acef91870c4cd9d1c1b287841b95dd71e5a2d1acdb",
+      "metrics": "results/research_v1_dev/metrics.json",
+      "metrics_sha256": "ab5ef086c8d2f29b954b92b226332bfd00dbdb40361d2ebc09cee9a7c6ed2d2a",
+      "environment": {
+        "python": "3.13.1",
+        "packages": {
+          "torch": "2.6.0+cu124",
+          "transformers": "5.17.0",
+          "sentence-transformers": "6.1.0",
+          "datasets": "5.0.1",
+          "faiss-cpu": "1.15.1",
+          "rank-bm25": "0.2.2"
+        }
+      }
+    },
+    "replay": {
+      "predictions": "results/research_colab_dev/predictions.jsonl.gz",
+      "predictions_sha256": "18645e18c6d65fc84e7957af1dd6d1fb1a717ce219118429d0d9cbc6c7480690",
+      "prediction_sha_matches_manifest_and_comparison": true,
+      "manifest": "results/research_colab_dev/manifest.json",
+      "manifest_sha256": "34ebc1c809a77cf16850a97b023b4975bd94c819749daf48c26a615199e69b00",
+      "metrics": "results/research_colab_dev/metrics.json",
+      "metrics_sha256": "fde52c24f771424921ba667e1112d013b7429eac6a068c69f0266900ec4cd690",
+      "environment": {
+        "python": "3.13.16",
+        "packages": {
+          "torch": "2.11.0+cu130",
+          "transformers": "5.17.0",
+          "sentence-transformers": "6.1.0",
+          "datasets": "5.0.1",
+          "faiss-cpu": "1.15.1",
+          "rank-bm25": "0.2.2"
+        }
+      }
+    }
+  },
+  "comparison": {
+    "path": "results/research_colab_reproduction_comparison.json",
+    "sha256": "edcb5651fa805dce94d84021ff21e72da2a4c59e2d2d5ce26de95db332c95a8c",
+    "status": "PASS_EXACT_ANSWERS",
+    "validator_sha256": "84c411270c5750e018bfcb4f0188f882702ff72f9356a98aab6681afc75922e4"
+  },
+  "shared_identity": {
+    "dataset_manifest_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+    "closed_book_model_sha256": "60ca4725f079cd65fb5607a23c46f9aac858a1f47a58b0c58e466e2281833f10",
+    "rag_model_sha256": "4909c3007546c81e3523429b6e64cedca816ba3f0281348124a5a2444d5e693e",
+    "four_recorded_method_hashes_equal": true
+  },
+  "dev_scope_confirmation": {
+    "n": 200,
+    "arms": [
+      "generator_only",
+      "retrieval_only",
+      "rag_full",
+      "rag_hybrid",
+      "rag_checkpoint_no_context"
+    ],
+    "answer_pairs_compared": 1000,
+    "ranking_mismatch_ids": {
+      "dense": [
+        "qb_4397"
+      ],
+      "bm25": [],
+      "hybrid": [
+        "qb_4397"
+      ]
+    },
+    "answer_mismatch_ids": {
+      "generator_only": [],
+      "retrieval_only": [],
+      "rag_full": [],
+      "rag_hybrid": [],
+      "rag_checkpoint_no_context": []
+    },
+    "context_mismatch_ids": {
+      "generator_only": [],
+      "retrieval_only": [],
+      "rag_full": [],
+      "rag_hybrid": [],
+      "rag_checkpoint_no_context": []
+    }
+  },
+  "ranking_details": {
+    "dense": {
+      "pool_size": 30,
+      "pool_membership_equal": true,
+      "chunk_content_equal_for_matching_ids": true,
+      "changed_positions": [
+        {
+          "rank": 23,
+          "original_chunk_id": "chunk_6eb255d0dd5e319f085c1f50",
+          "replay_chunk_id": "chunk_097e8421b5f64d5e7a0352e0"
+        },
+        {
+          "rank": 24,
+          "original_chunk_id": "chunk_097e8421b5f64d5e7a0352e0",
+          "replay_chunk_id": "chunk_6eb255d0dd5e319f085c1f50"
+        }
+      ],
+      "moved_chunks": [
+        {
+          "chunk_id": "chunk_6eb255d0dd5e319f085c1f50",
+          "title": "Labour Party (UK)",
+          "doc_id": "doc_1e2e8e04f7db9e29e761528f",
+          "original": {
+            "rank": 23,
+            "score": 0.35818642377853394
+          },
+          "replay": {
+            "rank": 24,
+            "score": 0.3581863045692444
+          },
+          "score_delta_replay_minus_original": -1.1920928955078125e-07
+        },
+        {
+          "chunk_id": "chunk_097e8421b5f64d5e7a0352e0",
+          "title": "Harold Holt",
+          "doc_id": "doc_c2439da7d76e9256a0cca54b",
+          "original": {
+            "rank": 24,
+            "score": 0.35818639397621155
+          },
+          "replay": {
+            "rank": 23,
+            "score": 0.35818660259246826
+          },
+          "score_delta_replay_minus_original": 2.086162567138672e-07
+        }
+      ],
+      "max_abs_score_delta_over_same_30_chunk_ids": 2.384185791015625e-07,
+      "top_k_effects": {
+        "1": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "3": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "5": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "10": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "30": {
+          "membership_equal": true,
+          "order_equal": false,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": [
+            23,
+            24
+          ]
+        }
+      }
+    },
+    "bm25": {
+      "pool_size": 30,
+      "pool_membership_equal": true,
+      "chunk_content_equal_for_matching_ids": true,
+      "changed_positions": [],
+      "moved_chunks": [],
+      "max_abs_score_delta_over_same_30_chunk_ids": 0.0,
+      "top_k_effects": {
+        "1": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "3": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "5": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "10": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "30": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        }
+      }
+    },
+    "hybrid": {
+      "pool_size": 30,
+      "pool_membership_equal": true,
+      "chunk_content_equal_for_matching_ids": true,
+      "changed_positions": [
+        {
+          "rank": 28,
+          "original_chunk_id": "chunk_6eb255d0dd5e319f085c1f50",
+          "replay_chunk_id": "chunk_097e8421b5f64d5e7a0352e0"
+        },
+        {
+          "rank": 29,
+          "original_chunk_id": "chunk_097e8421b5f64d5e7a0352e0",
+          "replay_chunk_id": "chunk_6eb255d0dd5e319f085c1f50"
+        }
+      ],
+      "moved_chunks": [
+        {
+          "chunk_id": "chunk_6eb255d0dd5e319f085c1f50",
+          "title": "Labour Party (UK)",
+          "doc_id": "doc_1e2e8e04f7db9e29e761528f",
+          "original": {
+            "rank": 28,
+            "score": 0.012048192771084338
+          },
+          "replay": {
+            "rank": 29,
+            "score": 0.011904761904761904
+          },
+          "score_delta_replay_minus_original": -0.00014343086632243388
+        },
+        {
+          "chunk_id": "chunk_097e8421b5f64d5e7a0352e0",
+          "title": "Harold Holt",
+          "doc_id": "doc_c2439da7d76e9256a0cca54b",
+          "original": {
+            "rank": 29,
+            "score": 0.011904761904761904
+          },
+          "replay": {
+            "rank": 28,
+            "score": 0.012048192771084338
+          },
+          "score_delta_replay_minus_original": 0.00014343086632243388
+        }
+      ],
+      "max_abs_score_delta_over_same_30_chunk_ids": 0.00014343086632243388,
+      "top_k_effects": {
+        "1": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "3": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "5": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "10": {
+          "membership_equal": true,
+          "order_equal": true,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": []
+        },
+        "30": {
+          "membership_equal": true,
+          "order_equal": false,
+          "left_top_k": [],
+          "entered_top_k": [],
+          "changed_positions": [
+            28,
+            29
+          ]
+        }
+      }
+    }
+  },
+  "near_tie_observation": {
+    "original_labour_minus_holt_dense_score": 2.9802322387695312e-08,
+    "replay_holt_minus_labour_dense_score": 2.980232238769531e-07,
+    "interpretation": "Small recorded Dense score changes reverse a near tie. This is consistent with numerical sensitivity across environments; the saved artifacts do not isolate whether encoder, FAISS/BLAS, hardware, library version, or another backend difference caused the score changes.",
+    "numerical_cause_proven": false
+  },
+  "rrf_arithmetic_consistency": {
+    "rrf_constant": 60,
+    "formula_for_chunks_absent_from_bm25_pool": "1 / (rrf_constant + dense_rank)",
+    "observations": [
+      {
+        "chunk_id": "chunk_6eb255d0dd5e319f085c1f50",
+        "run": "original",
+        "dense_rank": 23,
+        "present_in_bm25_pool": false,
+        "hybrid_rank": 28,
+        "reported_hybrid_score": 0.012048192771084338,
+        "one_over_constant_plus_dense_rank": 0.012048192771084338,
+        "arithmetic_matches": true
+      },
+      {
+        "chunk_id": "chunk_6eb255d0dd5e319f085c1f50",
+        "run": "replay",
+        "dense_rank": 24,
+        "present_in_bm25_pool": false,
+        "hybrid_rank": 29,
+        "reported_hybrid_score": 0.011904761904761904,
+        "one_over_constant_plus_dense_rank": 0.011904761904761904,
+        "arithmetic_matches": true
+      },
+      {
+        "chunk_id": "chunk_097e8421b5f64d5e7a0352e0",
+        "run": "original",
+        "dense_rank": 24,
+        "present_in_bm25_pool": false,
+        "hybrid_rank": 29,
+        "reported_hybrid_score": 0.011904761904761904,
+        "one_over_constant_plus_dense_rank": 0.011904761904761904,
+        "arithmetic_matches": true
+      },
+      {
+        "chunk_id": "chunk_097e8421b5f64d5e7a0352e0",
+        "run": "replay",
+        "dense_rank": 23,
+        "present_in_bm25_pool": false,
+        "hybrid_rank": 28,
+        "reported_hybrid_score": 0.012048192771084338,
+        "one_over_constant_plus_dense_rank": 0.012048192771084338,
+        "arithmetic_matches": true
+      }
+    ]
+  },
+  "actual_generation_evidence": {
+    "generator_only": {
+      "original_answer": "Ireland",
+      "replay_answer": "Ireland",
+      "answer_equal": true,
+      "context_equal": true,
+      "original_context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "replay_context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_used_passage_ids": [],
+      "replay_used_passage_ids": [],
+      "used_passage_ids_equal": true,
+      "raw_used_passage_objects_equal_including_scores": true
+    },
+    "retrieval_only": {
+      "original_answer": "Canada",
+      "replay_answer": "Canada",
+      "answer_equal": true,
+      "context_equal": true,
+      "original_context_sha256": "0d9c94b9a3f164185c2e83f2d40e1d17604179d1fb9c21dd062517a501f11c7b",
+      "replay_context_sha256": "0d9c94b9a3f164185c2e83f2d40e1d17604179d1fb9c21dd062517a501f11c7b",
+      "original_used_passage_ids": [
+        "chunk_2b0cfb4463db5dcaf586655d",
+        "chunk_88f001e5b61f01dca0de9117",
+        "chunk_efe20269529be70b7af53695"
+      ],
+      "replay_used_passage_ids": [
+        "chunk_2b0cfb4463db5dcaf586655d",
+        "chunk_88f001e5b61f01dca0de9117",
+        "chunk_efe20269529be70b7af53695"
+      ],
+      "used_passage_ids_equal": true,
+      "raw_used_passage_objects_equal_including_scores": false
+    },
+    "rag_full": {
+      "original_answer": "Canada",
+      "replay_answer": "Canada",
+      "answer_equal": true,
+      "context_equal": true,
+      "original_context_sha256": "15123dd984b1763ef91b5c6ae6e955ce0d2f49454cf2f32e34933e880eb6927e",
+      "replay_context_sha256": "15123dd984b1763ef91b5c6ae6e955ce0d2f49454cf2f32e34933e880eb6927e",
+      "original_used_passage_ids": [
+        "chunk_2b0cfb4463db5dcaf586655d",
+        "chunk_88f001e5b61f01dca0de9117"
+      ],
+      "replay_used_passage_ids": [
+        "chunk_2b0cfb4463db5dcaf586655d",
+        "chunk_88f001e5b61f01dca0de9117"
+      ],
+      "used_passage_ids_equal": true,
+      "raw_used_passage_objects_equal_including_scores": false
+    },
+    "rag_hybrid": {
+      "original_answer": "Canada",
+      "replay_answer": "Canada",
+      "answer_equal": true,
+      "context_equal": true,
+      "original_context_sha256": "9876af0f5a669cadc825e6e7432502c50691808dfb27142acd322e6d017ce345",
+      "replay_context_sha256": "9876af0f5a669cadc825e6e7432502c50691808dfb27142acd322e6d017ce345",
+      "original_used_passage_ids": [
+        "chunk_2b0cfb4463db5dcaf586655d",
+        "chunk_efe20269529be70b7af53695"
+      ],
+      "replay_used_passage_ids": [
+        "chunk_2b0cfb4463db5dcaf586655d",
+        "chunk_efe20269529be70b7af53695"
+      ],
+      "used_passage_ids_equal": true,
+      "raw_used_passage_objects_equal_including_scores": true
+    },
+    "rag_checkpoint_no_context": {
+      "original_answer": "Australia",
+      "replay_answer": "Australia",
+      "answer_equal": true,
+      "context_equal": true,
+      "original_context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "replay_context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_used_passage_ids": [],
+      "replay_used_passage_ids": [],
+      "used_passage_ids_equal": true,
+      "raw_used_passage_objects_equal_including_scores": true
+    }
+  },
+  "retrieval_metric_deltas_replay_minus_original": {
+    "dense": {
+      "doc_hit_rate@1": 0.0,
+      "doc_recall@1": 0.0,
+      "official_answer_recall@1": 0.0,
+      "canonical_answer_recall@1": 0.0,
+      "doc_hit_rate@3": 0.0,
+      "doc_recall@3": 0.0,
+      "official_answer_recall@3": 0.0,
+      "canonical_answer_recall@3": 0.0,
+      "doc_hit_rate@5": 0.0,
+      "doc_recall@5": 0.0,
+      "official_answer_recall@5": 0.0,
+      "canonical_answer_recall@5": 0.0,
+      "doc_hit_rate@10": 0.0,
+      "doc_recall@10": 0.0,
+      "official_answer_recall@10": 0.0,
+      "canonical_answer_recall@10": 0.0,
+      "doc_mrr@30": 0.0
+    },
+    "bm25": {
+      "doc_hit_rate@1": 0.0,
+      "doc_recall@1": 0.0,
+      "official_answer_recall@1": 0.0,
+      "canonical_answer_recall@1": 0.0,
+      "doc_hit_rate@3": 0.0,
+      "doc_recall@3": 0.0,
+      "official_answer_recall@3": 0.0,
+      "canonical_answer_recall@3": 0.0,
+      "doc_hit_rate@5": 0.0,
+      "doc_recall@5": 0.0,
+      "official_answer_recall@5": 0.0,
+      "canonical_answer_recall@5": 0.0,
+      "doc_hit_rate@10": 0.0,
+      "doc_recall@10": 0.0,
+      "official_answer_recall@10": 0.0,
+      "canonical_answer_recall@10": 0.0,
+      "doc_mrr@30": 0.0
+    },
+    "hybrid": {
+      "doc_hit_rate@1": 0.0,
+      "doc_recall@1": 0.0,
+      "official_answer_recall@1": 0.0,
+      "canonical_answer_recall@1": 0.0,
+      "doc_hit_rate@3": 0.0,
+      "doc_recall@3": 0.0,
+      "official_answer_recall@3": 0.0,
+      "canonical_answer_recall@3": 0.0,
+      "doc_hit_rate@5": 0.0,
+      "doc_recall@5": 0.0,
+      "official_answer_recall@5": 0.0,
+      "canonical_answer_recall@5": 0.0,
+      "doc_hit_rate@10": 0.0,
+      "doc_recall@10": 0.0,
+      "official_answer_recall@10": 0.0,
+      "canonical_answer_recall@10": 0.0,
+      "doc_mrr@30": 0.0
+    }
+  },
+  "every_reported_dev_retrieval_metric_unchanged": true,
+  "why_no_observed_qa_effect": "The changed ranks are below the top-10 retrieval metrics and below all passages actually used by the extractive baseline (three) and RAG (two). Actual saved contexts and all five answers are byte-for-byte equal for this question. This establishes the observed replay outcome, not general robustness to ranking perturbations.",
+  "derivation_rules": [
+    "Verify each compressed predictions SHA256 against its complete run manifest and the imported comparison artifact.",
+    "Parse JSONL with unique QA IDs; align all 200 dev rows by ID and isolate qb_4397.",
+    "Compare chunk-ID sequences by rank and set membership at k=1,3,5,10,30 without sorting away the original order.",
+    "For moved IDs, report saved ranks/scores and replay-minus-original deltas; compare chunk content excluding only score/rank metadata.",
+    "Compare actual answer/context strings and used-passage IDs; keep numerical score differences in raw used-passage objects visible.",
+    "Subtract each stored dev retrieval metric and check the saved RRF scores against 1/(60+dense_rank) for the two IDs absent from BM25 pool."
+  ]
+}

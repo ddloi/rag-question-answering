@@ -1,0 +1,13 @@
+{
+  "system": "rag",
+  "initial_started_at": "2026-10-31T15:36:53.406217+00:00",
+  "resumed_at": "2026-11-01T01:28:08.712970+00:00",
+  "restored_optimizer_step": 117,
+  "last_log_before_interruption": 120,
+  "source_hashes_unchanged": {
+    "experiments/research_train.py": "dd4234f84e3a1eb0516a94ede1c3131a9b162173c2237213c14d704e17396687",
+    "experiments/research_pipeline.py": "b0f3098381786b0322946d8ec8c00f201e90e898f15a4eed81ef72136f52b8d7",
+    "experiments/metrics.py": "47781c94a385973794a4c257773626273609403b50884ab923abc65c0b7ab241"
+  },
+  "note": "Prior process no longer existed on continuation. Restored native Trainer optimizer/RNG checkpoint 117. Logs retain earlier steps, including repeated step 120 after replay. Manifest elapsed_seconds will measure the resumed training call, not total wall time across interruption."
+}

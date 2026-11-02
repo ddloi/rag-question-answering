@@ -1,0 +1,7 @@
+{
+  "scope": "Supplemental replay validator only; frozen ML method and artifacts unchanged.",
+  "files_sha256": {
+    "scripts/compare_research_replay.py": "84c411270c5750e018bfcb4f0188f882702ff72f9356a98aab6681afc75922e4",
+    "tests/test_research_replay_comparison.py": "f585ae6f0b044d055d2b6002d647f51d1e07b7d187ffda49fc9f3dd2454daffd"
+  }
+}

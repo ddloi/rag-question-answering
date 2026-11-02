@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from experiments.evaluate import retrieval_summary
-from experiments.metrics import classify_error, normalize_answer, score_answer
+from experiments.legacy_metrics import classify_error, normalize_answer, score_answer
 from experiments.verify_dataset import digest, read_jsonl
 from ragqa.paths import DATA_DIR, PROJECT_ROOT, RESULTS_DIR
 
@@ -85,7 +85,7 @@ def main():
         'model_inference':'not rerun; scores derived from saved predictions', 'n':len(rescored),
         'candidate_aliases_to_review':len(alias_rows),
         'scoring_code_sha256': {path.relative_to(PROJECT_ROOT).as_posix():digest(path) for path in
-            [Path(__file__).resolve(), Path(__file__).resolve().parents[1]/'experiments/metrics.py']}}
+            [Path(__file__).resolve(), Path(__file__).resolve().parents[1]/'experiments/legacy_metrics.py']}}
     (args.output/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     print(json.dumps(metrics,ensure_ascii=False,indent=2))
     print('Alias candidates for human review:',len(alias_rows))

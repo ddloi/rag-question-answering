@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "Four real UI requests compared to saved dev outputs, including Dense/Hybrid Stupa and label-warning case.",
+  "checks": [
+    {
+      "question_id": "qb_4336",
+      "mode": "dense",
+      "answers_match_saved_predictions": {
+        "generator_only": true,
+        "retrieval_only": true,
+        "rag": true
+      }
+    },
+    {
+      "question_id": "qb_7076",
+      "mode": "dense",
+      "answers_match_saved_predictions": {
+        "generator_only": true,
+        "retrieval_only": true,
+        "rag": true
+      }
+    },
+    {
+      "question_id": "qb_7076",
+      "mode": "hybrid",
+      "answers_match_saved_predictions": {
+        "generator_only": true,
+        "retrieval_only": true,
+        "rag": true
+      }
+    },
+    {
+      "question_id": "qb_6193",
+      "mode": "dense",
+      "answers_match_saved_predictions": {
+        "generator_only": true,
+        "retrieval_only": true,
+        "rag": true
+      }
+    }
+  ]
+}

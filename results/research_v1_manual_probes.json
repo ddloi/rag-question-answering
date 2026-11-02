@@ -1,0 +1,881 @@
+{
+  "scope": "Manual post-test probes of earlier user questions; not added to train/dev/test and not used to alter frozen evaluation.",
+  "time": "2026-11-01T06:33:03.729674+00:00",
+  "mode": "hybrid",
+  "rows": [
+    {
+      "dataset_version": "research_v1",
+      "dataset_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+      "query": "Antigonus is a character in which Shakespeare play?",
+      "retrieval_mode": "hybrid",
+      "systems": {
+        "generator_only": {
+          "answer": "Shakespeare",
+          "context_used": "",
+          "used_passages": [],
+          "input_tokens": 17,
+          "latency_ms": 320.22,
+          "scores": null
+        },
+        "retrieval_only": {
+          "answer": "Macbeth",
+          "context_used": "Well and a number of his best known tragedies. Many critics believe that Shakespeare's greatest tragedies represent the peak of his art. The titular hero of one of Shakespeare's most famous tragedies, Hamlet, has probably been discussed more than any other Shakespearean character, especially for his famous soliloquy which begins \"To be or not to be; that is the question\". Unlike the introverted Hamlet, whose fatal flaw is hesitation, the heroes of the tragedies that followed, Othello and King Lear, are undone by hasty errors of judgement. The plots of Shakespeare's tragedies often hinge on such fatal errors or flaws, which overturn order and destroy the hero and those he loves. In Othello, the villain Iago stokes Othello's sexual jealousy to the point where he murders the innocent wife who loves him. In King Lear, the old king commits the tragic error of giving up his powers, initiating the events which lead to the torture and blinding of the Earl of Gloucester and the murder of Lear's youngest daughter Cordelia. According to the critic Frank Kermode, \"the play-offers neither its good characters nor its audience any relief from its cruelty\". In Macbeth, the shortest and most compressed of Shakespeare's tragedies,\n\noften uses the Shakespearean quote: \"\" to him for various purposes. Brutus appears in minor roles in various books, and has a major role in Asterix and Son, where his plot to kill Caesar and Cleopatra's infant son to secure his place as Caesar's heir prompts him to attack the village when Cleopatra sends her son there for safety, causing Caesar to send him to Upper Germania. Brutus's physical appearance is arguably different in each of his appearances. * Pompey (Pompée) — Caesar's greatest enemy and a former consul of Rome. He is mentioned in Asterix the Gladiator, Asterix the Legionary and Asterix and the Roman Agent and appears in person in Asterix and the Actress, where he is the book's antagonist, seeking valuable pieces of armour that have been given to Asterix and Obelix as birthday presents. * Metellus Scipio (Scipion) — Another of Caesar's enemies, allied to Pompey. Caesar defeated him in the Battle of Thapsus, as depicted in Asterix the Legionary. Note that Pompey doesn't make an appearance there, as he was assassinated before these events took place (though he anachronistically surfaces in Asterix and the Actress later). * Caesarion — Caesar and Cleopatra's baby boy. Appears\n\nis a loose adaptation of the first Shakespearean historical tetralogy. It depicts Richard III as intersex instead of hunchbacked. Historical inaccuracies Shakespeare, and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place, requiring that the last Plantagenet king, Richard III, be depicted as a villain. There are many historical inaccuracies in the play, which can be attributed partly to Shakespeare's sources, such as Holinshed's Chronicles. Some of these inaccuracies are listed below in the order in which they either appear or are referred to in the play. Richard was not personally responsible for the death of his wife's first husband, Edward of Westminster (the son of Henry VI), nor that of her father, Richard Neville (the Earl of Warwick). They were killed in the battles of Tewkesbury and Barnet, respectively, which restored Edward IV to the throne. Although only eighteen years old, Richard took part in both battles, but no contemporary records indicate him as being involved directly in either death. Richard was",
+          "used_passages": [
+            {
+              "chunk_id": "chunk_9a8634b8ff38b42ac73195fd",
+              "doc_id": "doc_b34b74cde2fee1f5c0151e62",
+              "source_doc_ids": [
+                "doc_b34b74cde2fee1f5c0151e62"
+              ],
+              "title": "William Shakespeare",
+              "text": "Well and a number of his best known tragedies. Many critics believe that Shakespeare's greatest tragedies represent the peak of his art. The titular hero of one of Shakespeare's most famous tragedies, Hamlet, has probably been discussed more than any other Shakespearean character, especially for his famous soliloquy which begins \"To be or not to be; that is the question\". Unlike the introverted Hamlet, whose fatal flaw is hesitation, the heroes of the tragedies that followed, Othello and King Lear, are undone by hasty errors of judgement. The plots of Shakespeare's tragedies often hinge on such fatal errors or flaws, which overturn order and destroy the hero and those he loves. In Othello, the villain Iago stokes Othello's sexual jealousy to the point where he murders the innocent wife who loves him. In King Lear, the old king commits the tragic error of giving up his powers, initiating the events which lead to the torture and blinding of the Earl of Gloucester and the murder of Lear's youngest daughter Cordelia. According to the critic Frank Kermode, \"the play-offers neither its good characters nor its audience any relief from its cruelty\". In Macbeth, the shortest and most compressed of Shakespeare's tragedies,",
+              "rank": 1,
+              "score": 0.5278926491737366
+            },
+            {
+              "chunk_id": "chunk_b118d2257f9802bc547f1f9b",
+              "doc_id": "doc_25f9aee53389243d25ee8450",
+              "source_doc_ids": [
+                "doc_25f9aee53389243d25ee8450"
+              ],
+              "title": "List of Asterix characters",
+              "text": "often uses the Shakespearean quote: \"\" to him for various purposes. Brutus appears in minor roles in various books, and has a major role in Asterix and Son, where his plot to kill Caesar and Cleopatra's infant son to secure his place as Caesar's heir prompts him to attack the village when Cleopatra sends her son there for safety, causing Caesar to send him to Upper Germania. Brutus's physical appearance is arguably different in each of his appearances. * Pompey (Pompée) — Caesar's greatest enemy and a former consul of Rome. He is mentioned in Asterix the Gladiator, Asterix the Legionary and Asterix and the Roman Agent and appears in person in Asterix and the Actress, where he is the book's antagonist, seeking valuable pieces of armour that have been given to Asterix and Obelix as birthday presents. * Metellus Scipio (Scipion) — Another of Caesar's enemies, allied to Pompey. Caesar defeated him in the Battle of Thapsus, as depicted in Asterix the Legionary. Note that Pompey doesn't make an appearance there, as he was assassinated before these events took place (though he anachronistically surfaces in Asterix and the Actress later). * Caesarion — Caesar and Cleopatra's baby boy. Appears",
+              "rank": 2,
+              "score": 0.5055488348007202
+            },
+            {
+              "chunk_id": "chunk_ffa04f3d295139b643fe2ad0",
+              "doc_id": "doc_20e2c23cd5a2903018798a71",
+              "source_doc_ids": [
+                "doc_20e2c23cd5a2903018798a71"
+              ],
+              "title": "Richard III (play)",
+              "text": "is a loose adaptation of the first Shakespearean historical tetralogy. It depicts Richard III as intersex instead of hunchbacked. Historical inaccuracies Shakespeare, and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place, requiring that the last Plantagenet king, Richard III, be depicted as a villain. There are many historical inaccuracies in the play, which can be attributed partly to Shakespeare's sources, such as Holinshed's Chronicles. Some of these inaccuracies are listed below in the order in which they either appear or are referred to in the play. Richard was not personally responsible for the death of his wife's first husband, Edward of Westminster (the son of Henry VI), nor that of her father, Richard Neville (the Earl of Warwick). They were killed in the battles of Tewkesbury and Barnet, respectively, which restored Edward IV to the throne. Although only eighteen years old, Richard took part in both battles, but no contemporary records indicate him as being involved directly in either death. Richard was",
+              "rank": 3,
+              "score": 0.4976239502429962
+            }
+          ],
+          "latency_ms": 35.17,
+          "scores": null
+        },
+        "rag": {
+          "answer": "The Tempest",
+          "context_used": "Source [1] | Shakespeare in Love\nMerchant of Venice). * Viola, as well as being Paltrow's character in the film, is the name of the lead character in Twelfth Night who dresses as a man after the supposed death of her brother. * At the end of the film, Shakespeare imagines a shipwreck overtaking Viola on her way to America, inspiring the second scene of his next play, Twelfth Night, a scene which also echoes the beginning of The Tempest. * Shakespeare writes a sonnet to Viola which begins: \"Shall I compare thee to a summer's day?\" (from Sonnet 18). * Shakespeare tells Henslowe that he still owes him for \"one gentleman of Verona\", a reference to Two Gentlemen of Verona, part of which we also see being acted before the Queen later in the film. * In a boat, Shakespeare tells Viola, who is disguised as Thomas Kent, of his lady’s beauty and charms, she dismisses his praise, as no real woman could live up to this ideal, this is a 'set up' for Sonnet 130, \"My mistress’ eyes are nothing like the sun\". Christopher Marlowe is presented in the film as the master playwright whom the characters consider the greatest English dramatist of that\n\nSource [2] | Shakespeare in Love\nto marry Lord Wessex, while Shakespeare himself is poor and already married). There is also a Rosaline, with whom Will is in love at the beginning of the film. There are references to earlier cinematic versions of Shakespeare, such as the balcony scene pastiching the Zeffirelli Romeo and Juliet. Many other plot devices used in the film are common in Shakespearean comedies and other plays of the Elizabethan era: the Queen disguised as a commoner, the cross-dressing disguises, mistaken identities, the sword fight, the suspicion of adultery, the appearance of a \"ghost\" (cf. Macbeth), and the \"play within a play\". According to Douglas Brode, the film deftly portrays many of these devices as though the events depicted were the inspiration for Shakespeare",
+          "used_passages": [
+            {
+              "chunk_id": "chunk_a00aa5be44d09c79abd214da",
+              "doc_id": "doc_e9aaa610f1533acd729eabea",
+              "source_doc_ids": [
+                "doc_e9aaa610f1533acd729eabea"
+              ],
+              "title": "Shakespeare in Love",
+              "text": "Merchant of Venice). * Viola, as well as being Paltrow's character in the film, is the name of the lead character in Twelfth Night who dresses as a man after the supposed death of her brother. * At the end of the film, Shakespeare imagines a shipwreck overtaking Viola on her way to America, inspiring the second scene of his next play, Twelfth Night, a scene which also echoes the beginning of The Tempest. * Shakespeare writes a sonnet to Viola which begins: \"Shall I compare thee to a summer's day?\" (from Sonnet 18). * Shakespeare tells Henslowe that he still owes him for \"one gentleman of Verona\", a reference to Two Gentlemen of Verona, part of which we also see being acted before the Queen later in the film. * In a boat, Shakespeare tells Viola, who is disguised as Thomas Kent, of his lady’s beauty and charms, she dismisses his praise, as no real woman could live up to this ideal, this is a 'set up' for Sonnet 130, \"My mistress’ eyes are nothing like the sun\". Christopher Marlowe is presented in the film as the master playwright whom the characters consider the greatest English dramatist of that",
+              "rank": 1,
+              "score": 0.032018442622950824,
+              "citation_id": 1,
+              "visible_heading": "Source [1] | Shakespeare in Love\n",
+              "title_only": false
+            },
+            {
+              "chunk_id": "chunk_5a75799686f8c09aea161904",
+              "doc_id": "doc_e9aaa610f1533acd729eabea",
+              "source_doc_ids": [
+                "doc_e9aaa610f1533acd729eabea"
+              ],
+              "title": "Shakespeare in Love",
+              "text": "to marry Lord Wessex, while Shakespeare himself is poor and already married). There is also a Rosaline, with whom Will is in love at the beginning of the film. There are references to earlier cinematic versions of Shakespeare, such as the balcony scene pastiching the Zeffirelli Romeo and Juliet. Many other plot devices used in the film are common in Shakespearean comedies and other plays of the Elizabethan era: the Queen disguised as a commoner, the cross-dressing disguises, mistaken identities, the sword fight, the suspicion of adultery, the appearance of a \"ghost\" (cf. Macbeth), and the \"play within a play\". According to Douglas Brode, the film deftly portrays many of these devices as though the events depicted were the inspiration for Shakespeare",
+              "rank": 2,
+              "score": 0.029631255487269532,
+              "citation_id": 2,
+              "visible_heading": "Source [2] | Shakespeare in Love\n",
+              "title_only": false
+            }
+          ],
+          "input_tokens": 512,
+          "latency_ms": 148.81,
+          "scores": null
+        }
+      },
+      "retrieval": {
+        "dense": [
+          {
+            "chunk_id": "chunk_9a8634b8ff38b42ac73195fd",
+            "doc_id": "doc_b34b74cde2fee1f5c0151e62",
+            "source_doc_ids": [
+              "doc_b34b74cde2fee1f5c0151e62"
+            ],
+            "title": "William Shakespeare",
+            "text": "Well and a number of his best known tragedies. Many critics believe that Shakespeare's greatest tragedies represent the peak of his art. The titular hero of one of Shakespeare's most famous tragedies, Hamlet, has probably been discussed more than any other Shakespearean character, especially for his famous soliloquy which begins \"To be or not to be; that is the question\". Unlike the introverted Hamlet, whose fatal flaw is hesitation, the heroes of the tragedies that followed, Othello and King Lear, are undone by hasty errors of judgement. The plots of Shakespeare's tragedies often hinge on such fatal errors or flaws, which overturn order and destroy the hero and those he loves. In Othello, the villain Iago stokes Othello's sexual jealousy to the point where he murders the innocent wife who loves him. In King Lear, the old king commits the tragic error of giving up his powers, initiating the events which lead to the torture and blinding of the Earl of Gloucester and the murder of Lear's youngest daughter Cordelia. According to the critic Frank Kermode, \"the play-offers neither its good characters nor its audience any relief from its cruelty\". In Macbeth, the shortest and most compressed of Shakespeare's tragedies,",
+            "rank": 1,
+            "score": 0.5278926491737366
+          },
+          {
+            "chunk_id": "chunk_b118d2257f9802bc547f1f9b",
+            "doc_id": "doc_25f9aee53389243d25ee8450",
+            "source_doc_ids": [
+              "doc_25f9aee53389243d25ee8450"
+            ],
+            "title": "List of Asterix characters",
+            "text": "often uses the Shakespearean quote: \"\" to him for various purposes. Brutus appears in minor roles in various books, and has a major role in Asterix and Son, where his plot to kill Caesar and Cleopatra's infant son to secure his place as Caesar's heir prompts him to attack the village when Cleopatra sends her son there for safety, causing Caesar to send him to Upper Germania. Brutus's physical appearance is arguably different in each of his appearances. * Pompey (Pompée) — Caesar's greatest enemy and a former consul of Rome. He is mentioned in Asterix the Gladiator, Asterix the Legionary and Asterix and the Roman Agent and appears in person in Asterix and the Actress, where he is the book's antagonist, seeking valuable pieces of armour that have been given to Asterix and Obelix as birthday presents. * Metellus Scipio (Scipion) — Another of Caesar's enemies, allied to Pompey. Caesar defeated him in the Battle of Thapsus, as depicted in Asterix the Legionary. Note that Pompey doesn't make an appearance there, as he was assassinated before these events took place (though he anachronistically surfaces in Asterix and the Actress later). * Caesarion — Caesar and Cleopatra's baby boy. Appears",
+            "rank": 2,
+            "score": 0.5055488348007202
+          },
+          {
+            "chunk_id": "chunk_ffa04f3d295139b643fe2ad0",
+            "doc_id": "doc_20e2c23cd5a2903018798a71",
+            "source_doc_ids": [
+              "doc_20e2c23cd5a2903018798a71"
+            ],
+            "title": "Richard III (play)",
+            "text": "is a loose adaptation of the first Shakespearean historical tetralogy. It depicts Richard III as intersex instead of hunchbacked. Historical inaccuracies Shakespeare, and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place, requiring that the last Plantagenet king, Richard III, be depicted as a villain. There are many historical inaccuracies in the play, which can be attributed partly to Shakespeare's sources, such as Holinshed's Chronicles. Some of these inaccuracies are listed below in the order in which they either appear or are referred to in the play. Richard was not personally responsible for the death of his wife's first husband, Edward of Westminster (the son of Henry VI), nor that of her father, Richard Neville (the Earl of Warwick). They were killed in the battles of Tewkesbury and Barnet, respectively, which restored Edward IV to the throne. Although only eighteen years old, Richard took part in both battles, but no contemporary records indicate him as being involved directly in either death. Richard was",
+            "rank": 3,
+            "score": 0.4976239502429962
+          },
+          {
+            "chunk_id": "chunk_a00aa5be44d09c79abd214da",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "Merchant of Venice). * Viola, as well as being Paltrow's character in the film, is the name of the lead character in Twelfth Night who dresses as a man after the supposed death of her brother. * At the end of the film, Shakespeare imagines a shipwreck overtaking Viola on her way to America, inspiring the second scene of his next play, Twelfth Night, a scene which also echoes the beginning of The Tempest. * Shakespeare writes a sonnet to Viola which begins: \"Shall I compare thee to a summer's day?\" (from Sonnet 18). * Shakespeare tells Henslowe that he still owes him for \"one gentleman of Verona\", a reference to Two Gentlemen of Verona, part of which we also see being acted before the Queen later in the film. * In a boat, Shakespeare tells Viola, who is disguised as Thomas Kent, of his lady’s beauty and charms, she dismisses his praise, as no real woman could live up to this ideal, this is a 'set up' for Sonnet 130, \"My mistress’ eyes are nothing like the sun\". Christopher Marlowe is presented in the film as the master playwright whom the characters consider the greatest English dramatist of that",
+            "rank": 4,
+            "score": 0.4971763789653778
+          },
+          {
+            "chunk_id": "chunk_ef325325e26a90822eb6a050",
+            "doc_id": "doc_b34b74cde2fee1f5c0151e62",
+            "source_doc_ids": [
+              "doc_b34b74cde2fee1f5c0151e62"
+            ],
+            "title": "William Shakespeare",
+            "text": "biographer, recounted a Stratford legend that Shakespeare fled the town for London to escape prosecution for deer poaching in the estate of local squire Thomas Lucy. Shakespeare is also supposed to have taken his revenge on Lucy by writing a scurrilous ballad about him. Another 18th-century story has Shakespeare starting his theatrical career minding the horses of theatre patrons in London. John Aubrey reported that Shakespeare had been a country schoolmaster. Some 20th-century scholars have suggested that Shakespeare may have been employed as a schoolmaster by Alexander Hoghton of Lancashire, a Catholic landowner who named a certain \"William Shakeshafte\" in his will. Little evidence substantiates such stories other than hearsay collected after his death, and Shakeshafte was a common name in the Lancashire area. London and theatrical career It is not known definitively when Shakespeare began writing, but contemporary allusions and records of performances show that several of his plays were on the London stage by 1592. By then, he was sufficiently known in London to be attacked in print by the playwright Robert Greene in his Groats-Worth of Wit: ... there is an upstart Crow, beautified with our feathers, that with his Tiger's heart wrapped in a Player's hide,",
+            "rank": 5,
+            "score": 0.4966112971305847
+          },
+          {
+            "chunk_id": "chunk_b73bb5eb6096ea3bbae53522",
+            "doc_id": "doc_b34b74cde2fee1f5c0151e62",
+            "source_doc_ids": [
+              "doc_b34b74cde2fee1f5c0151e62"
+            ],
+            "title": "William Shakespeare",
+            "text": "the publication. Critics praise the Sonnets as a profound meditation on the nature of love, sexual passion, procreation, death, and time. Style Shakespeare's first plays were written in the conventional style of the day. He wrote them in a stylised language that does not always spring naturally from the needs of the characters or the drama. The poetry depends on extended, sometimes elaborate metaphors and conceits, and the language is often rhetorical—written for actors to declaim rather than speak. The grand speeches in Titus Andronicus, in the view of some critics, often hold up the action, for example; and the verse in The Two Gentlemen of Verona has been described as stilted. Soon, however, Shakespeare began to adapt the traditional styles to his own purposes. The opening soliloquy of Richard III has its roots in the self-declaration of Vice in medieval drama. At the same time, Richard's vivid self-awareness looks forward to the soliloquies of Shakespeare's mature plays. No single play marks a change from the traditional to the freer style. Shakespeare combined the two throughout his career, with Romeo and Juliet perhaps the best example of the mixing of the styles. By the time of Romeo and Juliet, Richard",
+            "rank": 6,
+            "score": 0.49453020095825195
+          },
+          {
+            "chunk_id": "chunk_5a75799686f8c09aea161904",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "to marry Lord Wessex, while Shakespeare himself is poor and already married). There is also a Rosaline, with whom Will is in love at the beginning of the film. There are references to earlier cinematic versions of Shakespeare, such as the balcony scene pastiching the Zeffirelli Romeo and Juliet. Many other plot devices used in the film are common in Shakespearean comedies and other plays of the Elizabethan era: the Queen disguised as a commoner, the cross-dressing disguises, mistaken identities, the sword fight, the suspicion of adultery, the appearance of a \"ghost\" (cf. Macbeth), and the \"play within a play\". According to Douglas Brode, the film deftly portrays many of these devices as though the events depicted were the inspiration for Shakespeare's own use of them in his plays. The film also has sequences in which Shakespeare and the other characters utter words that later appear in his plays, or in other ways echo those plays: * On the street, Shakespeare hears a Puritan preaching against the two London stages: \"The Rose smells thusly rank, by any name! I say, a plague on both their houses!\" Two references in one, both to Romeo and Juliet; first, \"A rose by any",
+            "rank": 7,
+            "score": 0.49082064628601074
+          },
+          {
+            "chunk_id": "chunk_aa5088f8c8128404f30facfe",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "has seen Shakespeare's plays at court, disguises herself as \"Thomas Kent\" to audition, then runs away. Shakespeare pursues Kent to Viola's house and leaves a note with the nurse, asking Thomas Kent to begin rehearsals at the Rose. He sneaks into the house with the minstrels playing that night at the ball, where her parents are arranging her betrothal to Lord Wessex, an impoverished aristocrat. While dancing with Viola, Shakespeare is struck speechless, and after being forcibly ejected by Wessex, uses Thomas Kent as a go-between to woo her. Wessex also asks Will's name, to which he replies that he is Christopher Marlowe. When he discovers her true identity, they begin a secret affair. Inspired by her, Shakespeare writes quickly, with help from his friend and rival playwright Christopher 'Kit' Marlowe, completely transforming the play into what will become Romeo and Juliet. Then, Viola is summoned to court to receive approval for her proposed marriage to Lord Wessex. Shakespeare accompanies her, disguised as her female cousin. There, he persuades Wessex to wager £50 that a play can capture the true nature of love, the exact amount Shakespeare requires to buy a share in the Chamberlain's Men. Queen Elizabeth I declares",
+            "rank": 8,
+            "score": 0.49010521173477173
+          },
+          {
+            "chunk_id": "chunk_49b1c49cebf4b3dea6f285cc",
+            "doc_id": "doc_b34b74cde2fee1f5c0151e62",
+            "source_doc_ids": [
+              "doc_b34b74cde2fee1f5c0151e62"
+            ],
+            "title": "William Shakespeare",
+            "text": "of Gloucester and the murder of Lear's youngest daughter Cordelia. According to the critic Frank Kermode, \"the play-offers neither its good characters nor its audience any relief from its cruelty\". In Macbeth, the shortest and most compressed of Shakespeare's tragedies, uncontrollable ambition incites Macbeth and his wife, Lady Macbeth, to murder the rightful king and usurp the throne, until their own guilt destroys them in turn. In this play, Shakespeare adds a supernatural element to the tragic structure. His last major tragedies, Antony and Cleopatra and Coriolanus, contain some of Shakespeare's finest poetry and were considered his most successful tragedies by the poet and critic T. S. Eliot. In his final period, Shakespeare turned to romance or tragicomedy and completed three more major plays: Cymbeline, The Winter's Tale and The Tempest, as well as the collaboration, Pericles, Prince of Tyre. Less bleak than the tragedies, these four plays are graver in tone than the comedies of the 1590s, but they end with reconciliation and the forgiveness of potentially tragic errors. Some commentators have seen this change in mood as evidence of a more serene view of life on Shakespeare's part, but it may merely reflect the theatrical fashion of the",
+            "rank": 9,
+            "score": 0.48761308193206787
+          },
+          {
+            "chunk_id": "chunk_b4eb4d679dc20fd72d3e7f7d",
+            "doc_id": "doc_20e2c23cd5a2903018798a71",
+            "source_doc_ids": [
+              "doc_20e2c23cd5a2903018798a71"
+            ],
+            "title": "Richard III (play)",
+            "text": "(The New Shakespeare; Cambridge: Cambridge University Press, 1954; revised edition 1961) * Eccles, Mark (ed.) The Tragedy of King Richard III (Signet Classic Shakespeare; New York: Signet, 1964; revised edition, 1988; 2nd revised edition 1998) * Evans, G. Blakemore (ed.) Richard III (The Pelican Shakespeare; London: Penguin, 1959; revised edition 1969) * ———. The Riverside Shakespeare (Boston: Houghton Mifflin, 1974; 2nd edn., 1997) * Greenblatt, Stephen; Cohen, Walter; Howard, Jean E. and Maus, Katharine Eisaman (eds.) The Norton Shakespeare: Based on the Oxford Shakespeare (London: Norton, 1997) * Greg, W.W. (ed.) Richard III, 1597 (Oxford: Oxford University Press, 1959) * Hammond, Anthony (ed.) King Richard III (The Arden Shakespeare, 2nd Series; London: Arden, 1981) * Holland, Peter (ed.) Richard III (The Pelican Shakespeare, 2nd edition; London: Penguin, 2000) * Honigmann, E.A.J. (ed.) Richard III (The New Penguin Shakespeare; London: Penguin, 1968; revised edition, 1995) * Jowett, John (ed.) Richard III (The Oxford Shakespeare; Oxford: Oxford University Press, 2000) * Lull, Janis (ed.) King Richard III (The New Cambridge Shakespeare; Cambridge: Cambridge University Press, 1999; 2nd edition 2009) * Siemon, James R. (ed.) King Richard III (The Arden Shakespeare, 3rd Series; London: Arden, 2009) * Taylor, Michael (ed.) Richard III (The",
+            "rank": 10,
+            "score": 0.4866337776184082
+          }
+        ],
+        "bm25": [
+          {
+            "chunk_id": "chunk_a00aa5be44d09c79abd214da",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "Merchant of Venice). * Viola, as well as being Paltrow's character in the film, is the name of the lead character in Twelfth Night who dresses as a man after the supposed death of her brother. * At the end of the film, Shakespeare imagines a shipwreck overtaking Viola on her way to America, inspiring the second scene of his next play, Twelfth Night, a scene which also echoes the beginning of The Tempest. * Shakespeare writes a sonnet to Viola which begins: \"Shall I compare thee to a summer's day?\" (from Sonnet 18). * Shakespeare tells Henslowe that he still owes him for \"one gentleman of Verona\", a reference to Two Gentlemen of Verona, part of which we also see being acted before the Queen later in the film. * In a boat, Shakespeare tells Viola, who is disguised as Thomas Kent, of his lady’s beauty and charms, she dismisses his praise, as no real woman could live up to this ideal, this is a 'set up' for Sonnet 130, \"My mistress’ eyes are nothing like the sun\". Christopher Marlowe is presented in the film as the master playwright whom the characters consider the greatest English dramatist of that",
+            "rank": 1,
+            "score": 32.118165066930246
+          },
+          {
+            "chunk_id": "chunk_7a0eabc132ee7b803b25e142",
+            "doc_id": "doc_fbe156072d528946e5e35372",
+            "source_doc_ids": [
+              "doc_fbe156072d528946e5e35372"
+            ],
+            "title": "The Merchant of Venice",
+            "text": "of Shylock has brought little less persecution upon us, poor scattered sons of Abraham, than the Inquisition itself.\" Cumberland later wrote a successful play, The Jew (1794), in which his title character, Sheva, is portrayed sympathetically, as both a kindhearted and generous man. This was the first known attempt by a dramatist to reverse the negative stereotype that Shylock personified. The depiction of Jews in literature throughout the centuries bears the close imprint of Shylock. With slight variations much of English literature up until the 20th century depicts the Jew as \"a monied, cruel, lecherous, avaricious outsider tolerated only because of his golden hoard\". Shylock as a sympathetic character Many modern readers and theatregoers have read the play as a plea for tolerance, noting that Shylock is a sympathetic character. They cite as evidence that Shylock's \"trial\" at the end of the play is a mockery of justice, with Portia acting as a judge when she has no right to do so. The characters who berated Shylock for dishonesty resort to trickery in order to win. In addition, Shakespeare gives Shylock one of his most eloquent speeches: It is difficult to know whether the sympathetic reading of Shylock is entirely",
+            "rank": 2,
+            "score": 30.196610239520435
+          },
+          {
+            "chunk_id": "chunk_20b86e50357dfc00e950ed37",
+            "doc_id": "doc_fbe156072d528946e5e35372",
+            "source_doc_ids": [
+              "doc_fbe156072d528946e5e35372"
+            ],
+            "title": "The Merchant of Venice",
+            "text": "that Shakespeare meant Shylock's forced conversion to Christianity to be a \"happy ending\" for the character, as, to a Christian audience, it saves his soul and allows him to enter Heaven. Regardless of what Shakespeare's authorial intent may have been, the play has been made use of by antisemites throughout the play's history. One must note that the end of the title in the 1619 edition \"With the Extreme Cruelty of Shylock the Jew...\" must aptly describe how Shylock was viewed by the English public. The Nazis used the usurious Shylock for their propaganda. Shortly after Kristallnacht in 1938, The Merchant of Venice was broadcast for propagandistic ends over the German airwaves. Productions of the play followed in Lübeck (1938), Berlin (1940), and elsewhere within the Nazi Territory. In a series of articles called Observer, first published in 1785, British playwright Richard Cumberland created a character named Abraham Abrahams who is quoted as saying, \"I verily believe the odious character of Shylock has brought little less persecution upon us, poor scattered sons of Abraham, than the Inquisition itself.\" Cumberland later wrote a successful play, The Jew (1794), in which his title character, Sheva, is portrayed sympathetically, as both a kindhearted",
+            "rank": 3,
+            "score": 29.56242298610033
+          },
+          {
+            "chunk_id": "chunk_67701eef4f45b617914f0ac1",
+            "doc_id": "doc_bf76b7aee77dc81097cf4c71",
+            "source_doc_ids": [
+              "doc_bf76b7aee77dc81097cf4c71"
+            ],
+            "title": "Niccolò Machiavelli",
+            "text": "Revival of interest in the comedies In the 20th century there was also renewed interest in Machiavelli's La Mandragola (1518), which received numerous stagings, including several in New York, at the New York Shakespeare Festival in 1976 and the Riverside Shakespeare Company in 1979, as a musical comedy by Peer Raben in Munich's antiteater in 1971, and at London's National Theatre in 1984. In popular culture Christopher Marlowe's play The Jew of Malta (ca. 1589) contains a prologue in pronounced by a character called Machiavel, a Senecan ghost based on Machiavelli. Machiavel expresses the cynical view that power is amoral, saying \"I count religion but a childish toy,/And hold there is no sin but ignorance.\" Niccolò Machiavelli plays a vital role in the young adult book series The Secrets of the Immortal Nicholas Flamel. He is an immortal working in national security for the French government. Niccolò Machiavelli aids Cesare Borgia and protagonist Nicholas Dawson in their dangerous intrigues in Cecelia Holland's 1979 historical novel City of God. David Maclaine writes that in the novel, Machiavelli \"is an off-stage presence whose spirit permeates this work of intrigue and betrayal ... It is a brilliant introduction to the people and events",
+            "rank": 4,
+            "score": 29.559949835459534
+          },
+          {
+            "chunk_id": "chunk_0c19ae58eeb097ded106aee1",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "For the theatre adaptation, see Shakespeare in Love (play). Shakespeare in Love is a 1998 British-American romantic comedy-drama film directed by John Madden, written by Marc Norman and playwright Tom Stoppard. The film depicts an imaginary love affair involving Viola de Lesseps (Gwyneth Paltrow) and playwright William Shakespeare (Joseph Fiennes) while he was writing Romeo and Juliet. Several characters are based on historical figures, and many of the characters, lines, and plot devices allude to Shakespeare's plays. Shakespeare in Love won seven Academy Awards, including Best Picture, Best Actress (Gwyneth Paltrow), and Best Supporting Actress (Judi Dench). Plot In 1593 London, William Shakespeare is a sometime player in the Lord Chamberlain's Men and poor playwright for Philip Henslowe, owner of The Rose Theatre. Shakespeare is working on a new comedy, Romeo and Ethel, the Pirate's Daughter. Suffering from writer's block, he has barely begun the play, but starts auditioning players. Viola de Lesseps, the daughter of a wealthy merchant, who has seen Shakespeare's plays at court, disguises herself as \"Thomas Kent\" to audition, then runs away. Shakespeare pursues Kent to Viola's house and leaves a note with the nurse, asking Thomas Kent to begin rehearsals at the Rose. He sneaks",
+            "rank": 5,
+            "score": 28.98579476964363
+          },
+          {
+            "chunk_id": "chunk_9e78d1d9dcd047b6ae7267a5",
+            "doc_id": "doc_20e2c23cd5a2903018798a71",
+            "source_doc_ids": [
+              "doc_20e2c23cd5a2903018798a71"
+            ],
+            "title": "Richard III (play)",
+            "text": "Machiavellian reading of the play finds evidence in Richard's interactions with the audience, as when he mentions that he is \"determinèd to prove a villain\" (I.i.30). However, though it seems Richard views himself as completely in control, Lull suggests that Shakespeare is using Richard to state \"the tragic conception of the play in a joke. His primary meaning is that he controls his own destiny. His pun also has a second, contradictory meaning—that his villainy is predestined—and the strong providentialism of the play ultimately endorses this meaning\". Literary critic Paul Haeffner writes that Shakespeare had a great understanding of language and the potential of every word he used. One word that Shakespeare gave potential to was \"joy\". This is employed in Act I, Scene III, where it is used to show \"deliberate emotional effect\". Another word that Haeffner points out is \"kind\", which he suggests is used with two different definitions. The first definition is used to express a \"gentle and loving\" man, which Clarence uses to describe his brother Richard to the murderers that were sent to kill him. This definition is not true, as Richard uses a gentle façade to seize the throne. The second definition concerns \"the",
+            "rank": 6,
+            "score": 28.89825938304444
+          },
+          {
+            "chunk_id": "chunk_64d1dbec3176e08e1bd65a19",
+            "doc_id": "doc_fbe156072d528946e5e35372",
+            "source_doc_ids": [
+              "doc_fbe156072d528946e5e35372"
+            ],
+            "title": "The Merchant of Venice",
+            "text": "that they were easily identified, and had to live in a ghetto protected by Christian guards.[https://www.jewishvirtuallibrary.org/jsource/vjw/Venice.html The Virtual Jewish History Tour – Venice] On the Elizabethan stage, Jews were often presented in an Orientalist caricature, with hooked noses and bright red wigs, and were usually depicted as avaricious usurers; an example is Christopher Marlowe's play The Jew of Malta, which features a comically wicked Jewish villain called Barabas. They were usually characterised as evil, deceitful and greedy. Shakespeare's play may be seen as a continuation of this tradition. The title page of the Quarto indicates that the play was sometimes known as The Jew of Venice in its day, which suggests that it was seen as similar to Marlowe's The Jew of Malta. One interpretation of the play's structure is that Shakespeare meant to contrast the mercy of the main Christian characters with the vengefulness of a Jew, who lacks the religious grace to comprehend mercy. Similarly, it is possible that Shakespeare meant Shylock's forced conversion to Christianity to be a \"happy ending\" for the character, as, to a Christian audience, it saves his soul and allows him to enter Heaven. Regardless of what Shakespeare's authorial intent may have been,",
+            "rank": 7,
+            "score": 28.82956017244515
+          },
+          {
+            "chunk_id": "chunk_5a75799686f8c09aea161904",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "to marry Lord Wessex, while Shakespeare himself is poor and already married). There is also a Rosaline, with whom Will is in love at the beginning of the film. There are references to earlier cinematic versions of Shakespeare, such as the balcony scene pastiching the Zeffirelli Romeo and Juliet. Many other plot devices used in the film are common in Shakespearean comedies and other plays of the Elizabethan era: the Queen disguised as a commoner, the cross-dressing disguises, mistaken identities, the sword fight, the suspicion of adultery, the appearance of a \"ghost\" (cf. Macbeth), and the \"play within a play\". According to Douglas Brode, the film deftly portrays many of these devices as though the events depicted were the inspiration for Shakespeare's own use of them in his plays. The film also has sequences in which Shakespeare and the other characters utter words that later appear in his plays, or in other ways echo those plays: * On the street, Shakespeare hears a Puritan preaching against the two London stages: \"The Rose smells thusly rank, by any name! I say, a plague on both their houses!\" Two references in one, both to Romeo and Juliet; first, \"A rose by any",
+            "rank": 8,
+            "score": 28.65420882599264
+          },
+          {
+            "chunk_id": "chunk_eaa762c5304ae6dcd95754a9",
+            "doc_id": "doc_838efd2bccb31b10b45372d6",
+            "source_doc_ids": [
+              "doc_838efd2bccb31b10b45372d6"
+            ],
+            "title": "The Picture of Dorian Gray",
+            "text": "of a temptation is to yield to it. Resist it, and your soul grows sick with longing.\" As such, the devilish Lord Henry is \"leading Dorian into an unholy pact, by manipulating his innocence and insecurity.\" Shakespeare In the preface to The Picture of Dorian Gray (1891), Wilde speaks of the sub-human Caliban character from The Tempest. When Dorian tells Lord Henry about his new love Sibyl Vane, he mentions the Shakespeare plays in which she has acted, and refers to her by the name of the heroine of each play. Later, Dorian speaks of his life by quoting Hamlet, a privileged character who impels his girlfriend (Ophelia) to suicide, and prompts her brother (Laertes) to swear mortal revenge. Joris-Karl Huysmans The anonymous \"poisonous French novel\" that leads Dorian to his fall is a thematic variant of À rebours (1884), by Joris-Karl Huysmans. In the biography, Oscar Wilde (1989), the literary critic Richard Ellmann said that: Wilde does not name the book, but at his trial he conceded that it was, or almost [was], Huysmans's À rebours ... to a correspondent, he wrote that he had played a 'fantastic variation' upon À rebours, and [that] someday must write it down.",
+            "rank": 9,
+            "score": 28.441426525237382
+          },
+          {
+            "chunk_id": "chunk_c97af37d579d19ad000b22d6",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "Shakespeare hears a Puritan preaching against the two London stages: \"The Rose smells thusly rank, by any name! I say, a plague on both their houses!\" Two references in one, both to Romeo and Juliet; first, \"A rose by any other name would smell as sweet\" (Act II, scene ii, lines 1 and 2); second, \"a plague on both your houses\" (Act III, scene I, line 94). * Backstage at a performance of The Two Gentlemen of Verona, Shakespeare sees William Kempe in full make-up, silently contemplating a skull, a reference to the gravediggers scene in Hamlet. * Shakespeare utters the lines \"Doubt thou the stars are fire, / Doubt that the sun doth move\" (from Hamlet) to Philip Henslowe. * As Shakespeare's writer's block is introduced, he is seen crumpling balls of paper and throwing them around his room. They land near props which represent scenes in several of his plays: a skull (Hamlet), and an open chest (The Merchant of Venice). * Viola, as well as being Paltrow's character in the film, is the name of the lead character in Twelfth Night who dresses as a man after the supposed death of her brother. * At the end",
+            "rank": 10,
+            "score": 28.29634875111452
+          }
+        ],
+        "hybrid": [
+          {
+            "chunk_id": "chunk_a00aa5be44d09c79abd214da",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "Merchant of Venice). * Viola, as well as being Paltrow's character in the film, is the name of the lead character in Twelfth Night who dresses as a man after the supposed death of her brother. * At the end of the film, Shakespeare imagines a shipwreck overtaking Viola on her way to America, inspiring the second scene of his next play, Twelfth Night, a scene which also echoes the beginning of The Tempest. * Shakespeare writes a sonnet to Viola which begins: \"Shall I compare thee to a summer's day?\" (from Sonnet 18). * Shakespeare tells Henslowe that he still owes him for \"one gentleman of Verona\", a reference to Two Gentlemen of Verona, part of which we also see being acted before the Queen later in the film. * In a boat, Shakespeare tells Viola, who is disguised as Thomas Kent, of his lady’s beauty and charms, she dismisses his praise, as no real woman could live up to this ideal, this is a 'set up' for Sonnet 130, \"My mistress’ eyes are nothing like the sun\". Christopher Marlowe is presented in the film as the master playwright whom the characters consider the greatest English dramatist of that",
+            "rank": 1,
+            "score": 0.032018442622950824
+          },
+          {
+            "chunk_id": "chunk_5a75799686f8c09aea161904",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "to marry Lord Wessex, while Shakespeare himself is poor and already married). There is also a Rosaline, with whom Will is in love at the beginning of the film. There are references to earlier cinematic versions of Shakespeare, such as the balcony scene pastiching the Zeffirelli Romeo and Juliet. Many other plot devices used in the film are common in Shakespearean comedies and other plays of the Elizabethan era: the Queen disguised as a commoner, the cross-dressing disguises, mistaken identities, the sword fight, the suspicion of adultery, the appearance of a \"ghost\" (cf. Macbeth), and the \"play within a play\". According to Douglas Brode, the film deftly portrays many of these devices as though the events depicted were the inspiration for Shakespeare's own use of them in his plays. The film also has sequences in which Shakespeare and the other characters utter words that later appear in his plays, or in other ways echo those plays: * On the street, Shakespeare hears a Puritan preaching against the two London stages: \"The Rose smells thusly rank, by any name! I say, a plague on both their houses!\" Two references in one, both to Romeo and Juliet; first, \"A rose by any",
+            "rank": 2,
+            "score": 0.029631255487269532
+          },
+          {
+            "chunk_id": "chunk_0c19ae58eeb097ded106aee1",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "For the theatre adaptation, see Shakespeare in Love (play). Shakespeare in Love is a 1998 British-American romantic comedy-drama film directed by John Madden, written by Marc Norman and playwright Tom Stoppard. The film depicts an imaginary love affair involving Viola de Lesseps (Gwyneth Paltrow) and playwright William Shakespeare (Joseph Fiennes) while he was writing Romeo and Juliet. Several characters are based on historical figures, and many of the characters, lines, and plot devices allude to Shakespeare's plays. Shakespeare in Love won seven Academy Awards, including Best Picture, Best Actress (Gwyneth Paltrow), and Best Supporting Actress (Judi Dench). Plot In 1593 London, William Shakespeare is a sometime player in the Lord Chamberlain's Men and poor playwright for Philip Henslowe, owner of The Rose Theatre. Shakespeare is working on a new comedy, Romeo and Ethel, the Pirate's Daughter. Suffering from writer's block, he has barely begun the play, but starts auditioning players. Viola de Lesseps, the daughter of a wealthy merchant, who has seen Shakespeare's plays at court, disguises herself as \"Thomas Kent\" to audition, then runs away. Shakespeare pursues Kent to Viola's house and leaves a note with the nurse, asking Thomas Kent to begin rehearsals at the Rose. He sneaks",
+            "rank": 3,
+            "score": 0.02804284323271665
+          },
+          {
+            "chunk_id": "chunk_c97af37d579d19ad000b22d6",
+            "doc_id": "doc_e9aaa610f1533acd729eabea",
+            "source_doc_ids": [
+              "doc_e9aaa610f1533acd729eabea"
+            ],
+            "title": "Shakespeare in Love",
+            "text": "Shakespeare hears a Puritan preaching against the two London stages: \"The Rose smells thusly rank, by any name! I say, a plague on both their houses!\" Two references in one, both to Romeo and Juliet; first, \"A rose by any other name would smell as sweet\" (Act II, scene ii, lines 1 and 2); second, \"a plague on both your houses\" (Act III, scene I, line 94). * Backstage at a performance of The Two Gentlemen of Verona, Shakespeare sees William Kempe in full make-up, silently contemplating a skull, a reference to the gravediggers scene in Hamlet. * Shakespeare utters the lines \"Doubt thou the stars are fire, / Doubt that the sun doth move\" (from Hamlet) to Philip Henslowe. * As Shakespeare's writer's block is introduced, he is seen crumpling balls of paper and throwing them around his room. They land near props which represent scenes in several of his plays: a skull (Hamlet), and an open chest (The Merchant of Venice). * Viola, as well as being Paltrow's character in the film, is the name of the lead character in Twelfth Night who dresses as a man after the supposed death of her brother. * At the end",
+            "rank": 4,
+            "score": 0.027106227106227107
+          },
+          {
+            "chunk_id": "chunk_adb15efbad4263b30b197698",
+            "doc_id": "doc_20e2c23cd5a2903018798a71",
+            "source_doc_ids": [
+              "doc_20e2c23cd5a2903018798a71"
+            ],
+            "title": "Richard III (play)",
+            "text": "Richard III is a historical play by William Shakespeare, believed to have been written in approximately 1592. It depicts the Machiavellian rise to power and subsequent short reign of King Richard III of England. The play is grouped among the histories in the First Folio and is most often classified as such. Occasionally, however, as in the quarto edition, it is termed a tragedy. Richard III concludes Shakespeare's first tetralogy (also containing Henry VI parts 1–3). It is the second longest play in the canon after Hamlet, and is the longest of the First Folio, whose version of Hamlet is shorter than its Quarto counterpart. The play is rarely performed unabridged; often, certain peripheral characters are removed entirely. In such instances extra lines are often invented or added from elsewhere in the sequence to establish the nature of characters' relationships. A further reason for abridgment is that Shakespeare assumed that his audiences would be familiar with the Henry VI plays, and frequently made indirect references to events in them, such as Richard's murder of Henry VI or the defeat of Henry's queen, Margaret. Characters House of York * King Edward IV – King of England * Richard, Duke of Gloucester",
+            "rank": 5,
+            "score": 0.02684684684684685
+          },
+          {
+            "chunk_id": "chunk_9a8634b8ff38b42ac73195fd",
+            "doc_id": "doc_b34b74cde2fee1f5c0151e62",
+            "source_doc_ids": [
+              "doc_b34b74cde2fee1f5c0151e62"
+            ],
+            "title": "William Shakespeare",
+            "text": "Well and a number of his best known tragedies. Many critics believe that Shakespeare's greatest tragedies represent the peak of his art. The titular hero of one of Shakespeare's most famous tragedies, Hamlet, has probably been discussed more than any other Shakespearean character, especially for his famous soliloquy which begins \"To be or not to be; that is the question\". Unlike the introverted Hamlet, whose fatal flaw is hesitation, the heroes of the tragedies that followed, Othello and King Lear, are undone by hasty errors of judgement. The plots of Shakespeare's tragedies often hinge on such fatal errors or flaws, which overturn order and destroy the hero and those he loves. In Othello, the villain Iago stokes Othello's sexual jealousy to the point where he murders the innocent wife who loves him. In King Lear, the old king commits the tragic error of giving up his powers, initiating the events which lead to the torture and blinding of the Earl of Gloucester and the murder of Lear's youngest daughter Cordelia. According to the critic Frank Kermode, \"the play-offers neither its good characters nor its audience any relief from its cruelty\". In Macbeth, the shortest and most compressed of Shakespeare's tragedies,",
+            "rank": 6,
+            "score": 0.01639344262295082
+          },
+          {
+            "chunk_id": "chunk_7a0eabc132ee7b803b25e142",
+            "doc_id": "doc_fbe156072d528946e5e35372",
+            "source_doc_ids": [
+              "doc_fbe156072d528946e5e35372"
+            ],
+            "title": "The Merchant of Venice",
+            "text": "of Shylock has brought little less persecution upon us, poor scattered sons of Abraham, than the Inquisition itself.\" Cumberland later wrote a successful play, The Jew (1794), in which his title character, Sheva, is portrayed sympathetically, as both a kindhearted and generous man. This was the first known attempt by a dramatist to reverse the negative stereotype that Shylock personified. The depiction of Jews in literature throughout the centuries bears the close imprint of Shylock. With slight variations much of English literature up until the 20th century depicts the Jew as \"a monied, cruel, lecherous, avaricious outsider tolerated only because of his golden hoard\". Shylock as a sympathetic character Many modern readers and theatregoers have read the play as a plea for tolerance, noting that Shylock is a sympathetic character. They cite as evidence that Shylock's \"trial\" at the end of the play is a mockery of justice, with Portia acting as a judge when she has no right to do so. The characters who berated Shylock for dishonesty resort to trickery in order to win. In addition, Shakespeare gives Shylock one of his most eloquent speeches: It is difficult to know whether the sympathetic reading of Shylock is entirely",
+            "rank": 7,
+            "score": 0.016129032258064516
+          },
+          {
+            "chunk_id": "chunk_b118d2257f9802bc547f1f9b",
+            "doc_id": "doc_25f9aee53389243d25ee8450",
+            "source_doc_ids": [
+              "doc_25f9aee53389243d25ee8450"
+            ],
+            "title": "List of Asterix characters",
+            "text": "often uses the Shakespearean quote: \"\" to him for various purposes. Brutus appears in minor roles in various books, and has a major role in Asterix and Son, where his plot to kill Caesar and Cleopatra's infant son to secure his place as Caesar's heir prompts him to attack the village when Cleopatra sends her son there for safety, causing Caesar to send him to Upper Germania. Brutus's physical appearance is arguably different in each of his appearances. * Pompey (Pompée) — Caesar's greatest enemy and a former consul of Rome. He is mentioned in Asterix the Gladiator, Asterix the Legionary and Asterix and the Roman Agent and appears in person in Asterix and the Actress, where he is the book's antagonist, seeking valuable pieces of armour that have been given to Asterix and Obelix as birthday presents. * Metellus Scipio (Scipion) — Another of Caesar's enemies, allied to Pompey. Caesar defeated him in the Battle of Thapsus, as depicted in Asterix the Legionary. Note that Pompey doesn't make an appearance there, as he was assassinated before these events took place (though he anachronistically surfaces in Asterix and the Actress later). * Caesarion — Caesar and Cleopatra's baby boy. Appears",
+            "rank": 8,
+            "score": 0.016129032258064516
+          },
+          {
+            "chunk_id": "chunk_20b86e50357dfc00e950ed37",
+            "doc_id": "doc_fbe156072d528946e5e35372",
+            "source_doc_ids": [
+              "doc_fbe156072d528946e5e35372"
+            ],
+            "title": "The Merchant of Venice",
+            "text": "that Shakespeare meant Shylock's forced conversion to Christianity to be a \"happy ending\" for the character, as, to a Christian audience, it saves his soul and allows him to enter Heaven. Regardless of what Shakespeare's authorial intent may have been, the play has been made use of by antisemites throughout the play's history. One must note that the end of the title in the 1619 edition \"With the Extreme Cruelty of Shylock the Jew...\" must aptly describe how Shylock was viewed by the English public. The Nazis used the usurious Shylock for their propaganda. Shortly after Kristallnacht in 1938, The Merchant of Venice was broadcast for propagandistic ends over the German airwaves. Productions of the play followed in Lübeck (1938), Berlin (1940), and elsewhere within the Nazi Territory. In a series of articles called Observer, first published in 1785, British playwright Richard Cumberland created a character named Abraham Abrahams who is quoted as saying, \"I verily believe the odious character of Shylock has brought little less persecution upon us, poor scattered sons of Abraham, than the Inquisition itself.\" Cumberland later wrote a successful play, The Jew (1794), in which his title character, Sheva, is portrayed sympathetically, as both a kindhearted",
+            "rank": 9,
+            "score": 0.015873015873015872
+          },
+          {
+            "chunk_id": "chunk_ffa04f3d295139b643fe2ad0",
+            "doc_id": "doc_20e2c23cd5a2903018798a71",
+            "source_doc_ids": [
+              "doc_20e2c23cd5a2903018798a71"
+            ],
+            "title": "Richard III (play)",
+            "text": "is a loose adaptation of the first Shakespearean historical tetralogy. It depicts Richard III as intersex instead of hunchbacked. Historical inaccuracies Shakespeare, and the Tudor chroniclers who influenced him, were obliged to portray the downfall of the Plantagenet House of York and the victory of the House of Tudor as good conquering evil. This is usually attributed to bias as a result of a new regime being in place, requiring that the last Plantagenet king, Richard III, be depicted as a villain. There are many historical inaccuracies in the play, which can be attributed partly to Shakespeare's sources, such as Holinshed's Chronicles. Some of these inaccuracies are listed below in the order in which they either appear or are referred to in the play. Richard was not personally responsible for the death of his wife's first husband, Edward of Westminster (the son of Henry VI), nor that of her father, Richard Neville (the Earl of Warwick). They were killed in the battles of Tewkesbury and Barnet, respectively, which restored Edward IV to the throne. Although only eighteen years old, Richard took part in both battles, but no contemporary records indicate him as being involved directly in either death. Richard was",
+            "rank": 10,
+            "score": 0.015873015873015872
+          }
+        ]
+      },
+      "reference": null,
+      "legacy_reference_not_used_for_inference": {
+        "question": "Antigonus is a character in which Shakespeare play?",
+        "canonical": "The Winter’s Tale"
+      }
+    },
+    {
+      "dataset_version": "research_v1",
+      "dataset_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+      "query": "Which children’s playground game is sometimes called ‘Fivestones’, ‘Knucklebones’ or ‘Snobs’?",
+      "retrieval_mode": "hybrid",
+      "systems": {
+        "generator_only": {
+          "answer": "Snob",
+          "context_used": "",
+          "used_passages": [],
+          "input_tokens": 38,
+          "latency_ms": 98.81,
+          "scores": null
+        },
+        "retrieval_only": {
+          "answer": "",
+          "context_used": "e.g. Fox and Geese or Tablut * Wargames – ranging from Risk, Diplomacy, or Axis & Allies, to Attack! or Conquest of the Empire * Word games – e.g. Scrabble, Boggle, Anagrams, or What's My Word? (2010) Glossary Although many board games have a jargon all their own, there is a generalized terminology to describe concepts applicable to basic game mechanics and attributes common to nearly all board games.\n\n** The Ball Game in Sedgefield, County Durham * In Scotland the Ba game (\"Ball Game\") is still popular around Christmas and Hogmanay at: ** Duns, Berwickshire ** Scone, Perthshire ** Kirkwall in the Orkney Islands Outside the UK * Calcio Fiorentino – a modern revival of Renaissance football from 16th century Florence. * la Soule – a modern revival of French medieval football * lelo burti – a Georgian traditional football game Surviving UK school games Games still played at UK public (independent) schools: *Eton field game *Eton wall game *Harrow football *Winchester College football Recent inventions and hybrid games * Keepie uppie (keep up) – the art of juggling with a football using the feet, knees, chest, shoulders, and head. ** Footbag – several variations using a small bean bag or sand bag as a ball, the trade marked term hacky sack is sometimes used as a generic synonym. ** Freestyle football – participants are graded for their entertainment value and expression of skill. Based on FA rules * Three sided football * Triskelion Based on rugby *Force ’em backs a.k.a. forcing back, forcemanback Hybrid games * Austus – a compromise between Australian rules and American football, invented\n\nto combine action with melodrama. The player’s imagination is fired as they plan to rob the train. Because of the gamble they take in the early stage of the game there is a build up of tension, which is immediately released once the train is robbed. Release of tension is therapeutic and useful in our society, because most jobs are boring and repetitive.Stealing the show. Toy Retailing News, Volume 2 Number 4 (December 1976), p. 2 Playing games have been suggested as a viable addition to traditional educational curriculum. Categories There are a number of ways in which board games can be classified, and considerable overlap may exist, so that a game belong in several categories. The following is a list of some of the most common: * Abstract strategy games – e.g. chess, checkers, Go, Reversi, tafl games, or modern games such as Abalone, Stratego, Hive, or GIPF * Alignment games – e.g. Renju, Gomoku, Connect6, Nine Men's Morris, or Tic-tac-toe * Auction games – e.g. Hoity Toity * Chess variants – traditional variants e.g. shogi, xiangqi, or janggi; modern variants e.g. Chess960, Grand chess, Hexagonal chess, or Alice chess * Configuration games – e.g. Lines of Action, Hexade,",
+          "used_passages": [
+            {
+              "chunk_id": "chunk_bfe2c53ee3a33a717b249d55",
+              "doc_id": "doc_9bb420829704508d38e857d6",
+              "source_doc_ids": [
+                "doc_9bb420829704508d38e857d6"
+              ],
+              "title": "Board game",
+              "text": "e.g. Fox and Geese or Tablut * Wargames – ranging from Risk, Diplomacy, or Axis & Allies, to Attack! or Conquest of the Empire * Word games – e.g. Scrabble, Boggle, Anagrams, or What's My Word? (2010) Glossary Although many board games have a jargon all their own, there is a generalized terminology to describe concepts applicable to basic game mechanics and attributes common to nearly all board games.",
+              "rank": 1,
+              "score": 0.4984092116355896
+            },
+            {
+              "chunk_id": "chunk_3887b33717822135b1559dcd",
+              "doc_id": "doc_a4a5b53360aadc22cfbba381",
+              "source_doc_ids": [
+                "doc_a4a5b53360aadc22cfbba381"
+              ],
+              "title": "Football",
+              "text": "** The Ball Game in Sedgefield, County Durham * In Scotland the Ba game (\"Ball Game\") is still popular around Christmas and Hogmanay at: ** Duns, Berwickshire ** Scone, Perthshire ** Kirkwall in the Orkney Islands Outside the UK * Calcio Fiorentino – a modern revival of Renaissance football from 16th century Florence. * la Soule – a modern revival of French medieval football * lelo burti – a Georgian traditional football game Surviving UK school games Games still played at UK public (independent) schools: *Eton field game *Eton wall game *Harrow football *Winchester College football Recent inventions and hybrid games * Keepie uppie (keep up) – the art of juggling with a football using the feet, knees, chest, shoulders, and head. ** Footbag – several variations using a small bean bag or sand bag as a ball, the trade marked term hacky sack is sometimes used as a generic synonym. ** Freestyle football – participants are graded for their entertainment value and expression of skill. Based on FA rules * Three sided football * Triskelion Based on rugby *Force ’em backs a.k.a. forcing back, forcemanback Hybrid games * Austus – a compromise between Australian rules and American football, invented",
+              "rank": 2,
+              "score": 0.4676467180252075
+            },
+            {
+              "chunk_id": "chunk_4e408573794ea45d9e54dbc6",
+              "doc_id": "doc_9bb420829704508d38e857d6",
+              "source_doc_ids": [
+                "doc_9bb420829704508d38e857d6"
+              ],
+              "title": "Board game",
+              "text": "to combine action with melodrama. The player’s imagination is fired as they plan to rob the train. Because of the gamble they take in the early stage of the game there is a build up of tension, which is immediately released once the train is robbed. Release of tension is therapeutic and useful in our society, because most jobs are boring and repetitive.Stealing the show. Toy Retailing News, Volume 2 Number 4 (December 1976), p. 2 Playing games have been suggested as a viable addition to traditional educational curriculum. Categories There are a number of ways in which board games can be classified, and considerable overlap may exist, so that a game belong in several categories. The following is a list of some of the most common: * Abstract strategy games – e.g. chess, checkers, Go, Reversi, tafl games, or modern games such as Abalone, Stratego, Hive, or GIPF * Alignment games – e.g. Renju, Gomoku, Connect6, Nine Men's Morris, or Tic-tac-toe * Auction games – e.g. Hoity Toity * Chess variants – traditional variants e.g. shogi, xiangqi, or janggi; modern variants e.g. Chess960, Grand chess, Hexagonal chess, or Alice chess * Configuration games – e.g. Lines of Action, Hexade,",
+              "rank": 3,
+              "score": 0.4666638672351837
+            }
+          ],
+          "latency_ms": 30.62,
+          "scores": null
+        },
+        "rag": {
+          "answer": "Scrabble",
+          "context_used": "Source [1] | Ring a Ring o' Roses\nand curtsied as demanded by the verses and at the end kissed the one she liked best, so choosing her for the middle. In Croatian/Serbian/Bosnian langauge, there is a similar rhyme called \"Ringe Ringe Raja\": Ringe Ringe Raja, Došo čika Paja, Pa pojeo jaja, Jedno jaje muć, A mi djeco ČUČ! Rough translation is: \"Ringe Ringe Raya (doesn't mean anything, this is common in Croato-Serbian rhymes), uncle Ducky has came, and he ate all the eggs, one egg crashed, and we children DUCK!\" On the last word, all the children singing the rhyme jump or duck. Meaning The origins and meanings of the game have long been unknown and subject to speculation. In 1898, A Dictionary of British Folklore contained the belief that an explanation of the game was of pagan origin, based on the Sheffield Glossary comparison of Grimm's Teut. Myth. The theory states that it is in reference to Pagan myths and cited a passage which states, \"Gifted children of fortune have the power to laugh roses, as Treyja wept gold.\" Believing the first instance to be indicative of Pagan beings of light. Another suggestion is more literal, that it was making a \"ring\" around the roses and\n\nSource [2] | Scrabble\nfound. This is the format used for the French World Scrabble Championships but it is also used in Romanian and Dutch. There is no limit to the number of players that can be involved in one game, and at Vichy in 1998 there were 1485 players, a record for French Scrabble tournaments. Scarabeo is a variant that is much more popular in Italy than the original game. It features a 17×17 grid of cells and peculiar rules. In one variation of Scrabble, blanks actually do score points c",
+          "used_passages": [
+            {
+              "chunk_id": "chunk_69eeaba368d3a664524335ea",
+              "doc_id": "doc_56835b69aa483c215c3c117e",
+              "source_doc_ids": [
+                "doc_56835b69aa483c215c3c117e"
+              ],
+              "title": "Ring a Ring o' Roses",
+              "text": "and curtsied as demanded by the verses and at the end kissed the one she liked best, so choosing her for the middle. In Croatian/Serbian/Bosnian langauge, there is a similar rhyme called \"Ringe Ringe Raja\": Ringe Ringe Raja, Došo čika Paja, Pa pojeo jaja, Jedno jaje muć, A mi djeco ČUČ! Rough translation is: \"Ringe Ringe Raya (doesn't mean anything, this is common in Croato-Serbian rhymes), uncle Ducky has came, and he ate all the eggs, one egg crashed, and we children DUCK!\" On the last word, all the children singing the rhyme jump or duck. Meaning The origins and meanings of the game have long been unknown and subject to speculation. In 1898, A Dictionary of British Folklore contained the belief that an explanation of the game was of pagan origin, based on the Sheffield Glossary comparison of Grimm's Teut. Myth. The theory states that it is in reference to Pagan myths and cited a passage which states, \"Gifted children of fortune have the power to laugh roses, as Treyja wept gold.\" Believing the first instance to be indicative of Pagan beings of light. Another suggestion is more literal, that it was making a \"ring\" around the roses and",
+              "rank": 1,
+              "score": 0.025603864734299518,
+              "citation_id": 1,
+              "visible_heading": "Source [1] | Ring a Ring o' Roses\n",
+              "title_only": false
+            },
+            {
+              "chunk_id": "chunk_22b966aac0bd8d9298b4b11f",
+              "doc_id": "doc_9c019aa8784596c7aedb4ba4",
+              "source_doc_ids": [
+                "doc_9c019aa8784596c7aedb4ba4"
+              ],
+              "title": "Scrabble",
+              "text": "found. This is the format used for the French World Scrabble Championships but it is also used in Romanian and Dutch. There is no limit to the number of players that can be involved in one game, and at Vichy in 1998 there were 1485 players, a record for French Scrabble tournaments. Scarabeo is a variant that is much more popular in Italy than the original game. It features a 17×17 grid of cells and peculiar rules. In one variation of Scrabble, blanks actually do score points c",
+              "rank": 2,
+              "score": 0.02531645569620253,
+              "citation_id": 2,
+              "visible_heading": "Source [2] | Scrabble\n",
+              "title_only": false
+            }
+          ],
+          "input_tokens": 512,
+          "latency_ms": 167.57,
+          "scores": null
+        }
+      },
+      "retrieval": {
+        "dense": [
+          {
+            "chunk_id": "chunk_bfe2c53ee3a33a717b249d55",
+            "doc_id": "doc_9bb420829704508d38e857d6",
+            "source_doc_ids": [
+              "doc_9bb420829704508d38e857d6"
+            ],
+            "title": "Board game",
+            "text": "e.g. Fox and Geese or Tablut * Wargames – ranging from Risk, Diplomacy, or Axis & Allies, to Attack! or Conquest of the Empire * Word games – e.g. Scrabble, Boggle, Anagrams, or What's My Word? (2010) Glossary Although many board games have a jargon all their own, there is a generalized terminology to describe concepts applicable to basic game mechanics and attributes common to nearly all board games.",
+            "rank": 1,
+            "score": 0.4984092116355896
+          },
+          {
+            "chunk_id": "chunk_3887b33717822135b1559dcd",
+            "doc_id": "doc_a4a5b53360aadc22cfbba381",
+            "source_doc_ids": [
+              "doc_a4a5b53360aadc22cfbba381"
+            ],
+            "title": "Football",
+            "text": "** The Ball Game in Sedgefield, County Durham * In Scotland the Ba game (\"Ball Game\") is still popular around Christmas and Hogmanay at: ** Duns, Berwickshire ** Scone, Perthshire ** Kirkwall in the Orkney Islands Outside the UK * Calcio Fiorentino – a modern revival of Renaissance football from 16th century Florence. * la Soule – a modern revival of French medieval football * lelo burti – a Georgian traditional football game Surviving UK school games Games still played at UK public (independent) schools: *Eton field game *Eton wall game *Harrow football *Winchester College football Recent inventions and hybrid games * Keepie uppie (keep up) – the art of juggling with a football using the feet, knees, chest, shoulders, and head. ** Footbag – several variations using a small bean bag or sand bag as a ball, the trade marked term hacky sack is sometimes used as a generic synonym. ** Freestyle football – participants are graded for their entertainment value and expression of skill. Based on FA rules * Three sided football * Triskelion Based on rugby *Force ’em backs a.k.a. forcing back, forcemanback Hybrid games * Austus – a compromise between Australian rules and American football, invented",
+            "rank": 2,
+            "score": 0.4676467180252075
+          },
+          {
+            "chunk_id": "chunk_4e408573794ea45d9e54dbc6",
+            "doc_id": "doc_9bb420829704508d38e857d6",
+            "source_doc_ids": [
+              "doc_9bb420829704508d38e857d6"
+            ],
+            "title": "Board game",
+            "text": "to combine action with melodrama. The player’s imagination is fired as they plan to rob the train. Because of the gamble they take in the early stage of the game there is a build up of tension, which is immediately released once the train is robbed. Release of tension is therapeutic and useful in our society, because most jobs are boring and repetitive.Stealing the show. Toy Retailing News, Volume 2 Number 4 (December 1976), p. 2 Playing games have been suggested as a viable addition to traditional educational curriculum. Categories There are a number of ways in which board games can be classified, and considerable overlap may exist, so that a game belong in several categories. The following is a list of some of the most common: * Abstract strategy games – e.g. chess, checkers, Go, Reversi, tafl games, or modern games such as Abalone, Stratego, Hive, or GIPF * Alignment games – e.g. Renju, Gomoku, Connect6, Nine Men's Morris, or Tic-tac-toe * Auction games – e.g. Hoity Toity * Chess variants – traditional variants e.g. shogi, xiangqi, or janggi; modern variants e.g. Chess960, Grand chess, Hexagonal chess, or Alice chess * Configuration games – e.g. Lines of Action, Hexade,",
+            "rank": 3,
+            "score": 0.4666638672351837
+          },
+          {
+            "chunk_id": "chunk_43de993597ed87df3904def2",
+            "doc_id": "doc_e98e40c3319c960288007d5f",
+            "source_doc_ids": [
+              "doc_e98e40c3319c960288007d5f"
+            ],
+            "title": "Pinball",
+            "text": "and tabletop ball games The origins of pinball are intertwined with the history of many other games. Games played outdoors by rolling balls or stones on a grass course, such as bocce or bowls, eventually evolved into various local ground billiards games played by hitting the balls with sticks and propelling them at targets, often around obstacles. Croquet, golf and paille-maille eventually derived from ground billiards variants. The evolving and specializing outdoor games finally led to indoor versions that could be played on a table, such as billiards, or on the floor of a pub, like bowling and shuffleboard. The tabletop versions of these games became the ancestors of modern pinball. Late 1700s: Spring launcher invented In France, during the long 1643–1715 reign of Louis XIV, billiard tables were narrowed, with wooden pins or skittles at one end of the table, and players would shoot balls with a stick or cue from the other end, in a game inspired as much by bowling as billiards. Pins took too long to reset when knocked down, so they were eventually fixed to the table, and holes in the bed of the table became the targets. Players could ricochet balls off the pins",
+            "rank": 4,
+            "score": 0.4451780319213867
+          },
+          {
+            "chunk_id": "chunk_dda2c79dad8d4b1c9f8aee3d",
+            "doc_id": "doc_9bb420829704508d38e857d6",
+            "source_doc_ids": [
+              "doc_9bb420829704508d38e857d6"
+            ],
+            "title": "Board game",
+            "text": "for people to find out about games and to find opponents to play against. Around the year 2000 the board gaming industry began significant growth with companies producing a rising number of new games to be sold to a growing worldwide audience. In the 2010s, a number of publications referred to the board games as having a new Golden Age. Board game venues are also growing in popularity; for example the board game cafes are reported to be very popular in China. Luck, strategy, and diplomacy Some games, such as chess, depend completely on player skill, while many children's games such as Candy Land and Snakes and Ladders require no decisions by the players and are decided purely by luck. Many games require some level of both skill and luck. A player may be hampered by bad luck in backgammon, Monopoly, Risk; but over many games a skilled player will win more often and the elements of luck can make for more excitement, and more diverse and multifaceted strategies, as concepts such as expected value and risk management must be considered. Luck may be introduced into a game by a number of methods. The use of dice of various sorts",
+            "rank": 5,
+            "score": 0.43968984484672546
+          },
+          {
+            "chunk_id": "chunk_330ebda648f9d1da3819a429",
+            "doc_id": "doc_9c019aa8784596c7aedb4ba4",
+            "source_doc_ids": [
+              "doc_9c019aa8784596c7aedb4ba4"
+            ],
+            "title": "Scrabble",
+            "text": "CH in SOWPODS. History In 1938, American architect Alfred Mosher Butts created the game as a variation on an earlier word game he invented called Lexiko. The two games had the same set of letter tiles, whose distributions and point values Butts worked out by performing a frequency analysis of letters from various sources, including The New York Times. The new game, which he called \"Criss-Crosswords,\" added the 15×15 gameboard and the crossword-style game play. He manufactured a few sets himself, but was not successful in selling the game to any major game manufacturers of the day. In 1948, James Brunot, a resident of Newtown, Connecticut – and one of the few owners of the original Criss-Crosswords game – bought the rights to manufacture the game in exchange for granting Butts a royalty on every unit sold. Though he left most of the game (including the distribution of letters) unchanged, Brunot slightly rearranged the \"premium\" squares of the board and simplified the rules; he also changed the name of the game to \"Scrabble\", a real word which means \"to scratch frantically\". In 1949, Brunot and his family made sets in a converted former schoolhouse in Dodgingtown, a section of Newtown.",
+            "rank": 6,
+            "score": 0.4381343126296997
+          },
+          {
+            "chunk_id": "chunk_5152dbe36e3df98459299968",
+            "doc_id": "doc_9c019aa8784596c7aedb4ba4",
+            "source_doc_ids": [
+              "doc_9c019aa8784596c7aedb4ba4"
+            ],
+            "title": "Scrabble",
+            "text": "Scrabble is a word game in which two to four players score points by placing tiles, each bearing a single letter, onto a gameboard which is divided into a 15×15 grid of squares. The tiles must form words which, in crossword fashion, flow left to right in rows or downwards in columns. The words must be defined in a standard dictionary, or present in specified reference works (e.g., the Official Tournament and Club Word List, the Official Scrabble Players Dictionary), which provide a list of officially permissible words. The name Scrabble is a trademark of Hasbro, Inc. in the United States and Canada and has been sold by Hasbro's Parker Brothers division since 1999. Prior to 1999, it was sold as a Milton Bradley game. Outside the United States and Canada, Scrabble is a trademark of Mattel. The game is sold in 121 countries and is available in 29 languages; approximately 150 million sets have been sold worldwide and roughly one-third of American and half of British homes have a Scrabble set. There are around 4,000 Scrabble clubs around the world. Game details The game is played by two to four players on a square board with a 15×15 grid",
+            "rank": 7,
+            "score": 0.4281594157218933
+          },
+          {
+            "chunk_id": "chunk_29b845acc987d51a1af50efc",
+            "doc_id": "doc_ad87be883e115f0964c89ffe",
+            "source_doc_ids": [
+              "doc_ad87be883e115f0964c89ffe"
+            ],
+            "title": "CBS",
+            "text": "a series of one-minute segments titled In the News, which aired between other Saturday morning programs. Otherwise, in regards to children's programming, CBS has aired mostly animated series for children, such as reruns of Mighty Mouse, Bugs Bunny and Tom and Jerry cartoons, as well as the original version of Scooby-Doo, Fat Albert and the Cosby Kids, Jim Henson's Muppet Babies, Garfield and Friends, and the 1987 Teenage Mutant Ninja Turtles. In 1997, CBS premiered Wheel 2000 (a children's version of the syndicated game show Wheel of Fortune), which aired simultaneously on the Game Show Network. In September 1998, CBS began contracting the time period out to other companies to provide programming and material for its Saturday morning schedule. The first of these outsourced blocks was the CBS Kidshow, which ran until 2000 and featured programming from Canadian studio Nelvana (such as Anatole, Mythic Warriors, Rescue Heroes and Flying Rhino Junior High). After its agreement with Nelvana ended, the network then entered into a deal with Nickelodeon (which by the time of the deal was a corporate sister to CBS, through the latter's then parent company Viacom, as a result of its 2000 merger with CBS Corporation) to air programming",
+            "rank": 8,
+            "score": 0.42674586176872253
+          },
+          {
+            "chunk_id": "chunk_f7c154fdeed5ae1c54eff229",
+            "doc_id": "doc_9bb420829704508d38e857d6",
+            "source_doc_ids": [
+              "doc_9bb420829704508d38e857d6"
+            ],
+            "title": "Board game",
+            "text": "L game * Race games – e.g. Pachisi, backgammon, Snakes and Ladders, Hyena chase, or Worm Up * Role-playing game - e.g. Dungeons & Dragons * Roll-and-move games – e.g. Monopoly or Life * Share-buying games (games in which players buy stakes in each other's positions) – typically longer economic-management games - Acquire or Panamax * Single-player puzzle games – e.g. peg solitaire or Sudoku * Spiritual development games (games with no winners or losers) – e.g. Transformation Game or Psyche's Key * Story telling games – e.g. Dixit or Tales of the Arabian Nights * Stacking games – e.g. Lasca or DVONN * Territory games – e.g. Go or Reversi * Tile-based games – e.g. Carcassonne, Scrabble, Tigris and Euphrates, or Evo * Train games – e.g. Ticket to Ride, Steam, or 18xx * Trivia games – e.g. Trivial Pursuit * Two-player-only themed games – e.g. En Garde or Dos de Mayo * Unequal forces (or \"hunt\") games – e.g. Fox and Geese or Tablut * Wargames – ranging from Risk, Diplomacy, or Axis & Allies, to Attack! or Conquest of the Empire * Word games – e.g. Scrabble, Boggle, Anagrams, or What's My Word? (2010) Glossary Although many",
+            "rank": 9,
+            "score": 0.4191083610057831
+          },
+          {
+            "chunk_id": "chunk_b38acc8eaa1b2ae0ca9e16ed",
+            "doc_id": "doc_9c019aa8784596c7aedb4ba4",
+            "source_doc_ids": [
+              "doc_9c019aa8784596c7aedb4ba4"
+            ],
+            "title": "Scrabble",
+            "text": "and, between its launch date and April 6, 2008, fewer than 2000 users had registered, compared with 600,000 registered Scrabulous users. The original Scrabble, developed by Electronic Arts and released by Gamehouse Inc. in 2012, was withdrawn from Facebook in May 2013. The decision by Mattel to replace the original version was met with criticism from its user base, many of whom have switched to an alternative. Television game show versions In 1987, a board game was released by Selchow & Righter, based on the game show hosted by Chuck Woolery, which aired on NBC from 1984 to 1990 (and for five months in 1993). Billed as the \"Official Home Version\" of the game show (or officially as the \"TV Scrabble Home Game\"), game play bears more resemblance to the game show than it does to a traditional Scrabble game, although it does utilize a traditional Scrabble gameboard in play. On September 17, 2011, a new game show based on Scrabble, called Scrabble Showdown, debuted on The Hub with Justin \"Kredible\" Willman as the host of the program. Each week, teams play various activities based on the board game in order to win big prizes including a trip to anywhere",
+            "rank": 10,
+            "score": 0.41902434825897217
+          }
+        ],
+        "bm25": [
+          {
+            "chunk_id": "chunk_96942001c0e91a54fc00ad06",
+            "doc_id": "doc_aaa0396c17206b143a9e5865",
+            "source_doc_ids": [
+              "doc_aaa0396c17206b143a9e5865"
+            ],
+            "title": "Dice",
+            "text": "the rules of Senet. Dicing is mentioned as an Indian game in the Rigveda, Atharvaveda and Buddha games list. There are several biblical references to \"casting lots\", as in Psalm 22, indicating that dicing (or a related activity) was commonplace when the psalm was composed. It is theorized that dice developed from the practice of fortunetelling with the talus of hoofed animals, colloquially known as \"knucklebones\", but knucklebones is not the oldest divination technique that incorporates randomness. Knucklebones was a game of skill played by women and children; a derivative form had the four sides of the bone receive different values and count as modern dice. Although gambling was illegal, many Romans were passionate gamblers that enjoyed dicing, which was known as aleam ludere (\"to play at dice\"). Dicing was even a popular pastime of emperors. Letters by Augustus to Tacitus and his daughter recount his hobby of dicing. There were two sizes of Roman dice. Tali were large dice inscribed with one, three, four, and six on four sides. Tesserae were smaller dice with sides numbered from one to six. Twenty-sided dice date back to the 2nd century AD and from Ptolemaic Egypt as early as 2nd century BC.",
+            "rank": 1,
+            "score": 30.88755728061631
+          },
+          {
+            "chunk_id": "chunk_b85dc51651f8d17257de2c84",
+            "doc_id": "doc_56835b69aa483c215c3c117e",
+            "source_doc_ids": [
+              "doc_56835b69aa483c215c3c117e"
+            ],
+            "title": "Ring a Ring o' Roses",
+            "text": "\"Ring a Ring o' Roses\" or \"Ring Around the Rosie\" is a nursery rhyme or folksong and playground singing game. It first appeared in print in 1881, but it is reported that a version was already being sung to the current tune in the 1790s and similar rhymes are known from across Europe. It has a Roud Folk Song Index number of 7925. Urban legend says the song originally described the plague, specifically the Great Plague of London, or the Black Death, but folklorists reject this idea. Lyrics It is unknown what the earliest version of the rhyme was or when it began. Many incarnations of the game have a group of children form a ring and dance in a circle around a person and stoop or curtsy with the final line. The slowest child to do so would be faced with some penalty or become the \"rosie\" (literally: rose tree) from the French rosier) and take their place in the center of the ring. Numerous variations, corruptions and even several vulgarized versions were noted to be in use long prior to the earliest printed publications. One such variation was dated to be in use in Connecticut in the 1840s.",
+            "rank": 2,
+            "score": 20.61992434887746
+          },
+          {
+            "chunk_id": "chunk_d89049bbfd13a68142254c6b",
+            "doc_id": "doc_d434c54df74ae0e24ab853ac",
+            "source_doc_ids": [
+              "doc_d434c54df74ae0e24ab853ac"
+            ],
+            "title": "Prague",
+            "text": "largest stadium in the world *Prague International Marathon *Prague Open – Tennis Tournament held by the I. Czech Lawn Tennis Club *Sparta Prague Open – Tennis Tournament held in Prague 7 *Josef Odložil Memorial – Athletics meeting *Mystic SK8 Cup – World Cup of Skateboarding venue takes place at the Štvanice skatepark * Gutovka – sport area with a large concrete skatepark, the highest outside climbing wall in Central Europe, four beach volleyball courts and children’s playground * World Ultimate Club Championships 2010 International relations The city of Prague also maintains its own EU delegation in Brussels called Prague House. Prague was the location of U.S. President Barack Obama's speech on 5 April 2009, which led to the New START treaty with Russia, signed in Prague on 8 April 2010. The annual conference Forum 2000, which was founded by former Czech President Václav Havel, Japanese philanthropist Yōhei Sasakawa, and Nobel Peace Prize laureate Elie Wiesel in 1996, is held in Prague. Its main objective is \"to identify the key issues facing civilization and to explore ways to prevent the escalation of conflicts that have religion, culture or ethnicity as their primary components\", and also intends to promote democracy in non-democratic",
+            "rank": 3,
+            "score": 20.52475666196876
+          },
+          {
+            "chunk_id": "chunk_8b9f0293c5b60af69681ae74",
+            "doc_id": "doc_09500226318a3341c4fe72e4",
+            "source_doc_ids": [
+              "doc_09500226318a3341c4fe72e4"
+            ],
+            "title": "Boss (video gaming)",
+            "text": "rare loot unavailable anywhere else. Penultimate Boss The Penultimate Boss is a boss before the Final boss of a game. It is sometimes the Secondary Antagonist of a game. Final boss The final boss is generally considered a significant opponent that is at, or near, the end of the game. They are often the primary antagonist(s) of the game, but this is not always true (Example: Conker's Bad Fur Day's Antagonist is Proffesor Von Kripplespac. But the final boss is Heinrich, his alien pet). Final bosses are generally larger, more detailed, and better animated than lesser enemies, often in order to inspire a feeling of grandeur and special significance from the encounter. Final bosses usually have a unique musical track(s), often more dramatic than the music used for other bosses, while some final battles use the main theme of the game. The final boss is most often fought during the final level, with completion of the game usually following the battle, assuming the player is victorious. The levels they inhabit are commonly more difficult than previous, with the boss being heavily guarded by lesser enemies, which can make the route to the final boss a challenge. Minibosses or previously defeated",
+            "rank": 4,
+            "score": 18.953391605148802
+          },
+          {
+            "chunk_id": "chunk_200b7f784a3315d0b84c9d6c",
+            "doc_id": "doc_0e23927960cf53c77610f00d",
+            "source_doc_ids": [
+              "doc_0e23927960cf53c77610f00d"
+            ],
+            "title": "Montréal–Pierre Elliott Trudeau International Airport",
+            "text": "open spaces, restaurants, shops and a children’s playground area. It took two years to complete and opened four months ahead of the original schedule for a total cost of $350 million. It was conceived by Humà Design and integrates three massive art installations and four vitrines showcasing Montreal's museums. The extension of the international jetty was built to alleviate the high level of congestion on the tarmac and in the terminal. Apart from these expansions, ADM inaugurated in April 2016, a commercial area between gate 52 and 53. This area is called Haltes gourmandes (English: gourmet stops) referring to the large number of restaurants located there. The new restaurants are all owned by SSP Canada Food Service Inc. Before the end of the summer 2016, SSP Canada will operate 10 locations in the terminal, managing a total of 4000 m² of terminal area. SSP plans to invest over $200 million before the end of 2016 in its airport locations. Future projects In January 2016, ADM published a call for tenders on their website regarding the restoration and upgrade of the curtain wall of the main façade on the terminal. This part of the airport is one of the oldest remaining",
+            "rank": 5,
+            "score": 18.400604306730823
+          },
+          {
+            "chunk_id": "chunk_7d5cc09658e733c08ce84abc",
+            "doc_id": "doc_e6fd107cf819eb5dc5400b0a",
+            "source_doc_ids": [
+              "doc_e6fd107cf819eb5dc5400b0a"
+            ],
+            "title": "Tashkent",
+            "text": "systems available in Tashkent which is unique in Central Asia. Transportation *Metro system *Tashkent International Airport is the largest in the country, connecting the city to Asia, Europe and North American continents. *Tashkent–Samarkand high-speed rail line *Trolleybus system was closed down in 2010. *Tram transport end at 1 May 2016. Entertainment and shopping There are several shopping malls in Tashkent which are good both for entertainment and shopping. These include Next, Samarqand Darvoza and Kontinent shopping malls. Next mall is very popular among families and prominent for its Science Lab for kids, Dinosaur’s museum, Ice Rink and Cinema. Samarqand Darvoza offers a wide range of entertaining including Playground for kids, Game area, bowling and convenient multilayer parking place. It is a good place for kids’ birthday parties and family entertainment. Kontinent Mall is conveniently located next to the Grand Mir Hotel. It is a smaller place but combines a variety of dining options such as diet cafe, fast food court and a bar. Sport Football is the most popular sport in Tashkent, with the most prominent football clubs being FC Pakhtakor Tashkent and FC Bunyodkor, both of which compete in the Uzbek League. Footballers Maksim Shatskikh, Peter Odemwingie and Vassilis",
+            "rank": 6,
+            "score": 18.066666477859705
+          },
+          {
+            "chunk_id": "chunk_e894d9c4f2b1fec52555b9fc",
+            "doc_id": "doc_9c019aa8784596c7aedb4ba4",
+            "source_doc_ids": [
+              "doc_9c019aa8784596c7aedb4ba4"
+            ],
+            "title": "Scrabble",
+            "text": "edition varies the width up to 2 mm for different letters. Travelling versions of the game often have smaller tiles (e.g. 13 x); sometimes they are magnetic to keep them in place. The capital letter is printed in black at the centre of the tile face and the letter's point value printed in a smaller font at the bottom right corner. S is the most valuable letter in English-language Scrabble because it easily goes on the ends of words; Alfred Butts included only four instances to avoid a game that was \"too easy\". Q is considered the most problematic letter, as most words with it also contain U; a similar problem occurs in other languages like French, Dutch, Italian and German. J is also difficult to play due to its low frequency and a scarcity of words having it at the end. C and V may be troublesome in the endgame, since no two-letter words with them exist, save for CH in SOWPODS. History In 1938, American architect Alfred Mosher Butts created the game as a variation on an earlier word game he invented called Lexiko. The two games had the same set of letter tiles, whose distributions and point",
+            "rank": 7,
+            "score": 17.538721302300154
+          },
+          {
+            "chunk_id": "chunk_3f7a6c783181e0740e94e669",
+            "doc_id": "doc_e98e40c3319c960288007d5f",
+            "source_doc_ids": [
+              "doc_e98e40c3319c960288007d5f"
+            ],
+            "title": "Pinball",
+            "text": "to deny the player the ability to shoot the ball into whatever is behind it. If used in the latter way, the target is usually blocking a lane or ramp. * Kicking Target: Used rarely, these targets look like stationary targets, but when hit they kick the ball away in the opposite direction much like a slingshot or bumper. * Vari-Target: These targets reward a different amount of points depending on how hard the target was hit. It is a metal arm that pivots under the playfield. When a ball hits it, it ratchets back sometimes, resetting immediately or resetting only after it is hit all the way back. A large sum of points is usually rewarded when the target is hit back all the way with one strike of the ball. Holes and saucers * Holes: The player directs the ball into a hole. On modern games, there are both vertical and horizontal holes (also called scoops), and the game may include mechanisms to move the ball between them. On some older games, a \"gobble hole\" is sometimes included, usually awarding a large bonus or a game feature, but not giving the ball back. * Saucers: A shallow hole",
+            "rank": 8,
+            "score": 17.529181584576452
+          },
+          {
+            "chunk_id": "chunk_69eeaba368d3a664524335ea",
+            "doc_id": "doc_56835b69aa483c215c3c117e",
+            "source_doc_ids": [
+              "doc_56835b69aa483c215c3c117e"
+            ],
+            "title": "Ring a Ring o' Roses",
+            "text": "and curtsied as demanded by the verses and at the end kissed the one she liked best, so choosing her for the middle. In Croatian/Serbian/Bosnian langauge, there is a similar rhyme called \"Ringe Ringe Raja\": Ringe Ringe Raja, Došo čika Paja, Pa pojeo jaja, Jedno jaje muć, A mi djeco ČUČ! Rough translation is: \"Ringe Ringe Raya (doesn't mean anything, this is common in Croato-Serbian rhymes), uncle Ducky has came, and he ate all the eggs, one egg crashed, and we children DUCK!\" On the last word, all the children singing the rhyme jump or duck. Meaning The origins and meanings of the game have long been unknown and subject to speculation. In 1898, A Dictionary of British Folklore contained the belief that an explanation of the game was of pagan origin, based on the Sheffield Glossary comparison of Grimm's Teut. Myth. The theory states that it is in reference to Pagan myths and cited a passage which states, \"Gifted children of fortune have the power to laugh roses, as Treyja wept gold.\" Believing the first instance to be indicative of Pagan beings of light. Another suggestion is more literal, that it was making a \"ring\" around the roses and",
+            "rank": 9,
+            "score": 17.406478037069135
+          },
+          {
+            "chunk_id": "chunk_1407177d57803d3fca978e1b",
+            "doc_id": "doc_ac542518f7385ed77d2164ab",
+            "source_doc_ids": [
+              "doc_ac542518f7385ed77d2164ab"
+            ],
+            "title": "The Love Bug",
+            "text": "a warehouse in Pennsylvania, and has been preserved-still sporting its original paint from the film. Deleted scenes The bonuses on the DVD provide two deleted scenes named \"Used Car Lot\" and \"Playground\". A scene shot, but not included in the final cut of the film, featured Jim calling at a used car lot prior to his visiting Thorndyke's auto showroom. This missing sequence has long since been lost, and all that remains is the script and a single black-and-white photograph of Jim talking with the salesman at the lot. An unfilmed scene at the end of the story that was scripted and storyboarded was to have shown Herbie playing with children at a nearby playground prior to taking the newly married Jim and Carole off on their honeymoon. Stock footage The opening scene of the demolition derby cars is footage from the film Fireball 500. Parts of this scene can also be found in a 1966-model year dealer promotional film by Chevrolet, titled Impact '66. Shooting locations Some of the racetrack scenes were shot at the Riverside International Raceway in Riverside, California. Others were filmed at Laguna Seca Raceway in Monterey, California and Willow Springs Raceway in Willow Springs, California.",
+            "rank": 10,
+            "score": 17.377776623503607
+          }
+        ],
+        "hybrid": [
+          {
+            "chunk_id": "chunk_69eeaba368d3a664524335ea",
+            "doc_id": "doc_56835b69aa483c215c3c117e",
+            "source_doc_ids": [
+              "doc_56835b69aa483c215c3c117e"
+            ],
+            "title": "Ring a Ring o' Roses",
+            "text": "and curtsied as demanded by the verses and at the end kissed the one she liked best, so choosing her for the middle. In Croatian/Serbian/Bosnian langauge, there is a similar rhyme called \"Ringe Ringe Raja\": Ringe Ringe Raja, Došo čika Paja, Pa pojeo jaja, Jedno jaje muć, A mi djeco ČUČ! Rough translation is: \"Ringe Ringe Raya (doesn't mean anything, this is common in Croato-Serbian rhymes), uncle Ducky has came, and he ate all the eggs, one egg crashed, and we children DUCK!\" On the last word, all the children singing the rhyme jump or duck. Meaning The origins and meanings of the game have long been unknown and subject to speculation. In 1898, A Dictionary of British Folklore contained the belief that an explanation of the game was of pagan origin, based on the Sheffield Glossary comparison of Grimm's Teut. Myth. The theory states that it is in reference to Pagan myths and cited a passage which states, \"Gifted children of fortune have the power to laugh roses, as Treyja wept gold.\" Believing the first instance to be indicative of Pagan beings of light. Another suggestion is more literal, that it was making a \"ring\" around the roses and",
+            "rank": 1,
+            "score": 0.025603864734299518
+          },
+          {
+            "chunk_id": "chunk_22b966aac0bd8d9298b4b11f",
+            "doc_id": "doc_9c019aa8784596c7aedb4ba4",
+            "source_doc_ids": [
+              "doc_9c019aa8784596c7aedb4ba4"
+            ],
+            "title": "Scrabble",
+            "text": "found. This is the format used for the French World Scrabble Championships but it is also used in Romanian and Dutch. There is no limit to the number of players that can be involved in one game, and at Vichy in 1998 there were 1485 players, a record for French Scrabble tournaments. Scarabeo is a variant that is much more popular in Italy than the original game. It features a 17×17 grid of cells and peculiar rules. In one variation of Scrabble, blanks actually do score points corresponding to the letter which the blank is used to represent. For example, if one played blank to represent a \"Z\", it would get ten; a blank to represent a V or an H would get four; a blank to represent a D would get 2 and blank to represent a T, N, L, S or R or any of the vowels would get one. A junior version, called Junior Scrabble, has been marketed. This has slightly different distributions of frequencies of letter tiles to the standard Scrabble game. Word games similar to or influenced by Scrabble include Bananagrams, Boggle, Bonza (Word Game), Dabble, Nab-It!, Perquackey, Puzzlage, Quiddler, Scribbage, Tapple, Upwords, and WordSpot",
+            "rank": 2,
+            "score": 0.02531645569620253
+          },
+          {
+            "chunk_id": "chunk_468aee3987288387ddef6b65",
+            "doc_id": "doc_9bb420829704508d38e857d6",
+            "source_doc_ids": [
+              "doc_9bb420829704508d38e857d6"
+            ],
+            "title": "Board game",
+            "text": "Adriaan de Groot, William Chase, Herbert A. Simon, and Fernand Gobet have established that knowledge, more than the ability to anticipate moves, plays an essential role in chess-playing. Linearly arranged board games have been shown to improve children's spatial numerical understanding. This is because the game is similar to a number line in that they promote a linear understanding of numbers rather than the innate logarithmic one. Research studies show that board games such as Chutes and Ladders result in children showing significant improvements in aspects of basic number skills such as counting, recognizing numbers, numerical estimation and number comprehension. They also practice fine motor skills each time they grasp a game piece. Playing board games has also been tied to improving children's executive skills. Additionally, board games can be therapeutic. Bruce Halpenny, a games inventor said when interviewed about his game, The Great Train Robbery: With crime you deal with every basic human emotion and also have enough elements to combine action with melodrama. The player’s imagination is fired as they plan to rob the train. Because of the gamble they take in the early stage of the game there is a build up of tension, which is immediately",
+            "rank": 3,
+            "score": 0.024868705591597158
+          },
+          {
+            "chunk_id": "chunk_96942001c0e91a54fc00ad06",
+            "doc_id": "doc_aaa0396c17206b143a9e5865",
+            "source_doc_ids": [
+              "doc_aaa0396c17206b143a9e5865"
+            ],
+            "title": "Dice",
+            "text": "the rules of Senet. Dicing is mentioned as an Indian game in the Rigveda, Atharvaveda and Buddha games list. There are several biblical references to \"casting lots\", as in Psalm 22, indicating that dicing (or a related activity) was commonplace when the psalm was composed. It is theorized that dice developed from the practice of fortunetelling with the talus of hoofed animals, colloquially known as \"knucklebones\", but knucklebones is not the oldest divination technique that incorporates randomness. Knucklebones was a game of skill played by women and children; a derivative form had the four sides of the bone receive different values and count as modern dice. Although gambling was illegal, many Romans were passionate gamblers that enjoyed dicing, which was known as aleam ludere (\"to play at dice\"). Dicing was even a popular pastime of emperors. Letters by Augustus to Tacitus and his daughter recount his hobby of dicing. There were two sizes of Roman dice. Tali were large dice inscribed with one, three, four, and six on four sides. Tesserae were smaller dice with sides numbered from one to six. Twenty-sided dice date back to the 2nd century AD and from Ptolemaic Egypt as early as 2nd century BC.",
+            "rank": 4,
+            "score": 0.01639344262295082
+          },
+          {
+            "chunk_id": "chunk_bfe2c53ee3a33a717b249d55",
+            "doc_id": "doc_9bb420829704508d38e857d6",
+            "source_doc_ids": [
+              "doc_9bb420829704508d38e857d6"
+            ],
+            "title": "Board game",
+            "text": "e.g. Fox and Geese or Tablut * Wargames – ranging from Risk, Diplomacy, or Axis & Allies, to Attack! or Conquest of the Empire * Word games – e.g. Scrabble, Boggle, Anagrams, or What's My Word? (2010) Glossary Although many board games have a jargon all their own, there is a generalized terminology to describe concepts applicable to basic game mechanics and attributes common to nearly all board games.",
+            "rank": 5,
+            "score": 0.01639344262295082
+          },
+          {
+            "chunk_id": "chunk_3887b33717822135b1559dcd",
+            "doc_id": "doc_a4a5b53360aadc22cfbba381",
+            "source_doc_ids": [
+              "doc_a4a5b53360aadc22cfbba381"
+            ],
+            "title": "Football",
+            "text": "** The Ball Game in Sedgefield, County Durham * In Scotland the Ba game (\"Ball Game\") is still popular around Christmas and Hogmanay at: ** Duns, Berwickshire ** Scone, Perthshire ** Kirkwall in the Orkney Islands Outside the UK * Calcio Fiorentino – a modern revival of Renaissance football from 16th century Florence. * la Soule – a modern revival of French medieval football * lelo burti – a Georgian traditional football game Surviving UK school games Games still played at UK public (independent) schools: *Eton field game *Eton wall game *Harrow football *Winchester College football Recent inventions and hybrid games * Keepie uppie (keep up) – the art of juggling with a football using the feet, knees, chest, shoulders, and head. ** Footbag – several variations using a small bean bag or sand bag as a ball, the trade marked term hacky sack is sometimes used as a generic synonym. ** Freestyle football – participants are graded for their entertainment value and expression of skill. Based on FA rules * Three sided football * Triskelion Based on rugby *Force ’em backs a.k.a. forcing back, forcemanback Hybrid games * Austus – a compromise between Australian rules and American football, invented",
+            "rank": 6,
+            "score": 0.016129032258064516
+          },
+          {
+            "chunk_id": "chunk_b85dc51651f8d17257de2c84",
+            "doc_id": "doc_56835b69aa483c215c3c117e",
+            "source_doc_ids": [
+              "doc_56835b69aa483c215c3c117e"
+            ],
+            "title": "Ring a Ring o' Roses",
+            "text": "\"Ring a Ring o' Roses\" or \"Ring Around the Rosie\" is a nursery rhyme or folksong and playground singing game. It first appeared in print in 1881, but it is reported that a version was already being sung to the current tune in the 1790s and similar rhymes are known from across Europe. It has a Roud Folk Song Index number of 7925. Urban legend says the song originally described the plague, specifically the Great Plague of London, or the Black Death, but folklorists reject this idea. Lyrics It is unknown what the earliest version of the rhyme was or when it began. Many incarnations of the game have a group of children form a ring and dance in a circle around a person and stoop or curtsy with the final line. The slowest child to do so would be faced with some penalty or become the \"rosie\" (literally: rose tree) from the French rosier) and take their place in the center of the ring. Numerous variations, corruptions and even several vulgarized versions were noted to be in use long prior to the earliest printed publications. One such variation was dated to be in use in Connecticut in the 1840s.",
+            "rank": 7,
+            "score": 0.016129032258064516
+          },
+          {
+            "chunk_id": "chunk_4e408573794ea45d9e54dbc6",
+            "doc_id": "doc_9bb420829704508d38e857d6",
+            "source_doc_ids": [
+              "doc_9bb420829704508d38e857d6"
+            ],
+            "title": "Board game",
+            "text": "to combine action with melodrama. The player’s imagination is fired as they plan to rob the train. Because of the gamble they take in the early stage of the game there is a build up of tension, which is immediately released once the train is robbed. Release of tension is therapeutic and useful in our society, because most jobs are boring and repetitive.Stealing the show. Toy Retailing News, Volume 2 Number 4 (December 1976), p. 2 Playing games have been suggested as a viable addition to traditional educational curriculum. Categories There are a number of ways in which board games can be classified, and considerable overlap may exist, so that a game belong in several categories. The following is a list of some of the most common: * Abstract strategy games – e.g. chess, checkers, Go, Reversi, tafl games, or modern games such as Abalone, Stratego, Hive, or GIPF * Alignment games – e.g. Renju, Gomoku, Connect6, Nine Men's Morris, or Tic-tac-toe * Auction games – e.g. Hoity Toity * Chess variants – traditional variants e.g. shogi, xiangqi, or janggi; modern variants e.g. Chess960, Grand chess, Hexagonal chess, or Alice chess * Configuration games – e.g. Lines of Action, Hexade,",
+            "rank": 8,
+            "score": 0.015873015873015872
+          },
+          {
+            "chunk_id": "chunk_d89049bbfd13a68142254c6b",
+            "doc_id": "doc_d434c54df74ae0e24ab853ac",
+            "source_doc_ids": [
+              "doc_d434c54df74ae0e24ab853ac"
+            ],
+            "title": "Prague",
+            "text": "largest stadium in the world *Prague International Marathon *Prague Open – Tennis Tournament held by the I. Czech Lawn Tennis Club *Sparta Prague Open – Tennis Tournament held in Prague 7 *Josef Odložil Memorial – Athletics meeting *Mystic SK8 Cup – World Cup of Skateboarding venue takes place at the Štvanice skatepark * Gutovka – sport area with a large concrete skatepark, the highest outside climbing wall in Central Europe, four beach volleyball courts and children’s playground * World Ultimate Club Championships 2010 International relations The city of Prague also maintains its own EU delegation in Brussels called Prague House. Prague was the location of U.S. President Barack Obama's speech on 5 April 2009, which led to the New START treaty with Russia, signed in Prague on 8 April 2010. The annual conference Forum 2000, which was founded by former Czech President Václav Havel, Japanese philanthropist Yōhei Sasakawa, and Nobel Peace Prize laureate Elie Wiesel in 1996, is held in Prague. Its main objective is \"to identify the key issues facing civilization and to explore ways to prevent the escalation of conflicts that have religion, culture or ethnicity as their primary components\", and also intends to promote democracy in non-democratic",
+            "rank": 9,
+            "score": 0.015873015873015872
+          },
+          {
+            "chunk_id": "chunk_43de993597ed87df3904def2",
+            "doc_id": "doc_e98e40c3319c960288007d5f",
+            "source_doc_ids": [
+              "doc_e98e40c3319c960288007d5f"
+            ],
+            "title": "Pinball",
+            "text": "and tabletop ball games The origins of pinball are intertwined with the history of many other games. Games played outdoors by rolling balls or stones on a grass course, such as bocce or bowls, eventually evolved into various local ground billiards games played by hitting the balls with sticks and propelling them at targets, often around obstacles. Croquet, golf and paille-maille eventually derived from ground billiards variants. The evolving and specializing outdoor games finally led to indoor versions that could be played on a table, such as billiards, or on the floor of a pub, like bowling and shuffleboard. The tabletop versions of these games became the ancestors of modern pinball. Late 1700s: Spring launcher invented In France, during the long 1643–1715 reign of Louis XIV, billiard tables were narrowed, with wooden pins or skittles at one end of the table, and players would shoot balls with a stick or cue from the other end, in a game inspired as much by bowling as billiards. Pins took too long to reset when knocked down, so they were eventually fixed to the table, and holes in the bed of the table became the targets. Players could ricochet balls off the pins",
+            "rank": 10,
+            "score": 0.015625
+          }
+        ]
+      },
+      "reference": null,
+      "legacy_reference_not_used_for_inference": {
+        "question": "Which children’s playground game is sometimes called ‘Fivestones’, ‘Knucklebones’ or ‘Snobs’?",
+        "canonical": "Jacks"
+      }
+    }
+  ]
+}

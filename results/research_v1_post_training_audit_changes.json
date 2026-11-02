@@ -1,0 +1,23 @@
+{
+  "training_pair_sources_matched": true,
+  "prompt_and_context_format_ast_unchanged": {
+    "prompt": true,
+    "context_text": true
+  },
+  "changes_after_both_models_completed": [
+    "Record partially visible source headings in used_passages without changing encoded input or visible context.",
+    "Verify document/rejection file hashes, FAISS metric and encoder token budget.",
+    "Reject resume of completed model runs before model loading."
+  ],
+  "training_source_sha256": {
+    "experiments/research_train.py": "dd4234f84e3a1eb0516a94ede1c3131a9b162173c2237213c14d704e17396687",
+    "experiments/research_pipeline.py": "b0f3098381786b0322946d8ec8c00f201e90e898f15a4eed81ef72136f52b8d7",
+    "experiments/metrics.py": "47781c94a385973794a4c257773626273609403b50884ab923abc65c0b7ab241"
+  },
+  "current_source_sha256": {
+    "experiments/research_train.py": "664d8a859e5b0c0d98f194bd25e205416132d4c837fce24be8a41dcea24406a1",
+    "experiments/research_pipeline.py": "5ef58881ed3f15be788fe07267211b419bc99c7a8994c332efdc326ce8c2d036",
+    "experiments/metrics.py": "47781c94a385973794a4c257773626273609403b50884ab923abc65c0b7ab241"
+  },
+  "tests": "79/79 PASS; offset fixture proves unchanged encoded input/context and clipped source accounting."
+}

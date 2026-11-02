@@ -1,0 +1,342 @@
+{
+  "status": "PASS_EXACT_ANSWERS",
+  "scope": "Frozen inference replay of already evaluated QA splits; not a new independent holdout, retraining reproduction, or semantic faithfulness evaluation.",
+  "created_at": "2026-11-01T12:15:10.123512+00:00",
+  "validator_sha256": "84c411270c5750e018bfcb4f0188f882702ff72f9356a98aab6681afc75922e4",
+  "lock": {
+    "path": "results\\research_v1_test_lock.json",
+    "sha256": "161e84dbe9d7260c8aeffbd58f922a5d072efad2bc3002c537ba8c33f34067ec"
+  },
+  "dataset_manifest_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+  "models_sha256": {
+    "closed_book": "60ca4725f079cd65fb5607a23c46f9aac858a1f47a58b0c58e466e2281833f10",
+    "rag": "4909c3007546c81e3523429b6e64cedca816ba3f0281348124a5a2444d5e693e"
+  },
+  "current_method_source_checks": {
+    "experiments/research_evaluate.py": {
+      "expected": "154b6052dead0cb1f8fd1556a6d006100b9b7a8c264f1f912537cb8f327dc1c1",
+      "observed": "154b6052dead0cb1f8fd1556a6d006100b9b7a8c264f1f912537cb8f327dc1c1",
+      "matches": true
+    },
+    "experiments/research_pipeline.py": {
+      "expected": "5ef58881ed3f15be788fe07267211b419bc99c7a8994c332efdc326ce8c2d036",
+      "observed": "5ef58881ed3f15be788fe07267211b419bc99c7a8994c332efdc326ce8c2d036",
+      "matches": true
+    },
+    "experiments/metrics.py": {
+      "expected": "47781c94a385973794a4c257773626273609403b50884ab923abc65c0b7ab241",
+      "observed": "47781c94a385973794a4c257773626273609403b50884ab923abc65c0b7ab241",
+      "matches": true
+    },
+    "ragqa/rag_engine.py": {
+      "expected": "200593f23e618c9fe03f1834bb09d594bf91b3a7a5ac003b20bf2bbada948b23",
+      "observed": "200593f23e618c9fe03f1834bb09d594bf91b3a7a5ac003b20bf2bbada948b23",
+      "matches": true
+    }
+  },
+  "identity_scope": "Current method files and run manifest input identities match the lock; each predictions/snapshot file matches its own manifest digest. Model weight and dataset byte preflights are separate evidence.",
+  "artifact_checks": {
+    "dev": {
+      "original": {
+        "run_dir": "results\\research_v1_dev",
+        "manifest_sha256": "bd510ea22dd54b57ad4df4acef91870c4cd9d1c1b287841b95dd71e5a2d1acdb",
+        "metrics_sha256": "ab5ef086c8d2f29b954b92b226332bfd00dbdb40361d2ebc09cee9a7c6ed2d2a",
+        "predictions_sha256": "f951e50af3976f1f4b42466c8a440c66d9ed9e3a1d01dddc1e3eefcfc916d90f",
+        "source_snapshot_sha256": "ee6d62152361eb0319840d8b37d44a01d5e64f9a54c832575514cfb07f1a0b80"
+      },
+      "replay": {
+        "run_dir": "results\\research_colab_dev",
+        "manifest_sha256": "34ebc1c809a77cf16850a97b023b4975bd94c819749daf48c26a615199e69b00",
+        "metrics_sha256": "fde52c24f771424921ba667e1112d013b7429eac6a068c69f0266900ec4cd690",
+        "predictions_sha256": "18645e18c6d65fc84e7957af1dd6d1fb1a717ce219118429d0d9cbc6c7480690",
+        "source_snapshot_sha256": "8f821374f6bae341eeb3ca7ed21f8639f1c54117c4c18f120296ed0db37353dc"
+      }
+    },
+    "test": {
+      "original": {
+        "run_dir": "results\\research_v1_test",
+        "manifest_sha256": "29bd93c4973d98599ebf38c3ccd31f4fe69d52761bfbe418e7bdb78e913d0004",
+        "metrics_sha256": "9005db4bbb8f21fd3f67b79f7eb8e484370c50dd3b8177df2a2dfbc14740706c",
+        "predictions_sha256": "6cd2d83563c21a3cb58ba202ea0d9fd74f258b561cf612a8f201eef9a9641e91",
+        "source_snapshot_sha256": "ee6d62152361eb0319840d8b37d44a01d5e64f9a54c832575514cfb07f1a0b80"
+      },
+      "replay": {
+        "run_dir": "results\\research_colab_test",
+        "manifest_sha256": "8bf8a08b9f2b20ac074924e766482fc553e9bddaa53e9336a36b2ee42e1764a5",
+        "metrics_sha256": "8a869edc60ca4fcd5ede07c900c1fd2bf471942a395da6602a590c121b6c778f",
+        "predictions_sha256": "0c68e07c4d584cbbbf90291263a2537041bda4cc3b8f1e8fad69aa826ecbb08b",
+        "source_snapshot_sha256": "8f821374f6bae341eeb3ca7ed21f8639f1c54117c4c18f120296ed0db37353dc"
+      }
+    }
+  },
+  "comparisons": {
+    "dev": {
+      "status": "PASS_EXACT_ANSWERS",
+      "n": 200,
+      "expected_n": 200,
+      "unique_exact_ids": true,
+      "identical_qa_records": true,
+      "complete_manifest_and_frozen_identity": true,
+      "raw_answer_mismatch_ids": {
+        "generator_only": [],
+        "retrieval_only": [],
+        "rag_full": [],
+        "rag_hybrid": [],
+        "rag_checkpoint_no_context": []
+      },
+      "normalized_answer_mismatch_ids": {
+        "generator_only": [],
+        "retrieval_only": [],
+        "rag_full": [],
+        "rag_hybrid": [],
+        "rag_checkpoint_no_context": []
+      },
+      "qa_metric_deltas": {
+        "generator_only": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "retrieval_only": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "rag_full": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "rag_hybrid": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "rag_checkpoint_no_context": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        }
+      },
+      "qa_metrics_equal_within_tolerance": true,
+      "qa_metric_tolerance": 1e-12,
+      "evidence_diagnostics": {
+        "status": "REVIEW_REQUIRED",
+        "scope": "Separate from answer PASS; compares ranking order and evidence without floating point retrieval scores.",
+        "ranking_mismatch_ids": {
+          "dense": [
+            "qb_4397"
+          ],
+          "bm25": [],
+          "hybrid": [
+            "qb_4397"
+          ]
+        },
+        "retrieval_evidence_mismatch_ids": {
+          "dense": [
+            "qb_4397"
+          ],
+          "bm25": [],
+          "hybrid": [
+            "qb_4397"
+          ]
+        },
+        "context_mismatch_ids": {
+          "generator_only": [],
+          "retrieval_only": [],
+          "rag_full": [],
+          "rag_hybrid": [],
+          "rag_checkpoint_no_context": []
+        },
+        "used_passage_mismatch_ids": {
+          "generator_only": [],
+          "retrieval_only": [],
+          "rag_full": [],
+          "rag_hybrid": [],
+          "rag_checkpoint_no_context": []
+        },
+        "source_snapshot_archive_equal": false,
+        "source_snapshot_archive_equality_required": false
+      },
+      "environments": {
+        "original": {
+          "python": "3.13.1",
+          "packages": {
+            "torch": "2.6.0+cu124",
+            "transformers": "5.17.0",
+            "sentence-transformers": "6.1.0",
+            "datasets": "5.0.1",
+            "faiss-cpu": "1.15.1",
+            "rank-bm25": "0.2.2"
+          }
+        },
+        "replay": {
+          "python": "3.13.16",
+          "packages": {
+            "torch": "2.11.0+cu130",
+            "transformers": "5.17.0",
+            "sentence-transformers": "6.1.0",
+            "datasets": "5.0.1",
+            "faiss-cpu": "1.15.1",
+            "rank-bm25": "0.2.2"
+          }
+        }
+      }
+    },
+    "test": {
+      "status": "PASS_EXACT_ANSWERS",
+      "n": 300,
+      "expected_n": 300,
+      "unique_exact_ids": true,
+      "identical_qa_records": true,
+      "complete_manifest_and_frozen_identity": true,
+      "raw_answer_mismatch_ids": {
+        "generator_only": [],
+        "retrieval_only": [],
+        "rag_full": [],
+        "rag_hybrid": [],
+        "rag_checkpoint_no_context": []
+      },
+      "normalized_answer_mismatch_ids": {
+        "generator_only": [],
+        "retrieval_only": [],
+        "rag_full": [],
+        "rag_hybrid": [],
+        "rag_checkpoint_no_context": []
+      },
+      "qa_metric_deltas": {
+        "generator_only": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "retrieval_only": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "rag_full": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "rag_hybrid": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        },
+        "rag_checkpoint_no_context": {
+          "official": {
+            "em": 0.0,
+            "f1": 0.0
+          },
+          "canonical": {
+            "em": 0.0,
+            "f1": 0.0
+          }
+        }
+      },
+      "qa_metrics_equal_within_tolerance": true,
+      "qa_metric_tolerance": 1e-12,
+      "evidence_diagnostics": {
+        "status": "MATCH",
+        "scope": "Separate from answer PASS; compares ranking order and evidence without floating point retrieval scores.",
+        "ranking_mismatch_ids": {
+          "dense": [],
+          "bm25": [],
+          "hybrid": []
+        },
+        "retrieval_evidence_mismatch_ids": {
+          "dense": [],
+          "bm25": [],
+          "hybrid": []
+        },
+        "context_mismatch_ids": {
+          "generator_only": [],
+          "retrieval_only": [],
+          "rag_full": [],
+          "rag_hybrid": [],
+          "rag_checkpoint_no_context": []
+        },
+        "used_passage_mismatch_ids": {
+          "generator_only": [],
+          "retrieval_only": [],
+          "rag_full": [],
+          "rag_hybrid": [],
+          "rag_checkpoint_no_context": []
+        },
+        "source_snapshot_archive_equal": false,
+        "source_snapshot_archive_equality_required": false
+      },
+      "environments": {
+        "original": {
+          "python": "3.13.1",
+          "packages": {
+            "torch": "2.6.0+cu124",
+            "transformers": "5.17.0",
+            "sentence-transformers": "6.1.0",
+            "datasets": "5.0.1",
+            "faiss-cpu": "1.15.1",
+            "rank-bm25": "0.2.2"
+          }
+        },
+        "replay": {
+          "python": "3.13.16",
+          "packages": {
+            "torch": "2.11.0+cu130",
+            "transformers": "5.17.0",
+            "sentence-transformers": "6.1.0",
+            "datasets": "5.0.1",
+            "faiss-cpu": "1.15.1",
+            "rank-bm25": "0.2.2"
+          }
+        }
+      }
+    }
+  }
+}

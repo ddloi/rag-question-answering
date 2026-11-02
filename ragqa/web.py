@@ -13,6 +13,7 @@ import uvicorn
 from .engine import DeterministicPipelineEngine
 from .rag_engine import RAGNeuralEngine
 from .paths import DATA_DIR
+from .research_web import router as research_router, available as research_available
 
 app = FastAPI(
     title="RAG Lab — Nghiên cứu & So sánh Hỏi-Đáp",
@@ -30,6 +31,7 @@ app.add_middleware(
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+app.include_router(research_router)
 
 def select_demo_data_dir():
     for version in ('demo_v3', 'verified_v2'):
@@ -43,8 +45,9 @@ def select_demo_data_dir():
 DEMO_DATA_DIR = select_demo_data_dir()
 rag_neural_engine = RAGNeuralEngine(data_dir=DEMO_DATA_DIR)
 print("[Server] Initializing Deterministic Pipeline Engine...")
-engine = DeterministicPipelineEngine(DEMO_DATA_DIR)
-source_urls = {row['chunk_id']: row['source_url'] for row in engine.metadata if row.get('source_url')}
+engine = (DeterministicPipelineEngine(DEMO_DATA_DIR)
+          if (DEMO_DATA_DIR / 'chunk_metadata.jsonl').is_file() else None)
+source_urls = {row['chunk_id']: row['source_url'] for row in engine.metadata if row.get('source_url')} if engine else {}
 print("[Server] Engine loaded and ready.")
 
 # Neural models load only on request, so the lightweight demo and tests do
@@ -81,10 +84,21 @@ def rare_query_anchor(normalization, total_chunks):
 
 @app.get("/")
 def get_index():
+    if research_available() or engine is None:
+        return FileResponse(STATIC_DIR / 'research.html')
+    return FileResponse(STATIC_DIR / "index.html")
+
+
+@app.get('/legacy')
+def legacy_page():
+    if engine is None:
+        raise HTTPException(503, 'Chưa có corpus demo lịch sử. Dùng /research cho protocol nghiên cứu mới.')
     return FileResponse(STATIC_DIR / "index.html")
 
 @app.get("/api/pipeline/info")
 def get_info():
+    if engine is None:
+        raise HTTPException(503, 'Chưa có corpus demo lịch sử. Dùng /research.')
     rag_avail = rag_neural_engine.is_available()
     return {
         "status": "online",
@@ -148,6 +162,8 @@ def load_rag_now():
 
 @app.post("/api/pipeline/execute")
 def execute_pipeline(req: PipelineRequest):
+    if engine is None:
+        raise HTTPException(503, 'Chưa có corpus demo lịch sử. Dùng /research.')
     started = time.perf_counter()
     if not req.query.strip():
         raise HTTPException(status_code=400, detail="Query cannot be empty.")

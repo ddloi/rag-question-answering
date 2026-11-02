@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RAG Lab · Đối chiếu nghiên cứu</title>
+  <link rel="stylesheet" href="/static/research.css?v=research-v1-20261101b">
+  <script src="/static/research.js?v=research-v1-20261101b" defer></script>
+</head>
+<body>
+<a class="skip" href="#question">Đến câu hỏi</a>
+<div class="shell">
+  <header><a class="brand" href="/research">RAG Lab</a><span>TriviaQA · research_v1</span><a href="/legacy">Demo lịch sử</a></header>
+  <aside aria-label="Phạm vi nghiên cứu">
+    <strong>Đối chiếu ba hệ</strong>
+    <p>Cùng câu hỏi, cùng corpus. Theo dõi nguồn truy hồi và context thực tế để giải thích kết quả.</p>
+    <dl id="corpus"><dt>Corpus</dt><dd>Đang đọc manifest…</dd></dl>
+    <details><summary>Phương pháp</summary><p>MiniLM + FAISS; Hybrid dùng BM25 + RRF. Hai T5 được fine-tune riêng, cùng QA train. Extractive dùng DistilBERT SQuAD.</p><p>Top-5 retrieval; T5 nhận tối đa 2 passages trong 512 token. Nguồn do ứng dụng gắn, không phải inline citations do model sinh.</p></details>
+    <p class="small">Các câu mẫu lấy từ dev và có nhãn lỗi lexical. Xem nguồn để kết luận ngữ nghĩa.</p>
+  </aside>
+  <main>
+    <div class="title"><div><h1>Kiểm chứng câu trả lời</h1><p>Đầu ra mô hình và bằng chứng được trình bày riêng.</p></div><button id="load" type="button">Nạp ba hệ</button></div>
+    <p id="status" class="status" role="status" aria-live="polite">Đang kiểm tra artifact…</p>
+    <form id="query-form">
+      <label for="question">Câu hỏi tiếng Anh</label>
+      <textarea id="question" rows="2" maxlength="2000" required aria-describedby="question-help" placeholder="Nhập câu hỏi hoặc chọn một tình huống dev bên dưới."></textarea>
+      <div class="controls"><label for="method">Retrieval cho RAG <select id="method"><option value="dense">Dense</option><option value="hybrid">Hybrid RRF</option></select></label><span id="question-help">Ctrl / ⌘ + Enter để chạy</span><button id="run" type="submit" disabled>So sánh ba hệ</button></div>
+      <div class="examples"><label for="case-filter">Tình huống dev <select id="case-filter"><option value="all">Tất cả tình huống</option></select></label><div id="cases">Chưa có run dev đầy đủ để chọn ví dụ.</div></div>
+    </form>
+    <p id="error" class="error" role="alert" hidden></p>
+    <section id="results" aria-labelledby="result-title">
+      <div class="result-heading"><h2 id="result-title" tabindex="-1">Đối chiếu đầu ra</h2><span id="latency">Chưa chạy câu hỏi</span></div>
+      <p id="stale" class="notice" hidden>Câu hỏi hoặc phương pháp đã đổi. Chạy lại để cập nhật kết quả.</p>
+      <p id="result-query" class="result-query" hidden></p>
+      <div class="answers">
+        <article><h3>Generator-only</h3><p class="small">T5 closed-book · fine-tune riêng</p><p class="answer" id="answer-generator_only">Nhập câu hỏi để xem T5 trả lời khi không có retrieval.</p><p class="score" id="score-generator_only"></p><details><summary>Context thực dùng</summary><p>Context rỗng; model chỉ nhận câu hỏi.</p></details></article>
+        <article><h3>Retrieval-only</h3><p class="small">Dense + DistilBERT extractive</p><p class="answer" id="answer-retrieval_only">Đáp án được chọn từ span trong passage truy hồi.</p><p class="score" id="score-retrieval_only"></p><details><summary>Context thực dùng</summary><div id="context-retrieval_only" class="contexts">Chưa chạy.</div></details></article>
+        <article><h3>RAG</h3><p class="small" id="rag-label">Dense + T5 với context</p><p class="answer" id="answer-rag">T5 sinh đáp án từ câu hỏi và context truy hồi.</p><p class="score" id="score-rag"></p><details><summary>Context thực dùng</summary><div id="context-rag" class="contexts">Chưa chạy.</div></details></article>
+      </div>
+      <details class="reference"><summary>Đáp án chuẩn và cách chấm</summary><p id="reference">Chỉ đối chiếu khi câu hỏi khớp một QA dev. Nhãn được gắn sau suy luận.</p><p class="small">EM/F1 là so khớp lexical, không phải xác nhận ngữ nghĩa. “Official” xét aliases nguồn; “canonical” xét một đáp án chính.</p></details>
+    </section>
+    <section class="evidence" aria-labelledby="evidence-title"><div class="result-heading"><h2 id="evidence-title">Passage truy hồi</h2><span id="ranking-label">Chưa có kết quả</span></div><div id="sources">Sau khi chạy, mở từng passage để kiểm tra bằng chứng. Điểm truy hồi không phải xác suất trả lời đúng.</div></section>
+  </main>
+</div>
+</body>
+</html>

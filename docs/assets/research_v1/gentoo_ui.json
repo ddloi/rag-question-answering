@@ -1,0 +1,9 @@
+{
+  "answers": {
+    "generator_only": "Macaroni",
+    "rag": "Penguin",
+    "retrieval_only": "penguin"
+  },
+  "overflow": false,
+  "query": "Gentoo, Adelie and Macaroni are all species of which bird?"
+}

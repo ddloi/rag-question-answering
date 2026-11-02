@@ -1,0 +1,90 @@
+{
+  "status": "COMPLETE_FROZEN_INFERENCE_REPLAY",
+  "date": "2026-11-01",
+  "scope": "Frozen inference replay on Google Colab; not retraining or a new independent holdout.",
+  "notebook_url": "https://colab.research.google.com/drive/1a935fO3EVh9QnZ-9BU2wT2GHZdI_VZLK",
+  "runtime_ui": "T4 (Python 3)",
+  "previous_session": {
+    "last_output_utc": "2026-11-01T06:58:05Z",
+    "status": "EXPIRED_BEFORE_MODEL_EVALUATION",
+    "observed_notebook_outputs": {
+      "research_tests": "PASS 31/31",
+      "triviaqa_metrics_tests": "PASS 5/5",
+      "dataset_preflight": "PASS: 3157 docs, 90667 chunks, 0 question overlap, all vectors finite/unit",
+      "bundle_hashes": "PASS source/data/evidence; model upload incomplete",
+      "python": "3.13.16",
+      "torch": "2.11.0+cu130",
+      "gpu": "Tesla T4"
+    },
+    "limitation": "Notebook outputs survived; runtime-local files were lost. Evaluation and answer comparison had not run."
+  },
+  "recovery_started_utc": "2026-11-01T11:32:07Z",
+  "expected_splits": {
+    "dev": 200,
+    "test": 300
+  },
+  "expected_arms": [
+    "generator_only",
+    "retrieval_only",
+    "rag_full",
+    "rag_hybrid",
+    "rag_checkpoint_no_context"
+  ],
+  "checks": {
+    "runtime_connected": "PASS",
+    "core_dependency_install": "PASS",
+    "bundle_hashes": "PASS all four bundles",
+    "dataset_preflight": "PASS",
+    "research_and_metrics_tests": "PASS 36/36 on recovered Colab runtime",
+    "model_preflight": "PASS both closed_book and rag",
+    "dev_evaluation": "PASS 200/200; QA metrics match local; report recompute PASS",
+    "test_evaluation": "PASS 300/300; QA metrics match local; report recompute PASS",
+    "answer_comparison": "PASS_EXACT_ANSWERS: all 2500 raw answers and official/canonical QA EM/F1 match local",
+    "evidence_download": "PASS exact ZIP reconstructed via checksum-verified rendered Colab transfer parts",
+    "context_comparison": "MATCH all actual contexts and used passages",
+    "ranking_diagnostics": "dev REVIEW_REQUIRED qb_4397 ranks dense 23/24, hybrid 28/29; test MATCH",
+    "supplemental_validator_tests_colab": "PASS 18/18",
+    "evidence_import": "PASS 123 payload files verified; 38 new Colab result files imported",
+    "local_comparison_after_import": "PASS_EXACT_ANSWERS",
+    "colab_retraining": "NOT RUN",
+    "colab_dataset_rebuild_from_raw_sources": "NOT RUN"
+  },
+  "current_bundle_observations": {
+    "source": "PASS",
+    "data": "PASS",
+    "evidence": "PASS",
+    "models": "PASS"
+  },
+  "supplemental_validator": {
+    "script_sha256": "84c411270c5750e018bfcb4f0188f882702ff72f9356a98aab6681afc75922e4",
+    "test_sha256": "f585ae6f0b044d055d2b6002d647f51d1e07b7d187ffda49fc9f3dd2454daffd",
+    "focused_tests_local": "PASS 18/18",
+    "full_suite_local": "PASS 97/97",
+    "full_suite_local_log": "outputs/research_colab_validator_local_tests.log",
+    "scope": "Additional evidence checks only; frozen ML method files and original ZIPs remain unchanged."
+  },
+  "raw_colab_artifacts_downloaded": true,
+  "human_review": "NOT RUN; user selected human_author, blank author_1 form prepared without labels/rationales",
+  "record_updated_at": "2026-11-01T17:22:31.902113+00:00",
+  "evidence_archive": {
+    "path": "outputs/research_colab_evidence.zip",
+    "bytes": 45948889,
+    "sha256": "a6aa21e7d4c56d82053235eccd4efc5e67fa774f19db5e2b3875afa5c5c928ac",
+    "receipt": "results/research_colab_import_receipt.json"
+  },
+  "raw_executed_notebook": {
+    "local_download": "UNAVAILABLE",
+    "saved_on_drive": true,
+    "url": "https://colab.research.google.com/drive/1a935fO3EVh9QnZ-9BU2wT2GHZdI_VZLK",
+    "limitation": "Standard notebook download attempts stopped; raw executed .ipynb is not archived locally."
+  },
+  "source_workflow_notebook": {
+    "path": "notebooks/research_verify_frozen_colab.ipynb",
+    "execution": "NOT RUN; source-only notebook, AST/nbformat verified; actual run used staged upload/prefetch helpers."
+  },
+  "comparison": {
+    "colab": "results/research_colab_reproduction_comparison.json",
+    "local": "results/research_colab_local_verification.json",
+    "ranking_audit": "results/research_colab_ranking_audit.json"
+  }
+}

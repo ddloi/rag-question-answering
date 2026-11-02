@@ -1,0 +1,26 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "unittest", "discover", "-s", "tests", "-p", "test_research_replay_comparison.py", "-v"], "cwd": "/content/RAG", "started_utc": "20261101T120501390370Z"}
+test_actual_answer_change_needs_review_even_if_normalization_matches (test_research_replay_comparison.ReplayComparisonTests.test_actual_answer_change_needs_review_even_if_normalization_matches) ... ok
+test_changed_locked_method_is_invalid_even_with_matching_answers (test_research_replay_comparison.ReplayComparisonTests.test_changed_locked_method_is_invalid_even_with_matching_answers) ... ok
+test_context_change_is_reported_separately_from_exact_answers (test_research_replay_comparison.ReplayComparisonTests.test_context_change_is_reported_separately_from_exact_answers) ... ok
+test_duplicate_id_is_not_silently_collapsed (test_research_replay_comparison.ReplayComparisonTests.test_duplicate_id_is_not_silently_collapsed) ... ok
+test_equal_row_count_with_wrong_id_fails (test_research_replay_comparison.ReplayComparisonTests.test_equal_row_count_with_wrong_id_fails) ... ok
+test_exact_valid_evidence_passes_both_expected_split_sizes (test_research_replay_comparison.ReplayComparisonTests.test_exact_valid_evidence_passes_both_expected_split_sizes) ... ok
+test_finite_metric_difference_needs_review (test_research_replay_comparison.ReplayComparisonTests.test_finite_metric_difference_needs_review) ... ok
+test_float_retrieval_score_rounding_is_not_an_evidence_content_mismatch (test_research_replay_comparison.ReplayComparisonTests.test_float_retrieval_score_rounding_is_not_an_evidence_content_mismatch) ... ok
+test_incomplete_or_wrong_count_manifest_cannot_pass (test_research_replay_comparison.ReplayComparisonTests.test_incomplete_or_wrong_count_manifest_cannot_pass) ... ok
+test_malformed_lock_returns_a_useful_validation_error (test_research_replay_comparison.ReplayComparisonTests.test_malformed_lock_returns_a_useful_validation_error) ... ok
+test_metric_count_mismatch_is_invalid_evidence (test_research_replay_comparison.ReplayComparisonTests.test_metric_count_mismatch_is_invalid_evidence) ... ok
+test_missing_arm_is_a_schema_failure (test_research_replay_comparison.ReplayComparisonTests.test_missing_arm_is_a_schema_failure) ... ok
+test_missing_row_fails_before_answer_pass (test_research_replay_comparison.ReplayComparisonTests.test_missing_row_fails_before_answer_pass) ... ok
+test_nonfinite_metrics_are_invalid_evidence (test_research_replay_comparison.ReplayComparisonTests.test_nonfinite_metrics_are_invalid_evidence) ... ok
+test_other_snapshot_archive_can_be_valid_when_locked_method_hashes_match (test_research_replay_comparison.ReplayComparisonTests.test_other_snapshot_archive_can_be_valid_when_locked_method_hashes_match) ... ok
+test_run_loader_rejects_prediction_bytes_that_disagree_with_manifest (test_research_replay_comparison.ReplayComparisonTests.test_run_loader_rejects_prediction_bytes_that_disagree_with_manifest) ... ok
+test_same_id_with_changed_question_is_invalid_input_provenance (test_research_replay_comparison.ReplayComparisonTests.test_same_id_with_changed_question_is_invalid_input_provenance) ... ok
+test_wrong_model_hash_cannot_pass_even_if_all_answers_match (test_research_replay_comparison.ReplayComparisonTests.test_wrong_model_hash_cannot_pass_even_if_all_answers_match) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.446s
+
+OK
+
+EXIT_CODE=0

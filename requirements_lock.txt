@@ -1,3 +1,0 @@
-# Snapshot of the original experiment environment, including CUDA packages.
-# See requirements/README.md before recreating this environment.
--r requirements/lock.txt

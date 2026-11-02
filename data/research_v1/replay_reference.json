@@ -1,0 +1,11 @@
+{
+  "dataset_manifest_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+  "definition": "SHA256 of sorted-key compact UTF-8 JSON records separated by LF; platform-independent record identity, not file-byte identity.",
+  "records_sha256": {
+    "chunk_metadata.jsonl": "811a9fdc22f4a17384b169d706387b707943513af02ab66ad83e2c083f062861",
+    "train_qa.jsonl": "e572e8688c0cfb89df263f2fd69f7de3db73f231ae8325cde1d9eb63a3980dbc",
+    "dev_qa.jsonl": "55dde6c5eaedb5e8d9c174fd1fc9445f0bbb815ae0f7ff0a75ed759a67632c43",
+    "test_qa.jsonl": "1e16f485378467753471f0969f69f265425dea77fabc65321ea8354f0347c28c",
+    "training_accepted.jsonl": "b2581acc5795ea6e101998b60f9f498fd0fccf1c94e3857e020f657b8be4e175"
+  }
+}

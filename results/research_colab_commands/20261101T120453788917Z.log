@@ -1,0 +1,9 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "scripts.report_research", "--run-dir", "results/research_colab_test"], "cwd": "/content/RAG", "started_utc": "20261101T120453788917Z"}
+{
+  "status": "PASS",
+  "n": 300,
+  "report": "/content/RAG/results/research_colab_test/REPORT.md",
+  "examples": 16
+}
+
+EXIT_CODE=0

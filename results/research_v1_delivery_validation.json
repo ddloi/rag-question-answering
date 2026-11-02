@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "bundle_receipts": [
+    {
+      "kind": "source",
+      "file": "outputs/research_source.zip",
+      "bytes": 495926,
+      "sha256": "abbf059e4edd549a3002f5d66ca83e5e9a55bac06fba26f80adfb43338e1ba86",
+      "archive_contents_sha256": "PASS",
+      "files": 127
+    },
+    {
+      "kind": "data",
+      "file": "outputs/research_data.zip",
+      "bytes": 200033520,
+      "sha256": "401d0462de73c97e9889a72a6385178df9406975d9080027b5147f47cad8c03b",
+      "archive_contents_sha256": "PASS",
+      "files": 10
+    },
+    {
+      "kind": "models",
+      "file": "outputs/research_models.zip",
+      "bytes": 1639694007,
+      "sha256": "4db8c33a8b09770ae204223895eddb2eba6cd11556bcc36c7e7a19a13c758fc2",
+      "archive_contents_sha256": "PASS",
+      "files": 20
+    },
+    {
+      "kind": "evidence",
+      "file": "outputs/research_evidence.zip",
+      "bytes": 23391906,
+      "sha256": "3792db9430d6dfcce0c8ea762b2f41ed9c3420a59a9f5134d6e7efca90f82b47",
+      "archive_contents_sha256": "PASS",
+      "files": 85
+    }
+  ],
+  "clean_source_research_and_metric_tests": 36,
+  "cold_web_without_legacy_artifacts": "PASS",
+  "fresh_dependency_install_or_Colab_execution": "NOT RUN"
+}

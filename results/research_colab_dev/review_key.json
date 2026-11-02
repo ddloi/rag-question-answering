@@ -1,0 +1,657 @@
+{
+  "seed": 42,
+  "selected_question_ids": [
+    "qb_6193",
+    "qb_8367",
+    "qb_7077",
+    "qb_6509",
+    "qb_4219",
+    "qb_5565",
+    "qb_8157",
+    "qb_4699",
+    "qb_5564",
+    "qb_6014",
+    "qb_7187",
+    "qb_7327",
+    "qb_3791",
+    "qb_7094",
+    "qb_4594",
+    "qb_7283",
+    "qb_6613",
+    "qb_4391",
+    "qb_4919",
+    "qb_9473",
+    "qb_3200",
+    "qb_4353",
+    "qb_6291",
+    "qb_9568",
+    "qb_6562",
+    "qb_9331",
+    "qb_6125",
+    "qb_6288",
+    "qb_5098",
+    "qb_3248",
+    "qb_8980",
+    "qb_5701",
+    "qb_6024",
+    "qb_9190",
+    "qb_8115",
+    "qb_3556",
+    "qb_8229",
+    "qb_8788",
+    "qb_8569",
+    "qb_3486",
+    "qb_9001",
+    "qb_6900",
+    "qb_7496",
+    "qb_4727",
+    "qb_6762",
+    "qb_3466",
+    "qb_7354",
+    "qb_7426",
+    "qb_7991",
+    "qb_3917"
+  ],
+  "mapping": [
+    {
+      "review_id": "review_001",
+      "question_id": "qb_6193",
+      "system": "rag_hybrid",
+      "payload_sha256": "a57e6f20cf4b71ed036b6b8023c1e189a637899f1e3d5b148f87cceb3e064b46"
+    },
+    {
+      "review_id": "review_002",
+      "question_id": "qb_6193",
+      "system": "rag_full",
+      "payload_sha256": "a57e6f20cf4b71ed036b6b8023c1e189a637899f1e3d5b148f87cceb3e064b46"
+    },
+    {
+      "review_id": "review_003",
+      "question_id": "qb_8367",
+      "system": "rag_full",
+      "payload_sha256": "9f41c4a0ce925eac8e049acf1ef16ad56dc080100af954c601bc57827ee57ac2"
+    },
+    {
+      "review_id": "review_004",
+      "question_id": "qb_8367",
+      "system": "rag_hybrid",
+      "payload_sha256": "3564324b0ae8f0ce6fb6a214821adfef5b8981eaabcf47e9eb3551eb1f8bdcf6"
+    },
+    {
+      "review_id": "review_005",
+      "question_id": "qb_7077",
+      "system": "rag_hybrid",
+      "payload_sha256": "bf8b2f21a13ecb3f9ccfbc71fae7066bf3df1c29f7886ce41d4015ae1d9b84b6"
+    },
+    {
+      "review_id": "review_006",
+      "question_id": "qb_7077",
+      "system": "rag_full",
+      "payload_sha256": "2ac5b2424ba62e1d9b053affd82f38fbcc49d550ae0c13120b5684ce7343c52e"
+    },
+    {
+      "review_id": "review_007",
+      "question_id": "qb_6509",
+      "system": "rag_full",
+      "payload_sha256": "e73b2bb3df83c1f01d2a2d1ab9cb1174ba595e8c4d68784b14999993169ae12e"
+    },
+    {
+      "review_id": "review_008",
+      "question_id": "qb_6509",
+      "system": "rag_hybrid",
+      "payload_sha256": "8efd462ddfb89b0643fffafc696aeb99b3af8c17b5db58cdcc1a2ec013eaf017"
+    },
+    {
+      "review_id": "review_009",
+      "question_id": "qb_4219",
+      "system": "rag_full",
+      "payload_sha256": "272530e6b4946ca8b284440bb32a5e724fa06ebebf3b64f3cf923b7ce17b5e51"
+    },
+    {
+      "review_id": "review_010",
+      "question_id": "qb_4219",
+      "system": "rag_hybrid",
+      "payload_sha256": "be819b5df40fe9cc4bfc71d7a911517dace4329c9eb608dccdb740dd76e833c6"
+    },
+    {
+      "review_id": "review_011",
+      "question_id": "qb_5565",
+      "system": "rag_hybrid",
+      "payload_sha256": "3875cb43c58f0e9c580b272b873f3433a34739445488c47871e986259ad533d4"
+    },
+    {
+      "review_id": "review_012",
+      "question_id": "qb_5565",
+      "system": "rag_full",
+      "payload_sha256": "06fcf18cf554c5e9009b70dd511ee0b3ecd8c80de3d0fed21c2ded562ae9b695"
+    },
+    {
+      "review_id": "review_013",
+      "question_id": "qb_8157",
+      "system": "rag_full",
+      "payload_sha256": "5dfcedc0884b6dcac06af6990717c45d281d186b63796ed42374ec5367445374"
+    },
+    {
+      "review_id": "review_014",
+      "question_id": "qb_8157",
+      "system": "rag_hybrid",
+      "payload_sha256": "5dfcedc0884b6dcac06af6990717c45d281d186b63796ed42374ec5367445374"
+    },
+    {
+      "review_id": "review_015",
+      "question_id": "qb_4699",
+      "system": "rag_full",
+      "payload_sha256": "078aeb8a81e3ec2a6a7bae0ed0eb369a99db9849759ac6fb567b4f66ada1c277"
+    },
+    {
+      "review_id": "review_016",
+      "question_id": "qb_4699",
+      "system": "rag_hybrid",
+      "payload_sha256": "078aeb8a81e3ec2a6a7bae0ed0eb369a99db9849759ac6fb567b4f66ada1c277"
+    },
+    {
+      "review_id": "review_017",
+      "question_id": "qb_5564",
+      "system": "rag_hybrid",
+      "payload_sha256": "48321bcde8c8d55ba0abee0c243ae1b7f213150960399ece537df2fcc087614f"
+    },
+    {
+      "review_id": "review_018",
+      "question_id": "qb_5564",
+      "system": "rag_full",
+      "payload_sha256": "fb49eec4bb45b4c0c876cb6b85ec651baeab12fde3dfe6b935206d5f6baef5f3"
+    },
+    {
+      "review_id": "review_019",
+      "question_id": "qb_6014",
+      "system": "rag_full",
+      "payload_sha256": "569c1bd9140c9f592c14a0f81fbf3c09091f90f92a41051c1fc79907d48c73d8"
+    },
+    {
+      "review_id": "review_020",
+      "question_id": "qb_6014",
+      "system": "rag_hybrid",
+      "payload_sha256": "11ca4fadb8ac8c2414d423b5d38fb0273df52153db3d3eb1a796ced562b69364"
+    },
+    {
+      "review_id": "review_021",
+      "question_id": "qb_7187",
+      "system": "rag_full",
+      "payload_sha256": "a691b149caefc38b4f7fddbc029705b226bffc210c76d19c30c115f49c6ae816"
+    },
+    {
+      "review_id": "review_022",
+      "question_id": "qb_7187",
+      "system": "rag_hybrid",
+      "payload_sha256": "a691b149caefc38b4f7fddbc029705b226bffc210c76d19c30c115f49c6ae816"
+    },
+    {
+      "review_id": "review_023",
+      "question_id": "qb_7327",
+      "system": "rag_full",
+      "payload_sha256": "18f2a320b6c48ddaef64a1cda0c7b695b8a6408c814ef88d9fcf86f165e60870"
+    },
+    {
+      "review_id": "review_024",
+      "question_id": "qb_7327",
+      "system": "rag_hybrid",
+      "payload_sha256": "c9d56276d7a0b6d93ae7b46f3b306fa79e19d1b38154e63d35b096199c2a605e"
+    },
+    {
+      "review_id": "review_025",
+      "question_id": "qb_3791",
+      "system": "rag_full",
+      "payload_sha256": "d0a20b1ca7e9b8bf98e63bdc8fb7cca785fc207acf59cbfb436d6a303dca16e5"
+    },
+    {
+      "review_id": "review_026",
+      "question_id": "qb_3791",
+      "system": "rag_hybrid",
+      "payload_sha256": "38fd7c3b7743c0e91bb1ebb5bf00d3e45a9de6472c29c2dbb07fff527a18dec7"
+    },
+    {
+      "review_id": "review_027",
+      "question_id": "qb_7094",
+      "system": "rag_hybrid",
+      "payload_sha256": "bf713ba132ace15d788394536844872a68c8839f73fad18606acc56dc2de944b"
+    },
+    {
+      "review_id": "review_028",
+      "question_id": "qb_7094",
+      "system": "rag_full",
+      "payload_sha256": "ef1873ddb2e0b8caafa838cb034f47302d6cc373e14a0df922683b88eaca8ec2"
+    },
+    {
+      "review_id": "review_029",
+      "question_id": "qb_4594",
+      "system": "rag_hybrid",
+      "payload_sha256": "68b1c33e18332d2a6af2060ca542fc469e9306ceb87c1ab96e87cf470ab083af"
+    },
+    {
+      "review_id": "review_030",
+      "question_id": "qb_4594",
+      "system": "rag_full",
+      "payload_sha256": "078015015229c01b462ab3f6b38f222f1e2e961456a00f1a06ea9ea142319cfd"
+    },
+    {
+      "review_id": "review_031",
+      "question_id": "qb_7283",
+      "system": "rag_hybrid",
+      "payload_sha256": "fb4ee6c1bedb5245f6061c2f85ec74a8e624b52ab30e90fd984ed87e08501493"
+    },
+    {
+      "review_id": "review_032",
+      "question_id": "qb_7283",
+      "system": "rag_full",
+      "payload_sha256": "fb4ee6c1bedb5245f6061c2f85ec74a8e624b52ab30e90fd984ed87e08501493"
+    },
+    {
+      "review_id": "review_033",
+      "question_id": "qb_6613",
+      "system": "rag_hybrid",
+      "payload_sha256": "57db96d3ed8420cb26406be8a17fad60b631be032f9c3683f4606076dfb4ebe7"
+    },
+    {
+      "review_id": "review_034",
+      "question_id": "qb_6613",
+      "system": "rag_full",
+      "payload_sha256": "8563d6378141c3b1053bf55aa92cbf7fc46eb362be90eae9a4ccc10784dd4db1"
+    },
+    {
+      "review_id": "review_035",
+      "question_id": "qb_4391",
+      "system": "rag_full",
+      "payload_sha256": "36d7654aa0698698493f113400b2f40ca780b9fe42e067580406a5edbe5b3e62"
+    },
+    {
+      "review_id": "review_036",
+      "question_id": "qb_4391",
+      "system": "rag_hybrid",
+      "payload_sha256": "6b6398164eb3de962846ebd08f6d6e06a9169fafe1ba327f0591ee4a2dde25d1"
+    },
+    {
+      "review_id": "review_037",
+      "question_id": "qb_4919",
+      "system": "rag_hybrid",
+      "payload_sha256": "81b9b2432c7d68a52e5a3a2528c98e5b3cdcaf431c5f236aff2d891d134d641b"
+    },
+    {
+      "review_id": "review_038",
+      "question_id": "qb_4919",
+      "system": "rag_full",
+      "payload_sha256": "02f46b5dde2f7fb44542d5e393793a1debc853419ce1cc8c84b691b18112ca16"
+    },
+    {
+      "review_id": "review_039",
+      "question_id": "qb_9473",
+      "system": "rag_hybrid",
+      "payload_sha256": "d6e7b6e20d09151cd5771b0dad80b03e790a8276549adef18627a8d39467a3d2"
+    },
+    {
+      "review_id": "review_040",
+      "question_id": "qb_9473",
+      "system": "rag_full",
+      "payload_sha256": "2cdd05b32d0d5550e79aca2e0bb6ddb0e7ec1bc6cc40717894937173515b02bf"
+    },
+    {
+      "review_id": "review_041",
+      "question_id": "qb_3200",
+      "system": "rag_hybrid",
+      "payload_sha256": "7f41739c3f49adea8db2784c0799e1029506e23b116daf99bf36bf43ab04b95a"
+    },
+    {
+      "review_id": "review_042",
+      "question_id": "qb_3200",
+      "system": "rag_full",
+      "payload_sha256": "0aad42afd89b1c10120e4db43fe47e3d4147323cf0229dde0f6647b3bbfb8a41"
+    },
+    {
+      "review_id": "review_043",
+      "question_id": "qb_4353",
+      "system": "rag_full",
+      "payload_sha256": "c37239e42dc7c7f8cdcbbd69c483b0be88687ea248a9ebb2c6a0903a5e2777fb"
+    },
+    {
+      "review_id": "review_044",
+      "question_id": "qb_4353",
+      "system": "rag_hybrid",
+      "payload_sha256": "c0cb3a39059a1a52a25a500f843127d131e00409ab13680d13485e963b8c4eb0"
+    },
+    {
+      "review_id": "review_045",
+      "question_id": "qb_6291",
+      "system": "rag_hybrid",
+      "payload_sha256": "8cc9f96f6d876468c91f37a16750f647f84546df6bf5e804ab198ae7b446bc6f"
+    },
+    {
+      "review_id": "review_046",
+      "question_id": "qb_6291",
+      "system": "rag_full",
+      "payload_sha256": "8cc9f96f6d876468c91f37a16750f647f84546df6bf5e804ab198ae7b446bc6f"
+    },
+    {
+      "review_id": "review_047",
+      "question_id": "qb_9568",
+      "system": "rag_full",
+      "payload_sha256": "905dab7a69edf932def78b1db9d7310d07fde55b30d32cf5628c4e2d26890631"
+    },
+    {
+      "review_id": "review_048",
+      "question_id": "qb_9568",
+      "system": "rag_hybrid",
+      "payload_sha256": "86f532da5cde53c25209ab02800e95f31eb0b3806021d1ab588a802e7f14c3ef"
+    },
+    {
+      "review_id": "review_049",
+      "question_id": "qb_6562",
+      "system": "rag_full",
+      "payload_sha256": "cb306ecf155b81f6284471ae861304d7eaae53e623f64b0b37f0d986f4fead05"
+    },
+    {
+      "review_id": "review_050",
+      "question_id": "qb_6562",
+      "system": "rag_hybrid",
+      "payload_sha256": "174fc33e96294a4706df10a9d6c75292c8e39c3253e53eb8eecf2f0880297bc0"
+    },
+    {
+      "review_id": "review_051",
+      "question_id": "qb_9331",
+      "system": "rag_hybrid",
+      "payload_sha256": "145c69a1e88f2182d27f0841aa997aac144243f855e8ae844200ffedb31ac826"
+    },
+    {
+      "review_id": "review_052",
+      "question_id": "qb_9331",
+      "system": "rag_full",
+      "payload_sha256": "f94701a47779580e376d224118b70eca802b768c11844e21ce52ec9ddcaf4462"
+    },
+    {
+      "review_id": "review_053",
+      "question_id": "qb_6125",
+      "system": "rag_full",
+      "payload_sha256": "f1d8a8928903cd5eee709f7618c8979aebb32623e0dde35efee17b3e7ca3aa79"
+    },
+    {
+      "review_id": "review_054",
+      "question_id": "qb_6125",
+      "system": "rag_hybrid",
+      "payload_sha256": "f3123eb51bb8121858afa6b0d6e39f24b6ab8dc32807f4ec325cd69ca343192d"
+    },
+    {
+      "review_id": "review_055",
+      "question_id": "qb_6288",
+      "system": "rag_hybrid",
+      "payload_sha256": "26e4dca13ad146d415e83cc634c51bb790e1388754979bef8a740089f48b3ff0"
+    },
+    {
+      "review_id": "review_056",
+      "question_id": "qb_6288",
+      "system": "rag_full",
+      "payload_sha256": "4708a85775606aca155f70ad5ee2cb92c623f7df30803de582fa0039f402ecda"
+    },
+    {
+      "review_id": "review_057",
+      "question_id": "qb_5098",
+      "system": "rag_hybrid",
+      "payload_sha256": "e44aac454e73b8e5639b2e46887bb3c11281a24d21613718292de29bd94d8244"
+    },
+    {
+      "review_id": "review_058",
+      "question_id": "qb_5098",
+      "system": "rag_full",
+      "payload_sha256": "a4d26bddecab4d2e1e3bcc7a986d808cc71eb9fc50a712fd1973f1b27419f256"
+    },
+    {
+      "review_id": "review_059",
+      "question_id": "qb_3248",
+      "system": "rag_hybrid",
+      "payload_sha256": "3388f34cef1815084d5b55cd18d5fa8caab26ba5cfcf50b8074c484bb007ad4f"
+    },
+    {
+      "review_id": "review_060",
+      "question_id": "qb_3248",
+      "system": "rag_full",
+      "payload_sha256": "e6dda9859472ab98523e873087fe46e17d5a1e3570d29cfc7573537607919adf"
+    },
+    {
+      "review_id": "review_061",
+      "question_id": "qb_8980",
+      "system": "rag_hybrid",
+      "payload_sha256": "431458579f88b2fa10ae55249b7da955099f79e1145f314afee5ae6aaa1b7f7b"
+    },
+    {
+      "review_id": "review_062",
+      "question_id": "qb_8980",
+      "system": "rag_full",
+      "payload_sha256": "a3419bd6fbd1794f5ff04a6396dca45164f2d176e247cd4255945f306037fbf3"
+    },
+    {
+      "review_id": "review_063",
+      "question_id": "qb_5701",
+      "system": "rag_hybrid",
+      "payload_sha256": "04d5663038648dbc36b02326577f1ca6c2d68b39f11e16874f43f2c5c809a6df"
+    },
+    {
+      "review_id": "review_064",
+      "question_id": "qb_5701",
+      "system": "rag_full",
+      "payload_sha256": "04d5663038648dbc36b02326577f1ca6c2d68b39f11e16874f43f2c5c809a6df"
+    },
+    {
+      "review_id": "review_065",
+      "question_id": "qb_6024",
+      "system": "rag_hybrid",
+      "payload_sha256": "fa60f9237a729e4ecd20495cb050642ffffcb2a9d3b800af8ace94f71c07fe7c"
+    },
+    {
+      "review_id": "review_066",
+      "question_id": "qb_6024",
+      "system": "rag_full",
+      "payload_sha256": "b967e409032d2bee866eebfa7d36be492086faa482b13dbad1c686eac39b9c2c"
+    },
+    {
+      "review_id": "review_067",
+      "question_id": "qb_9190",
+      "system": "rag_full",
+      "payload_sha256": "29446bf727bde793e0a8d394ffc06c343abe7477d220f5d82ed2d36f4f218301"
+    },
+    {
+      "review_id": "review_068",
+      "question_id": "qb_9190",
+      "system": "rag_hybrid",
+      "payload_sha256": "b8880d927f252c1688102d7cbaf0d4a2eeb6282003045568140e09926a4a597d"
+    },
+    {
+      "review_id": "review_069",
+      "question_id": "qb_8115",
+      "system": "rag_full",
+      "payload_sha256": "bb1e4396a829faea42a42766f69fc1d5c37ef4b5e5785693725af0f420d5fbbf"
+    },
+    {
+      "review_id": "review_070",
+      "question_id": "qb_8115",
+      "system": "rag_hybrid",
+      "payload_sha256": "4f171e3ce84e0a1781b040efeaf78eabecbf8683f098feb3e6062087449a9a8f"
+    },
+    {
+      "review_id": "review_071",
+      "question_id": "qb_3556",
+      "system": "rag_hybrid",
+      "payload_sha256": "38ae2728c7dda2cbae8fc5071606b9b512c8be2cc54e90ba1bbb0a2a0e74414f"
+    },
+    {
+      "review_id": "review_072",
+      "question_id": "qb_3556",
+      "system": "rag_full",
+      "payload_sha256": "dbd312ae5c4f70887b69a162f8525cbe4d718c006749c5e88074d0494760896a"
+    },
+    {
+      "review_id": "review_073",
+      "question_id": "qb_8229",
+      "system": "rag_hybrid",
+      "payload_sha256": "1a592a50919fd83dbf301ff9bf80acedc2be756f005dcd209f6d9a53abc0f0d3"
+    },
+    {
+      "review_id": "review_074",
+      "question_id": "qb_8229",
+      "system": "rag_full",
+      "payload_sha256": "0d54e2a95812a9d7ab905bd70656c558129106d8adbf929dfde5866e6028d486"
+    },
+    {
+      "review_id": "review_075",
+      "question_id": "qb_8788",
+      "system": "rag_hybrid",
+      "payload_sha256": "909921b324d55e03a202817c32bfea07eb892779ffce98f6c69e587faf1913fa"
+    },
+    {
+      "review_id": "review_076",
+      "question_id": "qb_8788",
+      "system": "rag_full",
+      "payload_sha256": "1b8b42ae41d9cde172c8699df18ab27d540c1eee096fee7618bba18b1c2806ee"
+    },
+    {
+      "review_id": "review_077",
+      "question_id": "qb_8569",
+      "system": "rag_hybrid",
+      "payload_sha256": "d4fe579facfd05f4d88a30e1f95a9c98bbe9be51b8d9862f5864770c86574fcc"
+    },
+    {
+      "review_id": "review_078",
+      "question_id": "qb_8569",
+      "system": "rag_full",
+      "payload_sha256": "3d98b77facbdbadfb942071287679073e08578f2b8719c8b625f4c7bcd090356"
+    },
+    {
+      "review_id": "review_079",
+      "question_id": "qb_3486",
+      "system": "rag_full",
+      "payload_sha256": "2c51cc964a716db5faf1b37da46d69a6be7c3bb0de74cbe18c620e88c0e9d80a"
+    },
+    {
+      "review_id": "review_080",
+      "question_id": "qb_3486",
+      "system": "rag_hybrid",
+      "payload_sha256": "032cdf8fc697facec9a5eaecd88b01fda349ff680b37a4f45f1998e17b16e178"
+    },
+    {
+      "review_id": "review_081",
+      "question_id": "qb_9001",
+      "system": "rag_full",
+      "payload_sha256": "fc27bfa0cd2aded2d4b38749f9c9b2697457091add852d5dd1883cff21d62dc4"
+    },
+    {
+      "review_id": "review_082",
+      "question_id": "qb_9001",
+      "system": "rag_hybrid",
+      "payload_sha256": "764c18f08dc72498d3e2b098367a0a2e85ba0c868654d9b4eb5c69eab599b445"
+    },
+    {
+      "review_id": "review_083",
+      "question_id": "qb_6900",
+      "system": "rag_full",
+      "payload_sha256": "49c163f8c73dc45c28a6daaa82e70929a5b7caff7999600ab508d77fa276591f"
+    },
+    {
+      "review_id": "review_084",
+      "question_id": "qb_6900",
+      "system": "rag_hybrid",
+      "payload_sha256": "e8cfd430b363f8b7f45580e5a11fad6992f3ea6c2f41c71885a86a703e680440"
+    },
+    {
+      "review_id": "review_085",
+      "question_id": "qb_7496",
+      "system": "rag_full",
+      "payload_sha256": "8f07af361ce93bc1f7e705bfbf7b50004607d7bfd1c2e13339c8937d87741d5e"
+    },
+    {
+      "review_id": "review_086",
+      "question_id": "qb_7496",
+      "system": "rag_hybrid",
+      "payload_sha256": "74a7224981ef5be848b4d38ca663462079f40b01f0ed61b8ab34aa1402a87718"
+    },
+    {
+      "review_id": "review_087",
+      "question_id": "qb_4727",
+      "system": "rag_hybrid",
+      "payload_sha256": "a6fdb9b8bbe76cd3abbb386abdcfc591ee44a9f9af550864f9ecf4e56b202fdb"
+    },
+    {
+      "review_id": "review_088",
+      "question_id": "qb_4727",
+      "system": "rag_full",
+      "payload_sha256": "1ac97ff344e18555c16a47a02757baf0916d43d203ed7ccd3a2d0c074fc8eb73"
+    },
+    {
+      "review_id": "review_089",
+      "question_id": "qb_6762",
+      "system": "rag_hybrid",
+      "payload_sha256": "85f666ed1009338dde72bb24e77f6f697ed4aed7d4d2b37a4ba31a6b484ffaf2"
+    },
+    {
+      "review_id": "review_090",
+      "question_id": "qb_6762",
+      "system": "rag_full",
+      "payload_sha256": "0ecd5abf47f5ec4644ed0d444897030e8594d54418375dee22497b4f2090c06e"
+    },
+    {
+      "review_id": "review_091",
+      "question_id": "qb_3466",
+      "system": "rag_hybrid",
+      "payload_sha256": "1e029c39ff394ff6a29bf7fc52691e11bd591040355ff391b3196f8e014c5899"
+    },
+    {
+      "review_id": "review_092",
+      "question_id": "qb_3466",
+      "system": "rag_full",
+      "payload_sha256": "a37d9c51b43ee46a058092d67a0d25d56871d74dbf426ddac73d9301bd73b465"
+    },
+    {
+      "review_id": "review_093",
+      "question_id": "qb_7354",
+      "system": "rag_full",
+      "payload_sha256": "0180d23ca69c9458e1c3c705b7b2405b8ac709483fe1499cfedec89e755f9cba"
+    },
+    {
+      "review_id": "review_094",
+      "question_id": "qb_7354",
+      "system": "rag_hybrid",
+      "payload_sha256": "0180d23ca69c9458e1c3c705b7b2405b8ac709483fe1499cfedec89e755f9cba"
+    },
+    {
+      "review_id": "review_095",
+      "question_id": "qb_7426",
+      "system": "rag_hybrid",
+      "payload_sha256": "704522b22f6daefc9a8e7b8af6d05772a8ba350ac43b56d62dc28f62ad06f91a"
+    },
+    {
+      "review_id": "review_096",
+      "question_id": "qb_7426",
+      "system": "rag_full",
+      "payload_sha256": "704522b22f6daefc9a8e7b8af6d05772a8ba350ac43b56d62dc28f62ad06f91a"
+    },
+    {
+      "review_id": "review_097",
+      "question_id": "qb_7991",
+      "system": "rag_full",
+      "payload_sha256": "e30d6a9ce649e30d972b2b8fcb454e9171c02365e592f8170637a9980470e35e"
+    },
+    {
+      "review_id": "review_098",
+      "question_id": "qb_7991",
+      "system": "rag_hybrid",
+      "payload_sha256": "9070c684b7dccdf0725dbd97d86e791dbb77bc704ba64741c3b27754731a03a6"
+    },
+    {
+      "review_id": "review_099",
+      "question_id": "qb_3917",
+      "system": "rag_full",
+      "payload_sha256": "b22cf017a6872133c56cf3ef678c561116ddee0bb1bfcb53bde520f0bf025351"
+    },
+    {
+      "review_id": "review_100",
+      "question_id": "qb_3917",
+      "system": "rag_hybrid",
+      "payload_sha256": "b22cf017a6872133c56cf3ef678c561116ddee0bb1bfcb53bde520f0bf025351"
+    }
+  ]
+}

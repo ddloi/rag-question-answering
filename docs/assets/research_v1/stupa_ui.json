@@ -1,0 +1,22 @@
+{
+  "dense": {
+    "answers": {
+      "generator_only": "Hindu",
+      "rag": "Buddhism",
+      "retrieval_only": "Buddhist"
+    },
+    "mode": "dense",
+    "query": "Which religion uses a domed structure called a Stupa as a shrine?"
+  },
+  "hybrid": {
+    "answers": {
+      "generator_only": "Hindu",
+      "rag": "Christianity",
+      "retrieval_only": "Buddhist"
+    },
+    "mode": "hybrid",
+    "query": "Which religion uses a domed structure called a Stupa as a shrine?",
+    "rankingLabel": "Hybrid · điểm RRF",
+    "stale": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "status": "agent_proposed",
+  "scope": "One observed dev case; not exhaustive label verification and not a human-approved correction.",
+  "dataset_manifest_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+  "question_id": "qb_6193",
+  "question": "Tennis player Martina Hingis was born in which European country?",
+  "original_canonical": "Switzerland",
+  "proposed_answer_current_country": "Slovakia",
+  "historical_alternative_from_context": "Czechoslovakia; a human must decide the intended historical/current-country interpretation.",
+  "model_output": "Czech Republic",
+  "model_issue": "The used context distinguishes birth in Kosice from childhood in Roznov; output confuses the relation.",
+  "primary_source": "https://www.wtatennis.com/legends/80301/martina-hingis",
+  "source_checked_date": "2026-11-01",
+  "source_signal": "Birthplace: Kosice, Slovakia",
+  "reviewer_kind": "agent_self_review",
+  "human_approved": false,
+  "dataset_modified": false,
+  "metrics_rescored_with_proposal": false
+}

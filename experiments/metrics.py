@@ -1,13 +1,15 @@
-"""Alias-aware QA metrics and explicitly named evidence proxies; no ML imports."""
+"""TriviaQA-compatible normalization and versioned answer policies; no ML imports."""
 import re
 import string
-import unicodedata
 from collections import Counter
 
 
 def normalize_answer(value):
-    value = unicodedata.normalize("NFKC", str(value)).casefold()
-    value = "".join(c for c in value if c not in string.punctuation and not unicodedata.category(c).startswith("P"))
+    # TriviaQA v1.0 evaluator: punctuation separates tokens rather than joining them.
+    # https://github.com/mandarjoshi90/triviaqa/blob/master/evaluation/triviaqa_evaluation.py
+    value = str(value).lower().replace('_', ' ')
+    punctuation = set(string.punctuation + '‘’´`')
+    value = ''.join(' ' if c in punctuation else c for c in value)
     return " ".join(re.sub(r"\b(a|an|the)\b", " ", value).split())
 
 
@@ -30,13 +32,25 @@ def exact_match_score(prediction, ground_truth):
 def f1_score(prediction, ground_truth):
     pred, gold = normalize_answer(prediction).split(), normalize_answer(ground_truth).split()
     if not pred or not gold:
-        return float(pred == gold)
+        return 0.0
     common = sum((Counter(pred) & Counter(gold)).values())
     return 2 * common / (len(pred) + len(gold))
 
 
-def score_answer(prediction, record):
-    aliases = answers_for(record)
+def reference_answers(record, policy):
+    if policy == 'canonical':
+        return [record['answer']]
+    field = {'official': 'official_answer_aliases', 'curated': 'curated_answers'}.get(policy)
+    if field is None:
+        raise ValueError(f'Unknown answer policy: {policy}')
+    answers = record.get(field)
+    if not isinstance(answers, list) or not answers or any(not isinstance(a, str) or not a.strip() for a in answers):
+        raise ValueError(f'{policy} scoring requires a non-empty {field} list')
+    return list(dict.fromkeys(answers))
+
+
+def score_answer(prediction, record, policy=None):
+    aliases = reference_answers(record, policy) if policy is not None else answers_for(record)
     return {"em": max(exact_match_score(prediction, a) for a in aliases),
             "f1": max(f1_score(prediction, a) for a in aliases)}
 

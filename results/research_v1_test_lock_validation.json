@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "validated_at": "2026-11-01T01:59:46.288192+00:00",
+  "lock_sha256": "161e84dbe9d7260c8aeffbd58f922a5d072efad2bc3002c537ba8c33f34067ec",
+  "checks": {
+    "experiments/research_evaluate.py": true,
+    "experiments/research_pipeline.py": true,
+    "experiments/metrics.py": true,
+    "ragqa/rag_engine.py": true,
+    "dataset": true,
+    "test_qa": true,
+    "closed_book": true,
+    "rag": true
+  },
+  "post_run_source_checks": {
+    "experiments/research_evaluate.py": true,
+    "experiments/research_pipeline.py": true,
+    "experiments/metrics.py": true,
+    "ragqa/rag_engine.py": true
+  },
+  "dataset_unchanged": true,
+  "full_test_complete": true
+}

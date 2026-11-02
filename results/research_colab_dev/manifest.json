@@ -1,0 +1,85 @@
+{
+  "status": "complete",
+  "started_at": "2026-11-01T11:52:16.683786+00:00",
+  "split": "dev",
+  "final": false,
+  "pilot": false,
+  "dataset_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+  "config": {
+    "version": "research_v1",
+    "seed": 42,
+    "dataset": {
+      "name": "mandarjoshi/trivia_qa",
+      "config": "rc.wikipedia",
+      "revision": "0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+      "train_candidates": 2000,
+      "dev": 200,
+      "test": 300,
+      "exclude_legacy_from_validation": true,
+      "chunk_words": 200,
+      "overlap_words": 40,
+      "max_chunks": 250000
+    },
+    "models": {
+      "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+      "generator_base": "google-t5/t5-base",
+      "extractive": "distilbert/distilbert-base-cased-distilled-squad"
+    },
+    "retrieval": {
+      "top_k": 5,
+      "pool": 30,
+      "rrf_constant": 60,
+      "context_top_n": 2
+    },
+    "generation": {
+      "max_input_tokens": 512,
+      "max_new_tokens": 32,
+      "num_beams": 4,
+      "length_penalty": 0.8,
+      "no_repeat_ngram_size": 3
+    },
+    "training": {
+      "epochs": 3,
+      "micro_batch": 2,
+      "gradient_accumulation": 8,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01
+    },
+    "evaluation": {
+      "policies": [
+        "official",
+        "canonical"
+      ],
+      "review_sample": 50,
+      "retrieval_k": [
+        1,
+        3,
+        5,
+        10
+      ]
+    }
+  },
+  "closed_book_model_sha256": "60ca4725f079cd65fb5607a23c46f9aac858a1f47a58b0c58e466e2281833f10",
+  "rag_model_sha256": "4909c3007546c81e3523429b6e64cedca816ba3f0281348124a5a2444d5e693e",
+  "source_sha256": {
+    "experiments/research_evaluate.py": "154b6052dead0cb1f8fd1556a6d006100b9b7a8c264f1f912537cb8f327dc1c1",
+    "experiments/research_pipeline.py": "5ef58881ed3f15be788fe07267211b419bc99c7a8994c332efdc326ce8c2d036",
+    "experiments/metrics.py": "47781c94a385973794a4c257773626273609403b50884ab923abc65c0b7ab241",
+    "ragqa/rag_engine.py": "200593f23e618c9fe03f1834bb09d594bf91b3a7a5ac003b20bf2bbada948b23"
+  },
+  "python": "3.13.16",
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "transformers": "5.17.0",
+    "sentence-transformers": "6.1.0",
+    "datasets": "5.0.1",
+    "faiss-cpu": "1.15.1",
+    "rank-bm25": "0.2.2"
+  },
+  "citation_definition": "Application-provided actual used passages; not model-generated inline citations.",
+  "source_snapshot_sha256": "8f821374f6bae341eeb3ca7ed21f8639f1c54117c4c18f120296ed0db37353dc",
+  "error_definition": "Lexical proxies; semantic error attribution requires the blinded review.",
+  "n": 200,
+  "finished_at": "2026-11-01T11:57:36.917931+00:00",
+  "predictions_sha256": "18645e18c6d65fc84e7957af1dd6d1fb1a717ce219118429d0d9cbc6c7480690"
+}

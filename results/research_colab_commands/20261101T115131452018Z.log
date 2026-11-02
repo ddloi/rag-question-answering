@@ -1,0 +1,34 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "scripts.check_research", "--data-dir", "data/research_v1", "--model-run", "checkpoints/research_v1/closed_book", "--download-base"], "cwd": "/content/RAG", "started_utc": "20261101T115131452018Z"}
+
+Loading weights:   0%|          | 0/257 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 257/257 [00:00<00:00, 5101.21it/s]
+{
+  "dataset": "PASS",
+  "counts": {
+    "documents": 3157,
+    "chunks": 90667,
+    "train": 2000,
+    "dev": 200,
+    "test": 300,
+    "training_accepted": 1866,
+    "training_rejected": 134
+  },
+  "all_vectors_finite_and_unit": true,
+  "question_overlap": 0,
+  "checkpoint": "PASS",
+  "shared_document_counts": {
+    "train/dev": 80,
+    "train/test": 85,
+    "dev/test": 44
+  },
+  "generalization_scope": "Unseen QA within a shared controlled corpus; not an unseen-document split.",
+  "pilot": false,
+  "precision": "bf16",
+  "selected_parameter_max_update": 0.013357829302549362,
+  "tied_weights_restored": true,
+  "restored_inference_has_answer": true,
+  "restored_input_tokens": 15,
+  "peak_training_gpu_bytes": 4477298688
+}
+
+EXIT_CODE=0

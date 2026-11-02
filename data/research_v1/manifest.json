@@ -1,0 +1,103 @@
+{
+  "status": "complete",
+  "created_at": "2026-10-31T15:22:51.381568+00:00",
+  "version": "research_v1",
+  "config": {
+    "version": "research_v1",
+    "seed": 42,
+    "dataset": {
+      "name": "mandarjoshi/trivia_qa",
+      "config": "rc.wikipedia",
+      "revision": "0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+      "train_candidates": 2000,
+      "dev": 200,
+      "test": 300,
+      "exclude_legacy_from_validation": true,
+      "chunk_words": 200,
+      "overlap_words": 40,
+      "max_chunks": 250000
+    },
+    "models": {
+      "embedding": "sentence-transformers/all-MiniLM-L6-v2",
+      "generator_base": "google-t5/t5-base",
+      "extractive": "distilbert/distilbert-base-cased-distilled-squad"
+    },
+    "retrieval": {
+      "top_k": 5,
+      "pool": 30,
+      "rrf_constant": 60,
+      "context_top_n": 2
+    },
+    "generation": {
+      "max_input_tokens": 512,
+      "max_new_tokens": 32,
+      "num_beams": 4,
+      "length_penalty": 0.8,
+      "no_repeat_ngram_size": 3
+    },
+    "training": {
+      "epochs": 3,
+      "micro_batch": 2,
+      "gradient_accumulation": 8,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01
+    },
+    "evaluation": {
+      "policies": [
+        "official",
+        "canonical"
+      ],
+      "review_sample": 50,
+      "retrieval_k": [
+        1,
+        3,
+        5,
+        10
+      ]
+    }
+  },
+  "config_sha256": "94c00159ee7f7d943f9e780a0b8eb3bd4b4579739d3c237da3dcc662cd9b67d3",
+  "selection": "First eligible source rows; validation assignment by seeded question-id hash; no answer-based test selection.",
+  "corpus_policy": "All supplied entity pages; no evidence page selected by test answer presence.",
+  "models": {
+    "embedding": {
+      "name": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+    },
+    "generator_base": {
+      "name": "google-t5/t5-base",
+      "revision": "a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1"
+    },
+    "extractive": {
+      "name": "distilbert/distilbert-base-cased-distilled-squad",
+      "revision": "564e9b582944a57a3e586bbb98fd6f0a4118db7f"
+    }
+  },
+  "counts": {
+    "documents": 3157,
+    "chunks": 90667,
+    "train": 2000,
+    "dev": 200,
+    "test": 300,
+    "training_accepted": 1866,
+    "training_rejected": 134
+  },
+  "exact_question_overlap": 0,
+  "training_positive_rule": "Canonical lexical evidence; no first-chunk fallback; same accepted QA for both T5 models.",
+  "builder_sha256": "d45b6ac70db3bc009d8d4ab817b58ef0eefc80434378b32de5cbb51359312cd8",
+  "embedding_dimension": 384,
+  "embedding_max_tokens": 256,
+  "finished_at": "2026-10-31T15:28:27.603298+00:00",
+  "output_sha256": {
+    "chunk_metadata.jsonl": "12a3c417688f46d4c6ddae213c84ae7f6c2cc6fee05f90a0ed89d0eed0f377c0",
+    "dev_qa.jsonl": "11cf10d5e70acbf9672dd6e6ee5e651068c53bbfa551f35c3987e594e75a8a29",
+    "documents.jsonl": "7a1ab087ecf93d73ecc10e5b3967c43761cbca152328b037de4049b90d4b19f4",
+    "faiss.index": "ebccb3ea6dd2ff67207b74e603e6061b02486e67de2fa71b4cc6098fbb63010c",
+    "source_train.jsonl": "0a381e8d4147926a04bb2c83fe48f3321a3a27ae2b6e1bcb1ee4d3ba7aff0968",
+    "source_validation.jsonl": "bf1c859740ac6c1c5439e6abd144c0d98b0c1a286ca84ac3ce3dcd9e7860586a",
+    "test_qa.jsonl": "e856ea0b2f98848955707cdeadc8e7dbc88b5da65af3c057b680bdea41007db4",
+    "training_accepted.jsonl": "c580d5a8e676178aa6a1d59bd94ac58c11350c520c864a4c3f9da072adbaff46",
+    "training_rejected.jsonl": "b9d1fc6c34bf816b45d6a3b6ee7f754726f94ca01babc8cd30f3fb4449204659",
+    "train_qa.jsonl": "b3d66130c6c0de3550c8d66fcfbd981fc624b9690827d063662ef8bfa4b1e2fd"
+  }
+}

@@ -1,0 +1,39 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "unittest", "discover", "-s", "tests", "-p", "test_research*.py", "-v"], "cwd": "/content/RAG", "started_utc": "20261101T113629175363Z"}
+test_no_context_has_no_citations (test_research_context.ResearchContextTests.test_no_context_has_no_citations) ... ok
+test_partly_visible_title_is_recorded_without_claiming_body_was_seen (test_research_context.ResearchContextTests.test_partly_visible_title_is_recorded_without_claiming_body_was_seen) ... ok
+test_visible_text_is_clipped_and_fully_hidden_source_is_omitted (test_research_context.ResearchContextTests.test_visible_text_is_clipped_and_fully_hidden_source_is_omitted) ... ok
+test_corpus_keeps_all_pages_even_without_test_answer (test_research_data.ResearchDataTests.test_corpus_keeps_all_pages_even_without_test_answer) ... ok
+test_identical_pages_and_chunks_do_not_duplicate_vectors (test_research_data.ResearchDataTests.test_identical_pages_and_chunks_do_not_duplicate_vectors) ... ok
+test_overlapping_questions_fail_instead_of_leaking (test_research_data.ResearchDataTests.test_overlapping_questions_fail_instead_of_leaking) ... ok
+test_train_rejects_unsupported_context_and_test_is_preserved (test_research_data.ResearchDataTests.test_train_rejects_unsupported_context_and_test_is_preserved) ... ok
+test_deduplicated_passage_retains_all_relevant_source_links (test_research_protocol.ResearchProtocolTests.test_deduplicated_passage_retains_all_relevant_source_links) ... ok
+test_policy_does_not_silently_add_canonical_to_official_aliases (test_research_protocol.ResearchProtocolTests.test_policy_does_not_silently_add_canonical_to_official_aliases) ... ok
+test_rag_checkpoint_cannot_be_mislabeled_as_closed_book (test_research_protocol.ResearchProtocolTests.test_rag_checkpoint_cannot_be_mislabeled_as_closed_book) ... ok
+test_ranked_evidence_absent_from_visible_context_is_not_generation_failure (test_research_protocol.ResearchProtocolTests.test_ranked_evidence_absent_from_visible_context_is_not_generation_failure) ... ok
+test_recall_distinguishes_one_hit_from_covering_all_relevant_documents (test_research_protocol.ResearchProtocolTests.test_recall_distinguishes_one_hit_from_covering_all_relevant_documents) ... ok
+test_same_template_is_used_with_and_without_context (test_research_protocol.ResearchProtocolTests.test_same_template_is_used_with_and_without_context) ... ok
+test_visible_title_evidence_takes_precedence_over_body_only_diagnostics (test_research_protocol.ResearchProtocolTests.test_visible_title_evidence_takes_precedence_over_body_only_diagnostics) ... ok
+test_cached_legacy_question_is_rejected_without_network (test_research_replay.ReplayTests.test_cached_legacy_question_is_rejected_without_network) ... ok
+test_record_hash_ignores_serialization_and_newlines_but_preserves_text (test_research_replay.ReplayTests.test_record_hash_ignores_serialization_and_newlines_but_preserves_text) ... ok
+test_valid_complete_cache_is_reused_without_network (test_research_replay.ReplayTests.test_valid_complete_cache_is_reused_without_network) ... ok
+test_altered_scores_are_rejected (test_research_reporting.ResearchReportingTests.test_altered_scores_are_rejected) ... ok
+test_examples_cover_error_classes_and_negative_hybrid_results (test_research_reporting.ResearchReportingTests.test_examples_cover_error_classes_and_negative_hybrid_results) ... ok
+test_rounding_tolerance_is_bounded (test_research_reporting.ResearchReportingTests.test_rounding_tolerance_is_bounded) ... ok
+test_agent_labels_remain_separate_and_irrelevant_citations_count (test_research_review.ResearchReviewTests.test_agent_labels_remain_separate_and_irrelevant_citations_count) ... ok
+test_empty_forms_are_not_claimed_as_an_evaluation (test_research_review.ResearchReviewTests.test_empty_forms_are_not_claimed_as_an_evaluation) ... ok
+test_invented_citation_ids_are_rejected (test_research_review.ResearchReviewTests.test_invented_citation_ids_are_rejected) ... ok
+test_missing_selected_questions_cannot_be_called_complete (test_research_review.ResearchReviewTests.test_missing_selected_questions_cannot_be_called_complete) ... ok
+test_unclear_judgments_remain_in_reported_coverage (test_research_review.ResearchReviewTests.test_unclear_judgments_remain_in_reported_coverage) ... ok
+test_completed_run_cannot_be_overwritten_by_resume (test_research_run_preservation.RunPreservationTests.test_completed_run_cannot_be_overwritten_by_resume) ... ok
+test_incomplete_models_cannot_be_loaded (test_research_web.ResearchWebTests.test_incomplete_models_cannot_be_loaded) ... ok
+test_inference_does_not_accept_reference_answers_from_client (test_research_web.ResearchWebTests.test_inference_does_not_accept_reference_answers_from_client) ... ok
+test_invalid_method_and_blank_question_are_rejected (test_research_web.ResearchWebTests.test_invalid_method_and_blank_question_are_rejected) ... ok
+test_page_has_three_separate_systems (test_research_web.ResearchWebTests.test_page_has_three_separate_systems) ... ok
+test_simultaneous_request_is_rejected (test_research_web.ResearchWebTests.test_simultaneous_request_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.175s
+
+OK
+
+EXIT_CODE=0

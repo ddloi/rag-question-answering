@@ -1,0 +1,1 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "scripts.export_research_bundle", "--kind", "evidence", "--data-dir", "data/research_v1", "--output", "outputs/research_colab_evidence.zip"], "cwd": "/content/RAG", "started_utc": "20261101T120504758366Z"}

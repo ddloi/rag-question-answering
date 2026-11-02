@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "scope": "Source archive hashes, research unit tests, TriviaQA metrics and cold web startup without legacy artifacts; not fresh dependency installation or Colab execution.",
+  "files": 110
+}

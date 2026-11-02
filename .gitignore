@@ -39,6 +39,7 @@ test_clean.docx
 
 # IDE / System
 .impeccable/
+.taste-skill/
 .ipynb_checkpoints/
 .vscode/
 .idea/
@@ -64,6 +65,12 @@ data/verified_v2/raw_documents.json
 data/verified_v2/faiss.index
 data/demo_v3/*.jsonl
 data/demo_v3/faiss.index
+data/research_v1/*.jsonl
+data/research_v1/faiss.index
+checkpoints/
+outputs/
+data/research_colab_v1/*.jsonl
+data/research_colab_v1/faiss.index
 
 # Short local smoke runs; the full evaluation evidence is kept separately.
 results/evaluation_v2_smoke/

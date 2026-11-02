@@ -1,0 +1,24 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "scripts.check_research", "--data-dir", "data/research_v1"], "cwd": "/content/RAG", "started_utc": "20261101T113708791050Z"}
+{
+  "dataset": "PASS",
+  "counts": {
+    "documents": 3157,
+    "chunks": 90667,
+    "train": 2000,
+    "dev": 200,
+    "test": 300,
+    "training_accepted": 1866,
+    "training_rejected": 134
+  },
+  "all_vectors_finite_and_unit": true,
+  "question_overlap": 0,
+  "checkpoint": "NOT RUN",
+  "shared_document_counts": {
+    "train/dev": 80,
+    "train/test": 85,
+    "dev/test": 44
+  },
+  "generalization_scope": "Unseen QA within a shared controlled corpus; not an unseen-document split."
+}
+
+EXIT_CODE=0

@@ -16,6 +16,9 @@ STAGES = {
     "ablation": "ablation",
     "baseline": "baseline_retrieval",
     "verify": "verify_dataset",
+    "research-data": "research_data",
+    "research-train": "research_train",
+    "research-evaluate": "research_evaluate",
 }
 
 

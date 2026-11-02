@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "scope": "Rebuild logical records from recovered pinned-source caches; not an actual Colab execution.",
+  "dataset_manifest_sha256": "b2abb8c2f7c17064d4c6656aad00c8f1e01f419b404323664c13d445e7563ffa",
+  "portable_legacy_exclusions_checked": true,
+  "record_hash_matches": {
+    "chunk_metadata.jsonl": true,
+    "train_qa.jsonl": true,
+    "dev_qa.jsonl": true,
+    "test_qa.jsonl": true,
+    "training_accepted.jsonl": true
+  },
+  "counts": {
+    "docs": 3157,
+    "chunks": 90667,
+    "accepted": 1866,
+    "rejected": 134
+  },
+  "current_replay_builder_sha256": "528f92f4f2475b3cb55c39f619c021f9699fe84bfee13afd2b4b9ade54571e6b",
+  "frozen_builder_exact_source_archived": false,
+  "note": "Builder gained portable exclusions/reference replay after original dataset build; logical equivalence verified on all five record files. Original byte-level builder source is not claimed available."
+}

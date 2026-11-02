@@ -1,0 +1,9 @@
+{
+  "answers": {
+    "generator_only": "Ireland",
+    "rag": "Czech Republic",
+    "retrieval_only": "Swiss"
+  },
+  "query": "Tennis player Martina Hingis was born in which European country?",
+  "reference": "Lưu ý: Nhãn nguồn có cờ rà soát; xem casebook và nguồn đối chiếu. Điểm vẫn giữ nhãn frozen, chưa dùng đề xuất để chấm lại. https://www.wtatennis.com/legends/80301/martina-hingis. Canonical: Switzerland. Split: dev. Official aliases: der schweiz; switzeland; confederation helvetia; confederatio helvetica; swissland; switzerland information; confederation suisse; switserland; confédération suisse; swizterland; confederation of helvatia; swizerland; svizzera; confederation helvetica; land of switzers; suiza; confederaziun svizra; schweiz; etymology of switzerland; die schweiz; suisse; confederazione svizzera; swiss; svizra; switzerland; schweitz; swiss confederation; switz; svissland; schwitzerland; environmental integrity group; land of swiss; schweizerische eidgenossenschaft; swissenergy; confœderatio helvetica; confoederatio helvetica; switzer land; švýcarsko; swiss confederated states; iso 3166 1 ch."
+}

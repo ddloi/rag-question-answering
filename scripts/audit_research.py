@@ -9,7 +9,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-from experiments.metrics import contains_answer, score_answer
+from experiments.legacy_metrics import contains_answer, score_answer
 from experiments.verify_dataset import digest, read_jsonl
 from ragqa.paths import DATA_DIR, PROJECT_ROOT, RESULTS_DIR
 

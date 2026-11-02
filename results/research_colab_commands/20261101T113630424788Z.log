@@ -1,0 +1,13 @@
+{"command": ["/usr/bin/python3", "-u", "-m", "unittest", "discover", "-s", "tests", "-p", "test_triviaqa_metrics.py", "-v"], "cwd": "/content/RAG", "started_utc": "20261101T113630424788Z"}
+test_extracted_apostrophes_are_equivalent_to_reference (test_triviaqa_metrics.TriviaQAMetricsTests.test_extracted_apostrophes_are_equivalent_to_reference) ... ok
+test_f1_empty_tokens_matches_official_zero_convention (test_triviaqa_metrics.TriviaQAMetricsTests.test_f1_empty_tokens_matches_official_zero_convention) ... ok
+test_historical_scoring_is_preserved_explicitly (test_triviaqa_metrics.TriviaQAMetricsTests.test_historical_scoring_is_preserved_explicitly) ... ok
+test_missing_official_or_curated_labels_fail_explicitly (test_triviaqa_metrics.TriviaQAMetricsTests.test_missing_official_or_curated_labels_fail_explicitly) ... ok
+test_official_policy_uses_only_the_supplied_normalized_alias_set (test_triviaqa_metrics.TriviaQAMetricsTests.test_official_policy_uses_only_the_supplied_normalized_alias_set) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK
+
+EXIT_CODE=0
