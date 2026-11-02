@@ -1,0 +1,48 @@
+{
+  "status": "COMPLETE",
+  "independent_human_status": "NOT RUN",
+  "metric_unit": "annotation and cited source; multiple reviewers are not additional independent QA samples",
+  "groups": {
+    "agent_self_review/rag_hybrid": {
+      "completed": 50,
+      "faithfulness": {
+        "supported": 21,
+        "unsupported": 19,
+        "unclear": 10
+      },
+      "citations": {
+        "supports_answer": 25,
+        "does_not_support": 54,
+        "unclear": 19
+      },
+      "citation_precision_assessed": 0.31645569620253167,
+      "citation_unclear": 19,
+      "faithfulness_supported_fraction_all": 0.42,
+      "faithfulness_supported_fraction_assessed": 0.525,
+      "faithfulness_unclear": 10
+    },
+    "agent_self_review/rag_full": {
+      "completed": 50,
+      "faithfulness": {
+        "unsupported": 19,
+        "supported": 23,
+        "unclear": 8
+      },
+      "citations": {
+        "does_not_support": 53,
+        "supports_answer": 28,
+        "unclear": 17
+      },
+      "citation_precision_assessed": 0.345679012345679,
+      "citation_unclear": 17,
+      "faithfulness_supported_fraction_all": 0.46,
+      "faithfulness_supported_fraction_assessed": 0.5476190476190477,
+      "faithfulness_unclear": 8
+    }
+  },
+  "incomplete_review_ids": [],
+  "note": "Human-independent, human-author and agent-self-review counts are separate; no empty form is treated as a scored evaluation.",
+  "reviews_sha256": "6f61c70d43d28de18bffd9bbcbd55219d0d7a01a8a8d159d21fa81f9ac7d8e0b",
+  "key_sha256": "208f6bd8a77294a25e394f338f9705457115cb77dce042698a0a6f4cae5b14bd",
+  "aggregator_sha256": "c50fa3d5b22d8a069b6f98dd5a69408fa39d0f8b8c3121ca63afa72d37b28d90"
+}
