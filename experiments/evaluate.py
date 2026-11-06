@@ -12,8 +12,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ragqa.paths import DATA_DIR, MODEL_DIR, PROJECT_ROOT, RESULTS_DIR, resolve_project_path
-from .metrics import (answers_for, classify_error, contains_answer, exact_match_score,
-                      f1_score, normalize_answer, score_answer, select_answer_policy, token_support_fraction)
+from .metrics import (answers_for, classify_error, contains_answer, exact_match_score as exact_match_score,
+                      f1_score as f1_score, normalize_answer, score_answer, select_answer_policy, token_support_fraction)
 from .verify_dataset import digest, read_jsonl
 
 
@@ -121,7 +121,6 @@ def main():
     if not records: parser.error('Empty test split')
     run_dir=resolve_project_path(args.run_dir) if args.run_dir else RESULTS_DIR/('evaluation_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
     run_dir.mkdir(parents=True,exist_ok=False)
-    import torch
     from transformers import set_seed
     set_seed(args.seed)
     from .rag_pipeline import RAGSystem, GENERATION_OPTIONS

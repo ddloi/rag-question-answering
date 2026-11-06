@@ -15,19 +15,13 @@ Lưu ý: mỗi lần đổi chunk_size, phải rebuild lại chunk + index từ 
 
 import sys
 import json
-import re
-import numpy as np
-import torch
-import faiss
-import pandas as pd
 from ragqa.paths import DATA_DIR, RAW_DOCUMENTS_PATH, RESULTS_DIR
+from .prepare_chunks import chunk_text, clean_text
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-from rank_bm25 import BM25Okapi
-from sentence_transformers import SentenceTransformer
 
 OUTPUT_PATH = RESULTS_DIR / "ablation_results.csv"
 EMBED_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
@@ -36,24 +30,6 @@ TOP_KS = [3, 5, 10]
 CHUNK_OVERLAP_RATIO = 0.2  # overlap = 20% chunk_size
 RRF_K = 60
 CANDIDATE_POOL = 30
-
-
-def clean_text(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip()
-
-
-def chunk_text(text: str, chunk_size: int, overlap: int):
-    words = text.split()
-    chunks, start = [], 0
-    while start < len(words):
-        end = start + chunk_size
-        chunk = " ".join(words[start:end])
-        if chunk.strip():
-            chunks.append(chunk)
-        if end >= len(words):
-            break
-        start = end - overlap
-    return chunks
 
 
 def build_chunks_for_size(documents, chunk_size):
@@ -69,6 +45,7 @@ def build_chunks_for_size(documents, chunk_size):
 
 
 def build_dense_index(chunks, embed_model):
+    import faiss
     texts = [c["text"] for c in chunks]
     embeddings = embed_model.encode(
         texts, batch_size=64, convert_to_numpy=True, normalize_embeddings=True,
@@ -88,6 +65,7 @@ def dense_retrieve(index, embed_model, query, top_k):
 
 
 def hybrid_retrieve(bm25, index, embed_model, query, top_k):
+    import numpy as np
     tokenized_query = query.lower().split()
     bm25_scores = bm25.get_scores(tokenized_query)
     bm25_ids = list(np.argsort(bm25_scores)[::-1][:CANDIDATE_POOL])
@@ -111,18 +89,26 @@ def recall_at_k(retrieved_doc_ids_per_query, gold_doc_ids):
     return hits / len(gold_doc_ids)
 
 
+def load_test_questions():
+    test_file = DATA_DIR / 'test_qa.jsonl'
+    if not test_file.is_file():
+        raise FileNotFoundError(f'Missing test split: {test_file}. Run python -m experiments split first.')
+    with test_file.open(encoding='utf-8') as stream:
+        records = [json.loads(line) for line in stream if line.strip()][:100]
+    if not records:
+        raise ValueError(f'Test split is empty: {test_file}')
+    return records
+
+
 def main():
+    qa_records = load_test_questions()
+    import pandas as pd
+    import torch
+    from rank_bm25 import BM25Okapi
+    from sentence_transformers import SentenceTransformer
+
     with open(RAW_DOCUMENTS_PATH, "r", encoding="utf-8") as f:
         documents = json.load(f)
-
-    qa_records = []
-    # Dùng test_qa.jsonl để đánh giá ablation trên tập test chuẩn, tránh rò rỉ dữ liệu train
-    test_file = DATA_DIR / "test_qa.jsonl" if (DATA_DIR / "test_qa.jsonl").exists() else DATA_DIR / "qa_pairs.jsonl"
-    with open(test_file, "r", encoding="utf-8") as f:
-        for line in f:
-            qa_records.append(json.loads(line))
-    # Dùng subset 100 câu cho ablation để chạy nhanh
-    qa_records = qa_records[:100]
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     embed_model = SentenceTransformer(EMBED_MODEL_NAME, device=device)

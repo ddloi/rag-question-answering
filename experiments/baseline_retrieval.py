@@ -20,7 +20,7 @@ import random
 import re
 import sys
 from pathlib import Path
-from ragqa.paths import BASELINE_CONFIG_PATH, DATA_DIR, PIPELINE_DIR, RESULTS_DIR, resolve_project_path
+from ragqa.paths import BASELINE_CONFIG_PATH, PIPELINE_DIR, RESULTS_DIR, resolve_project_path
 from typing import Any, Dict, List, Tuple
 
 import numpy as np
@@ -46,7 +46,7 @@ def set_seed(seed: int = 42) -> None:
 
 
 def load_config() -> Dict[str, Any]:
-    """Tải cấu hình hyperparameters từ pipeline hoặc dùng fallback mặc định."""
+    """Use defaults only when no config exists; reject unreadable configs."""
     default_config = {
         "random_seed": 42,
         "bm25": {"k1": 1.5, "b": 0.75},
@@ -84,8 +84,8 @@ def load_config() -> Dict[str, Any]:
         try:
             with open(config_path, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except Exception as e:
-            print(f"Cảnh báo: Không thể đọc config từ {config_path} ({e}), dùng default config.")
+        except (OSError, ValueError) as exc:
+            raise ValueError(f'Cannot read baseline configuration: {config_path}') from exc
     return default_config
 
 

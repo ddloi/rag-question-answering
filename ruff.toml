@@ -1,0 +1,12 @@
+target-version = "py313"
+extend-exclude = ["outputs", "data", "results", "checkpoints", "generator_finetuned"]
+
+[lint]
+select = ["E9", "F"]
+
+[lint.per-file-ignores]
+# Frozen research_v1 sources: preserve their recorded hashes.
+"experiments/research_data.py" = ["F401"]
+# support() consumes these closure variables before their explicit deletion.
+# This valid lifetime is not modeled by Pyflakes; retain the frozen evaluator.
+"experiments/research_evaluate.py" = ["F821"]

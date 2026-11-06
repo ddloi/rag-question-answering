@@ -7,7 +7,6 @@ import json
 import faiss
 import torch
 import gradio as gr
-from pathlib import Path
 from huggingface_hub import hf_hub_download
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForQuestionAnswering

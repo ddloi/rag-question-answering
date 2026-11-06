@@ -6,7 +6,6 @@ be used as an independent test corpus or compared with verified_v2 metrics.
 import json
 import shutil
 from datetime import datetime, timezone
-from pathlib import Path
 
 from experiments.prepare_chunks import chunk_text, clean_text
 from experiments.verify_dataset import digest, read_jsonl, write_jsonl

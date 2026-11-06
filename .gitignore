@@ -76,3 +76,6 @@ data/research_colab_v1/faiss.index
 results/evaluation_v2_smoke/
 # Intermediate draft; canonical_rescore_v2 contains the finalized scoring provenance.
 results/canonical_rescore_v1/
+ 
+# Office temporary files
+~$*

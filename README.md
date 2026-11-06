@@ -73,11 +73,13 @@ python -m unittest discover -s tests -v
 python -m experiments --list
 ```
 
-Bộ kiểm thử hiện có **97 tests**, gồm các test demo lịch sử cần corpus local. Trên clone chỉ có source, chạy hai nhóm nghiên cứu không phụ thuộc corpus đầy đủ:
+Bộ kiểm thử hiện có **106 tests**, gồm các test demo lịch sử cần corpus local; hai test cấu hình baseline cần môi trường ML và sẽ được bỏ qua nếu chưa cài các thư viện này. Trên clone chỉ có source, chạy hai nhóm nghiên cứu không phụ thuộc corpus đầy đủ:
 
 ```powershell
 python -m unittest discover -s tests -p 'test_research*.py' -v
 python -m unittest discover -s tests -p 'test_triviaqa_metrics.py' -v
 ```
 
-Hai nhóm này có 54 tests. Chạy toàn bộ 97 tests sau khi chuẩn bị corpus demo lịch sử. Dữ liệu/model lớn và cache không đưa vào Git; không ép stage chúng. Xem [biên bản dọn](docs/CLEANUP.md) và [trạng thái nghiên cứu](docs/RESEARCH_UPGRADE_STATUS.md) trước khi bàn giao.
+Hai nhóm này có 56 tests. Chạy toàn bộ sau khi chuẩn bị corpus demo lịch sử. Dữ liệu/model lớn và cache không đưa vào Git; không ép stage chúng. Xem [biên bản dọn](docs/CLEANUP.md) và [trạng thái nghiên cứu](docs/RESEARCH_UPGRADE_STATUS.md) trước khi bàn giao.
+
+Kiểm tra mã Python bằng `python -m pip install -r requirements/lint.txt`, sau đó chạy `python -m ruff check app.py ragqa experiments scripts deployment tests`. Phạm vi và ngoại lệ của mã nghiên cứu đã khóa được giải thích trong [biên bản clean code](docs/CLEAN_CODE_REVIEW.md).

@@ -1,6 +1,6 @@
 """Offsets fixture checks citation accounting at a truncation boundary, without ML."""
 import unittest
-from experiments.research_pipeline import encode_context, context_text, prompt
+from experiments.research_pipeline import encode_context, prompt
 
 
 class Offsets:

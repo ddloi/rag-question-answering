@@ -9,7 +9,6 @@ Chạy 1 lần duy nhất (offline) — không cần chạy lại mỗi lần h�
 """
 
 import json
-import numpy as np
 import torch
 import faiss
 from sentence_transformers import SentenceTransformer

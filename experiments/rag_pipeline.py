@@ -2,7 +2,7 @@
 Generator-only is a no-context ablation of the same fine-tuned checkpoint.
 """
 from ragqa.paths import DATA_DIR, MODEL_DIR
-from ragqa.rag_engine import RAGNeuralEngine, EMBED_MODEL_NAME
+from ragqa.rag_engine import RAGNeuralEngine, EMBED_MODEL_NAME as EMBED_MODEL_NAME
 
 TOP_K = 5
 GENERATOR_PATH = str(MODEL_DIR)

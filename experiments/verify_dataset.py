@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ragqa.paths import DATA_DIR, RAW_DOCUMENTS_PATH
-from .legacy_metrics import answers_for, contains_answer, normalize_answer
+from .legacy_metrics import contains_answer, normalize_answer
 from .prepare_chunks import chunk_text, clean_text
 
 

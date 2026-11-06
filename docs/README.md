@@ -19,6 +19,7 @@ Nếu chuẩn bị demo và báo cáo, đọc theo thứ tự sau:
 - [Rubric tự chấm faithfulness/citation](REVIEW_RUBRIC.md).
 - [GitHub và artifact](GITHUB_UPDATE.md).
 - [Dọn file và sắp xếp](CLEANUP.md).
+- [Rà soát clean code và cách kiểm tra](CLEAN_CODE_REVIEW.md).
 
 ## Tài liệu chỉ tra khi cần
 

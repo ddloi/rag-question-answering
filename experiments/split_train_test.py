@@ -15,9 +15,6 @@ from ragqa.paths import DATA_DIR
 SEED = 42
 TEST_RATIO = 0.15
 
-random.seed(SEED)
-
-
 def load_jsonl(path):
     records = []
     with open(path, "r", encoding="utf-8") as f:
@@ -49,7 +46,7 @@ def main():
     for c in corpus_records:
         chunks_by_doc.setdefault(c["doc_id"], []).append(c)
 
-    random.shuffle(qa_records)
+    random.Random(SEED).shuffle(qa_records)
     n_test = int(len(qa_records) * TEST_RATIO)
     test_records = qa_records[:n_test]
     train_records = qa_records[n_test:]

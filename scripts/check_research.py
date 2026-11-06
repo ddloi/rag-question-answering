@@ -4,7 +4,7 @@ import json
 import math
 from pathlib import Path
 
-from ragqa.paths import DATA_DIR, PROJECT_ROOT, resolve_project_path
+from ragqa.paths import DATA_DIR, resolve_project_path
 from experiments.research_data import validate_disjoint, json_write
 from experiments.research_pipeline import dataset_manifest, ResearchGenerator
 from experiments.metrics import contains_answer
@@ -60,7 +60,6 @@ def main():
                     raise ValueError(f'Non-finite training log: {key}')
         from huggingface_hub import hf_hub_download
         from safetensors import safe_open
-        import torch
         base = hf_hub_download(info['base_model']['name'], 'model.safetensors',
                                revision=info['base_model']['revision'], local_files_only=not args.download_base)
         name = 'encoder.block.0.layer.0.SelfAttention.q.weight'

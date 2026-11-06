@@ -1,7 +1,6 @@
 """Recover official answer aliases/evidence for the existing subset, without replacing it."""
 import json
 import unicodedata
-from pathlib import Path
 
 from ragqa.paths import DATA_DIR, RAW_DOCUMENTS_PATH
 

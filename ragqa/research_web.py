@@ -3,6 +3,7 @@ import gzip
 import json
 import logging
 import threading
+import zlib
 from pathlib import Path
 from typing import Literal
 from functools import lru_cache
@@ -63,7 +64,11 @@ def dev_cases():
     path = latest_dev_run()
     if path is None:
         return [], None
-    return cached_dev_cases(path)
+    try:
+        return cached_dev_cases(path)
+    except (OSError, EOFError, UnicodeError, ValueError, KeyError, TypeError, zlib.error):
+        logging.warning('Cannot read optional dev examples from %s', path, exc_info=True)
+        return [], None
 
 
 @lru_cache(maxsize=2)

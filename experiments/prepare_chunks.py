@@ -32,9 +32,6 @@ OUTPUT_DIR = DATA_DIR
 CHUNK_SIZE = 200        # số từ mỗi chunk (không phải token, xấp xỉ)
 CHUNK_OVERLAP = 40      # số từ overlap giữa 2 chunk liền kề
 
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-
 def clean_text(text: str) -> str:
     """Loại bỏ khoảng trắng thừa, ký tự lạ."""
     text = re.sub(r"\s+", " ", text).strip()
@@ -46,6 +43,8 @@ def chunk_text(text: str, chunk_size: int, overlap: int):
     Chia văn bản thành các đoạn theo số từ, có overlap.
     Đơn giản, dễ hiểu — đủ dùng cho quy mô đồ án.
     """
+    if chunk_size <= 0 or not 0 <= overlap < chunk_size:
+        raise ValueError('Require chunk_size > 0 and 0 <= overlap < chunk_size')
     words = text.split()
     chunks = []
     start = 0
@@ -74,7 +73,6 @@ def main():
         chunks = chunk_text(text, CHUNK_SIZE, CHUNK_OVERLAP)
 
         # Lưu từng chunk kèm metadata để sau này truy vết lại nguồn
-        first_chunk_id_of_doc = chunk_id_counter
         for chunk in chunks:
             corpus_records.append({
                 "chunk_id": chunk_id_counter,
@@ -94,6 +92,7 @@ def main():
                 "gold_doc_id": doc_id,
             })
 
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     # Ghi ra file .jsonl (mỗi dòng 1 JSON object — chuẩn cho dữ liệu lớn)
     with open(OUTPUT_DIR / "corpus_chunks.jsonl", "w", encoding="utf-8") as f:
         for rec in corpus_records:

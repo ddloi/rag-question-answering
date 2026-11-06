@@ -1,4 +1,7 @@
+import gzip
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch, Mock
 from fastapi.testclient import TestClient
 
@@ -42,6 +45,30 @@ class ResearchWebTests(unittest.TestCase):
     def test_invalid_method_and_blank_question_are_rejected(self):
         for payload in ({'query': '  '}, {'query': 'Who?', 'retrieval_mode': 'oracle'}):
             self.assertEqual(self.client.post('/api/research/execute', json=payload).status_code, 422)
+
+    def test_missing_optional_examples_do_not_break_info(self):
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(research_web, 'latest_dev_run', return_value=Path(folder)), \
+                 self.assertLogs(level='WARNING'):
+                response = self.client.get('/api/research/info')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['cases'], [])
+        self.assertIsNone(response.json()['case_run'])
+
+    def test_corrupt_optional_examples_do_not_break_info(self):
+        corrupt_payload = bytearray(gzip.compress(b'{}'))
+        corrupt_payload[10] = 0xff
+        fixtures = [b'not gzip', gzip.compress(b'{broken json'), gzip.compress(b'{}'),
+                    gzip.compress(b'{}')[:-3], bytes(corrupt_payload)]
+        for contents in fixtures:
+            with self.subTest(contents=contents), tempfile.TemporaryDirectory() as folder:
+                path = Path(folder)
+                (path / 'predictions.jsonl.gz').write_bytes(contents)
+                with patch.object(research_web, 'latest_dev_run', return_value=path), \
+                     self.assertLogs(level='WARNING'):
+                    response = self.client.get('/api/research/info')
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.json()['cases'], [])
 
 
 if __name__ == '__main__':

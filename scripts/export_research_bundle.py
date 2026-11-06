@@ -21,7 +21,7 @@ def main():
     if output.exists():
         raise FileExistsError(output)
     patterns = {
-        'source': ['app.py', 'README.md', '.gitignore', '.gitattributes',
+        'source': ['app.py', 'README.md', 'ruff.toml', '.gitignore', '.gitattributes',
             'experiments/*.py', 'experiments/README.md', 'ragqa/*.py', 'ragqa/static/*', 'scripts/*.py', 'tests/*.py',
             'deployment/*.py', 'deployment/huggingface/*.py', 'deployment/huggingface/requirements.txt',
             'configs/*.json', 'configs/README.md', 'requirements/*.txt', 'requirements/README.md', 'docs/**/*.md',

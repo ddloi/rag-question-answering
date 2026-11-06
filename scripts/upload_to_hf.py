@@ -80,7 +80,7 @@ def main():
         print(" Upload metadata thành công!")
 
     print("\n" + "=" * 60)
-    print(f" HOÀN TẤT! Model và Index của bạn đã được lưu vĩnh viễn tại:")
+    print(" HOÀN TẤT! Model và Index của bạn đã được lưu vĩnh viễn tại:")
     print(f" https://huggingface.co/{repo_id}")
     print("=" * 60)
 
