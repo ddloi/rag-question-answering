@@ -31,16 +31,18 @@ flowchart LR
 | Tệp | Trách nhiệm |
 | --- | --- |
 | app.py | Điểm mở web; hỗ trợ python app.py và uvicorn app:app |
-| ragqa/web.py | FastAPI, static files, route nghiên cứu và demo lịch sử |
-| ragqa/research_web.py | Nạp ba hệ, nhận câu hỏi, gắn reference dev sau inference |
+| ragqa/web.py | FastAPI, static files, route nghiên cứu và demo lịch sử; chỉ mở 127.0.0.1 trừ khi đặt RAG_HOST |
+| ragqa/research_web.py | Nạp ba hệ, nhận câu hỏi, gắn reference dev sau inference; reranker và T5 mới là tùy chọn |
 | ragqa/static/research.* | Giao diện nghiên cứu |
 | experiments/research_data.py | Chọn split, chunking, embedding và index |
 | experiments/research_pipeline.py | Template, token budget, retrieval, generation, extraction |
 | experiments/research_train.py | Fine-tune hai T5 riêng |
 | experiments/research_evaluate.py | Ba hệ, Hybrid, ablation, predictions và metrics |
+| experiments/research_ablation.py | Dev: ablation top-k/token budget và cross-encoder reranker |
+| experiments/research_train_retrieved.py | Train T5 RAG với context Dense + reranker |
 | experiments/metrics.py | Normalization TriviaQA, EM/F1 |
 | configs/research_v1.json | Cấu hình chung đã chốt |
-| scripts/ | Preflight, báo cáo, đối chiếu replay, tổng hợp phiếu chấm, đóng gói |
+| scripts/ | Preflight, báo cáo, đối chiếu replay, so sánh run ablation, công cụ chấm (review_tool.html) và ghép/tổng hợp phiếu chấm, đóng gói |
 
 Các module lịch sử vẫn ở experiments/ và ragqa/ vì còn import hoặc phục vụ /legacy. Xem [bản đồ experiments](../experiments/README.md). Không đổi các đường dẫn phương pháp đã khóa trong lượt sắp xếp này.
 

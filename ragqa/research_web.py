@@ -169,7 +169,7 @@ class ResearchRuntime:
         from experiments.metrics import score_answer
         from experiments.research_ablation import passage_text, rerank
         if mode == 'rerank' and self.reranker is None:
-            raise UnavailableOption('Chưa có model reranker. Tải theo hướng dẫn trong docs/ABLATION_RERANKER_RESEARCH_V1.md.')
+            raise UnavailableOption('Chưa có model reranker. Tải theo hướng dẫn trong docs/IMPROVEMENTS_RESEARCH_V1.md.')
         if generator == 'retrieved' and self.rag_retrieved is None:
             raise UnavailableOption('Chưa có T5 train với context truy hồi. Chạy python -m experiments.research_train_retrieved.')
         rankings = self.retriever.all_rankings(query)

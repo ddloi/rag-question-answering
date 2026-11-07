@@ -9,16 +9,15 @@ Nếu chuẩn bị demo và báo cáo, đọc theo thứ tự sau:
 | 3 | [Protocol](RESEARCH_PROTOCOL_V1.md) | Thiết kế, split, token budget và cách chấm |
 | 4 | [Kết quả](RESEARCH_RESULTS_V1.md) | Số liệu được dùng để báo cáo, bất định và giới hạn |
 | 5 | [Casebook](CASES_RESEARCH_V1.md) | Ví dụ đúng/sai và các loại lỗi |
-| 5b | [Ablation top-k và reranker](ABLATION_RERANKER_RESEARCH_V1.md) | Điểm cộng: số passage, token budget, cross-encoder reranker (dev) |
-| 5c | [Train lại T5 với context truy hồi](RETRIEVAL_TRAINING_RESEARCH_V1.md) | Cải tiến bước sinh: train trên 2 passage Dense + reranker (dev) |
-| 6 | [Tập trình bày và phản biện](PHAN_BIEN_VA_TAP_TRINH_BAY.md) | Kịch bản demo và câu hỏi thường gặp |
+| 6 | [Cải tiến](IMPROVEMENTS_RESEARCH_V1.md) | Điểm cộng: ablation top-k/token budget, reranker, T5 train với context truy hồi (dev) |
+| 7 | [Tập trình bày và phản biện](PHAN_BIEN_VA_TAP_TRINH_BAY.md) | Kịch bản demo và câu hỏi thường gặp |
 
 ## Kiểm chứng và bàn giao
 
 - [Trạng thái nghiên cứu](RESEARCH_UPGRADE_STATUS.md).
 - [Kiểm chứng Colab](COLAB_VERIFICATION_RESEARCH_V1.md).
 - [Kiểm tra giao diện](UI_VERIFICATION_RESEARCH_V1.md), tại thời điểm thực hiện UI audit.
-- [Rubric tự chấm faithfulness/citation](REVIEW_RUBRIC.md) và [hướng dẫn chấm từng bước](HUONG_DAN_CHAM_REVIEW.md) với công cụ `scripts/review_tool.html`.
+- [Hướng dẫn và rubric tự chấm faithfulness/citation](REVIEW_RUBRIC.md), dùng công cụ `scripts/review_tool.html`.
 - [GitHub và artifact](GITHUB_UPDATE.md).
 - [Dọn file và sắp xếp](CLEANUP.md).
 - [Rà soát clean code và cách kiểm tra](CLEAN_CODE_REVIEW.md).

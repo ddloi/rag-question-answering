@@ -5,8 +5,8 @@
 - `research_v1_dev/`, `research_v1_test/`: đầy đủ 200 dev/300 test, predictions, metrics, source snapshots và các phiếu chấm.
 - `research_colab_dev/`, `research_colab_test/`, `research_colab_commands/`: replay Colab thật và logs. Các JSON `research_colab_*` ghi environment, checksum, import và đối chiếu.
 - `training/research_v1/`: hai run train và các pilot, gồm cả pilot thất bại để bảo toàn provenance.
-- `research_v1_ablation_dev/`: ablation top-k/token budget và reranker trên 200 dev; xem [tài liệu](../docs/ABLATION_RERANKER_RESEARCH_V1.md).
-- `research_v1_ablation_dev_rag_retrieved/`: cùng lưới cấu hình với T5 train trên context truy hồi, kèm `comparison_vs_v1.json`; bằng chứng train ở `training/research_v1/rag_retrieved/`. Xem [tài liệu](../docs/RETRIEVAL_TRAINING_RESEARCH_V1.md).
+- `research_v1_ablation_dev/`: ablation top-k/token budget và reranker trên 200 dev; xem [các cải tiến](../docs/IMPROVEMENTS_RESEARCH_V1.md).
+- `research_v1_ablation_dev_rag_retrieved/`: cùng lưới cấu hình với T5 train trên context truy hồi, kèm `comparison_vs_v1.json`; bằng chứng train ở `training/research_v1/rag_retrieved/`. Xem [các cải tiến](../docs/IMPROVEMENTS_RESEARCH_V1.md).
 - `research_v1_test_lock.json` và source ZIP: protocol/source/model identity đã khóa trước test.
 - `research_v1_test/human_review_author.csv`: phiếu người dùng tự chấm, hiện chưa có nhãn. Không coi phiếu trống là đánh giá hoàn tất.
 

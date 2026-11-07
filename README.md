@@ -61,13 +61,13 @@ RAG/
 
 Hybrid–Dense test EM = -1,33 điểm phần trăm, CI 95% [-6,00; +3,33] gồm 0. Chưa chứng minh Hybrid tốt hơn ổn định. Bộ truy hồi MiniLM cố định; pipeline nối context vào T5 áp dụng ý tưởng Lewis et al. (2020), chưa tái lập joint retriever training/latent-document marginalization của bài gốc.
 
-**Điểm cộng trên dev (200 câu):** thêm cross-encoder reranker (`ms-marco-MiniLM-L6-v2`) vào 30 ứng viên Dense nâng RAG từ 51,5% lên 57,5% EM official (+6,0 điểm, CI 95% [+1,0; +11,0]); answer recall@2 tăng từ 76,0% lên 83,0%. Ablation top-k cho thấy với giới hạn 512 token, passage thứ 3 bị cắt gần hết nên không đổi đáp án nào. Chi tiết và giới hạn: [ablation và reranker](docs/ABLATION_RERANKER_RESEARCH_V1.md). Số này là dev, không thay bảng test ở trên.
+**Điểm cộng trên dev (200 câu):** thêm cross-encoder reranker (`ms-marco-MiniLM-L6-v2`) vào 30 ứng viên Dense nâng RAG từ 51,5% lên 57,5% EM official (+6,0 điểm, CI 95% [+1,0; +11,0]); answer recall@2 tăng từ 76,0% lên 83,0%. Ablation top-k cho thấy với giới hạn 512 token, passage thứ 3 bị cắt gần hết nên không đổi đáp án nào. Chi tiết và giới hạn: [các cải tiến](docs/IMPROVEMENTS_RESEARCH_V1.md). Số này là dev, không thay bảng test ở trên.
 
-**Train lại T5 RAG với context truy hồi** (cùng 1.865 QA và siêu tham số, chỉ đổi context lúc train từ passage gold sang 2 passage Dense + reranker): trên dev, EM official ở cấu hình đã chốt tăng từ 51,5% lên 59,0% (+7,5, CI 95% [+3,0; +12,5]); gộp với reranker đạt 63,0%. Lỗi "sinh sai dù context có đáp án" giảm từ 45 xuống 31 câu. Xem [train lại với context truy hồi](docs/RETRIEVAL_TRAINING_RESEARCH_V1.md).
+**Train lại T5 RAG với context truy hồi** (cùng 1.865 QA và siêu tham số, chỉ đổi context lúc train từ passage gold sang 2 passage Dense + reranker): trên dev, EM official ở cấu hình đã chốt tăng từ 51,5% lên 59,0% (+7,5, CI 95% [+3,0; +12,5]); gộp với reranker đạt 63,0%. Lỗi "sinh sai dù context có đáp án" giảm từ 45 xuống 31 câu. Xem [các cải tiến](docs/IMPROVEMENTS_RESEARCH_V1.md#3-train-lại-t5-rag-với-context-truy-hồi).
 
 [Colab T4](docs/COLAB_VERIFICATION_RESEARCH_V1.md) đã replay đủ 500 QA × 5 cấu hình: **2.500 raw answers và QA EM/F1 khớp local**. Một câu dev đổi thứ tự passage ở hạng thấp; context và đáp án không đổi. Chưa train lại trên Colab.
 
-**Faithfulness/citation do người chấm còn NOT RUN**. Người dùng tự chấm [phiếu 100 dòng/50 QA](results/research_v1_test/human_review_author.csv) theo [rubric](docs/REVIEW_RUBRIC.md), với loại reviewer `human_author`; làm theo [hướng dẫn chấm từng bước](docs/HUONG_DAN_CHAM_REVIEW.md) với công cụ `scripts/review_tool.html`. Hai probe Antigonus/Fivestones vẫn sai; không thay output bằng ground truth để demo.
+**Faithfulness/citation do người chấm còn NOT RUN**. Người dùng tự chấm [phiếu 100 dòng/50 QA](results/research_v1_test/human_review_author.csv) theo [hướng dẫn chấm](docs/REVIEW_RUBRIC.md), với loại reviewer `human_author`, dùng công cụ `scripts/review_tool.html`. Hai probe Antigonus/Fivestones vẫn sai; không thay output bằng ground truth để demo.
 
 ## Kiểm tra phần mềm
 
