@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>RAG Lab · Đối chiếu nghiên cứu</title>
-  <link rel="stylesheet" href="/static/research.css?v=research-v1-20261101b">
-  <script src="/static/research.js?v=research-v1-20261101b" defer></script>
+  <link rel="stylesheet" href="/static/research.css?v=research-v1-20261107">
+  <script src="/static/research.js?v=research-v1-20261107" defer></script>
 </head>
 <body>
 <a class="skip" href="#question">Đến câu hỏi</a>
@@ -14,7 +14,7 @@
     <strong>Đối chiếu ba hệ</strong>
     <p>Cùng câu hỏi, cùng corpus. Theo dõi nguồn truy hồi và context thực tế để giải thích kết quả.</p>
     <dl id="corpus"><dt>Corpus</dt><dd>Đang đọc manifest…</dd></dl>
-    <details><summary>Phương pháp</summary><p>MiniLM + FAISS; Hybrid dùng BM25 + RRF. Hai T5 được fine-tune riêng, cùng QA train. Extractive dùng DistilBERT SQuAD.</p><p>Top-5 retrieval; T5 nhận tối đa 2 passages trong 512 token. Nguồn do ứng dụng gắn, không phải inline citations do model sinh.</p></details>
+    <details><summary>Phương pháp</summary><p>MiniLM + FAISS; Hybrid dùng BM25 + RRF. Hai T5 được fine-tune riêng, cùng QA train. Extractive dùng DistilBERT SQuAD.</p><p>Top-5 retrieval; T5 nhận tối đa 2 passages trong 512 token. Nguồn do ứng dụng gắn, không phải inline citations do model sinh.</p><p>Cải tiến (đo trên dev): Reranker chấm lại 30 ứng viên Dense bằng cross-encoder ms-marco-MiniLM. T5 “context truy hồi” được train với 2 passage lấy từ Dense + Reranker thay vì chỉ passage gold.</p></details>
     <p class="small">Các câu mẫu lấy từ dev và có nhãn lỗi lexical. Xem nguồn để kết luận ngữ nghĩa.</p>
   </aside>
   <main>
@@ -23,7 +23,7 @@
     <form id="query-form">
       <label for="question">Câu hỏi tiếng Anh</label>
       <textarea id="question" rows="2" maxlength="2000" required aria-describedby="question-help" placeholder="Nhập câu hỏi hoặc chọn một tình huống dev bên dưới."></textarea>
-      <div class="controls"><label for="method">Retrieval cho RAG <select id="method"><option value="dense">Dense</option><option value="hybrid">Hybrid RRF</option></select></label><span id="question-help">Ctrl / ⌘ + Enter để chạy</span><button id="run" type="submit" disabled>So sánh ba hệ</button></div>
+      <div class="controls"><label for="method">Retrieval cho RAG <select id="method"><option value="dense">Dense</option><option value="hybrid">Hybrid RRF</option><option value="rerank" hidden disabled>Dense + Reranker</option></select></label><label for="generator" id="generator-label" hidden>T5 RAG <select id="generator"><option value="v1">Train với passage gold (v1)</option><option value="retrieved">Train với context truy hồi</option></select></label><span id="question-help">Ctrl / ⌘ + Enter để chạy</span><button id="run" type="submit" disabled>So sánh ba hệ</button></div>
       <div class="examples"><label for="case-filter">Tình huống dev <select id="case-filter"><option value="all">Tất cả tình huống</option></select></label><div id="cases">Chưa có run dev đầy đủ để chọn ví dụ.</div></div>
     </form>
     <p id="error" class="error" role="alert" hidden></p>

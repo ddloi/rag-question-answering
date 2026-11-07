@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chấm faithfulness</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1d1d1b;--muted:#66655f;--line:#dddcd6;--accent:#2457c5;--ok:#1d7a3d;--bad:#b3261e;--warn:#8a6100;--mark:#fff1a8}
+@media (prefers-color-scheme:dark){:root{--bg:#161615;--card:#20201e;--ink:#ecebe6;--muted:#a3a29b;--line:#3a3935;--accent:#7ea2ff;--ok:#6fcf8f;--bad:#ff8a80;--warn:#e6c065;--mark:#5a4d00}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:920px;margin:0 auto;padding:20px 16px 80px}
+h1{font-size:20px;margin:0 0 4px}p{margin:.4em 0}.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,input[type=file]{font:inherit}
+button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}button:disabled{opacity:.45;cursor:default}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.choice button[aria-pressed=true]{color:#fff}
+.choice button[data-v=supported][aria-pressed=true],.choice button[data-v=supports_answer][aria-pressed=true]{background:var(--ok);border-color:var(--ok)}
+.choice button[data-v=unsupported][aria-pressed=true],.choice button[data-v=does_not_support][aria-pressed=true]{background:var(--bad);border-color:var(--bad)}
+.choice button[data-v=unclear][aria-pressed=true]{background:var(--warn);border-color:var(--warn)}
+.q{font-size:17px;font-weight:600}.pred{font-size:18px;font-weight:700;color:var(--accent)}
+.passage{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.passage pre{white-space:pre-wrap;font:inherit;margin:6px 0;max-height:320px;overflow:auto}
+code{font-size:12px;color:var(--muted);word-break:break-all}
+mark{background:var(--mark);color:inherit;border-radius:3px}
+textarea{width:100%;min-height:70px;font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;flex:1;min-width:120px}.progress div{height:100%;background:var(--ok)}
+.label{font-weight:600;margin:10px 0 4px}
+.status-done{color:var(--ok)}.status-todo{color:var(--warn)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Chấm faithfulness và citation</h1>
+  <p class="muted">Chạy hoàn toàn trong trình duyệt và không gửi dữ liệu đi đâu. Nhãn được tự lưu trong trình duyệt này; bấm <b>Xuất nhãn</b> để lấy file CSV rồi ghép bằng <code>scripts/merge_review_labels.py</code>.</p>
+  <div class="card bar">
+    <label>Phiếu chấm: <input type="file" id="file" accept=".csv"></label>
+    <span id="loaded" class="muted"></span>
+  </div>
+  <div id="app" hidden>
+    <div class="card bar">
+      <button id="prev">← Trước</button>
+      <select id="jump" aria-label="Chọn dòng"></select>
+      <button id="next">Sau →</button>
+      <button id="todo">Dòng chưa xong</button>
+      <div class="progress" aria-hidden="true"><div id="pbar"></div></div>
+      <span id="pcount"></span>
+      <button id="export" class="primary">Xuất nhãn</button>
+    </div>
+    <div class="card" id="item"></div>
+  </div>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let rows=[],labels={},pos=0,storeKey='';
+const FAITH=[['supported','Hỗ trợ'],['unsupported','Không hỗ trợ'],['unclear','Không rõ']];
+const CITE=[['supports_answer','Hỗ trợ đáp án'],['does_not_support','Không hỗ trợ'],['unclear','Không rõ']];
+
+function parseCSV(text){
+  if(text.charCodeAt(0)===0xFEFF)text=text.slice(1);
+  const out=[];let row=[],field='',q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){field+='"';i++;}else q=false;}else field+=c;}
+    else if(c==='"')q=true;else if(c===','){row.push(field);field='';}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);field='';if(row.length>1||row[0]!=='')out.push(row);row=[];}
+    else field+=c;}
+  if(field!==''||row.length){row.push(field);out.push(row);}
+  const head=out.shift();return out.map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??''])));
+}
+function csvCell(v){v=String(v??'');return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}
+function save(){try{localStorage.setItem(storeKey,JSON.stringify(labels));}catch{}}
+function passages(row){
+  const ids=row.source_chunk_ids.split(';').filter(Boolean);
+  const parts=row.context_used.split(/(?=^Source \[\d+\] \| )/m).filter(s=>s.trim());
+  return ids.map((id,i)=>({id,text:parts[i]??'(Không tách được đoạn này; xem toàn bộ context bên dưới)'}));
+}
+function done(id){const l=labels[id],r=rows.find(x=>x.review_id===id);if(!l||!r)return false;
+  return l.faithfulness&&l.rationale?.trim()&&passages(r).every(p=>l.citations?.[p.id]);}
+function highlight(text,needle){
+  const frag=document.createDocumentFragment();needle=needle.trim();
+  if(needle.length<2){frag.append(text);return frag;}
+  const re=new RegExp(needle.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');let last=0,m;
+  while((m=re.exec(text))){frag.append(text.slice(last,m.index));const k=document.createElement('mark');k.textContent=m[0];frag.append(k);last=m.index+m[0].length;}
+  frag.append(text.slice(last));return frag;
+}
+function choice(options,current,onPick){
+  const box=document.createElement('div');box.className='bar choice';
+  for(const [v,t] of options){const b=document.createElement('button');b.type='button';b.dataset.v=v;b.textContent=t;
+    b.setAttribute('aria-pressed',String(current===v));b.addEventListener('click',()=>{onPick(v);render();});box.append(b);}
+  return box;
+}
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+function render(){
+  const row=rows[pos],id=row.review_id,l=labels[id]??={citations:{}};
+  const box=$('item');box.replaceChildren();
+  box.append(el('div','muted',`${id} · ${pos+1}/${rows.length} · `),el('div','q',row.question));
+  const status=el('span');status.id='row-status';box.firstChild.append(status);
+  box.append(el('div','label','Đáp án hệ thống'),el('div','pred',row.prediction||'(rỗng)'));
+  box.append(el('p','muted','Phần tô vàng chỉ là chỗ khớp chữ. Chữ xuất hiện chưa chắc context đã hỗ trợ đáp án; hãy đọc đúng quan hệ mà câu hỏi hỏi.'));
+  for(const p of passages(row)){const d=el('div','passage');
+    d.append(el('code',null,p.id));const pre=el('pre');pre.append(highlight(p.text,row.prediction));d.append(pre);
+    d.append(el('div','label','Nguồn này có hỗ trợ đáp án không?'));
+    d.append(choice(CITE,l.citations[p.id],v=>{l.citations[p.id]=v;save();}));box.append(d);}
+  if(!passages(row).length)box.append(el('p','muted','Không có nguồn thực dùng.'));
+  const f=el('div','passage');f.append(el('div','label','Faithfulness: context có hỗ trợ đáp án cho đúng câu hỏi không?'));
+  f.append(choice(FAITH,l.faithfulness,v=>{l.faithfulness=v;save();}));
+  f.append(el('div','label','Lý do (bắt buộc, 1–2 câu)'));
+  const ta=el('textarea');ta.value=l.rationale??'';ta.addEventListener('input',()=>{l.rationale=ta.value;save();progress();});f.append(ta);box.append(f);
+  $('prev').disabled=pos===0;$('next').disabled=pos===rows.length-1;$('jump').value=String(pos);progress();
+}
+function progress(){const s=$('row-status'),ok=done(rows[pos].review_id);s.className=ok?'status-done':'status-todo';s.textContent=ok?'đã chấm xong':'chưa xong';
+  const n=rows.filter(r=>done(r.review_id)).length;$('pcount').textContent=`${n}/${rows.length} xong`;$('pbar').style.width=`${100*n/rows.length}%`;
+  [...$('jump').options].forEach((o,i)=>o.textContent=`${done(rows[i].review_id)?'✓':'○'} ${rows[i].review_id}`);}
+function exportLabels(){
+  const head=['review_id','faithfulness','citation_labels_json','rationale','reviewer_id','reviewer_kind'];
+  const lines=[head.join(',')];
+  for(const r of rows){const l=labels[r.review_id];if(!l)continue;
+    const cites=Object.fromEntries(passages(r).filter(p=>l.citations?.[p.id]).map(p=>[p.id,l.citations[p.id]]));
+    lines.push([r.review_id,l.faithfulness??'',Object.keys(cites).length?JSON.stringify(cites):'',l.rationale??'',r.reviewer_id||'author_1',r.reviewer_kind||'human_author'].map(csvCell).join(','));}
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+lines.join('\r\n')+'\r\n'],{type:'text/csv'}));
+  a.download='review_labels.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+$('file').addEventListener('change',async e=>{
+  const file=e.target.files[0];if(!file)return;
+  rows=parseCSV(await file.text()).filter(r=>r.review_id);
+  if(!rows.length||!('context_used' in rows[0])){$('loaded').textContent='Không đọc được phiếu. Chọn đúng file human_review_*.csv.';return;}
+  storeKey='review-labels:'+file.name+':'+rows.length;
+  try{labels=JSON.parse(localStorage.getItem(storeKey)||'{}');}catch{labels={};}
+  for(const r of rows){if(labels[r.review_id]||!r.faithfulness)continue;
+    let c={};try{c=JSON.parse(r.citation_labels_json||'{}');}catch{}
+    labels[r.review_id]={faithfulness:r.faithfulness,rationale:r.rationale,citations:c};}
+  $('jump').replaceChildren(...rows.map((r,i)=>new Option(r.review_id,String(i))));
+  $('loaded').textContent=`Đã nạp ${rows.length} dòng từ ${file.name}`;$('app').hidden=false;pos=0;render();
+});
+$('prev').addEventListener('click',()=>{pos=Math.max(0,pos-1);render();scrollTo(0,0);});
+$('next').addEventListener('click',()=>{pos=Math.min(rows.length-1,pos+1);render();scrollTo(0,0);});
+$('jump').addEventListener('change',()=>{pos=Number($('jump').value);render();});
+$('todo').addEventListener('click',()=>{const i=rows.findIndex(r=>!done(r.review_id));if(i>=0){pos=i;render();scrollTo(0,0);}});
+$('export').addEventListener('click',exportLabels);
+</script>
+</body>
+</html>

@@ -19,6 +19,8 @@ STAGES = {
     "research-data": "research_data",
     "research-train": "research_train",
     "research-evaluate": "research_evaluate",
+    "research-ablation": "research_ablation",
+    "research-train-retrieved": "research_train_retrieved",
 }
 
 

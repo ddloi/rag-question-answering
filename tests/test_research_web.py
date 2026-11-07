@@ -32,7 +32,31 @@ class ResearchWebTests(unittest.TestCase):
             response = self.client.post('/api/research/execute', json={
                 'query': 'Who?', 'retrieval_mode': 'dense', 'answer': 'Injected label'})
             self.assertEqual(response.status_code, 200)
-            runtime.answer.assert_called_once_with('Who?', 'dense')
+            runtime.answer.assert_called_once_with('Who?', 'dense', 'v1')
+
+    def test_optional_reranker_and_generator_are_forwarded(self):
+        with patch.dict(research_web._state, status='ready'), patch.object(research_web, '_runtime') as runtime:
+            runtime.answer.return_value = {'systems': {}}
+            response = self.client.post('/api/research/execute', json={
+                'query': 'Who?', 'retrieval_mode': 'rerank', 'generator': 'retrieved'})
+            self.assertEqual(response.status_code, 200)
+            runtime.answer.assert_called_once_with('Who?', 'rerank', 'retrieved')
+
+    def test_missing_optional_component_is_a_clear_conflict(self):
+        with patch.dict(research_web._state, status='ready'), patch.object(research_web, '_runtime') as runtime:
+            runtime.answer.side_effect = research_web.UnavailableOption('Chưa có model reranker.')
+            response = self.client.post('/api/research/execute', json={'query': 'Who?', 'retrieval_mode': 'rerank'})
+        self.assertEqual(response.status_code, 409)
+        self.assertIn('reranker', response.json()['detail'])
+
+    def test_runtime_rejects_uninstalled_options_before_inference(self):
+        runtime = research_web.ResearchRuntime.__new__(research_web.ResearchRuntime)
+        runtime.reranker = runtime.rag_retrieved = None
+        runtime.retriever = Mock()
+        for mode, generator in (('rerank', 'v1'), ('dense', 'retrieved')):
+            with self.subTest(mode=mode), self.assertRaises(research_web.UnavailableOption):
+                runtime.answer('Who?', mode, generator)
+        runtime.retriever.all_rankings.assert_not_called()
 
     def test_simultaneous_request_is_rejected(self):
         with patch.dict(research_web._state, status='ready'), patch.object(research_web, '_runtime', Mock()):
@@ -43,7 +67,8 @@ class ResearchWebTests(unittest.TestCase):
                 research_web._lock.release()
 
     def test_invalid_method_and_blank_question_are_rejected(self):
-        for payload in ({'query': '  '}, {'query': 'Who?', 'retrieval_mode': 'oracle'}):
+        for payload in ({'query': '  '}, {'query': 'Who?', 'retrieval_mode': 'oracle'},
+                        {'query': 'Who?', 'generator': 'gold'}):
             self.assertEqual(self.client.post('/api/research/execute', json=payload).status_code, 422)
 
     def test_missing_optional_examples_do_not_break_info(self):

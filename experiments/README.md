@@ -13,6 +13,8 @@ Các module được giữ đúng đường dẫn để không phá source hashe
 | 3 | research_train.py | Train closed-book và RAG riêng với QA/budget chung |
 | 4 | metrics.py | Normalization TriviaQA, official aliases/canonical, EM/F1 |
 | 5 | research_evaluate.py | Chạy ba hệ, Hybrid, ablation và lưu prediction/evidence |
+| 6 | research_ablation.py | Dev: ablation top-k/token budget và cross-encoder reranker |
+| 7 | research_train_retrieved.py | Train RAG T5 với context Dense + reranker (cùng QA/siêu tham số v1) |
 | Hỗ trợ | research_artifacts.py, verify_dataset.py | Hash, manifest, dữ liệu và kiểm tra provenance dùng chung |
 
 Các điểm gọi chính:
@@ -22,6 +24,8 @@ python -m experiments --list
 python -m experiments.research_data --help
 python -m experiments.research_train --help
 python -m experiments.research_evaluate --help
+python -m experiments.research_ablation --help
+python -m experiments.research_train_retrieved --help
 ```
 
 `--help` của module ML có thể chậm vì import thư viện. `--list` chỉ liệt kê, không khởi động thí nghiệm. Lệnh thật và điều kiện chạy nằm trong [hướng dẫn vận hành](../docs/HOC_VA_VAN_HANH.md).

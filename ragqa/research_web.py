@@ -19,6 +19,8 @@ from .paths import PROJECT_ROOT, DATA_DIR, RESULTS_DIR, resolve_project_path
 router = APIRouter()
 DATA = resolve_project_path(os.environ.get('RAG_RESEARCH_DATA_DIR', str(DATA_DIR / 'research_v1')))
 MODELS = PROJECT_ROOT / 'checkpoints/research_v1'
+RERANKER_DIR = PROJECT_ROOT / 'checkpoints/rerankers/ms-marco-MiniLM-L6-v2'
+RETRIEVED_RAG = MODELS / 'rag_retrieved'
 STATIC = Path(__file__).parent / 'static'
 _state = {'status': 'idle', 'error': None}
 _runtime = None
@@ -36,6 +38,20 @@ def available():
             if info['status'] != 'complete' or info['pilot'] or not (model / 'model/model.safetensors').is_file():
                 return False
         return True
+    except (OSError, ValueError, KeyError):
+        return False
+
+
+def reranker_available():
+    return (RERANKER_DIR / 'model.safetensors').is_file()
+
+
+def retrieved_rag_available():
+    """Optional RAG T5 trained on retrieved contexts (experiments.research_train_retrieved)."""
+    try:
+        info = json.loads((RETRIEVED_RAG / 'manifest.json').read_text(encoding='utf8'))
+        return (info['status'] == 'complete' and not info['pilot']
+                and (RETRIEVED_RAG / 'model/model.safetensors').is_file())
     except (OSError, ValueError, KeyError):
         return False
 
@@ -99,7 +115,12 @@ def cached_dev_cases(path):
 class ResearchRequest(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
     query: str = Field(min_length=1, max_length=2000)
-    retrieval_mode: Literal['dense', 'hybrid'] = 'dense'
+    retrieval_mode: Literal['dense', 'hybrid', 'rerank'] = 'dense'
+    generator: Literal['v1', 'retrieved'] = 'v1'
+
+
+class UnavailableOption(ValueError):
+    """An optional retrieval mode or generator was requested but is not installed."""
 
 
 class ResearchRuntime:
@@ -122,15 +143,44 @@ class ResearchRuntime:
         self.references = {r['question'].strip().casefold(): r for r in read_jsonl(DATA / 'dev_qa.jsonl')}
         audit_path = RESULTS_DIR / 'research_v1_label_audit_dev.json'
         self.label_audit = json.loads(audit_path.read_text(encoding='utf8')) if audit_path.exists() else {}
+        # Optional improvements; the three frozen systems work without them.
+        self.reranker = self.rag_retrieved = None
+        if reranker_available():
+            try:
+                from sentence_transformers import CrossEncoder
+                self.reranker = CrossEncoder(str(RERANKER_DIR), device=self.rag.device, max_length=512)
+            except Exception:
+                logging.exception('Optional reranker failed to load')
+        if retrieved_rag_available():
+            try:
+                info = model_run(RETRIEVED_RAG, self.data_hash, 'rag')
+                if info['base_model'] != right['base_model'] or info['config'] != right['config']:
+                    raise ValueError('Retrieved-context RAG does not match the research_v1 protocol')
+                self.rag_retrieved = ResearchGenerator(RETRIEVED_RAG / 'model', self.config['generation'])
+            except Exception:
+                logging.exception('Optional retrieved-context RAG failed to load')
 
-    def answer(self, query, mode):
+    def options(self):
+        return {'rerank': self.reranker is not None, 'retrieved_generator': self.rag_retrieved is not None}
+
+    def answer(self, query, mode, generator='v1'):
         from experiments.metrics import score_answer
+        from experiments.research_ablation import passage_text, rerank
+        if mode == 'rerank' and self.reranker is None:
+            raise UnavailableOption('Chưa có model reranker. Tải theo hướng dẫn trong docs/ABLATION_RERANKER_RESEARCH_V1.md.')
+        if generator == 'retrieved' and self.rag_retrieved is None:
+            raise UnavailableOption('Chưa có T5 train với context truy hồi. Chạy python -m experiments.research_train_retrieved.')
         rankings = self.retriever.all_rankings(query)
+        if mode == 'rerank':
+            dense = rankings['dense']
+            scores = self.reranker.predict([(query, passage_text(p)) for p in dense], show_progress_bar=False)
+            rankings['rerank'] = rerank(dense, [float(x) for x in scores])
         options = self.config['retrieval']
+        rag = self.rag_retrieved if generator == 'retrieved' else self.rag
         outputs = {
             'generator_only': self.closed.answer(query),
             'retrieval_only': self.extractor.answer(query, rankings['dense'][:options['top_k']]),
-            'rag': self.rag.answer(query, rankings[mode][:options['context_top_n']]),
+            'rag': rag.answer(query, rankings[mode][:options['context_top_n']]),
         }
         reference = self.references.get(query.casefold())
         for output in outputs.values():
@@ -144,7 +194,7 @@ class ResearchRuntime:
                                              'Điểm vẫn giữ nhãn frozen, chưa dùng đề xuất để chấm lại.')
             reference_result['audit_source'] = self.label_audit['primary_source']
         return {'dataset_version': 'research_v1', 'dataset_sha256': self.data_hash,
-                'query': query, 'retrieval_mode': mode, 'systems': outputs,
+                'query': query, 'retrieval_mode': mode, 'generator': generator, 'systems': outputs,
                 'retrieval': {m: r[:10] for m, r in rankings.items()},
                 'reference': reference_result}
 
@@ -182,7 +232,9 @@ def info():
     cases, run = dev_cases()
     return {**_state, 'available': available(), 'dataset_version': 'research_v1', 'counts': counts,
             'cases': cases, 'case_run': run, 'training_qa': training_qa,
-            'device': _runtime.rag.device if _runtime else None}
+            'device': _runtime.rag.device if _runtime else None,
+            'options': (_runtime.options() if _runtime else
+                        {'rerank': reranker_available(), 'retrieved_generator': retrieved_rag_available()})}
 
 
 @router.post('/api/research/load', status_code=202)
@@ -204,7 +256,9 @@ def execute(req: ResearchRequest):
     if not _lock.acquire(blocking=False):
         raise HTTPException(409, 'Đang xử lý câu hỏi khác. Chờ kết quả rồi thử lại.')
     try:
-        return _runtime.answer(req.query, req.retrieval_mode)
+        return _runtime.answer(req.query, req.retrieval_mode, req.generator)
+    except UnavailableOption as exc:
+        raise HTTPException(409, str(exc)) from exc
     except Exception as exc:
         logging.exception('Research inference failed')
         raise HTTPException(500, 'Không chạy được câu hỏi. Kiểm tra log máy chủ và thử lại.') from exc

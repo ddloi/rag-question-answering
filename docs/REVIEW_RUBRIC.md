@@ -1,5 +1,7 @@
 # Chấm faithfulness và citation correctness
 
+Cách làm từng bước, kèm công cụ chấm trên trình duyệt: [HUONG_DAN_CHAM_REVIEW.md](HUONG_DAN_CHAM_REVIEW.md).
+
 Mở `human_review_blinded.csv` của run nghiên cứu đã hoàn tất. Mẫu chọn cố định 50 QA bằng seed 42; mỗi QA có đáp án Dense RAG và Hybrid RAG, thứ tự điều kiện được che. Không đưa `review_key.json` hoặc bảng EM/F1 cho người chấm trước khi hoàn tất.
 
 Người dùng đã chọn tự chấm. Phiếu [human_review_author.csv](../results/research_v1_test/human_review_author.csv) của test đã điền sẵn `reviewer_id=author_1` và `reviewer_kind=human_author`; ba cột nhãn/lý do vẫn trống. Phiếu có 100 dòng cho 50 QA, không phải 100 câu độc lập. Tệp gốc được giữ nguyên. Điền `faithfulness`, `citation_labels_json`, `rationale`; giữ nguyên các cột bằng chứng và ID. UTF-8 BOM giúp mở tiếng Việt trong Excel.
