@@ -1,5 +1,7 @@
 import json
 import logging
+import os
+import threading
 import time
 from pathlib import Path
 from typing import Literal
@@ -20,13 +22,16 @@ app = FastAPI(
     description="So sánh trực tiếp BM25 Retrieval với Hệ thống RAG (FAISS Dense + T5 Generator) trên TriviaQA."
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins (Hugging Face Space)
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Same-origin by default. Set RAG_CORS_ORIGINS="https://a.example,https://b.example" to allow others.
+CORS_ORIGINS = [o.strip() for o in os.environ.get('RAG_CORS_ORIGINS', '').split(',') if o.strip()]
+if CORS_ORIGINS:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=CORS_ORIGINS,
+        allow_credentials=False,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
@@ -44,11 +49,28 @@ def select_demo_data_dir():
 
 DEMO_DATA_DIR = select_demo_data_dir()
 rag_neural_engine = RAGNeuralEngine(data_dir=DEMO_DATA_DIR)
-print("[Server] Initializing Deterministic Pipeline Engine...")
-engine = (DeterministicPipelineEngine(DEMO_DATA_DIR)
-          if (DEMO_DATA_DIR / 'chunk_metadata.jsonl').is_file() else None)
-source_urls = {row['chunk_id']: row['source_url'] for row in engine.metadata if row.get('source_url')} if engine else {}
-print("[Server] Engine loaded and ready.")
+
+# The legacy BM25 index is built on first use, so /research starts without it.
+_legacy = {}
+_legacy_lock = threading.Lock()
+
+
+def legacy_available():
+    return (DEMO_DATA_DIR / 'chunk_metadata.jsonl').is_file()
+
+
+def legacy_engine():
+    """Return (engine, source_urls), building the BM25 index once; (None, {}) without a corpus."""
+    if not legacy_available():
+        return None, {}
+    with _legacy_lock:
+        if 'engine' not in _legacy:
+            logging.info('Building legacy BM25 engine from %s', DEMO_DATA_DIR)
+            built = DeterministicPipelineEngine(DEMO_DATA_DIR)
+            _legacy['source_urls'] = {row['chunk_id']: row['source_url']
+                                      for row in built.metadata if row.get('source_url')}
+            _legacy['engine'] = built
+    return _legacy['engine'], _legacy['source_urls']
 
 # Neural models load only on request, so the lightweight demo and tests do
 # not import torch, allocate GPU memory or access the model registry at startup.
@@ -84,19 +106,20 @@ def rare_query_anchor(normalization, total_chunks):
 
 @app.get("/")
 def get_index():
-    if research_available() or engine is None:
+    if research_available() or not legacy_available():
         return FileResponse(STATIC_DIR / 'research.html')
     return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get('/legacy')
 def legacy_page():
-    if engine is None:
+    if not legacy_available():
         raise HTTPException(503, 'Chưa có corpus demo lịch sử. Dùng /research cho protocol nghiên cứu mới.')
     return FileResponse(STATIC_DIR / "index.html")
 
 @app.get("/api/pipeline/info")
 def get_info():
+    engine, _ = legacy_engine()
     if engine is None:
         raise HTTPException(503, 'Chưa có corpus demo lịch sử. Dùng /research.')
     rag_avail = rag_neural_engine.is_available()
@@ -162,6 +185,7 @@ def load_rag_now():
 
 @app.post("/api/pipeline/execute")
 def execute_pipeline(req: PipelineRequest):
+    engine, source_urls = legacy_engine()
     if engine is None:
         raise HTTPException(503, 'Chưa có corpus demo lịch sử. Dùng /research.')
     started = time.perf_counter()
@@ -220,8 +244,10 @@ def execute_pipeline(req: PipelineRequest):
         raise HTTPException(status_code=500, detail="Không thể xử lý truy vấn. Vui lòng thử lại.") from exc
 
 def main():
-    """Run the local demo without loading the corpus twice."""
-    uvicorn.run(app, host="0.0.0.0", port=8001, reload=False)
+    """Run the local demo. Localhost only unless RAG_HOST is set (e.g. 0.0.0.0 for a container)."""
+    host = os.environ.get('RAG_HOST', '127.0.0.1')
+    port = int(os.environ.get('RAG_PORT', '8001'))
+    uvicorn.run(app, host=host, port=port, reload=False)
 
 if __name__ == "__main__":
     main()

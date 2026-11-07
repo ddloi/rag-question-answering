@@ -4,8 +4,11 @@ const labels = {correct:'Đúng theo canonical EM',corpus_answer_string_missing:
 let ready=false, busy=false, cases=[], last=null, polling=null;
 async function request(url, options={}) {
   const response=await fetch(url,options);
-  const data=await response.json();
-  if(!response.ok) throw new Error(typeof data.detail==='string'?data.detail:'Yêu cầu không hợp lệ. Kiểm tra câu hỏi và thử lại.');
+  // Proxies and crashed servers can answer with HTML; never surface a JSON parse error.
+  let data=null;
+  try { data=await response.json(); } catch { data=null; }
+  if(!response.ok) throw new Error(typeof data?.detail==='string'?data.detail:`Máy chủ trả lỗi ${response.status}. Kiểm tra log máy chủ rồi thử lại.`);
+  if(data===null) throw new Error('Máy chủ trả dữ liệu không đọc được. Tải lại trang rồi thử lại.');
   return data;
 }
 function controls() { $('run').disabled=!ready||busy; $('load').disabled=busy||ready; ['question','method','generator','case-filter'].forEach(id=>$(id).disabled=busy); document.querySelectorAll('#cases button').forEach(b=>b.disabled=busy); }

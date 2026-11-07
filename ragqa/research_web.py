@@ -125,17 +125,19 @@ class UnavailableOption(ValueError):
 
 class ResearchRuntime:
     def __init__(self):
-        from experiments.research_pipeline import dataset_manifest, ResearchRetriever, ResearchGenerator, ResearchExtractor
+        from experiments.research_pipeline import ResearchRetriever, ResearchGenerator, ResearchExtractor
         from experiments.research_evaluate import model_run
         from experiments.verify_dataset import digest, read_jsonl
-        self.info = dataset_manifest(DATA)
+        # ResearchRetriever verifies every frozen dataset checksum; reuse its manifest
+        # instead of hashing the corpus and FAISS index a second time.
+        self.retriever = ResearchRetriever(DATA)
+        self.info = self.retriever.manifest
         self.data_hash = digest(DATA / 'manifest.json')
         left, right = [model_run(MODELS / system, self.data_hash, system) for system in ('closed_book', 'rag')]
         for key in ('train_ids', 'base_model', 'config', 'precision', 'prompt_template', 'source_sha256'):
             if left[key] != right[key]:
                 raise ValueError(f'Training pair mismatch: {key}')
         self.config = self.info['config']
-        self.retriever = ResearchRetriever(DATA)
         self.closed = ResearchGenerator(MODELS / 'closed_book/model', self.config['generation'])
         self.rag = ResearchGenerator(MODELS / 'rag/model', self.config['generation'])
         self.extractor = ResearchExtractor(self.info['models']['extractive'])
